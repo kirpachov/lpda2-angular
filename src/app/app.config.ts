@@ -28,7 +28,10 @@ registerLocaleData(localeEN);
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes, withHashLocation()),
+    provideRouter(
+      routes,
+      // withHashLocation()
+    ),
     importProvidersFrom(TuiRootModule),
     DatePipe,
     provideHttpClient(withInterceptors([addLanguageHeaderInterceptor, jwtInterceptor, catchRequireRootInterceptor])),

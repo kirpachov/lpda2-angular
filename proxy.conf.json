@@ -1,10 +1,10 @@
 {
-  "/api": {
+  "/backend-api": {
     "target": "http://localhost:3050",
     "secure": false,
     "ws": true,
     "pathRewrite": {
-      "^/api": "/"
+      "^/backend-api": "/"
     }
   },
   "/rails/active_storage": {

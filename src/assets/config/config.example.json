@@ -1,7 +1,7 @@
 {
   "api.domain": "localhost:4250",
   "api.secure": "false",
-  "api.path": "/api/",
+  "api.path": "/backend-api/",
   "contact.email": "kirpachov.com@gmail.com",
   "contact.phone": "+393515590063",
   "contact.phone.prefix": "+39",
