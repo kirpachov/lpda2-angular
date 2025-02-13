@@ -16,7 +16,7 @@ import { distinctUntilChanged, filter, finalize, map, switchMap, takeUntil, tap 
 import { MatIconModule } from '@angular/material/icon';
 import {PolymorpheusComponent} from "@tinkoff/ng-polymorpheus";
 import { PublicDishModalComponent } from '../public-dish-modal/public-dish-modal.component';
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, NgTemplateOutlet } from '@angular/common';
 import { PublicShowImagesComponent } from "../public-show-images/public-show-images.component";
 
 @Component({
@@ -30,6 +30,7 @@ import { PublicShowImagesComponent } from "../public-show-images/public-show-ima
     MatIconModule,
     CurrencyPipe,
     PublicShowImagesComponent,
+    NgTemplateOutlet,
 ],
   templateUrl: './public-navigate-menu-v1.component.html',
   styleUrl: './public-navigate-menu-v1.component.scss',

@@ -1,3 +1,16 @@
+<ng-template #navigateBackBtn>
+  @if(selectedCategory()) {
+    <div class="block my-3" >
+      <button type="button" tuiLink (click)="navigateBack()">
+        <span class="flex">
+          <mat-icon>arrow_back</mat-icon>
+          <span i18n>Indietro</span>
+        </span>
+      </button>
+    </div>
+  }
+</ng-template>
+
 <div class="max-w-[800px] md:mx-auto mx-2">
   <tui-loader
     [showLoader]="loading()"
@@ -41,6 +54,8 @@
         <app-public-show-images class="block max-w-[200px]" [images]="selectedCategory()?.images" ></app-public-show-images>
       </div> -->
     <!-- </div> -->
+
+    <ng-container *ngTemplateOutlet="navigateBackBtn" ></ng-container>
   } @else {
     <h1 class="text-5xl block mb-3" i18n>Menù</h1>
     <p class="text-xl block mb-2 text-slate-400" i18n>Naviga attraverso il menù cliccando sopra ai piatti per consultarne i dettagli.</p>
@@ -111,16 +126,7 @@
     }
   }
 
-  @if(selectedCategory()) {
-    <div class="block my-3" >
-      <button type="button" tuiLink (click)="navigateBack()">
-        <span class="flex">
-          <mat-icon>arrow_back</mat-icon>
-          <span i18n>Indietro</span>
-        </span>
-      </button>
-    </div>
-  }
+  <ng-container *ngTemplateOutlet="navigateBackBtn" ></ng-container>
 
   </tui-loader>
 </div>
