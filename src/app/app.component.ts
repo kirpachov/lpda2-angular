@@ -4,6 +4,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { CookieConsentComponent } from "../core/components/cookie-consent/cookie-consent.component";
+import { PwaService } from "@core/services/pwa.service";
 
 @Component({
   selector: 'app-root',
@@ -14,4 +15,6 @@ import { CookieConsentComponent } from "../core/components/cookie-consent/cookie
   providers: [{ provide: TUI_SANITIZER, useClass: NgDompurifySanitizer }]
 })
 export class AppComponent {
+  private readonly pwa: PwaService = inject(PwaService);
+
 }
