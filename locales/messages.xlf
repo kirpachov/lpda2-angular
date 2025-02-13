@@ -1282,6 +1282,10 @@
           <context context-type='sourcefile'>src/core/services/notifications.service.ts</context>
           <context context-type='linenumber'>67</context>
         </context-group>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>src/core/services/pwa.service.ts</context>
+          <context context-type='linenumber'>32</context>
+        </context-group>
       </trans-unit>
       <trans-unit id='8502305771103286072' datatype='html'>
         <source>Impostazioni</source>
@@ -8384,6 +8388,27 @@
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/core/services/notifications.service.ts</context>
           <context context-type='linenumber'>72</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='9027492167868625300' datatype='html'>
+        <source>Aggiornamento disponibile</source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>src/core/services/pwa.service.ts</context>
+          <context context-type='linenumber'>27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='7553649702654770708' datatype='html'>
+        <source>Aggiornare l&apos;applicazione?</source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>src/core/services/pwa.service.ts</context>
+          <context context-type='linenumber'>28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='5643014807286711792' datatype='html'>
+        <source>Aggiorna</source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>src/core/services/pwa.service.ts</context>
+          <context context-type='linenumber'>30</context>
         </context-group>
       </trans-unit>
     </body>
