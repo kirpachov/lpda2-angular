@@ -106,7 +106,17 @@
   
         <div class="justify-center align-center">
           <p class="text-xl">{{ dish.name }}</p>
-          <p class="text-lg text-slate-400">{{ dish.description }}</p>
+          <p class="text-lg text-slate-400">
+            <ng-template #dishDesc>
+              <span style="line-height: 28px;">
+                {{ dish.description }}
+              </span>
+            </ng-template>
+
+            <tui-line-clamp [lineHeight]="28" [linesLimit]="8" [content]="dishDesc" >
+              
+            </tui-line-clamp>
+          </p>
         </div>
       </div>
 

@@ -18,6 +18,7 @@ import {PolymorpheusComponent} from "@tinkoff/ng-polymorpheus";
 import { PublicDishModalComponent } from '../public-dish-modal/public-dish-modal.component';
 import { CurrencyPipe, NgTemplateOutlet } from '@angular/common';
 import { PublicShowImagesComponent } from "../public-show-images/public-show-images.component";
+import { TuiLineClampModule } from '@taiga-ui/kit';
 
 @Component({
   selector: 'app-public-navigate-menu-v1',
@@ -31,6 +32,7 @@ import { PublicShowImagesComponent } from "../public-show-images/public-show-ima
     CurrencyPipe,
     PublicShowImagesComponent,
     NgTemplateOutlet,
+    TuiLineClampModule,
 ],
   templateUrl: './public-navigate-menu-v1.component.html',
   styleUrl: './public-navigate-menu-v1.component.scss',
@@ -177,6 +179,7 @@ export class PublicNavigateMenuV1Component implements OnInit {
     this.loadingDishes.set(true);
     params ||= {};
     params["include_all"] = true;
+    params["per_page"] = 1000;
     this.menuService.searchDishes(params).pipe(
       takeUntil(this.destroy),
       finalize(() => this.loadingDishes.set(false)),
