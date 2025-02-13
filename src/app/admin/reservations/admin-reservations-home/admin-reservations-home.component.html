@@ -63,6 +63,12 @@
                 [adults]="item.adults"
                 [children]="item.children"
             ></app-reservation-people>
+
+            @if(item.table) {
+              <span class="text-slate-400" >
+                <span class="me-1" i18n>Tavolo</span>{{ item.table }}
+              </span>
+            }
           </span>
 
           <tui-expand #expand>
@@ -76,13 +82,6 @@
   
             @if(item.notes && item.notes.length > 0){
               <p class="block mb-2 text-slate-400" > {{ item.notes }} </p>
-            }
-
-            @if(item.table) {
-              <span class="block mb-2 text-slate-400" >
-                <span class="me-1" i18n>Tavolo</span>
-                {{ item.table }}
-              </span>
             }
 
             <div class="block mb-2">
