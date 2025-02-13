@@ -123,7 +123,7 @@
       <div>
           <div class="text-lg w-fit text-primary rounded py-2 px-4">
             @if(dish.price == 0) {
-              <ng-container i18n>Gratis</ng-container>
+              <ng-container>-</ng-container>
             } @else {
               {{ dish.price | currency }}
             }
