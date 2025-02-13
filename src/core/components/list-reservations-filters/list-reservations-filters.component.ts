@@ -54,6 +54,9 @@ export interface ReservationsFilters {
   datetime_to: string;
   order_by_field: string;
   order_by_direction: "ASC" | "DESC";
+
+  offset: number;
+  per_page: number;
 }
 
 @Component({
@@ -108,7 +111,7 @@ export class ListReservationsFiltersComponent implements OnInit, AfterViewInit {
   readonly dateStr: WritableSignal<string | null> = signal(this.formatDate(this.date.value));
 
   private offset: number = 0;
-  private per_page: number = 10;
+  private per_page: number = 100;
 
   constructor() {
   }
@@ -186,7 +189,11 @@ export class ListReservationsFiltersComponent implements OnInit, AfterViewInit {
 
   // Calculating current filters here.
   currentFilters(): Partial<ReservationsFilters> {
-    const filters: Partial<ReservationsFilters> = {};
+    const filters: Partial<ReservationsFilters> = {
+      offset: this.offset,
+      per_page: this.per_page
+    };
+
     if (typeof this.query.value == 'string' && this.query.valid && this.query.value.length > 0) {
       filters['query'] = this.query.value;
     }
@@ -241,6 +248,7 @@ export class ListReservationsFiltersComponent implements OnInit, AfterViewInit {
   private filtersMayHaveChanged(): boolean {
     const currentFilters: Partial<ReservationsFilters> = this.currentFilters();
     const changed: boolean = JSON.stringify(currentFilters) !== JSON.stringify(this.lastFilters);
+    console.log(`changed`, {changed, currentFilters});
     if (changed) {
       this.lastFilters = currentFilters;
       this.emitCurrentFilters();
