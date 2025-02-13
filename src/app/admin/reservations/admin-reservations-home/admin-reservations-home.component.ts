@@ -52,7 +52,6 @@ import {
 import {
   ListReservationsFiltersComponent, ReservationsFilters
 } from "@core/components/list-reservations-filters/list-reservations-filters.component";
-import {orderBy, OrderByComponent} from "@core/components/order-by/order-by.component";
 import {ReservationEventsComponent} from "@core/components/reservation-events/reservation-events.component";
 import {PhoneToComponent} from "@core/components/phone-to/phone-to.component";
 import {MailToComponent} from "@core/components/mail-to/mail-to.component";
@@ -114,18 +113,10 @@ export class AdminReservationsHomeComponent implements OnInit {
   @ViewChild(ReservationTurnSelectComponent, {static: true}) turnSelect?: ReservationTurnSelectComponent;
 
   readonly inputSize: "s" | "m" | "l" = 'm';
-  private readonly defaultOrder: orderBy = {field: "datetime", asc: true};
 
   filters: Partial<ReservationsFilters> = {};
-  order: FormControl<orderBy | null> = new FormControl<orderBy | null>(null);
 
   ngOnInit(): void {
-    this.order.valueChanges.subscribe({
-      next: (value: any) => {
-        this.search();
-      }
-    });
-
     this.router.events.pipe(
       takeUntil(this.destroy$)
     ).subscribe({
@@ -202,11 +193,6 @@ export class AdminReservationsHomeComponent implements OnInit {
   private search(filters: Partial<ReservationsFilters> = this.filters): void {
     filters ||= {};
     filters = {...filters};
-    const order: orderBy | null = this.order.value;
-    if (this.order.valid && order) {
-      filters.order_by_field = order.field;
-      filters.order_by_direction = order.asc ? "ASC" : "DESC";
-    }
 
     this.loading.set(true);
     this.service.search(filters).pipe(

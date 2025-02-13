@@ -10,9 +10,9 @@ import {
   TemplateRef,
   WritableSignal
 } from '@angular/core';
-import { TuiButtonModule, TuiDialogService, TuiHostedDropdownModule, TuiLinkModule, TuiTextfieldControllerModule } from "@taiga-ui/core";
+import { TuiButtonModule, TuiDataListModule, TuiDialogService, TuiHostedDropdownModule, TuiLinkModule, TuiTextfieldControllerModule } from "@taiga-ui/core";
 import { MatIcon } from "@angular/material/icon";
-import { TuiInputModule } from "@taiga-ui/kit";
+import { TuiDataListWrapperModule, TuiInputModule, TuiSelectModule } from "@taiga-ui/kit";
 import { TuiAutoFocusModule, TuiDay, TuiDayRange, TuiDestroyService } from "@taiga-ui/cdk";
 import { RouterLink } from "@angular/router";
 import {
@@ -27,7 +27,7 @@ import {
 import { TuiTablePagination, TuiTablePaginationModule } from "@taiga-ui/addon-table";
 import { Reservation } from "@core/models/reservation";
 import { SearchResult } from "@core/lib/search-result.model";
-import { DatePipe, JsonPipe } from "@angular/common";
+import { DatePipe, JsonPipe, NgSwitch, NgSwitchCase, NgSwitchDefault } from "@angular/common";
 import { ReservationTurn } from "@core/models/reservation-turn";
 import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { ReservationStatus } from "@core/lib/interfaces/reservation-data";
@@ -53,7 +53,7 @@ export interface ReservationsFilters {
   date_to: string;
   datetime_to: string;
   order_by_field: string;
-  order_by_direction: "ASC" | "DESC";
+  order_by_direction: "asc" | "desc";
 
   offset: number;
   per_page: number;
@@ -77,7 +77,13 @@ export interface ReservationsFilters {
     TuiHostedDropdownModule,
     TuiTextfieldControllerModule,
     ReservationStatusComponent,
-    ChipComponent
+    ChipComponent,
+    TuiDataListWrapperModule,
+    TuiSelectModule,
+    TuiDataListModule,
+    NgSwitch,
+    NgSwitchCase,
+    NgSwitchDefault,
   ],
   templateUrl: './list-reservations-filters.component.html',
   providers: [
@@ -101,6 +107,7 @@ export class ListReservationsFiltersComponent implements OnInit, AfterViewInit {
   readonly turn: FormControl<ReservationTurn | null> = new FormControl<ReservationTurn | null>(null);
   readonly date: FormControl<TuiDayRange | null> = new FormControl<TuiDayRange | null>(new TuiDayRange(TuiDay.currentLocal(), TuiDay.currentLocal()));
   readonly status: FormControl<ReservationStatus | null> = new FormControl<ReservationStatus | null>(`active`);
+  readonly orderBy = new FormControl<{ field: string, direction: "desc" | "asc" } | null>(null);
 
   readonly hiddenFormGroup = new FormGroup({
     query: this.query,
@@ -112,6 +119,13 @@ export class ListReservationsFiltersComponent implements OnInit, AfterViewInit {
 
   private offset: number = 0;
   private per_page: number = 100;
+
+  readonly orderByOptions: { field: string, direction: "asc" | "desc", humanLabel: string }[] = [
+    { field: 'created_at', direction: 'desc', humanLabel: $localize`Data di creazione (più recenti)` },
+    { field: 'created_at', direction: 'asc', humanLabel: $localize`Data di creazione (meno recenti)` },
+    { field: 'datetime', direction: 'desc', humanLabel: $localize`Data e ora (più recenti)` },
+    { field: 'datetime', direction: 'asc', humanLabel: $localize`Data e ora (meno recenti)` },
+  ];
 
   constructor() {
   }
@@ -137,7 +151,8 @@ export class ListReservationsFiltersComponent implements OnInit, AfterViewInit {
     [
       this.date,
       this.turn,
-      this.status
+      this.status,
+      this.orderBy
     ].map((control: FormControl): void => {
       control.valueChanges.pipe(
         takeUntil(this.destroy$),
@@ -219,6 +234,11 @@ export class ListReservationsFiltersComponent implements OnInit, AfterViewInit {
 
     if (typeof this.status.value == 'string' && this.status.valid) {
       filters.status = this.status.value;
+    }
+
+    if (this.orderBy.valid && this.orderBy.value) {
+      filters.order_by_field = this.orderBy.value.field;
+      filters.order_by_direction = this.orderBy.value.direction;
     }
 
     return filters;

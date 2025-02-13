@@ -22,17 +22,31 @@
 </ng-template>
 
 <div class="flex flex-wrap items-center">
-  <div class="col-12 md:col-6">
+  <div class="col-12 md:col-4">
     <app-reservation-date-select [formControl]="date">
       <ng-container i18n>Data</ng-container>
     </app-reservation-date-select>
   </div>
 
-  <div class="col-11 md:col-5 px-1">
+  <div class="col-12 md:col-4 px-1">
     <app-reservation-turn-select [showCleaner]="true" [filters]="{date: dateStr()}" [inputSize]="'m'"
       style="min-width: 150px;" class="mx-2" [formControl]="turn">
       <ng-container i18n>Turno</ng-container>
     </app-reservation-turn-select>
+  </div>
+
+  <div class="col-11 md:col-3">
+    <ng-template #stringifyOrderBy let-all>
+      {{ all.humanLabel }}
+    </ng-template>
+
+    <tui-select [valueContent]="stringifyOrderBy" [tuiTextfieldCleaner]="true" [tuiTextfieldSize]="'m'"
+      [formControl]="orderBy">
+      <ng-container i18n>Ordina per</ng-container>
+
+      <tui-data-list-wrapper *tuiDataList [itemContent]="stringifyOrderBy" [items]="orderByOptions">
+        ></tui-data-list-wrapper>
+    </tui-select>
   </div>
 
   <div class="col-1">
@@ -44,15 +58,15 @@
 
   <div class="col-12">
     @if(status.value){
-      <app-chip (removeClick)="status.patchValue(null)">
-        <ng-container i18n>Stato</ng-container>: <app-reservation-status [status]="status.value"></app-reservation-status>
-      </app-chip>
+    <app-chip (removeClick)="status.patchValue(null)">
+      <ng-container i18n>Stato</ng-container>: <app-reservation-status [status]="status.value"></app-reservation-status>
+    </app-chip>
     }
 
     @if(query.value){
-      <app-chip (removeClick)="query.patchValue(null)">
-        <ng-container i18n>Ricerca per</ng-container>: {{ query.value }}
-      </app-chip>
+    <app-chip (removeClick)="query.patchValue(null)">
+      <ng-container i18n>Ricerca per</ng-container>: {{ query.value }}
+    </app-chip>
     }
   </div>
 </div>
@@ -71,4 +85,3 @@
     </span>
   </a>
 </div>
-
