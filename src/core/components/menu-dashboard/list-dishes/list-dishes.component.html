@@ -190,9 +190,7 @@
   }
 </div>
 
-@if (data()?.metadata?.next_page || data()?.metadata?.prev_page) {
-  <tui-table-pagination class="my-2"
-                        [items]="[10, 20, 50, 100]" [total]="data()?.metadata?.total_count ?? 0"
-                        (paginationChange)="paginationChange($event)">
-  </tui-table-pagination>
-}
+<tui-table-pagination class="my-2"
+                      [items]="[10, 100, 1000]" [size]="100" [total]="data()?.metadata?.total_count ?? 0"
+                      (paginationChange)="paginationChange($event)">
+</tui-table-pagination>

@@ -103,7 +103,7 @@ export class ListDishesComponent implements OnInit, OnChanges {
   });
 
   offset: number = 0;
-  per_page: number = 10;
+  per_page: number = 100;
 
   @Input() parentCategoryId?: number | null = null;
 
