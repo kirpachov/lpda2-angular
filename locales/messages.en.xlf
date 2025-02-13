@@ -250,7 +250,7 @@
             
             src/app/admin/reservations/admin-reservations-home/admin-reservations-home.component.ts 
           </context>
-          <context context-type='linenumber'>197</context>
+          <context context-type='linenumber'>188</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/app/admin/settings/holidays/list/list.component.ts</context>
@@ -530,7 +530,7 @@
             
             src/core/components/public-navigate-menu-v1/public-navigate-menu-v1.component.html 
           </context>
-          <context context-type='linenumber'>119</context>
+          <context context-type='linenumber'>7</context>
         </context-group>
       </trans-unit>
       <trans-unit id='2968162645627162144' datatype='html'>
@@ -813,7 +813,7 @@
             
             src/core/components/list-reservations-filters/list-reservations-filters.component.html 
           </context>
-          <context context-type='linenumber'>48</context>
+          <context context-type='linenumber'>62</context>
         </context-group>
       </trans-unit>
       <trans-unit id='8065907609101976641' datatype='html'>
@@ -831,7 +831,7 @@
             
             src/app/admin/reservations/admin-reservations-home/admin-reservations-home.component.html 
           </context>
-          <context context-type='linenumber'>83</context>
+          <context context-type='linenumber'>69</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>
@@ -919,7 +919,7 @@
             
             src/app/admin/reservations/admin-reservations-home/admin-reservations-home.component.html 
           </context>
-          <context context-type='linenumber'>90</context>
+          <context context-type='linenumber'>89</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/app/admin/reservations/edit-reservation/edit-reservation.component.html</context>
@@ -934,7 +934,7 @@
             
             src/app/admin/reservations/admin-reservations-home/admin-reservations-home.component.html 
           </context>
-          <context context-type='linenumber'>104</context>
+          <context context-type='linenumber'>103</context>
         </context-group>
       </trans-unit>
       <trans-unit id='7156597206608384051' datatype='html'>
@@ -945,7 +945,7 @@
             
             src/app/admin/reservations/admin-reservations-home/admin-reservations-home.component.html 
           </context>
-          <context context-type='linenumber'>106</context>
+          <context context-type='linenumber'>105</context>
         </context-group>
       </trans-unit>
       <trans-unit id='8272843536846027906' datatype='html'>
@@ -956,7 +956,7 @@
             
             src/app/admin/reservations/admin-reservations-home/admin-reservations-home.component.ts 
           </context>
-          <context context-type='linenumber'>112</context>
+          <context context-type='linenumber'>111</context>
         </context-group>
       </trans-unit>
       <trans-unit id='1265862338076652065' datatype='html'>
@@ -981,7 +981,7 @@
             
             src/app/admin/reservations/admin-reservations-home/admin-reservations-home.component.ts 
           </context>
-          <context context-type='linenumber'>145</context>
+          <context context-type='linenumber'>136</context>
         </context-group>
       </trans-unit>
       <trans-unit id='6923005459778676818' datatype='html'>
@@ -992,7 +992,7 @@
             
             src/app/admin/reservations/admin-reservations-home/admin-reservations-home.component.ts 
           </context>
-          <context context-type='linenumber'>157</context>
+          <context context-type='linenumber'>148</context>
         </context-group>
       </trans-unit>
       <trans-unit id='1405502572574239258' datatype='html'>
@@ -1003,7 +1003,7 @@
             
             src/app/admin/reservations/admin-reservations-home/admin-reservations-home.component.ts 
           </context>
-          <context context-type='linenumber'>178</context>
+          <context context-type='linenumber'>169</context>
         </context-group>
       </trans-unit>
       <trans-unit id='3564020598943330712' datatype='html'>
@@ -1014,7 +1014,7 @@
             
             src/app/admin/reservations/admin-reservations-home/admin-reservations-home.component.ts 
           </context>
-          <context context-type='linenumber'>182</context>
+          <context context-type='linenumber'>173</context>
         </context-group>
       </trans-unit>
       <trans-unit id='941321116787164262' datatype='html'>
@@ -1025,7 +1025,7 @@
             
             src/app/admin/reservations/admin-reservations-home/admin-reservations-home.component.ts 
           </context>
-          <context context-type='linenumber'>220</context>
+          <context context-type='linenumber'>206</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/app/admin/settings/holidays/list/list.component.ts</context>
@@ -1081,7 +1081,7 @@
             
             src/core/components/list-reservations-filters/list-reservations-filters.component.html 
           </context>
-          <context context-type='linenumber'>70</context>
+          <context context-type='linenumber'>84</context>
         </context-group>
       </trans-unit>
       <trans-unit id='687418209005337938' datatype='html'>
@@ -1228,7 +1228,7 @@
             
             src/core/components/menu-dashboard/category-details/category-details.component.ts 
           </context>
-          <context context-type='linenumber'>141</context>
+          <context context-type='linenumber'>140</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>
@@ -4949,7 +4949,7 @@
             
             src/core/components/public-navigate-menu-v1/public-navigate-menu-v1.component.html 
           </context>
-          <context context-type='linenumber'>53</context>
+          <context context-type='linenumber'>68</context>
         </context-group>
       </trans-unit>
       <trans-unit id='6964330292623887797' datatype='html'>
@@ -5783,6 +5783,17 @@
           <context context-type='linenumber'>34</context>
         </context-group>
       </trans-unit>
+      <trans-unit id='843993869846882439' datatype='html'>
+        <source>Ordina per</source>
+        <target>Sort by</target>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/list-reservations-filters/list-reservations-filters.component.html 
+          </context>
+          <context context-type='linenumber'>45</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id='4479909772748521405' datatype='html'>
         <source>Ricerca per</source>
         <target>Search for</target>
@@ -5791,7 +5802,51 @@
             
             src/core/components/list-reservations-filters/list-reservations-filters.component.html 
           </context>
-          <context context-type='linenumber'>54</context>
+          <context context-type='linenumber'>68</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='5483766987007506956' datatype='html'>
+        <source>Data di creazione (più recenti)</source>
+        <target>Creation date (most recent)</target>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/list-reservations-filters/list-reservations-filters.component.ts 
+          </context>
+          <context context-type='linenumber'>124</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='7715713225970241929' datatype='html'>
+        <source>Data di creazione (meno recenti)</source>
+        <target>Creation date (less recent)</target>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/list-reservations-filters/list-reservations-filters.component.ts 
+          </context>
+          <context context-type='linenumber'>125</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='7740102693403996510' datatype='html'>
+        <source>Data e ora (più recenti)</source>
+        <target>Date and time (most recent)</target>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/list-reservations-filters/list-reservations-filters.component.ts 
+          </context>
+          <context context-type='linenumber'>126</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='3104645625547587526' datatype='html'>
+        <source>Data e ora (meno recenti)</source>
+        <target>Date and time (less recent)</target>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/list-reservations-filters/list-reservations-filters.component.ts 
+          </context>
+          <context context-type='linenumber'>127</context>
         </context-group>
       </trans-unit>
       <trans-unit id='803966016351905957' datatype='html'>
@@ -6012,7 +6067,7 @@
             
             src/core/components/menu-dashboard/category-details/category-details.component.ts 
           </context>
-          <context context-type='linenumber'>88</context>
+          <context context-type='linenumber'>87</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/core/components/menu-dashboard/view-dish/view-dish.component.ts</context>
@@ -6027,21 +6082,21 @@
             
             src/core/components/menu-dashboard/category-details/category-details.component.ts 
           </context>
-          <context context-type='linenumber'>93</context>
+          <context context-type='linenumber'>92</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>
             
             src/core/components/menu-dashboard/category-details/category-details.component.ts 
           </context>
-          <context context-type='linenumber'>113</context>
+          <context context-type='linenumber'>112</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>
             
             src/core/components/menu-dashboard/category-details/category-details.component.ts 
           </context>
-          <context context-type='linenumber'>132</context>
+          <context context-type='linenumber'>131</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/core/components/menu-dashboard/dish-allergens/dish-allergens.component.ts</context>
@@ -6154,7 +6209,7 @@
             
             src/core/components/menu-dashboard/category-details/category-details.component.ts 
           </context>
-          <context context-type='linenumber'>108</context>
+          <context context-type='linenumber'>107</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/core/components/menu-dashboard/view-dish/view-dish.component.ts</context>
@@ -6169,7 +6224,7 @@
             
             src/core/components/menu-dashboard/category-details/category-details.component.ts 
           </context>
-          <context context-type='linenumber'>128</context>
+          <context context-type='linenumber'>127</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/core/components/menu-dashboard/list-categories/list-categories.component.ts</context>
@@ -6184,7 +6239,7 @@
             
             src/core/components/menu-dashboard/category-details/category-details.component.ts 
           </context>
-          <context context-type='linenumber'>139</context>
+          <context context-type='linenumber'>138</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/core/components/menu-dashboard/list-categories/list-categories.component.ts</context>
@@ -6206,7 +6261,7 @@
             
             src/core/components/menu-dashboard/category-details/category-details.component.ts 
           </context>
-          <context context-type='linenumber'>140</context>
+          <context context-type='linenumber'>139</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/core/components/menu-dashboard/list-categories/list-categories.component.ts</context>
@@ -7024,7 +7079,7 @@
             
             src/core/components/public-navigate-menu-v1/public-navigate-menu-v1.component.html 
           </context>
-          <context context-type='linenumber'>45</context>
+          <context context-type='linenumber'>60</context>
         </context-group>
       </trans-unit>
       <trans-unit id='1229005893415965964' datatype='html'>
@@ -7847,7 +7902,7 @@
             
             src/core/components/public-navigate-menu-v1/public-navigate-menu-v1.component.html 
           </context>
-          <context context-type='linenumber'>46</context>
+          <context context-type='linenumber'>61</context>
         </context-group>
       </trans-unit>
       <trans-unit id='633961462470193792' datatype='html'>
@@ -7861,7 +7916,7 @@
             
             src/core/components/public-navigate-menu-v1/public-navigate-menu-v1.component.html 
           </context>
-          <context context-type='linenumber'>51</context>
+          <context context-type='linenumber'>66</context>
         </context-group>
       </trans-unit>
       <trans-unit id='8167274690213408728' datatype='html'>
@@ -7872,18 +7927,7 @@
             
             src/core/components/public-navigate-menu-v1/public-navigate-menu-v1.component.html 
           </context>
-          <context context-type='linenumber'>75</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id='1564974445977546920' datatype='html'>
-        <source>Gratis</source>
-        <target>Free</target>
-        <context-group purpose='location'>
-          <context context-type='sourcefile'>
-            
-            src/core/components/public-navigate-menu-v1/public-navigate-menu-v1.component.html 
-          </context>
-          <context context-type='linenumber'>101</context>
+          <context context-type='linenumber'>90</context>
         </context-group>
       </trans-unit>
       <trans-unit id='2894917011682469879' datatype='html'>
