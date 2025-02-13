@@ -37,6 +37,13 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "text-mask-core",
+              "dompurify",
+              "qrcode",
+              "joi"
+            ],
+            "i18nDuplicateTranslation": "error",
             "i18nMissingTranslation": "error",
             "outputPath": "dist/lpda2",
             "index": "src/index.html",
@@ -77,8 +84,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1.5mb"
+                  "maximumWarning": "1.5mb",
+                  "maximumError": "2mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -106,9 +113,6 @@
           },
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
-            "production": {
-              "buildTarget": "lpda2:build:production"
-            },
             "development": {
               "buildTarget": "lpda2:build:development"
             }

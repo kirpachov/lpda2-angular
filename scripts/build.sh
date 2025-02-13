@@ -4,9 +4,10 @@
 
 # echo "Ensure you have extracted the locales with 'ng extract-i18n' and you have the latest version of the locales inside 'locales' folder."
 
-echo " *** Don't forget to update config.json for production ***"
-echo "current config.json:"
-cat src/assets/config/config.json
+if [[ ! -f src/assets/config/config.prod.json ]]; then
+  echo "src/assets/config/config.prod.json does not exist. This file will replace config.json in production, so you'll need it."
+  exit 1
+fi
 
 rm -rf dist/lpda2/*
 
