@@ -100,7 +100,9 @@
                          [translations]="category.translations"></app-name-desc-eip>
     }
 
-    <app-eip-category-visibility [(category)]="category"></app-eip-category-visibility>
+    @if(category.visibility) {
+      <app-eip-category-visibility [(category)]="category"></app-eip-category-visibility>
+    }
 
   }
 </tui-expand>
