@@ -52,10 +52,7 @@ export class OnceHolidayFormComponent {
   readonly dates: FormControl<TuiDayRange | null> = new FormControl<TuiDayRange | null>(null, [Validators.required]);
   readonly fromTime = new FormControl<TuiTime>(this.defaultFromTime, [Validators.required]);
   readonly toTime = new FormControl<TuiTime>(this.defaultToTime, [Validators.required]);
-  readonly message: FormControl<Record<string, string> | null> = new FormControl<Record<string, string> | null>(null, [
-    Validators.required,
-    CustomValidators.objectNotEmpty
-  ]);
+  readonly message: FormControl<Record<string, string> | null> = new FormControl<Record<string, string> | null>(null, []);
 
   readonly submitted: WritableSignal<boolean> = signal(false);
 

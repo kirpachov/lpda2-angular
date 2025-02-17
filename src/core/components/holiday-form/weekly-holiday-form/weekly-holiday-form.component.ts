@@ -50,7 +50,7 @@ export class WeeklyHolidayFormComponent {
   readonly weeklyFrom = new FormControl<TuiTime | null>(null);
   readonly weeklyTo = new FormControl<TuiTime | null>(null);
   readonly wholeDay = new FormControl<boolean>(true);
-  readonly message: FormControl<Record<string, string> | null> = new FormControl<Record<string, string> | null>(null, [Validators.required, CustomValidators.objectNotEmpty]);
+  readonly message: FormControl<Record<string, string> | null> = new FormControl<Record<string, string> | null>(null, []);
 
   readonly form: FormGroup = new FormGroup({
     weekly_from: this.weeklyFrom,
