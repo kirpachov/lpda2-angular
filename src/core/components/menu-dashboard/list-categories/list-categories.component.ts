@@ -15,7 +15,8 @@ import {
   TuiDataListModule, TuiDropdownContextDirective,
   TuiDropdownModule, TuiHintModule,
   TuiHostedDropdownModule,
-  TuiLinkModule, TuiLoaderModule, TuiTextfieldControllerModule
+  TuiLinkModule, TuiLoaderModule, TuiTextfieldControllerModule,
+  TuiTooltipModule
 } from "@taiga-ui/core";
 import { MatIcon } from "@angular/material/icon";
 import { SearchResult } from "@core/lib/search-result.model";
@@ -69,6 +70,7 @@ import { SumPipe } from '@core/pipes/sum.pipe';
     TuiProgressModule,
     ObjectValuesPipe,
     SumPipe,
+    TuiTooltipModule,
   ],
   templateUrl: './list-categories.component.html',
   styleUrl: './list-categories.component.scss',
