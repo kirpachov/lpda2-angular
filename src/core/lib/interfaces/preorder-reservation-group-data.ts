@@ -9,7 +9,13 @@ export interface PreorderReservationGroupData extends BaseModelData {
   // active_to?: string;
   preorder_type?: PreorderType;
   payment_value?: number;
+
+  // Translated message: {language: message}
   message?: string;
+
+  translations: {
+    message?: Record<string, string>;
+  }
 
   turns: ReservationTurnData[];
   dates: PreorderReservationDateData[];

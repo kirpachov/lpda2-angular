@@ -25,7 +25,6 @@
         </td>
       </tr>
 
-
       <tr class="tui-table__tr tui-table__tr_border_none">
         <td class="tui-table__td">
           <span class="text-xl" i18n>Valore pagamento</span>
@@ -33,6 +32,17 @@
 
         <td class="tui-table__td">
           {{ item()!.payment_value | currency }}
+        </td>
+      </tr>
+
+
+      <tr class="tui-table__tr tui-table__tr_border_none">
+        <td class="tui-table__td">
+          <span class="text-xl" i18n>Messaggio</span>
+        </td>
+
+        <td class="tui-table__td">
+            <app-show-translations [translations]="item()?.translations?.message"></app-show-translations>
         </td>
       </tr>
 

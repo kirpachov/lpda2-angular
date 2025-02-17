@@ -17,6 +17,7 @@ import { PreorderReservationDateData } from '@core/lib/interfaces/preorder-reser
 import { Router, ActivatedRoute } from '@angular/router';
 import { PreorderReservationGroupCasesComponent, TurnDateOutputFormat } from "../preorder-reservation-group-cases/preorder-reservation-group-cases.component";
 import { SelectTurnsPaymentv2Component } from "../select-turns-paymentv2/select-turns-paymentv2.component";
+import { I18nInputComponent } from '../i18n-input/i18n-input.component';
 
 @Component({
   selector: 'app-preorder-reservation-group-form',
@@ -41,7 +42,8 @@ import { SelectTurnsPaymentv2Component } from "../select-turns-paymentv2/select-
     TuiExpandModule,
     TuiInputDateModule,
     PreorderReservationGroupCasesComponent,
-    SelectTurnsPaymentv2Component
+    SelectTurnsPaymentv2Component,
+    I18nInputComponent,
 ],
   templateUrl: './preorder-reservation-group-form.component.html',
   styleUrl: './preorder-reservation-group-form.component.scss',
@@ -64,6 +66,7 @@ export class PreorderReservationGroupFormComponent {
     title: new FormControl<string | null>($localize`Pagamento alla prenotazione richiesto ${Date.now()}`, [Validators.required]),
     active: new FormControl<boolean | null>(true, [Validators.required, Validators.pattern(/^(true|false)$/)]),
     payment_value: new FormControl<number | null>(null, [Validators.required]),
+    message: new FormControl<Record<string, string> | null>(null, []),
   });
 
   private submitted: boolean = false;
@@ -86,6 +89,7 @@ export class PreorderReservationGroupFormComponent {
       payment_value: obj.payment_value ?? null,
       title: obj.title ?? null,
       active: obj.status === "active",
+      message: obj.translations?.message || {}
     })
   }
 

@@ -12,7 +12,13 @@ export class PreorderReservationGroup extends BaseModel {
   // active_to?: Date;
   preorder_type?: PreorderType;
   payment_value?: number;
+
+  // Translated message: {language: message}
   message?: string;
+
+  translations: {
+    message?: Record<string, string>;
+  }
 
   turns: ReservationTurn[] = [];
   dates: PreorderReservationDate[] = [];
@@ -30,5 +36,6 @@ export class PreorderReservationGroup extends BaseModel {
 
     this.turns = (data.turns || []).map((datum: ReservationTurnData) => new ReservationTurn(datum));
     this.dates = (data.dates || []).map((datum: PreorderReservationDateData) => new PreorderReservationDate(datum));
+    this.translations = data.translations || {};
   }
 }

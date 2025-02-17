@@ -11,6 +11,7 @@ import { CurrencyPipe } from '@angular/common';
 import { NotificationsService } from '@core/services/notifications.service';
 import { PreorderReservationGroupCasesComponent } from "../../../../../core/components/preorder-reservation-group-cases/preorder-reservation-group-cases.component";
 import { SelectTurnsPaymentv2Component } from "../../../../../core/components/select-turns-paymentv2/select-turns-paymentv2.component";
+import { ShowTranslationsComponent } from "../../../../../core/components/show-translations/show-translations.component";
 
 @Component({
   selector: 'app-show',
@@ -24,7 +25,8 @@ import { SelectTurnsPaymentv2Component } from "../../../../../core/components/se
     RouterModule,
     TuiButtonModule,
     PreorderReservationGroupCasesComponent,
-    SelectTurnsPaymentv2Component
+    SelectTurnsPaymentv2Component,
+    ShowTranslationsComponent
 ],
   templateUrl: './show.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

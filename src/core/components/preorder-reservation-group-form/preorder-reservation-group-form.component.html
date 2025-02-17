@@ -19,6 +19,14 @@
   </div>
 
   <div class="block mb-3">
+    <app-i18n-input [long]="false" [formControlName]="'message'">
+      <ng-container i18n>Messaggio per i clienti che cercano di prenotare</ng-container>
+    </app-i18n-input>
+
+    <app-errors [errors]="e('message')"></app-errors>
+  </div>
+
+  <div class="block mb-3">
     <p class="text-xl"><ng-container i18n>Attivazione</ng-container></p>
 
     <tui-checkbox-block contentAlign="right" formControlName="active" size="l">
