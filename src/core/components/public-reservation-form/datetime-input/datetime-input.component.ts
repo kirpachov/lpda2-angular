@@ -122,7 +122,7 @@ export class DatetimeInputComponent implements OnInit, ControlValueAccessor {
     return (this.validDates().find((d: TuiDay) => d.daySame(day))) ? false : true;
   };
 
-  private readonly paymentGroupDefaultMessage: string = $localize`Per assicurarti uno dei nostro vavoli sarà necessario un pagamento che verrà scalato dal conto finale al ristorante.`;
+  private readonly paymentGroupDefaultMessage: string = $localize`Per assicurarti uno dei nostri tavoli sarà necessario un pagamento che verrà scalato dal conto finale al ristorante.`;
 
   ngOnInit(): void {
     this.updateMaxDate();
