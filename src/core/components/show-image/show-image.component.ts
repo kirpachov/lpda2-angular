@@ -15,7 +15,7 @@ import {AsyncPipe} from "@angular/common";
   imports: [
     AsyncPipe
   ],
-  template: `@if((imageSrc$ | async)) { <img [draggable]="false" class="{{ imgClass }}" src="{{ (imageSrc$ | async) }}"> }`,
+  template: `@if((imageSrc$ | async)) { <img [draggable]="false" class="max-w-[100%] h-auto min-h-[50px] md:min-h-[100px] {{ imgClass }}" src="{{ (imageSrc$ | async) }}"> }`,
   styleUrls: ['./show-image.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
