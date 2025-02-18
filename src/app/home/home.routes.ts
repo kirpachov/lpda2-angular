@@ -1,4 +1,4 @@
-import { Routes } from "@angular/router";
+import { Routes, UrlMatchResult, UrlSegment } from "@angular/router";
 
 export const routes: Routes = [
   {
@@ -29,11 +29,18 @@ export const routes: Routes = [
     path: `menu`,
     children: [
       {
-        path: `:categoryId`,
-        loadComponent: () => import(`./menu/menu.component`).then(m => m.MenuComponent),
-      },
-      {
-        path: ``,
+        matcher: (urls: UrlSegment[]): UrlMatchResult | null => {
+
+          const ids: string = urls.map(url => url.path).filter((url: unknown): url is string => typeof url === `string` && url.length > 0).join(',');
+          const url: UrlSegment = new UrlSegment(ids, {});
+
+          return {
+            consumed: urls,
+            posParams: {
+              categoryIds: url,
+            }
+          };
+        },
         loadComponent: () => import(`./menu/menu.component`).then(m => m.MenuComponent),
       }
     ]

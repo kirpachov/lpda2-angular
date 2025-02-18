@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, computed, inject, Injector, OnInit, Signal, signal, WritableSignal } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ChangeDetectionStrategy, Component, computed, inject, Injector, isDevMode, OnInit, Signal, signal, WritableSignal } from '@angular/core';
+import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
 import { parseHttpErrorMessage } from '@core/lib/parse-http-error-message';
 import { SearchResult } from '@core/lib/search-result.model';
 import { SOMETHING_WENT_WRONG_MESSAGE } from '@core/lib/something-went-wrong-message';
@@ -11,12 +11,12 @@ import { PublicReservationsService } from '@core/services/http/public-reservatio
 import { NotificationsService } from '@core/services/notifications.service';
 import { TuiDestroyService } from '@taiga-ui/cdk';
 import { TuiButtonModule, TuiDialogService, TuiLinkModule, TuiLoaderModule } from '@taiga-ui/core';
-import { distinctUntilChanged, filter, finalize, map, switchMap, takeUntil, tap } from 'rxjs';
+import { distinctUntilChanged, filter, finalize, map, Subscription, switchMap, takeUntil, tap } from 'rxjs';
 // import { ShowImageComponent } from '../show-image/show-image.component';
 import { MatIconModule } from '@angular/material/icon';
-import {PolymorpheusComponent} from "@tinkoff/ng-polymorpheus";
+import { PolymorpheusComponent } from "@tinkoff/ng-polymorpheus";
 import { PublicDishModalComponent } from '../public-dish-modal/public-dish-modal.component';
-import { CurrencyPipe, NgTemplateOutlet } from '@angular/common';
+import { CurrencyPipe, JsonPipe, NgTemplateOutlet } from '@angular/common';
 import { PublicShowImagesComponent } from "../public-show-images/public-show-images.component";
 import { TuiLineClampModule } from '@taiga-ui/kit';
 
@@ -33,7 +33,8 @@ import { TuiLineClampModule } from '@taiga-ui/kit';
     PublicShowImagesComponent,
     NgTemplateOutlet,
     TuiLineClampModule,
-],
+    RouterModule,
+  ],
   templateUrl: './public-navigate-menu-v1.component.html',
   styleUrl: './public-navigate-menu-v1.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -63,21 +64,13 @@ export class PublicNavigateMenuV1Component implements OnInit {
   readonly selectedCategory: WritableSignal<MenuCategory | null> = signal(null);
 
   readonly breadcrumbs: WritableSignal<MenuCategory[]> = signal([]);
+  readonly breadcrumbUrls: WritableSignal<string[]> = signal([]);
 
   ngOnInit(): void {
-    this.loadRootCategories();
 
-    this.route.params.pipe(
-      map((params: Params) => params["categoryId"]),
-      filter((category_id: unknown): category_id is string => typeof category_id === "string" && category_id.length > 0),
-      distinctUntilChanged(),
-      switchMap((category_id: string) => this.menuService.showCategory(category_id)),
-      takeUntil(this.destroy),
-    ).subscribe({
-      next: (category: MenuCategory): void => {
-        this.selectCategory(category);
-      }
-    })
+    this.listenRouteParamsAndPopulateBreadcrumb();
+
+    this.listenQueryParamsAndShowDishDetail();
 
     // this.loadingCategories.set(false); // DEVELOPMENT ONLY. REMOVE.
     // this.loadingDishes.set(false); // DEVELOPMENT ONLY. REMOVE.
@@ -85,45 +78,13 @@ export class PublicNavigateMenuV1Component implements OnInit {
   }
 
   /**
-   * Called when user clicks on "<- Back" button
-   */
-  navigateBack() {
-    const lastCategory: MenuCategory | null = this.breadcrumbs().pop() || null;
-
-    this.selectCategory(lastCategory);
-  }
-
-  /**
-   * Called by breadcrumb links.
-   * TODO see if this is actually used when the component is done.
-   */
-  navigateTo(breadcrumbIndex: number): void {
-    const category: MenuCategory = this.breadcrumbs()[breadcrumbIndex];
-    this.breadcrumbs.update((prev) => prev.slice(0, breadcrumbIndex));
-    this.selectCategory(category);
-  }
-
-  navigateToRoot(): void {
-    this.selectCategory(null);
-    this.breadcrumbs.set([]);
-  }
-
-  /**
-   * Called when user clicks on a category.
-   */
-  clickOnCategory(category: MenuCategory): void {
-    const currentSelected = this.selectedCategory();
-    if (currentSelected) this.breadcrumbs.update((p) => [...p, currentSelected]);
-
-    this.selectCategory(category);
-  }
-
-  /**
    * Called when user clicks on a dish.
    */
-  clickOnDish(dish: Dish): void {
-    // TODO fire modal with dish details
-    this.dialogs.open<unknown>(
+  private dishDetailSub?: Subscription;
+  private showDishDetail(dish: Dish): void {
+    this.closeDishDetailModal();
+
+    this.dishDetailSub = this.dialogs.open<unknown>(
       new PolymorpheusComponent(PublicDishModalComponent, this.injector),
       {
         data: { dish: dish },
@@ -132,11 +93,17 @@ export class PublicNavigateMenuV1Component implements OnInit {
         label: undefined,
       },
     ).pipe(
-      takeUntil(this.destroy)
+      takeUntil(this.destroy),
     ).subscribe({
-      next: (): void => {},
+      next: (): void => {
+        this.router.navigate([], { queryParams: { dishId: null }, queryParamsHandling: "merge" });
+      },
       error: (error: unknown): void => console.error(error),
     })
+  }
+
+  private closeDishDetailModal(): void {
+    if (this.dishDetailSub) this.dishDetailSub.unsubscribe();
   }
 
   /**
@@ -160,19 +127,20 @@ export class PublicNavigateMenuV1Component implements OnInit {
     this.loadCategories({ root: true, per_page: 100 });
   }
 
-  private loadCategories(params: Record<string, boolean|number|string> = {}): void {
-    // TODO add big delay server side and check if the requests is cancelled when changing page.
+  private loadCategories(params: Record<string, boolean | number | string> = {}): void {
     this.loadingCategories.set(true);
     params ||= {};
     params["skip_empty_categories"] = true;
     this.menuService.searchCategories(params).pipe(
       takeUntil(this.destroy),
       finalize(() => this.loadingCategories.set(false)),
-    ).subscribe({next: (categories: SearchResult<MenuCategory>) => {
-      this.categoriesData.set(categories);
-    }, error: (e: unknown) => {
-      this.notifications.error(e instanceof HttpErrorResponse ? parseHttpErrorMessage(e) : SOMETHING_WENT_WRONG_MESSAGE);
-    }});
+    ).subscribe({
+      next: (categories: SearchResult<MenuCategory>) => {
+        this.categoriesData.set(categories);
+      }, error: (e: unknown) => {
+        this.notifications.error(e instanceof HttpErrorResponse ? parseHttpErrorMessage(e) : SOMETHING_WENT_WRONG_MESSAGE);
+      }
+    });
   }
 
   private loadDishes(params: Record<string, string | number | boolean> = {}): void {
@@ -183,10 +151,116 @@ export class PublicNavigateMenuV1Component implements OnInit {
     this.menuService.searchDishes(params).pipe(
       takeUntil(this.destroy),
       finalize(() => this.loadingDishes.set(false)),
-    ).subscribe({next: (dishes: SearchResult<Dish>) => {
-      this.dishesData.set(dishes);
-    }, error: (e: unknown) => {
-      this.notifications.error(e instanceof HttpErrorResponse ? parseHttpErrorMessage(e) : SOMETHING_WENT_WRONG_MESSAGE);
-    }});
+    ).subscribe({
+      next: (dishes: SearchResult<Dish>) => {
+        this.dishesData.set(dishes);
+      }, error: (e: unknown) => {
+        this.notifications.error(e instanceof HttpErrorResponse ? parseHttpErrorMessage(e) : SOMETHING_WENT_WRONG_MESSAGE);
+      }
+    });
+  }
+
+  private findAndShowDish(dishId: unknown): void {
+    if (typeof dishId === "string") dishId = Number(dishId);
+    if (typeof dishId !== "number") {
+      console.error(`Invalid dish id: ${dishId}`);
+      return;
+    }
+
+    const done = (dish: Dish): void => {
+      this.showDishDetail(dish);
+    };
+
+    /**
+     * Using already loaded dish.
+     */
+    const loadedDish: Dish | undefined = this.dishes().find((d: Dish): boolean => d.id == dishId);
+    if (loadedDish) return done(loadedDish);
+
+    this.menuService.showDish(dishId).pipe(
+      takeUntil(this.destroy),
+    ).subscribe({
+      next: (dish: Dish): void => {
+        return done(dish);
+      },
+      error: (e: unknown): void => {
+        this.notifications.error(e instanceof HttpErrorResponse ? parseHttpErrorMessage(e) : SOMETHING_WENT_WRONG_MESSAGE);
+      }
+    })
+  }
+
+  private listenQueryParamsAndShowDishDetail(): void {
+    this.route.queryParams.pipe(
+      takeUntil(this.destroy),
+    ).subscribe({
+      next: (params: Params): void => {
+        if (params["dishId"]) {
+          this.findAndShowDish(params["dishId"]);
+        } else {
+          this.closeDishDetailModal();
+        }
+      }
+    });
+  }
+
+  /**
+   * Will listen for route change and load the categories and dishes accordingly.
+   * 
+   * May cache categories and dishes: here re-fetching them every time.
+   */
+  private listenRouteParamsAndPopulateBreadcrumb(): void {
+    this.route.params.pipe(
+      takeUntil(this.destroy),
+      map((params: Params): string[] => this.parseParamsToCategoryIds(params)),
+      tap((categoryIds: string[]): void => {
+        /**
+         * Need to generate partials or url for breadcrumbs.
+         */
+        let url: string = `/menu`;
+        let urls: string[] = [];
+        categoryIds.forEach((id: string): void => {
+          url += `/${id}`;
+          urls.push(url);
+        });
+        this.breadcrumbUrls.set(urls);
+      }),
+      distinctUntilChanged(),
+    ).subscribe({
+      next: (categoryIds: string[]): void => {
+        this.loadAndSetBreadcrumb(categoryIds);
+      }
+    });
+  }
+
+  private parseParamsToCategoryIds(params: Params): string[] {
+    return params["categoryIds"].split(`,`).filter((id: unknown): id is string => typeof id === "string" && id.length > 0);
+  }
+
+  private loadAndSetBreadcrumb(categoryIds: string[]): void {
+    const done = (categories: MenuCategory[]): void => {
+      this.selectCategory(categories.length === 0 ? null : categories[categories.length - 1]);
+      this.breadcrumbs.set(categories.splice(0, categories.length - 1));
+    };
+
+    if (categoryIds.length === 0) {
+      done([]);
+      if (isDevMode()) console.debug(`No category ids found in route params.`);
+      return;
+    }
+
+    this.menuService.searchCategories({ ids: categoryIds.join(",") }).pipe(
+      takeUntil(this.destroy),
+    ).subscribe({
+      next: (data: SearchResult<MenuCategory>): void => {
+        const categories: MenuCategory[] = [];
+        categoryIds.forEach((id: string): void => {
+          const category: MenuCategory | undefined = data.items.find((c: MenuCategory): boolean => c.id === Number(id) || c.secret == id);
+          if (category) categories.push(category);
+          else console.error(`Category with id ${id} not found.`);
+        });
+
+        done(categories);
+      }
+    });
   }
 }
