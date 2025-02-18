@@ -104,8 +104,8 @@ export class TimestampsModalComponent implements OnInit {
 
   readonly saving: WritableSignal<boolean> = signal(false);
   // TODO use location to get absolute url and use href insted of routerOutlet.
-  readonly privateUrl: string | null = `${location.origin}/#${this.urlTo.transform(this.context.data?.category?.secret_desc ?? this.context.data?.category?.secret ?? ``, 'menuCategory.private')}`;
-  readonly publicUrl: string | null = `${location.origin}/#${this.urlTo.transform(this.context.data?.category?.id ?? ``, 'menuCategory.public')}`;
+  readonly privateUrl: string | null = `${location.origin}/${this.urlTo.transform(this.context.data?.category?.secret_desc ?? this.context.data?.category?.secret ?? ``, 'menuCategory.private')}`;
+  readonly publicUrl: string | null = `${location.origin}/${this.urlTo.transform(this.context.data?.category?.id ?? ``, 'menuCategory.public')}`;
 
   constructor(
     @Inject(POLYMORPHEUS_CONTEXT)
