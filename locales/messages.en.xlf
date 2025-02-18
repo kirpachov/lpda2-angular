@@ -526,6 +526,10 @@
           <context context-type='linenumber'>7</context>
         </context-group>
         <context-group purpose='location'>
+          <context context-type='sourcefile'>src/core/components/public-dish-modal/public-dish-modal.component.html</context>
+          <context context-type='linenumber'>8</context>
+        </context-group>
+        <context-group purpose='location'>
           <context context-type='sourcefile'>
             
             src/core/components/public-navigate-menu-v1/public-navigate-menu-v1.component.html 
@@ -661,7 +665,7 @@
             
             src/core/components/preorder-reservation-group-form/preorder-reservation-group-form.component.html 
           </context>
-          <context context-type='linenumber'>56</context>
+          <context context-type='linenumber'>64</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>
@@ -795,7 +799,7 @@
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/app/admin/settings/preorder-reservation-groups/show/show.component.html</context>
-          <context context-type='linenumber'>41</context>
+          <context context-type='linenumber'>51</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/app/admin/settings/users/list-users/list-users.component.html</context>
@@ -1284,7 +1288,7 @@
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/core/components/menu-dashboard/list-categories/list-categories.component.ts</context>
-          <context context-type='linenumber'>183</context>
+          <context context-type='linenumber'>185</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/core/components/menu-dashboard/list-dishes/list-dishes.component.html</context>
@@ -1302,7 +1306,7 @@
             
             src/core/components/preorder-reservation-group-form/preorder-reservation-group-form.component.html 
           </context>
-          <context context-type='linenumber'>60</context>
+          <context context-type='linenumber'>68</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/core/components/require-root-modal/require-root-modal.component.html</context>
@@ -1566,7 +1570,7 @@
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/app/admin/settings/preorder-reservation-groups/show/show.component.html</context>
-          <context context-type='linenumber'>69</context>
+          <context context-type='linenumber'>79</context>
         </context-group>
       </trans-unit>
       <trans-unit id='3391948770868722763' datatype='html'>
@@ -1833,7 +1837,7 @@
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/app/admin/settings/preorder-reservation-groups/show/show.component.html</context>
-          <context context-type='linenumber'>74</context>
+          <context context-type='linenumber'>84</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/app/admin/settings/reservation-turn-messages/list/list.component.html</context>
@@ -2009,7 +2013,7 @@
         <target>Payment value</target>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/app/admin/settings/preorder-reservation-groups/show/show.component.html</context>
-          <context context-type='linenumber'>31</context>
+          <context context-type='linenumber'>30</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>
@@ -2019,19 +2023,34 @@
           <context context-type='linenumber'>14</context>
         </context-group>
       </trans-unit>
+      <trans-unit id='8591830564179925921' datatype='html'>
+        <source>Messaggio</source>
+        <target>Message</target>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>src/app/admin/settings/preorder-reservation-groups/show/show.component.html</context>
+          <context context-type='linenumber'>41</context>
+        </context-group>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/app/admin/settings/public_messages/list-public-messages/list-public-messages.component.html 
+          </context>
+          <context context-type='linenumber'>16</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id='487230140649712872' datatype='html'>
         <source>Quando sono richiesti pagamenti?</source>
         <target>When are payments due?</target>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/app/admin/settings/preorder-reservation-groups/show/show.component.html</context>
-          <context context-type='linenumber'>54</context>
+          <context context-type='linenumber'>64</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>
             
             src/core/components/preorder-reservation-group-form/preorder-reservation-group-form.component.html 
           </context>
-          <context context-type='linenumber'>31</context>
+          <context context-type='linenumber'>39</context>
         </context-group>
       </trans-unit>
       <trans-unit id='6340096295801004264' datatype='html'>
@@ -2039,7 +2058,7 @@
         <target>Not found :'(</target>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/app/admin/settings/preorder-reservation-groups/show/show.component.html</context>
-          <context context-type='linenumber'>83</context>
+          <context context-type='linenumber'>93</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/app/admin/settings/preorder-reservation-groups/update/update.component.html</context>
@@ -2057,7 +2076,7 @@
         </target>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/app/admin/settings/preorder-reservation-groups/show/show.component.ts</context>
-          <context context-type='linenumber'>77</context>
+          <context context-type='linenumber'>79</context>
         </context-group>
       </trans-unit>
       <trans-unit id='1795009640363499958' datatype='html'>
@@ -2172,17 +2191,6 @@
           <context context-type='linenumber'>12</context>
         </context-group>
       </trans-unit>
-      <trans-unit id='8591830564179925921' datatype='html'>
-        <source>Messaggio</source>
-        <target>Message</target>
-        <context-group purpose='location'>
-          <context context-type='sourcefile'>
-            
-            src/app/admin/settings/public_messages/list-public-messages/list-public-messages.component.html 
-          </context>
-          <context context-type='linenumber'>16</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id='6311311280798469211' datatype='html'>
         <source>Comunicazioni | La Porta D'Acqua</source>
         <target>Comunications | La Porta D'Acqua</target>
@@ -2228,6 +2236,13 @@
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/core/components/menu-dashboard/duplicate-dish/duplicate-dish.component.html</context>
           <context context-type='linenumber'>23</context>
+        </context-group>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/public-navigate-menu-v1/public-navigate-menu-v1.component.html 
+          </context>
+          <context context-type='linenumber'>135</context>
         </context-group>
       </trans-unit>
       <trans-unit id='6520561070532383856' datatype='html'>
@@ -4953,7 +4968,7 @@
             
             src/core/components/public-navigate-menu-v1/public-navigate-menu-v1.component.html 
           </context>
-          <context context-type='linenumber'>68</context>
+          <context context-type='linenumber'>67</context>
         </context-group>
       </trans-unit>
       <trans-unit id='6964330292623887797' datatype='html'>
@@ -5495,6 +5510,13 @@
           </context>
           <context context-type='linenumber'>50</context>
         </context-group>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/preorder-reservation-group-form/preorder-reservation-group-form.component.html 
+          </context>
+          <context context-type='linenumber'>23</context>
+        </context-group>
       </trans-unit>
       <trans-unit id='5839460738693952504' datatype='html'>
         <source>Seleziona il giorno della settimana</source>
@@ -5917,7 +5939,7 @@
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/core/components/menu-dashboard/list-categories/list-categories.component.ts</context>
-          <context context-type='linenumber'>161</context>
+          <context context-type='linenumber'>163</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/core/components/menu-dashboard/list-dishes/list-dishes.component.ts</context>
@@ -6138,11 +6160,11 @@
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/core/components/menu-dashboard/list-categories/list-categories.component.ts</context>
-          <context context-type='linenumber'>207</context>
+          <context context-type='linenumber'>209</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/core/components/menu-dashboard/list-categories/list-categories.component.ts</context>
-          <context context-type='linenumber'>225</context>
+          <context context-type='linenumber'>227</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/core/components/menu-dashboard/list-dishes/list-dishes.component.ts</context>
@@ -6232,7 +6254,7 @@
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/core/components/menu-dashboard/list-categories/list-categories.component.ts</context>
-          <context context-type='linenumber'>203</context>
+          <context context-type='linenumber'>205</context>
         </context-group>
       </trans-unit>
       <trans-unit id='4163242963927875832' datatype='html'>
@@ -6247,7 +6269,7 @@
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/core/components/menu-dashboard/list-categories/list-categories.component.ts</context>
-          <context context-type='linenumber'>181</context>
+          <context context-type='linenumber'>183</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>
@@ -6269,7 +6291,7 @@
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/core/components/menu-dashboard/list-categories/list-categories.component.ts</context>
-          <context context-type='linenumber'>182</context>
+          <context context-type='linenumber'>184</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>
@@ -6511,7 +6533,7 @@
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/core/components/menu-dashboard/list-categories/list-categories.component.ts</context>
-          <context context-type='linenumber'>231</context>
+          <context context-type='linenumber'>233</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/core/components/menu-dashboard/list-dishes/list-dishes.component.ts</context>
@@ -7083,7 +7105,7 @@
             
             src/core/components/public-navigate-menu-v1/public-navigate-menu-v1.component.html 
           </context>
-          <context context-type='linenumber'>60</context>
+          <context context-type='linenumber'>58</context>
         </context-group>
       </trans-unit>
       <trans-unit id='1229005893415965964' datatype='html'>
@@ -7202,6 +7224,63 @@
           <context context-type='linenumber'>145</context>
         </context-group>
       </trans-unit>
+      <trans-unit id='5426227410044440881' datatype='html'>
+        <source>NON pubblico</source>
+        <target>NOT public</target>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/menu-dashboard/list-categories/list-categories.component.html 
+          </context>
+          <context context-type='linenumber'>178</context>
+        </context-group>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/menu-dashboard/list-categories/list-categories.component.html 
+          </context>
+          <context context-type='linenumber'>197</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='3674843614458552272' datatype='html'>
+        <source>
+           Per renderlo pubblico, apri il menù, poi apri i dettagli e modifica
+          la Visibilità. 
+        </source>
+        <target>
+           To make it public, open the menu, then open the details and edit the
+          Visibility. 
+        </target>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/menu-dashboard/list-categories/list-categories.component.html 
+          </context>
+          <context context-type='linenumber'>181,182</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='7831846914633689930' datatype='html'>
+        <source>Pubblico</source>
+        <target>Public</target>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/menu-dashboard/list-categories/list-categories.component.html 
+          </context>
+          <context context-type='linenumber'>189</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='656529337293779630' datatype='html'>
+        <source>Non ci sono piatti attivi all'interno di questa categoria.</source>
+        <target>There are no active dishes in this category.</target>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/menu-dashboard/list-categories/list-categories.component.html 
+          </context>
+          <context context-type='linenumber'>200</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id='8242398469950799609' datatype='html'>
         <source>Piatti disattivati</source>
         <target>Disabled dishes</target>
@@ -7210,7 +7289,7 @@
             
             src/core/components/menu-dashboard/list-categories/list-categories.component.html 
           </context>
-          <context context-type='linenumber'>178</context>
+          <context context-type='linenumber'>210</context>
         </context-group>
       </trans-unit>
       <trans-unit id='3954652026696692024' datatype='html'>
@@ -7221,7 +7300,7 @@
             
             src/core/components/menu-dashboard/list-categories/list-categories.component.html 
           </context>
-          <context context-type='linenumber'>205</context>
+          <context context-type='linenumber'>238</context>
         </context-group>
       </trans-unit>
       <trans-unit id='1060243999568728854' datatype='html'>
@@ -7235,7 +7314,7 @@
         </target>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/core/components/menu-dashboard/list-categories/list-categories.component.ts</context>
-          <context context-type='linenumber'>231</context>
+          <context context-type='linenumber'>233</context>
         </context-group>
       </trans-unit>
       <trans-unit id='8129789210020016209' datatype='html'>
@@ -7524,7 +7603,7 @@
             
             src/core/components/preorder-reservation-group-form/preorder-reservation-group-form.component.html 
           </context>
-          <context context-type='linenumber'>22</context>
+          <context context-type='linenumber'>30</context>
         </context-group>
       </trans-unit>
       <trans-unit id='7238720371028138999' datatype='html'>
@@ -7535,7 +7614,7 @@
             
             src/core/components/preorder-reservation-group-form/preorder-reservation-group-form.component.html 
           </context>
-          <context context-type='linenumber'>25</context>
+          <context context-type='linenumber'>33</context>
         </context-group>
       </trans-unit>
       <trans-unit id='2204300410425423666' datatype='html'>
@@ -7552,7 +7631,7 @@
             
             src/core/components/preorder-reservation-group-form/preorder-reservation-group-form.component.ts 
           </context>
-          <context context-type='linenumber'>64</context>
+          <context context-type='linenumber'>66</context>
         </context-group>
       </trans-unit>
       <trans-unit id='5482427563113273465' datatype='html'>
@@ -7906,7 +7985,7 @@
             
             src/core/components/public-navigate-menu-v1/public-navigate-menu-v1.component.html 
           </context>
-          <context context-type='linenumber'>61</context>
+          <context context-type='linenumber'>59,60</context>
         </context-group>
       </trans-unit>
       <trans-unit id='633961462470193792' datatype='html'>
@@ -7920,7 +7999,7 @@
             
             src/core/components/public-navigate-menu-v1/public-navigate-menu-v1.component.html 
           </context>
-          <context context-type='linenumber'>66</context>
+          <context context-type='linenumber'>65</context>
         </context-group>
       </trans-unit>
       <trans-unit id='8167274690213408728' datatype='html'>
