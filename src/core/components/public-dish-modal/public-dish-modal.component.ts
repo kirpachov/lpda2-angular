@@ -16,6 +16,7 @@ import { PublicMenuShowAllergensComponent } from "./public-menu-show-allergens/p
 import { PublicMenuShowIngredientsComponent } from "./public-menu-show-ingredients/public-menu-show-ingredients.component";
 import { PublicMenuShowSuggestionsComponent } from "./public-menu-show-suggestions/public-menu-show-suggestions.component";
 import { PublicShowImagesComponent } from "../public-show-images/public-show-images.component";
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-public-dish-modal',
@@ -27,7 +28,8 @@ import { PublicShowImagesComponent } from "../public-show-images/public-show-ima
     PublicMenuShowAllergensComponent,
     PublicMenuShowIngredientsComponent,
     PublicMenuShowSuggestionsComponent,
-    PublicShowImagesComponent
+    PublicShowImagesComponent,
+    MatIconModule,
 ],
   templateUrl: './public-dish-modal.component.html',
   styleUrl: './public-dish-modal.component.scss',
@@ -42,6 +44,10 @@ export class PublicDishModalComponent {
     private readonly context: TuiDialogContext<null, { dish: Dish }>,
   ) {
     this.dish.set(this.context.data.dish);
+  }
+
+  close(){
+    this.context.completeWith(null);
   }
 
 }

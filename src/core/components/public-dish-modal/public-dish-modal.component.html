@@ -1,6 +1,15 @@
 @if(dish()) {
   <app-public-show-images class="block mb-3" [images]="dish()?.images" ></app-public-show-images>
 
+  <div class="block my-3">
+    <button type="button" tuiLink (click)="close()">
+      <span class="flex">
+        <mat-icon>arrow_back</mat-icon>
+        <span i18n>Indietro</span>
+      </span>
+    </button>
+  </div>
+
   @if((dish()?.tags || []).length > 0) {
      <app-public-menu-show-tags class="block mb-3" [tags]="dish()?.tags ?? []" ></app-public-menu-show-tags>
   }
