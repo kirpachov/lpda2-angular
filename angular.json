@@ -109,6 +109,7 @@
         "serve": {
           "options": {
             "port": 4250,
+            "open": true,
             "proxyConfig": "proxy.conf.json"
           },
           "builder": "@angular-devkit/build-angular:dev-server",
