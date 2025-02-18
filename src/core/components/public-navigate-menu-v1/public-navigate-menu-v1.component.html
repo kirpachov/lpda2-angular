@@ -99,15 +99,15 @@
 
     @for(dish of dishes(); track dish.id; let last = $last) {
     <div (click)="clickOnDish(dish)" role="button"
-      class="hover-transition justify-between cursor-pointer flex items-center py-3">
+      class="hover-transition md:justify-between cursor-pointer flex items-center py-3 justify-center">
       <div class="flex md:flex-row flex-col items-center">
         <div class="min-w-[20vw] max-w-[20vw] justify-center align-center me-3">
           <app-public-show-images class="block" [images]="dish?.images"></app-public-show-images>
         </div>
 
         <div class="justify-center align-center">
-          <p class="text-xl">{{ dish.name }}</p>
-          <p class="text-lg text-slate-400">
+          <p class="text-xl md:text-start text-center">{{ dish.name }}</p>
+          <p class="text-lg md:text-start text-center text-slate-400">
             <ng-template #dishDesc>
               <span style="line-height: 28px;">
                 {{ dish.description }}
