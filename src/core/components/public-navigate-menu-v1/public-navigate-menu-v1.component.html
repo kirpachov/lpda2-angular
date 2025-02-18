@@ -1,86 +1,86 @@
 <ng-template #navigateBackBtn>
   @if(selectedCategory()) {
-    <div class="block my-3" >
-      <button type="button" tuiLink (click)="navigateBack()">
-        <span class="flex">
-          <mat-icon>arrow_back</mat-icon>
-          <span i18n>Indietro</span>
-        </span>
-      </button>
-    </div>
+  <div class="block my-3">
+    <button type="button" tuiLink (click)="navigateBack()">
+      <span class="flex">
+        <mat-icon>arrow_back</mat-icon>
+        <span i18n>Indietro</span>
+      </span>
+    </button>
+  </div>
   }
 </ng-template>
 
 <div class="max-w-[800px] md:mx-auto mx-2">
-  <tui-loader
-    [showLoader]="loading()"
-    [overlay]="true"
-  >
+  <tui-loader [showLoader]="loading()" [overlay]="true">
 
-  @if(selectedCategory()) {
-        <p class="text-5xl block mb-3">{{ selectedCategory()?.name }}</p>
+    @if(selectedCategory()) {
+    <p class="text-5xl block mb-3">{{ selectedCategory()?.name }}</p>
 
-        @if(selectedCategory()?.description?.length) {
-          <p class="text-xl block mb-2 text-slate-400">{{ selectedCategory()?.description }}</p>
+    @if(selectedCategory()?.description?.length) {
+    <p class="text-xl block mb-2 text-slate-400">{{ selectedCategory()?.description }}</p>
+    }
+
+    @if(selectedCategory()?.price) {
+    <div class="text-lg w-fit text-primary rounded mb-2">Menù a prezzo fisso: {{ selectedCategory()?.price | currency }}
+    </div>
+    }
+
+    <div class="block mb-3">
+      <div class="flex items-center">
+        <span role="button" (click)="navigateToRoot()" class="text-lg like-anchor me-1">
+          Menu
+        </span>
+
+        <mat-icon class="me-1">chevron_right</mat-icon>
+
+        @for(cat of breadcrumbs(); track cat.id; let last = $last; let index = $index){
+        <span role="button" (click)="navigateTo(index)" class="text-lg like-anchor me-1">
+          {{ cat.name }}
+        </span>
+
+        <mat-icon class="me-1">chevron_right</mat-icon>
         }
 
-        @if(selectedCategory()?.price) {
-          <div class="text-lg w-fit text-primary rounded mb-2">Menù a prezzo fisso: {{ selectedCategory()?.price | currency }}</div>
-        }
-
-      <div class="block mb-3">
-        <div class="flex items-center">
-          <span role="button" (click)="navigateToRoot()" class="text-lg like-anchor me-1">
-            Menu
-          </span>
-  
-            <mat-icon class="me-1">chevron_right</mat-icon>
-  
-          @for(cat of breadcrumbs(); track cat.id; let last = $last; let index = $index){
-            <span role="button" (click)="navigateTo(index)" class="text-lg like-anchor me-1">
-              {{ cat.name }}
-            </span>
-
-            <mat-icon class="me-1">chevron_right</mat-icon>
-          }
-  
-          <span class="me-1 text-lg text-slate-600">
-            {{ selectedCategory()?.name }}
-          </span>
-        </div>
+        <span class="me-1 text-lg text-slate-600">
+          {{ selectedCategory()?.name }}
+        </span>
       </div>
+    </div>
 
-      <!-- <div>
+    <!-- <div>
         <app-public-show-images class="block max-w-[200px]" [images]="selectedCategory()?.images" ></app-public-show-images>
       </div> -->
     <!-- </div> -->
 
-    <ng-container *ngTemplateOutlet="navigateBackBtn" ></ng-container>
-  } @else {
-    <h1 class="text-5xl block mb-3" i18n>Menù</h1>
-    <p class="text-xl block mb-2 text-slate-400" i18n>Naviga attraverso il menù cliccando sopra ai piatti per consultarne i dettagli.</p>
-  }
-
-  @if(categories().length == 0 && dishes().length == 0) {
-    @if(loading()) {
-      <ng-container i18n>Stiamo caricando i piatti migliori di tutta Venezia, un attimo di pazienza...</ng-container>
+    <ng-container *ngTemplateOutlet="navigateBackBtn"></ng-container>
     } @else {
-      <ng-container i18n>Non abbiamo trovato nulla.</ng-container>
+    <h1 class="text-5xl block mb-3" i18n>Menù</h1>
+    <p class="text-xl block mb-2 text-slate-400" i18n>Naviga attraverso il menù cliccando sopra ai piatti per
+      consultarne i dettagli.</p>
     }
-  }
 
-  @for(category of categories(); track category.id; let last = $last) {
-    <div (click)="clickOnCategory(category)" role="button" class="hover-transition justify-between cursor-pointer flex items-center py-3">
+    @if(categories().length == 0 && dishes().length == 0) {
+    @if(loading()) {
+    <ng-container i18n>Stiamo caricando i piatti migliori di tutta Venezia, un attimo di pazienza...</ng-container>
+    } @else {
+    <ng-container i18n>Non abbiamo trovato nulla.</ng-container>
+    }
+    }
+
+    @for(category of categories(); track category.id; let last = $last) {
+    <div (click)="clickOnCategory(category)" role="button"
+      class="hover-transition justify-between cursor-pointer flex items-center py-3">
       <div class="flex items-center">
         <div class="min-w-[20vw] max-w-[20vw] justify-center align-center me-3">
-          <app-public-show-images class="block" [images]="category?.images" ></app-public-show-images>
+          <app-public-show-images class="block" [images]="category?.images"></app-public-show-images>
         </div>
-  
+
         <div class="justify-center align-center">
           <p class="text-xl">{{ category.name }}</p>
           <p class="text-lg text-slate-400">{{ category.description }}</p>
           @if(category.price) {
-            <div class="text-lg w-fit text-primary rounded">Menù a prezzo fisso: {{ category.price | currency }}</div>
+          <div class="text-lg w-fit text-primary rounded">Menù a prezzo fisso: {{ category.price | currency }}</div>
           }
         </div>
       </div>
@@ -93,17 +93,18 @@
     </div>
 
     @if(!last){
-      <hr style="height: 1px" class="border-slate-200 mb-5">
+    <hr style="height: 1px" class="border-slate-200 mb-5">
     }
-  }
+    }
 
-  @for(dish of dishes(); track dish.id; let last = $last) {
-    <div (click)="clickOnDish(dish)" role="button" class="hover-transition justify-between cursor-pointer flex items-center py-3">
-      <div class="flex items-center">
+    @for(dish of dishes(); track dish.id; let last = $last) {
+    <div (click)="clickOnDish(dish)" role="button"
+      class="hover-transition justify-between cursor-pointer flex items-center py-3">
+      <div class="flex md:flex-row flex-col items-center">
         <div class="min-w-[20vw] max-w-[20vw] justify-center align-center me-3">
-          <app-public-show-images class="block" [images]="dish?.images" ></app-public-show-images>
+          <app-public-show-images class="block" [images]="dish?.images"></app-public-show-images>
         </div>
-  
+
         <div class="justify-center align-center">
           <p class="text-xl">{{ dish.name }}</p>
           <p class="text-lg text-slate-400">
@@ -113,30 +114,37 @@
               </span>
             </ng-template>
 
-            <tui-line-clamp [lineHeight]="28" [linesLimit]="8" [content]="dishDesc" >
-              
+            <tui-line-clamp [lineHeight]="28" [linesLimit]="8" [content]="dishDesc">
+
             </tui-line-clamp>
           </p>
         </div>
-      </div>
 
-      <div>
-          <div class="text-lg w-fit text-primary rounded py-2 px-4">
-            @if(dish.price == 0) {
-              <ng-container>-</ng-container>
-            } @else {
-              {{ dish.price | currency }}
-            }
-          </div>
+        <div class="text-lg w-fit text-primary rounded py-2 px-4">
+          @if(dish.price == 0) {
+          <ng-container>-</ng-container>
+          } @else {
+          {{ dish.price | currency }}
+          }
+        </div>
+
+        <div class="md:hidden">
+          <button type="button" tuiLink>
+            <span class="flex">
+              <mat-icon>visibility</mat-icon>
+              <span class="ms-1" i18n>Dettagli</span>
+            </span>
+          </button>
+        </div>
       </div>
     </div>
 
     @if(!last){
-      <hr style="height: 1px" class="border-slate-200 mb-5">
+    <hr style="height: 1px" class="border-slate-200 mb-5">
     }
-  }
+    }
 
-  <ng-container *ngTemplateOutlet="navigateBackBtn" ></ng-container>
+    <ng-container *ngTemplateOutlet="navigateBackBtn"></ng-container>
 
   </tui-loader>
 </div>
