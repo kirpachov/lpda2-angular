@@ -1,88 +1,30 @@
-<!--<p>show-images works!</p>-->
 @if (images) {
+<div tuiCarouselButtons class="flex items-center mb-2">
+  <button [disabled]="cIndex() === 0" icon="tuiIconChevronLeftLarge" title="Previous" size="s" tuiIconButton
+    type="button" (click)="carousel.prev()"></button>
 
-<!--  <div tuiCarouselButtons>-->
-<!--    <button-->
-<!--        [disabled]="cIndex() === 0"-->
-<!--        icon="tuiIconChevronLeftLarge"-->
-<!--        title="Previous"-->
-<!--        size="s"-->
-<!--        tuiIconButton-->
-<!--        type="button"-->
-<!--        (click)="carousel.prev()"-->
-<!--    ></button>-->
+  <tui-carousel [index]="cIndex()" (indexChange)="cIndex.set($event)" #carousel class="max-w-[150px]">
+    @for (image of images; track image) {
+    <tui-island class="cursor-pointer" (click)="showDetails()" *tuiItem>
+      <app-show-image [image]="image" style="max-width: 100px;"></app-show-image>
+    </tui-island>
+    } @empty {
+    <tui-island (click)="showDetails()" class="!flex cursor-pointer items-center justify-center" *tuiItem>
+      <app-show-image [image]="null" style="max-width: 100px;"></app-show-image>
+    </tui-island>
+    }
+  </tui-carousel>
 
-<!--    <tui-carousel style="max-width: 40%;" #carousel [index]="index" [itemsCount]="1">-->
-<!--      @for (image of images; track image) {-->
-<!--&lt;!&ndash;        <span style="border: 1px solid;" *tuiItem>item</span>&ndash;&gt;-->
-<!--&lt;!&ndash;        <div style="border: 1px solid;" *tuiItem>&ndash;&gt;-->
-<!--&lt;!&ndash;        gigi&ndash;&gt;-->
-<!--        <img *tuiItem src="assets/img/logo.png" alt="Lpda2" class="max-h-[60px]"/>-->
-<!--&lt;!&ndash;      </div>&ndash;&gt;-->
-<!--      }-->
-<!--    </tui-carousel>-->
+  <button [disabled]="images.length == 0 || cIndex() === images.length - 1" icon="tuiIconChevronRightLarge" size="s"
+    title="Next" tuiIconButton type="button" (click)="carousel.next()"></button>
+</div>
 
-<!--    <button-->
-<!--        [disabled]="images.length == 0 || cIndex() === images.length - 1"-->
-<!--        icon="tuiIconChevronRightLarge"-->
-<!--        size="s"-->
-<!--        title="Next"-->
-<!--        tuiIconButton-->
-<!--        type="button"-->
-<!--        (click)="carousel.next()"-->
-<!--    ></button>-->
-<!--  </div>-->
-
-  <!--  <hr>-->
-
-        <div
-            tuiCarouselButtons
-            class="flex items-center mb-2"
-        >
-          <button
-              [disabled]="cIndex() === 0"
-              icon="tuiIconChevronLeftLarge"
-              title="Previous"
-              size="s"
-              tuiIconButton
-              type="button"
-              (click)="carousel.prev()"
-          ></button>
-
-          <tui-carousel
-            [index]="cIndex()"
-            (indexChange)="cIndex.set($event)"
-            #carousel
-            class="max-w-[150px]"
-          >
-            @for (image of images; track image) {
-              <tui-island class="cursor-pointer" (click)="showDetails()" *tuiItem>
-                <app-show-image [image]="image" style="max-width: 100px;"></app-show-image>
-              </tui-island>
-            } @empty {
-              <tui-island (click)="showDetails()" class="!flex cursor-pointer items-center justify-center" *tuiItem>
-                <app-show-image [image]="null" style="max-width: 100px;"></app-show-image>
-              </tui-island>
-            }
-          </tui-carousel>
-
-          <button
-              [disabled]="images.length == 0 || cIndex() === images.length - 1"
-              icon="tuiIconChevronRightLarge"
-              size="s"
-              title="Next"
-              tuiIconButton
-              type="button"
-              (click)="carousel.next()"
-          ></button>
-        </div>
-
-  <button (click)="showDetails()" type="button" tuiButton appearance="flat" size="m">
-    <span class="flex items-center">
-      <mat-icon class="me-1">edit</mat-icon>
-      <span i18n>Modifica immagini</span>
-    </span>
-  </button>
+<button (click)="showDetails()" type="button" tuiButton appearance="flat" size="m">
+  <span class="flex items-center">
+    <mat-icon class="me-1">edit</mat-icon>
+    <span i18n>Modifica immagini</span>
+  </span>
+</button>
 } @else if (loading()){
- <tui-loader [showLoader]="true" ></tui-loader>
+<tui-loader [showLoader]="true"></tui-loader>
 }
