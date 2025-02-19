@@ -14,6 +14,8 @@ import {
 import {MenuCategoriesService} from "@core/services/http/menu-categories.service";
 import {Dish} from "@core/models/dish";
 import {DishesService} from "@core/services/http/dishes.service";
+import { DishSelectOptionComponent } from './dish-select-option/dish-select-option.component';
+import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 
 @Component({
   templateUrl: `../common-dynamic-select/common-dynamic-select.component.html`,
@@ -36,11 +38,13 @@ import {DishesService} from "@core/services/http/dishes.service";
 })
 export class DishSelectComponent extends CommonDynamicSelectComponent<Dish> {
 
-  override stringify = (c: Dish): string => `${c.name}` ?? ``;
+  override stringify = (c: Dish): string => c.name || ``;
 
   override readonly service: DishesService = inject(DishesService);
 
   constructor() {
     super();
+
+    this.nativeOptionTemplate$.set(new PolymorpheusComponent(DishSelectOptionComponent));
   }
 }
