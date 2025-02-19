@@ -1,0 +1,23 @@
+<form (ngSubmit)="submit()" [formGroup]="form">
+  <div class="block mb-3">
+    <app-menu-category-select [autofocus]="true" [formControl]="control">
+      <ng-container i18n>Seleziona la categoria</ng-container>
+    </app-menu-category-select>
+  </div>
+
+  @if(context.data["hint"]) {
+    <p class="text-slate-400 block mb-3">
+      {{context.data["hint"]}}
+    </p>
+  }
+
+  <div class="flex items-center">
+    <button class="me-2" type="submit" tuiButton>
+      <ng-container i18n>Conferma</ng-container>
+    </button>
+  
+    <button type="button" (click)="cancelled()" tuiButton appearance="icon">
+      <ng-container i18n>Annulla</ng-container>
+    </button>
+  </div>
+</form>

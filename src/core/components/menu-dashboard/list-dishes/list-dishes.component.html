@@ -52,6 +52,17 @@
         </span>
       </button>
 
+      <ng-template #openSelectionMsg>
+        <ng-container i18n>Seleziona elementi</ng-container>
+      </ng-template>
+
+      <button (click)="triggerSelectingDishes()" tuiOption>
+        <span class="flex items-center">
+          <mat-icon class="me-1">check_box</mat-icon>
+          <ng-container *ngIf="selecting(); else openSelectionMsg" i18n>Chiudi selezione</ng-container>
+        </span>
+      </button>
+
       <button (click)="triggerOrdering()" tuiOption>
         <span class="flex items-center">
           <mat-icon class="me-1">sort_by_alpha</mat-icon>
@@ -90,6 +101,80 @@
 </div>
 }
 
+@if(selecting()) {
+<ng-template #bulkActionsDropdown>
+  <tui-data-list>
+    <button tuiOption>
+      <button (click)="updateSelectedDishStatus('active')" type="button" tuiOption>
+        <app-dish-status [status]="'active'">
+          <span class="flex items-center">
+            <mat-icon class="me-1">check_circle</mat-icon>
+            <span i18n>Attiva</span>
+          </span>
+        </app-dish-status>
+      </button>
+    </button>
+
+    <button tuiOption>
+      <button (click)="updateSelectedDishStatus('inactive')" type="button" tuiOption>
+        <app-dish-status [status]="'inactive'">
+          <span class="flex items-center">
+            <mat-icon class="me-1">cancel</mat-icon>
+            <span i18n>Disattiva</span>
+          </span>
+        </app-dish-status>
+      </button>
+    </button>
+
+    <button tuiOption>
+      <button (click)="removeSelectedDishesFromCategory()" type="button" tuiOption>
+        <span class="flex items-center">
+          <span i18n>Rimuovi da questa categoria</span>
+        </span>
+      </button>
+    </button>
+
+    <button tuiOption>
+      <button (click)="moveSelectedToOtherCategory()" type="button" tuiOption>
+        <span class="flex items-center">
+          <span i18n>Sposta in un altra categoria</span>
+        </span>
+      </button>
+    </button>
+
+
+    <button tuiOption>
+      <button (click)="associateSelectedToOtherCategory()" type="button" tuiOption>
+        <span class="flex items-center">
+          <span i18n>Associa anche in un altra categoria</span>
+        </span>
+      </button>
+    </button>
+
+  </tui-data-list>
+</ng-template>
+
+<div class="mt-3">
+  <div class="flex items-center justify-center">
+    <span class="me-2 text-xl">
+      {{ selectedDishes().length }}
+      <ng-container i18n>piatti selezionati</ng-container>
+    </span>
+
+    <!-- <pre [innerText]="selectedDishes() | json" ></pre> -->
+
+    <tui-hosted-dropdown #hostedDropdown [content]="bulkActionsDropdown">
+      <button [disabled]="selectedDishes().length == 0" tuiButton type="button" appearance="outline" size="m">
+        <span class="flex items-center justify-center">
+          <span i18n>Azioni</span>
+          <mat-icon class="animation-speed-2" [ngClass]="{'rotate180': hostedDropdown.open}">expand_more</mat-icon>
+        </span>
+      </button>
+    </tui-hosted-dropdown>
+  </div>
+</div>
+}
+
 @if (ordering()) {
 <button type="button" size="l" tuiButton appearance="flat" (click)="orderAllBy('name')">
   <ng-container i18n>Ordina tutti per nome</ng-container>
@@ -100,7 +185,7 @@
 
 <div class="items-list" (cdkDropListDropped)="drop($event)" [ngClass]="{'allow-reorder': reorderEnabled()}"
   [cdkDropListDisabled]="!reorderEnabled()" cdkDropList>
-  @for (item of items(); track item.id) {
+  @for (item of items(); track item.id; let index = $index) {
   <ng-template #actions>
     <tui-data-list role="menu" *ngIf="item">
       <a [routerLink]="['dish', item.id]" tuiOption>
@@ -166,7 +251,7 @@
     </tui-data-list>
   </ng-template>
 
-  <tui-island cdkDrag class="mb-2">
+  <tui-island [ngClass]="{'border-tui-primary bg-tui-secondary-active': selectedDishes().includes(item.id!)}" cdkDrag class="border mb-2">
     <div class="flex justify-between items-center">
       <span class="flex items-center">
         <a [routerLink]="{ categoryId: parentCategoryId, itemId: item.id } | urlTo: 'dish.show'">
@@ -185,6 +270,13 @@
       <button cdkDragHandle size="m" appearance="outline" type="button" tuiIconButton>
         <mat-icon class="drag-shake">drag_handle</mat-icon>
       </button>
+      } @else if(selecting()) {
+        <tui-checkbox-block
+          class="centered"
+          size="l"
+          [ngModel]="selectedDishes().includes(item.id!)"
+          (ngModelChange)="triggerSelection(item, index, $event)"
+        ></tui-checkbox-block>
       } @else {
       <tui-hosted-dropdown [content]="actions">
         <button cdkDragHandle size="m" appearance="outline" type="button" tuiIconButton>

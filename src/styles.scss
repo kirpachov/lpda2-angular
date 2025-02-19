@@ -158,3 +158,9 @@ $colWidth: math.div(100, 12);
     }
   }
 }
+
+tui-checkbox-block.centered {
+  label {
+    padding: 0 !important;
+  }
+}

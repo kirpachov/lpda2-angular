@@ -8,6 +8,18 @@ import {MoveDishParams} from "@core/lib/interfaces/move-dish-params";
 import {MoveIngredientParams} from "@core/lib/interfaces/move-ingredient-params";
 import {DishReferences} from "@core/lib/interfaces/dish-references";
 
+export type relocateType = {
+  dish_ids: number[],
+  to_category_id: number
+} |  {
+  dish_ids: number[],
+  from_category_id: number
+} | {
+  dish_ids: number[],
+  to_category_id: number,
+  from_category_id: number
+};
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,6 +27,14 @@ export class DishesService extends CommonHttpService<Dish> {
 
   constructor() {
     super(Dish, `admin/menu/dishes`);
+  }
+
+  bulkUpdateStatus(data: { dish_ids: number[], status: DishStatus }): Observable<{ok: true}> {
+    return this.patch<{ok: true}>(`bulk_status/${data.status}`, { dish_ids: data.dish_ids });
+  }
+
+  relocate(data: relocateType): Observable<{ok: true}> {
+    return this.patch<{ok: true}>(`relocate`, data);
   }
 
   updatePrices(data: { amount: number, filters?: Record<string, string | number | boolean> } |  { percent: number, filters?: Record<string, string | number | boolean> }): Observable<{ success: true, details: {id: number, price: number}[] }> {
