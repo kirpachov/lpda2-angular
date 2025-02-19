@@ -9,13 +9,12 @@
     </h2>
 
     @if (data()?.metadata?.total_count) {
-      <span class="me-1">({{ data()?.metadata?.total_count }})</span>
+    <span class="me-1">({{ data()?.metadata?.total_count }})</span>
     }
 
     <ng-template #addItemDropdownContent>
       <tui-data-list role="menu">
-        <a [routerLink]="this.parentCategoryId ?? '' | urlTo: 'menuCategory.createDish'"
-           tuiOption>
+        <a [routerLink]="this.parentCategoryId ?? '' | urlTo: 'menuCategory.createDish'" tuiOption>
           <span class="flex items-center">
             <mat-icon class="me-1">add_circle</mat-icon>
             <span i18n>Crea nuovo</span>
@@ -23,23 +22,23 @@
         </a>
 
         @if (parentCategoryId) {
-          <a [routerLink]="parentCategoryId | urlTo: 'menuCategory.linkDish'" tuiOption>
-              <span class="flex items-center">
-                <mat-icon class="me-1">share</mat-icon>
-                <ng-container i18n>Associa esistente</ng-container>
-              </span>
-          </a>
+        <a [routerLink]="parentCategoryId | urlTo: 'menuCategory.linkDish'" tuiOption>
+          <span class="flex items-center">
+            <mat-icon class="me-1">share</mat-icon>
+            <ng-container i18n>Associa esistente</ng-container>
+          </span>
+        </a>
         }
       </tui-data-list>
     </ng-template>
 
     <tui-hosted-dropdown #addDropdown [content]="addItemDropdownContent">
       <button tuiButton appearance="flat" type="button" size="m">
-      <span class="flex items-center">
-                <mat-icon>add</mat-icon>
-                <span i18n>Aggiungi</span>
-        <mat-icon class="animation-speed-2" [ngClass]="{'rotate180': addDropdown.open}">expand_more</mat-icon>
-      </span>
+        <span class="flex items-center">
+          <mat-icon>add</mat-icon>
+          <span i18n>Aggiungi</span>
+          <mat-icon class="animation-speed-2" [ngClass]="{'rotate180': addDropdown.open}">expand_more</mat-icon>
+        </span>
       </button>
     </tui-hosted-dropdown>
   </div>
@@ -57,9 +56,9 @@
         <span class="flex items-center">
           <mat-icon class="me-1">sort_by_alpha</mat-icon>
           @if (ordering()) {
-            <ng-container i18n>Fatto.</ng-container>
+          <ng-container i18n>Fatto.</ng-container>
           } @else {
-            <ng-container i18n>Riordina</ng-container>
+          <ng-container i18n>Riordina</ng-container>
           }
         </span>
       </button>
@@ -77,120 +76,136 @@
 
 
 @if (filtering()) {
-  <div class="mt-3">
-    <form class="flex items-center" (ngSubmit)="submitFilters()" [formGroup]="filters">
-      <button [showLoader]="searching()" class="me-2" type="submit" tuiIconButton appearance="flat">
-        <mat-icon>search</mat-icon>
-      </button>
+<div class="mt-3">
+  <form class="flex items-center" (ngSubmit)="submitFilters()" [formGroup]="filters">
+    <button [showLoader]="searching()" class="me-2" type="submit" tuiIconButton appearance="flat">
+      <mat-icon>search</mat-icon>
+    </button>
 
-      <tui-input class="grow" [tuiTextfieldSize]="'m'" formControlName="query" tuiAutoFocus>
-        <ng-container i18n>Filtra per nome o descrizione</ng-container>
-        <input type="text" [autocomplete]="false" tuiTextfield>
-      </tui-input>
-    </form>
-  </div>
+    <tui-input class="grow" [tuiTextfieldSize]="'m'" formControlName="query" tuiAutoFocus>
+      <ng-container i18n>Filtra per nome o descrizione</ng-container>
+      <input type="text" [autocomplete]="false" tuiTextfield>
+    </tui-input>
+  </form>
+</div>
 }
 
 @if (ordering()) {
-  <button type="button" size="l" tuiButton appearance="flat" (click)="orderAllBy('name')">
-    <ng-container i18n>Ordina tutti per nome</ng-container>
-  </button>
+<button type="button" size="l" tuiButton appearance="flat" (click)="orderAllBy('name')">
+  <ng-container i18n>Ordina tutti per nome</ng-container>
+</button>
 }
 
 <hr class="text-slate-400 my-3">
 
 <div class="items-list" (cdkDropListDropped)="drop($event)" [ngClass]="{'allow-reorder': reorderEnabled()}"
-     [cdkDropListDisabled]="!reorderEnabled()" cdkDropList>
+  [cdkDropListDisabled]="!reorderEnabled()" cdkDropList>
   @for (item of items(); track item.id) {
-    <ng-template #actions>
-      <tui-data-list role="menu" *ngIf="item">
-        <a [routerLink]="['dish', item.id]" tuiOption>
+  <ng-template #actions>
+    <tui-data-list role="menu" *ngIf="item">
+      <a [routerLink]="['dish', item.id]" tuiOption>
         <span class="flex items-center">
           <mat-icon class="me-1">visibility</mat-icon>
 
           <span i18n>Visualizza</span>
         </span>
-        </a>
+      </a>
 
-        <a [routerLink]="['dish', item.id, 'duplicate']" tuiOption>
+      <a [routerLink]="['dish', item.id, 'duplicate']" tuiOption>
         <span class="flex items-center">
           <mat-icon class="me-1">content_copy</mat-icon>
           <span i18n>Duplica</span>
         </span>
-        </a>
+      </a>
 
-        <ng-template #removeDishDropdownTemplate>
-          <tui-loader [overlay]="true" size="l" [showLoader]="deleting()">
-            <p i18n>Vuoi eliminare definitivamente questo piatto, oppure solo rimuoverlo da questa categoria?</p>
+      <button *ngIf="item.status != 'active'" (click)="updateDishStatus(item.id, 'active')" type="button" tuiOption>
+        <app-dish-status [status]="'active'">
+          <span class="flex items-center">
+            <mat-icon class="me-1">check_circle</mat-icon>
+            <span i18n>Attiva</span>
+          </span>
+        </app-dish-status>
+      </button>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-              <button type="button" (click)="deleteDish(item)" tuiButton appearance="secondary-destructive">
-                <ng-container i18n>Elimina definitivamente</ng-container>
-              </button>
+      <button *ngIf="item.status != 'inactive'" (click)="updateDishStatus(item.id, 'inactive')" type="button" tuiOption>
+        <app-dish-status [status]="'inactive'">
+          <span class="flex items-center">
+            <mat-icon class="me-1">cancel</mat-icon>
+            <span i18n>Disattiva</span>
+          </span>
+        </app-dish-status>
+      </button>
 
-              <button type="button" (click)="removeDishFromCategory(item)" tuiButton appearance="secondary">
-                <ng-container i18n>Rimuovi da questa categoria</ng-container>
-              </button>
+      <ng-template #removeDishDropdownTemplate>
+        <tui-loader [overlay]="true" size="l" [showLoader]="deleting()">
+          <p i18n>Vuoi eliminare definitivamente questo piatto, oppure solo rimuoverlo da questa categoria?</p>
 
-              <button type="button" (click)="closeModal()" tuiButton appearance="outline">
-                <ng-container i18n>Annulla</ng-container>
-              </button>
-            </div>
-          </tui-loader>
-        </ng-template>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <button type="button" (click)="deleteDish(item)" tuiButton appearance="secondary-destructive">
+              <ng-container i18n>Elimina definitivamente</ng-container>
+            </button>
 
-        <button (click)="showModal(removeDishDropdownTemplate)" type="button" tuiOption>
-            <span class="flex items-center">
-              <mat-icon class="me-1">delete</mat-icon>
-              <span i18n>Rimuovi</span>
-            </span>
-        </button>
-        <!--        </tui-hosted-dropdown>-->
-      </tui-data-list>
-    </ng-template>
+            <button type="button" (click)="removeDishFromCategory(item)" tuiButton appearance="secondary">
+              <ng-container i18n>Rimuovi da questa categoria</ng-container>
+            </button>
 
-    <tui-island cdkDrag class="mb-2">
-      <div class="flex justify-between items-center">
+            <button type="button" (click)="closeModal()" tuiButton appearance="outline">
+              <ng-container i18n>Annulla</ng-container>
+            </button>
+          </div>
+        </tui-loader>
+      </ng-template>
+
+      <button (click)="showModal(removeDishDropdownTemplate)" type="button" tuiOption>
+        <span class="flex items-center">
+          <mat-icon class="me-1">delete</mat-icon>
+          <span i18n>Rimuovi</span>
+        </span>
+      </button>
+      <!--        </tui-hosted-dropdown>-->
+    </tui-data-list>
+  </ng-template>
+
+  <tui-island cdkDrag class="mb-2">
+    <div class="flex justify-between items-center">
       <span class="flex items-center">
         <a [routerLink]="{ categoryId: parentCategoryId, itemId: item.id } | urlTo: 'dish.show'">
-      <app-show-image style="max-width: 100px;" class="inline-block rounded me-2"
-                      *ngIf="item && item.images && item.images.length > 0"
-                      [image]="item.images[0]"></app-show-image>
+          <app-show-image style="max-width: 100px;" class="inline-block rounded me-2"
+            *ngIf="item && item.images && item.images.length > 0" [image]="item.images[0]"></app-show-image>
         </a>
 
-      <div>
-        <a tuiLink [routerLink]="{ categoryId: parentCategoryId, itemId: item.id } | urlTo: 'dish.show'"
-           class="text-lg">{{ item.name }}</a>
-        <p class="tui-island__category" [ngClass]="{'text-warning': item.status === 'inactive'}" >{{ item.status }}</p>
-      </div>
-        </span>
+        <div>
+          <a tuiLink [routerLink]="{ categoryId: parentCategoryId, itemId: item.id } | urlTo: 'dish.show'"
+            class="text-lg">{{ item.name }}</a>
+          <p class="tui-island__category" [ngClass]="{'text-warning': item.status === 'inactive'}">{{ item.status }}</p>
+        </div>
+      </span>
 
-        @if (ordering()) {
-          <button cdkDragHandle size="m" appearance="outline" type="button" tuiIconButton>
-            <mat-icon class="drag-shake">drag_handle</mat-icon>
-          </button>
-        } @else {
-          <tui-hosted-dropdown [content]="actions">
-            <button cdkDragHandle size="m" appearance="outline" type="button" tuiIconButton>
-              <mat-icon>more_vert</mat-icon>
-            </button>
-          </tui-hosted-dropdown>
-        }
+      @if (ordering()) {
+      <button cdkDragHandle size="m" appearance="outline" type="button" tuiIconButton>
+        <mat-icon class="drag-shake">drag_handle</mat-icon>
+      </button>
+      } @else {
+      <tui-hosted-dropdown [content]="actions">
+        <button cdkDragHandle size="m" appearance="outline" type="button" tuiIconButton>
+          <mat-icon>more_vert</mat-icon>
+        </button>
+      </tui-hosted-dropdown>
+      }
 
-      </div>
-    </tui-island>
+    </div>
+  </tui-island>
   } @empty {
-    @if (searching()) {
-      <tui-loader size="m" [showLoader]="true"></tui-loader>
-    } @else {
-      <p class="text-center">
-        <ng-container i18n>Non ci sono piatti</ng-container>
-      </p>
-    }
+  @if (searching()) {
+  <tui-loader size="m" [showLoader]="true"></tui-loader>
+  } @else {
+  <p class="text-center">
+    <ng-container i18n>Non ci sono piatti</ng-container>
+  </p>
+  }
   }
 </div>
 
-<tui-table-pagination class="my-2"
-                      [items]="[10, 100, 1000]" [size]="100" [total]="data()?.metadata?.total_count ?? 0"
-                      (paginationChange)="paginationChange($event)">
+<tui-table-pagination class="my-2" [items]="[10, 100, 1000]" [size]="100" [total]="data()?.metadata?.total_count ?? 0"
+  (paginationChange)="paginationChange($event)">
 </tui-table-pagination>

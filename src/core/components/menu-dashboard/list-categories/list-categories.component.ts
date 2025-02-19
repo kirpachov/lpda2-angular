@@ -87,7 +87,7 @@ export class ListCategoriesComponent implements OnInit, OnChanges {
 
   readonly data: WritableSignal<SearchResult<MenuCategory> | null> = signal(null);
   readonly items = computed(() => this.data()?.items ?? []);
-  readonly filtering: WritableSignal<boolean> = signal(false);
+  readonly filtering: WritableSignal<boolean> = signal(true);
 
   readonly ordering: WritableSignal<boolean> = signal(false);
 

@@ -38,6 +38,7 @@ import {Dish} from "@core/models/dish";
 import {SOMETHING_WENT_WRONG_MESSAGE} from "@core/lib/something-went-wrong-message";
 import {PolymorpheusContent} from "@tinkoff/ng-polymorpheus";
 import {nue} from "@core/lib/nue";
+import { DishStatusComponent } from '@core/components/statuses/dish/dish-status/dish-status.component';
 
 @Component({
   selector: 'app-list-dishes',
@@ -69,6 +70,7 @@ import {nue} from "@core/lib/nue";
     TuiHintModule,
     TuiProgressModule,
     RouterOutlet,
+    DishStatusComponent,
 ],
   templateUrl: './list-dishes.component.html',
   styleUrl: './list-dishes.component.scss',
@@ -87,14 +89,15 @@ export class ListDishesComponent implements OnInit, OnChanges {
 
   readonly data: WritableSignal<SearchResult<Dish> | null> = signal(null);
   readonly items: Signal<Dish[]> = computed(() => this.data()?.items ?? []);
-  readonly filtering: WritableSignal<boolean> = signal(false);
+  readonly filtering: WritableSignal<boolean> = signal(true);
 
   readonly ordering: WritableSignal<boolean> = signal(false);
 
   readonly searching: WritableSignal<boolean> = signal(false);
   readonly deleting: WritableSignal<boolean> = signal(false);
   private readonly moving: WritableSignal<boolean> = signal(false);
-  readonly loading: Signal<boolean> = computed(() => this.searching() || this.deleting() || this.moving());
+  private readonly updatingStatus: WritableSignal<boolean> = signal(false);
+  readonly loading: Signal<boolean> = computed(() => this.searching() || this.deleting() || this.moving() || this.updatingStatus());
 
   readonly reorderEnabled: WritableSignal<boolean> = signal<boolean>(true);
 
@@ -127,6 +130,25 @@ export class ListDishesComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['parentCategoryId']) this.search();
+  }
+
+
+  updateDishStatus(id: Dish["id"], status: Dish["status"]): void {
+    if (!status || !id) return;
+
+    this.updatingStatus.set(true);
+    this.service.updateStatus(id, status).pipe(
+      takeUntil(this.destroy$),
+      finalize(() => this.updatingStatus.set(false)),
+      tap(() => this.search()),
+    ).subscribe({
+      next: () => {
+        this.notifications.fireSnackBar($localize`Stato aggiornato.`);
+      },
+      error: (r: HttpErrorResponse) => {
+        this.notifications.error(parseHttpErrorMessage(r) || $localize`Qualcosa è andato storto.`);
+      }
+    })
   }
 
   triggerFiltering(): void {
