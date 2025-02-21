@@ -238,7 +238,7 @@
             
             src/app/admin/reservations/admin-reservations-home/admin-reservations-home.component.ts 
           </context>
-          <context context-type='linenumber'>188</context>
+          <context context-type='linenumber'>219</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/app/admin/settings/holidays/list/list.component.ts</context>
@@ -800,7 +800,7 @@
             
             src/app/admin/reservations/admin-reservations-home/admin-reservations-home.component.html 
           </context>
-          <context context-type='linenumber'>69</context>
+          <context context-type='linenumber'>71</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>
@@ -883,11 +883,21 @@
             
             src/app/admin/reservations/admin-reservations-home/admin-reservations-home.component.html 
           </context>
-          <context context-type='linenumber'>89</context>
+          <context context-type='linenumber'>93</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/app/admin/reservations/edit-reservation/edit-reservation.component.html</context>
           <context context-type='linenumber'>3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='5969828721903363967' datatype='html'>
+        <source>Creazione:</source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/app/admin/reservations/admin-reservations-home/admin-reservations-home.component.html 
+          </context>
+          <context context-type='linenumber'>99</context>
         </context-group>
       </trans-unit>
       <trans-unit id='6652677406345413363' datatype='html'>
@@ -897,7 +907,7 @@
             
             src/app/admin/reservations/admin-reservations-home/admin-reservations-home.component.html 
           </context>
-          <context context-type='linenumber'>103</context>
+          <context context-type='linenumber'>114</context>
         </context-group>
       </trans-unit>
       <trans-unit id='7156597206608384051' datatype='html'>
@@ -907,7 +917,17 @@
             
             src/app/admin/reservations/admin-reservations-home/admin-reservations-home.component.html 
           </context>
-          <context context-type='linenumber'>105</context>
+          <context context-type='linenumber'>116</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='8138307764428444886' datatype='html'>
+        <source>Assegna tavolo</source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/app/admin/reservations/admin-reservations-home/admin-reservations-home.component.html 
+          </context>
+          <context context-type='linenumber'>135</context>
         </context-group>
       </trans-unit>
       <trans-unit id='8272843536846027906' datatype='html'>
@@ -917,7 +937,7 @@
             
             src/app/admin/reservations/admin-reservations-home/admin-reservations-home.component.ts 
           </context>
-          <context context-type='linenumber'>111</context>
+          <context context-type='linenumber'>116</context>
         </context-group>
       </trans-unit>
       <trans-unit id='1265862338076652065' datatype='html'>
@@ -934,7 +954,7 @@
             
             src/app/admin/reservations/admin-reservations-home/admin-reservations-home.component.ts 
           </context>
-          <context context-type='linenumber'>136</context>
+          <context context-type='linenumber'>141</context>
         </context-group>
       </trans-unit>
       <trans-unit id='6923005459778676818' datatype='html'>
@@ -944,7 +964,7 @@
             
             src/app/admin/reservations/admin-reservations-home/admin-reservations-home.component.ts 
           </context>
-          <context context-type='linenumber'>148</context>
+          <context context-type='linenumber'>153</context>
         </context-group>
       </trans-unit>
       <trans-unit id='1405502572574239258' datatype='html'>
@@ -954,7 +974,7 @@
             
             src/app/admin/reservations/admin-reservations-home/admin-reservations-home.component.ts 
           </context>
-          <context context-type='linenumber'>169</context>
+          <context context-type='linenumber'>200</context>
         </context-group>
       </trans-unit>
       <trans-unit id='3564020598943330712' datatype='html'>
@@ -964,7 +984,7 @@
             
             src/app/admin/reservations/admin-reservations-home/admin-reservations-home.component.ts 
           </context>
-          <context context-type='linenumber'>173</context>
+          <context context-type='linenumber'>204</context>
         </context-group>
       </trans-unit>
       <trans-unit id='941321116787164262' datatype='html'>
@@ -974,7 +994,7 @@
             
             src/app/admin/reservations/admin-reservations-home/admin-reservations-home.component.ts 
           </context>
-          <context context-type='linenumber'>206</context>
+          <context context-type='linenumber'>237</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/app/admin/settings/holidays/list/list.component.ts</context>
@@ -4265,6 +4285,16 @@
             src/core/components/public-navigate-menu-v1/public-navigate-menu-v1.component.html 
           </context>
           <context context-type='linenumber'>67</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='1796884652590216421' datatype='html'>
+        <source>Tavolo numero</source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/edit-reservation-table-modal/edit-reservation-table-modal.component.ts 
+          </context>
+          <context context-type='linenumber'>23</context>
         </context-group>
       </trans-unit>
       <trans-unit id='6964330292623887797' datatype='html'>
