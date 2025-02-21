@@ -3,6 +3,7 @@ import {
   Component,
   computed,
   inject,
+  Injector,
   OnInit,
   Signal,
   signal, ViewChild,
@@ -12,7 +13,7 @@ import {CommonModule, DatePipe} from "@angular/common";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {TuiInputModule} from "@taiga-ui/kit";
 import {TuiAutoFocusModule, TuiDay, TuiDestroyService} from "@taiga-ui/cdk";
-import {TuiButtonModule, TuiExpandModule, TuiHintModule, TuiLinkModule, TuiLoaderModule} from "@taiga-ui/core";
+import {TuiButtonModule, TuiDialogService, TuiExpandModule, TuiHintModule, TuiLinkModule, TuiLoaderModule} from "@taiga-ui/core";
 import {MatIcon} from "@angular/material/icon";
 import {NavigationEnd, Router, RouterLink, RouterOutlet} from "@angular/router";
 import {ShowImageComponent} from "@core/components/show-image/show-image.component";
@@ -62,6 +63,8 @@ import { AdminReservationPaymentComponent } from "../../../../core/components/ad
 import { EipReservationStatusComponent } from "../../../../core/components/eip-reservation-status/eip-reservation-status.component";
 import { ReservationStatus, ReservationStatusTranslations } from '@core/lib/interfaces/reservation-data';
 import { ReservationTablesSummaryComponent } from "../../../../core/components/reservation-tables-summary/reservation-tables-summary.component";
+import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
+import { EditReservationTableModalComponent } from '@core/components/edit-reservation-table-modal/edit-reservation-table-modal.component';
 
 @Component({
   selector: 'app-admin-reservations-home',
@@ -99,10 +102,12 @@ import { ReservationTablesSummaryComponent } from "../../../../core/components/r
   ],
 })
 export class AdminReservationsHomeComponent implements OnInit {
-
   readonly loading: WritableSignal<boolean> = signal(false);
   readonly data: WritableSignal<SearchResult<Reservation> | null> = signal(null);
   readonly items: Signal<Reservation[]> = computed(() => this.data()?.items || []);
+
+  private readonly dialogs: TuiDialogService = inject(TuiDialogService);
+  private readonly injector: Injector = inject(Injector);
   private readonly service: ReservationsService = inject(ReservationsService);
   private readonly router = inject(Router);
   private readonly notifications: NotificationsService = inject(NotificationsService);
@@ -155,6 +160,32 @@ export class AdminReservationsHomeComponent implements OnInit {
   filtersChanged(filters: Partial<ReservationsFilters>): void {
     this.filters = filters;
     this.search(filters);
+  }
+
+  editTable(reservation: Reservation) {
+    this.dialogs.open<string | false | null>(
+      new PolymorpheusComponent(EditReservationTableModalComponent, this.injector),
+      {
+        data: {
+          item: reservation
+        }
+      }
+    ).pipe(
+      takeUntil(this.destroy$)
+    ).subscribe({
+      next: (result: string | null | false): void => {
+        // console.log(`result`, {result});
+        if (result != false && reservation.id) {
+          this.loading.set(true);
+          this.service.update(reservation.id, { table: result }).pipe(
+            takeUntil(this.destroy$),
+            finalize(() => this.loading.set(false)),
+            finalize(() => this.search()),
+          ).subscribe();
+        }
+      },
+      error: (error: any): void => console.error(error),
+    })
   }
 
   private confirmedUpdateStatus(id: number, status: ReservationStatus): void {
