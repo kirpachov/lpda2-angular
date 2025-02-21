@@ -171,9 +171,9 @@ export class AdminReservationFormComponent implements OnInit {
     delete json.date;
     delete json.time;
 
-    if (!(json.table && json.table.length > 0)) delete json.table;
-    if (!(json.notes && json.notes.length > 0)) delete json.notes;
-    if (!(json.email && json.email.length > 0)) delete json.notes;
+    // if (!(json.table && json.table.length > 0)) delete json.table;
+    // if (!(json.notes && json.notes.length > 0)) delete json.notes;
+    // if (!(json.email && json.email.length > 0)) delete json.notes;
 
     return json;
   }
