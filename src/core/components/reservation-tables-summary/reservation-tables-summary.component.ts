@@ -13,10 +13,11 @@ import {TuiDay, TuiDestroyService, TuiLetModule} from "@taiga-ui/cdk";
 import {ReservationsService} from "@core/services/http/reservations.service";
 import {finalize, takeUntil} from "rxjs";
 import {TuiHintModule, TuiLoaderModule} from "@taiga-ui/core";
-import {ReservationTableSummary, UngroupedTablesSummary} from "@core/lib/interfaces/reservation-table-summary";
+import {addMissingTableSizes, adjustSummaries, ReservationTableSummary, UngroupedTablesSummary} from "@core/lib/interfaces/reservation-table-summary";
 import {ObjectToArrayPipe} from "@core/pipes/object-to-array.pipe";
 import { ReservationsFilters } from '../list-reservations-filters/list-reservations-filters.component';
 import { MatIconModule } from '@angular/material/icon';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-reservation-tables-summary',
@@ -25,7 +26,8 @@ import { MatIconModule } from '@angular/material/icon';
     TuiLoaderModule,
     TuiHintModule,
     MatIconModule,
-    ObjectToArrayPipe
+    ObjectToArrayPipe,
+    NgClass,
 ],
   templateUrl: './reservation-tables-summary.component.html',
   styleUrls: ['./reservation-tables-summary.component.scss'],
@@ -118,7 +120,7 @@ export class ReservationTablesSummaryComponent implements OnChanges {
       finalize(() => this.loadingGrouped.set(false)),
     ).subscribe({
       next: (data: ReservationTableSummary[]): void => {
-        this.groupedData.set(data);
+        this.groupedData.set(adjustSummaries(data));
       }
     })
   }

@@ -77,7 +77,7 @@
   
             @for (h of (d.summary | objectToArray); track h[0]) {
               <td class="tui-table__td">
-                <span>{{ h[1] }}</span>
+                <span [ngClass]="{'text-slate-400': h[1] == 0}" >{{ h[1] }}</span>
               </td>
             }
           </tr>
