@@ -2,43 +2,9 @@
 <tui-loader [showLoader]="showLoader" [size]="'s'"></tui-loader>
 } @else {
 
-<!-- <ng-template #details>
-    <table class="tui-table">
-
-      <thead>
-      <tr class="tui-table__tr tui-table__tr_border_none">
-        <th class="tui-table__th">
-          <ng-template #headerExplain>Quante persone ci sono al tavolo in questione</ng-template>
-
-          <span [tuiHint]="headerExplain" i18n>Tipo:</span>
-        </th>
-
-        @for (h of data(); track h[0]) {
-          <th class="tui-table__th">
-            {{ h[0] }} <span i18n>persone</span>
-          </th>
-        }
-      </tr>
-      </thead>
-
-      <tbody>
-      <tr class="tui-table__tr tui-table__tr_border_none">
-        <td class="tui-table__td">
-          <ng-template #valueExplain>Quanti tavoli con lo stesso numero di persone</ng-template>
-
-          <span [tuiHint]="valueExplain" i18n>Quantità:</span>
-        </td>
-
-        @for (h of data(); track h[0]) {
-          <td class="tui-table__td">
-            <span>{{ h[1] }}</span>
-          </td>
-        }
-      </tr>
-
-      </tbody>
-    </table>
-  </ng-template> -->
+  <!--
+          UNGROUPED data
+  -->
 
 <ng-template #totalHint>
   <ng-container i18n>Totale persone</ng-container> {{ totalPeople() }}
@@ -49,7 +15,7 @@
     <ng-container i18n>Distribuzione tavoli</ng-container>
   </span>
 
-  @for(d of data(); track d[0]){
+  @for(d of ungroupedData(); track d[0]){
   <ng-template #dHint>
     {{ d[1] }}
     <ng-container i18n>tavoli da</ng-container>
@@ -67,4 +33,61 @@
     {{ totalPeople() }}
   </span>
 </div>
+
+<!--
+          GROUPED data
+-->
+
+
+@if(groupedError()){
+  <p class="text-slate-500">
+    {{ groupedError() }}
+  </p>
+} @else {
+  <div class="flex flex-wrap">
+    @for (d of groupedData(); track d.turn.id) {
+      <div class="col-12 pe-2 mb-2 md:col-6">
+        <p class="font-xl" ><b>{{ d.turn.name }}</b></p>
+  
+        <table class="tui-table">
+  
+          <thead>
+          <tr class="tui-table__tr tui-table__tr_border_none">
+            <th class="tui-table__th">
+              <ng-template #headerExplain>Quante persone ci sono al tavolo in questione</ng-template>
+  
+              <span [tuiHint]="headerExplain" i18n>N° persone</span>
+            </th>
+  
+            @for (h of (d.summary | objectToArray); track h[0]) {
+              <th class="tui-table__th">
+                {{ h[0] }}
+              </th>
+            }
+          </tr>
+          </thead>
+  
+          <tbody>
+          <tr class="tui-table__tr tui-table__tr_border_none">
+            <td class="tui-table__td">
+              <ng-template #valueExplain>Quanti tavoli con lo stesso numero di persone</ng-template>
+  
+              <span [tuiHint]="valueExplain" i18n>Quantità:</span>
+            </td>
+  
+            @for (h of (d.summary | objectToArray); track h[0]) {
+              <td class="tui-table__td">
+                <span>{{ h[1] }}</span>
+              </td>
+            }
+          </tr>
+  
+          </tbody>
+        </table>
+      </div>
+    }
+  </div>
+}
+
+<!-- <app-grouped-reservation-tables-summary [showLoader]="loading()" [filters]="this.filters"></app-grouped-reservation-tables-summary> -->
 }

@@ -26,7 +26,7 @@ export class ReservationsService extends CommonHttpService<Reservation> {
     );
   }
 
-  tablesSummary(params: Record<string, string|number|boolean> = {}): Observable<ReservationTableSummary[]> {
+  tablesSummary(params: Partial<{ date: string }> = {}): Observable<ReservationTableSummary[]> {
     return this.get<ReservationTableSummary[]>(`tables_summary`, { params });
   }
 

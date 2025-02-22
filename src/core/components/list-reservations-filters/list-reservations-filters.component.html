@@ -28,14 +28,14 @@
     </app-reservation-date-select>
   </div>
 
-  <div class="col-12 md:col-4 px-1">
+  <div class="col-12 md:col-3 px-1">
     <app-reservation-turn-select [showCleaner]="true" [filters]="{date: dateStr()}" [inputSize]="'m'"
       style="min-width: 150px;" class="mx-2" [formControl]="turn">
       <ng-container i18n>Turno</ng-container>
     </app-reservation-turn-select>
   </div>
 
-  <div class="col-11 md:col-3">
+  <div class="col-10 md:col-3">
     <ng-template #stringifyOrderBy let-all>
       {{ all.humanLabel }}
     </ng-template>
@@ -49,7 +49,7 @@
     </tui-select>
   </div>
 
-  <div class="col-1">
+  <div class="col-2 md:col-1 overflow-hidden">
     <button (click)="fireModal(additionalFiltersTemplate)" type="button" [showLoader]="loading" tuiIconButton
       appearance="flat">
       <mat-icon>filter_alt</mat-icon>
