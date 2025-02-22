@@ -637,7 +637,7 @@
             
             src/core/components/preorder-reservation-group-form/preorder-reservation-group-form.component.html 
           </context>
-          <context context-type='linenumber'>64</context>
+          <context context-type='linenumber'>72</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>
@@ -1270,7 +1270,7 @@
             
             src/core/components/preorder-reservation-group-form/preorder-reservation-group-form.component.html 
           </context>
-          <context context-type='linenumber'>68</context>
+          <context context-type='linenumber'>76</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/core/components/require-root-modal/require-root-modal.component.html</context>
@@ -1915,7 +1915,7 @@
             
             src/core/components/preorder-reservation-group-form/preorder-reservation-group-form.component.html 
           </context>
-          <context context-type='linenumber'>14</context>
+          <context context-type='linenumber'>22</context>
         </context-group>
       </trans-unit>
       <trans-unit id='8591830564179925921' datatype='html'>
@@ -1943,7 +1943,7 @@
             
             src/core/components/preorder-reservation-group-form/preorder-reservation-group-form.component.html 
           </context>
-          <context context-type='linenumber'>39</context>
+          <context context-type='linenumber'>47</context>
         </context-group>
       </trans-unit>
       <trans-unit id='6340096295801004264' datatype='html'>
@@ -4790,7 +4790,7 @@
             
             src/core/components/preorder-reservation-group-form/preorder-reservation-group-form.component.html 
           </context>
-          <context context-type='linenumber'>23</context>
+          <context context-type='linenumber'>31</context>
         </context-group>
       </trans-unit>
       <trans-unit id='5839460738693952504' datatype='html'>
@@ -6807,6 +6807,16 @@
           <context context-type='linenumber'>5</context>
         </context-group>
       </trans-unit>
+      <trans-unit id='1816816620001762110' datatype='html'>
+        <source>Tipologia di pagamento</source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/preorder-reservation-group-form/preorder-reservation-group-form.component.html 
+          </context>
+          <context context-type='linenumber'>13</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id='7573704955542131513' datatype='html'>
         <source>Attivazione</source>
         <context-group purpose='location'>
@@ -6814,7 +6824,7 @@
             
             src/core/components/preorder-reservation-group-form/preorder-reservation-group-form.component.html 
           </context>
-          <context context-type='linenumber'>30</context>
+          <context context-type='linenumber'>38</context>
         </context-group>
       </trans-unit>
       <trans-unit id='7238720371028138999' datatype='html'>
@@ -6824,7 +6834,7 @@
             
             src/core/components/preorder-reservation-group-form/preorder-reservation-group-form.component.html 
           </context>
-          <context context-type='linenumber'>33</context>
+          <context context-type='linenumber'>41</context>
         </context-group>
       </trans-unit>
       <trans-unit id='2204300410425423666' datatype='html'>
@@ -6837,7 +6847,7 @@
             
             src/core/components/preorder-reservation-group-form/preorder-reservation-group-form.component.ts 
           </context>
-          <context context-type='linenumber'>66</context>
+          <context context-type='linenumber'>70</context>
         </context-group>
       </trans-unit>
       <trans-unit id='5482427563113273465' datatype='html'>
@@ -6847,7 +6857,7 @@
             
             src/core/components/preorder-reservation-group-preorder-type/preorder-reservation-group-preorder-type.component.ts 
           </context>
-          <context context-type='linenumber'>25</context>
+          <context context-type='linenumber'>32</context>
         </context-group>
       </trans-unit>
       <trans-unit id='7360290214533406305' datatype='html'>
@@ -6860,7 +6870,30 @@
             
             src/core/components/preorder-reservation-group-preorder-type/preorder-reservation-group-preorder-type.component.ts 
           </context>
-          <context context-type='linenumber'>26</context>
+          <context context-type='linenumber'>33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='8701528329687479118' datatype='html'>
+        <source>Autorizzazione cc con nexi</source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/preorder-reservation-group-preorder-type/preorder-reservation-group-preorder-type.component.ts 
+          </context>
+          <context context-type='linenumber'>36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='1671820798755331300' datatype='html'>
+        <source>
+           Verrà richiesta un&apos;autorizzazione con carta di credito del
+          valore specificato al momento della prenotazione. 
+        </source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/preorder-reservation-group-preorder-type/preorder-reservation-group-preorder-type.component.ts 
+          </context>
+          <context context-type='linenumber'>37</context>
         </context-group>
       </trans-unit>
       <trans-unit id='7593923899883419026' datatype='html'>
