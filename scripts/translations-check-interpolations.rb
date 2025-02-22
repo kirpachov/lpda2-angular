@@ -46,4 +46,4 @@ formatter.compact = true
 
 formatter.write(doc, File.open(OUTPUT_FILE_PATH, "w"))
 
-debugger
+# debugger

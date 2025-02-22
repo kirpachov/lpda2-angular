@@ -8904,7 +8904,7 @@
             
             src/core/components/reservation-tables-summary/reservation-tables-summary.component.html 
           </context>
-          <context context-type='linenumber'>44</context>
+          <context context-type='linenumber'>10</context>
         </context-group>
       </trans-unit>
       <trans-unit id='2774586529427193218' datatype='html'>
@@ -8915,7 +8915,7 @@
             
             src/core/components/reservation-tables-summary/reservation-tables-summary.component.html 
           </context>
-          <context context-type='linenumber'>49</context>
+          <context context-type='linenumber'>15</context>
         </context-group>
       </trans-unit>
       <trans-unit id='5860696062942698647' datatype='html'>
@@ -8926,7 +8926,7 @@
             
             src/core/components/reservation-tables-summary/reservation-tables-summary.component.html 
           </context>
-          <context context-type='linenumber'>55</context>
+          <context context-type='linenumber'>21</context>
         </context-group>
       </trans-unit>
       <trans-unit id='7998535168343361320' datatype='html'>
@@ -8937,7 +8937,40 @@
             
             src/core/components/reservation-tables-summary/reservation-tables-summary.component.html 
           </context>
-          <context context-type='linenumber'>57</context>
+          <context context-type='linenumber'>23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='6212608752552166823' datatype='html'>
+        <source>N° persone</source>
+        <target>N° of people</target>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/reservation-tables-summary/reservation-tables-summary.component.html 
+          </context>
+          <context context-type='linenumber'>59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='3338450619802087688' datatype='html'>
+        <source>Quantità:</source>
+        <target>Quantity:</target>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/reservation-tables-summary/reservation-tables-summary.component.html 
+          </context>
+          <context context-type='linenumber'>75</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='5542020214898240543' datatype='html'>
+        <source>Seleziona un unico giorno per vedere il riepilogo raggruppato per turno.</source>
+        <target>Select a single day to view the summary grouped by shift.</target>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/reservation-tables-summary/reservation-tables-summary.component.ts 
+          </context>
+          <context context-type='linenumber'>111</context>
         </context-group>
       </trans-unit>
       <trans-unit id='3751149526186668089' datatype='html'>
