@@ -9,6 +9,14 @@
   </div>
 
   <div class="block mb-3">
+    <app-select-preorder-type class="block" [formControl]="form.controls.preorder_type">
+      <ng-container i18n>Tipologia di pagamento</ng-container>
+    </app-select-preorder-type>
+
+    <app-errors [errors]="e('preorder_type')"></app-errors>
+  </div>
+
+  <div class="block mb-3">
     <tui-input-number
       [formControlName]="'payment_value'" [tuiTextfieldPrefix]="'€'">
       <ng-container i18n>Valore pagamento</ng-container>

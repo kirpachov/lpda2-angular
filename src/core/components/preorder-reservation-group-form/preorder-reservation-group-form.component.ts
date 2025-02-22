@@ -18,32 +18,30 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { PreorderReservationGroupCasesComponent, TurnDateOutputFormat } from "../preorder-reservation-group-cases/preorder-reservation-group-cases.component";
 import { SelectTurnsPaymentv2Component } from "../select-turns-paymentv2/select-turns-paymentv2.component";
 import { I18nInputComponent } from '../i18n-input/i18n-input.component';
+import { SelectPreorderTypeComponent } from "../select-preorder-type/select-preorder-type.component";
 
 @Component({
   selector: 'app-preorder-reservation-group-form',
   standalone: true,
   imports: [
     FormsModule,
-    JsonPipe,
     ReactiveFormsModule,
     TuiButtonModule,
     TuiInputModule,
     TuiTextareaModule,
     TuiSelectModule,
     TuiDataListModule,
-    PreorderReservationGroupPreorderTypeComponent,
     TuiAutoFocusModule,
     ErrorsComponent,
     TuiInputNumberModule,
-    CurrencyPipe,
     TuiTextfieldControllerModule,
     TuiHintModule,
     TuiCheckboxBlockModule,
     TuiExpandModule,
     TuiInputDateModule,
-    PreorderReservationGroupCasesComponent,
     SelectTurnsPaymentv2Component,
     I18nInputComponent,
+    SelectPreorderTypeComponent,
 ],
   templateUrl: './preorder-reservation-group-form.component.html',
   styleUrl: './preorder-reservation-group-form.component.scss',
@@ -62,11 +60,18 @@ export class PreorderReservationGroupFormComponent {
 
   readonly disabled: WritableSignal<boolean> = signal(false);
 
-  readonly form = new FormGroup({
+  readonly form = new FormGroup<{
+    title: FormControl<string | null>,
+    active: FormControl<boolean | null>,
+    payment_value: FormControl<number | null>,
+    message: FormControl<Record<string, string> | null>,
+    preorder_type: FormControl<PreorderReservationGroup["preorder_type"] | null>
+  }>({
     title: new FormControl<string | null>($localize`Pagamento alla prenotazione richiesto ${Date.now()}`, [Validators.required]),
     active: new FormControl<boolean | null>(true, [Validators.required, Validators.pattern(/^(true|false)$/)]),
     payment_value: new FormControl<number | null>(null, [Validators.required]),
     message: new FormControl<Record<string, string> | null>(null, []),
+    preorder_type: new FormControl<PreorderReservationGroup["preorder_type"] | null>(null, [Validators.required]),
   });
 
   private submitted: boolean = false;
@@ -89,7 +94,8 @@ export class PreorderReservationGroupFormComponent {
       payment_value: obj.payment_value ?? null,
       title: obj.title ?? null,
       active: obj.status === "active",
-      message: obj.translations?.message || {}
+      message: obj.translations?.message || {},
+      preorder_type: obj.preorder_type,
     })
   }
 

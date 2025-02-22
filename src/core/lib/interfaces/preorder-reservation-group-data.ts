@@ -24,5 +24,8 @@ export interface PreorderReservationGroupData extends BaseModelData {
 export const PreorderReservationGroupStatuses = ["active", "inactive"] as const;
 export type PreorderReservationGroupStatus = typeof PreorderReservationGroupStatuses[number];
 
-export const PreorderTypes = ["nexi_payment"] as const;
+export const PreorderTypes = ["nexi_payment", "nexi_authorization"] as const;
 export type PreorderType = typeof PreorderTypes[number];
+export function isPreorderType(value: unknown): value is PreorderType {
+  return PreorderTypes.includes(value as PreorderType);
+}
