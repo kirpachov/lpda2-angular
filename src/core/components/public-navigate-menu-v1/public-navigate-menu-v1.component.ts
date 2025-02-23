@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, computed, inject, Injector, isDevMode, OnInit, Signal, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, Injector, isDevMode, OnInit, Signal, signal, WritableSignal } from '@angular/core';
 import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
 import { parseHttpErrorMessage } from '@core/lib/parse-http-error-message';
 import { SearchResult } from '@core/lib/search-result.model';
@@ -50,6 +50,7 @@ export class PublicNavigateMenuV1Component implements OnInit {
   private readonly menuService: PublicMenuService = inject(PublicMenuService);
   private readonly dialogs: TuiDialogService = inject(TuiDialogService);
   private readonly injector: Injector = inject(Injector);
+  private readonly me = inject(ElementRef);
 
   readonly categoriesData: WritableSignal<SearchResult<MenuCategory> | null> = signal(null);
   readonly categories: Signal<MenuCategory[]> = computed(() => this.categoriesData()?.items || []);
@@ -67,7 +68,6 @@ export class PublicNavigateMenuV1Component implements OnInit {
   readonly breadcrumbUrls: WritableSignal<string[]> = signal([]);
 
   ngOnInit(): void {
-
     this.listenRouteParamsAndPopulateBreadcrumb();
 
     this.listenQueryParamsAndShowDishDetail();
@@ -206,7 +206,7 @@ export class PublicNavigateMenuV1Component implements OnInit {
   /**
    * Will listen for route change and load the categories and dishes accordingly.
    * 
-   * May cache categories and dishes: here re-fetching them every time.
+   * TODO May cache categories and dishes: here re-fetching them every time.
    */
   private listenRouteParamsAndPopulateBreadcrumb(): void {
     this.route.params.pipe(
@@ -233,6 +233,8 @@ export class PublicNavigateMenuV1Component implements OnInit {
   }
 
   private parseParamsToCategoryIds(params: Params): string[] {
+    if (!(params && params["categoryIds"] && typeof params["categoryIds"] === "string")) return [];
+
     return params["categoryIds"].split(`,`).filter((id: unknown): id is string => typeof id === "string" && id.length > 0);
   }
 
@@ -240,6 +242,7 @@ export class PublicNavigateMenuV1Component implements OnInit {
     const done = (categories: MenuCategory[]): void => {
       this.selectCategory(categories.length === 0 ? null : categories[categories.length - 1]);
       this.breadcrumbs.set(categories.splice(0, categories.length - 1));
+      if (categories.length > 0) this.scrollIntoView();
     };
 
     if (categoryIds.length === 0) {
@@ -262,5 +265,9 @@ export class PublicNavigateMenuV1Component implements OnInit {
         done(categories);
       }
     });
+  }
+
+  private scrollIntoView(): void {
+    this.me.nativeElement.scrollIntoView({ behavior: "smooth" });
   }
 }
