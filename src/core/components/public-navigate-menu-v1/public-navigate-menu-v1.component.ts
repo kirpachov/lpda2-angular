@@ -11,7 +11,7 @@ import { PublicReservationsService } from '@core/services/http/public-reservatio
 import { NotificationsService } from '@core/services/notifications.service';
 import { TuiDestroyService } from '@taiga-ui/cdk';
 import { TuiButtonModule, TuiDialogService, TuiLinkModule, TuiLoaderModule } from '@taiga-ui/core';
-import { distinctUntilChanged, filter, finalize, map, Subscription, switchMap, takeUntil, tap } from 'rxjs';
+import { distinctUntilChanged, filter, finalize, map, Observable, of, Subscription, switchMap, takeUntil, tap } from 'rxjs';
 // import { ShowImageComponent } from '../show-image/show-image.component';
 import { MatIconModule } from '@angular/material/icon';
 import { PolymorpheusComponent } from "@tinkoff/ng-polymorpheus";
@@ -60,6 +60,12 @@ export class PublicNavigateMenuV1Component implements OnInit {
   readonly dishes: Signal<Dish[]> = computed(() => this.dishesData()?.items || []);
   readonly loadingDishes: WritableSignal<boolean> = signal(false);
 
+  /**
+   * Cache of key-value pair of id and item.
+   */
+  private categoriesByIdCache: Record<string, MenuCategory> = {};
+  private dishesByIdCache: Record<number, Dish> = {};
+
   readonly loading: Signal<boolean> = computed(() => this.loadingCategories() || this.loadingDishes());
 
   readonly selectedCategory: WritableSignal<MenuCategory | null> = signal(null);
@@ -71,6 +77,14 @@ export class PublicNavigateMenuV1Component implements OnInit {
     this.listenRouteParamsAndPopulateBreadcrumb();
 
     this.listenQueryParamsAndShowDishDetail();
+
+    /**
+     * Every 3 minutes, empty the cache.
+     */
+    setInterval(() => {
+      this.categoriesByIdCache = {};
+      this.dishesByIdCache = {};
+    }, 1000 * 60 * 3);
 
     // this.loadingCategories.set(false); // DEVELOPMENT ONLY. REMOVE.
     // this.loadingDishes.set(false); // DEVELOPMENT ONLY. REMOVE.
@@ -134,6 +148,7 @@ export class PublicNavigateMenuV1Component implements OnInit {
     this.menuService.searchCategories(params).pipe(
       takeUntil(this.destroy),
       finalize(() => this.loadingCategories.set(false)),
+      tap((categories: SearchResult<MenuCategory>) => this.writeCategoriesCache(categories.items)),
     ).subscribe({
       next: (categories: SearchResult<MenuCategory>) => {
         this.categoriesData.set(categories);
@@ -151,6 +166,7 @@ export class PublicNavigateMenuV1Component implements OnInit {
     this.menuService.searchDishes(params).pipe(
       takeUntil(this.destroy),
       finalize(() => this.loadingDishes.set(false)),
+      tap((dishes: SearchResult<Dish>) => this.writeDishesCache(dishes.items)),
     ).subscribe({
       next: (dishes: SearchResult<Dish>) => {
         this.dishesData.set(dishes);
@@ -160,29 +176,26 @@ export class PublicNavigateMenuV1Component implements OnInit {
     });
   }
 
-  private findAndShowDish(dishId: unknown): void {
-    if (typeof dishId === "string") dishId = Number(dishId);
-    if (typeof dishId !== "number") {
-      console.error(`Invalid dish id: ${dishId}`);
+  private findAndShowDish(something: unknown): void {
+    if (typeof something === "string") something = Number(something);
+    if (typeof something !== "number") {
+      console.error(`Invalid dish id: ${something}`, something);
       return;
     }
+    const dishId: number = something; // Helping typescript because it's not smart enough to understand the above if statement.
 
     const done = (dish: Dish): void => {
       this.showDishDetail(dish);
     };
 
-    /**
-     * Using already loaded dish.
-     */
-    const loadedDish: Dish | undefined = this.dishes().find((d: Dish): boolean => d.id == dishId);
-    if (loadedDish) return done(loadedDish);
+    const cachedDish: Dish | null = this.readDishesCache(dishId);
+    const request: Observable<Dish> = cachedDish ? of(cachedDish) : this.menuService.showDish(dishId);
 
-    this.menuService.showDish(dishId).pipe(
+    request.pipe(
       takeUntil(this.destroy),
+      tap((d: Dish) => this.writeDishesCache([d])),
     ).subscribe({
-      next: (dish: Dish): void => {
-        return done(dish);
-      },
+      next: (dish: Dish): void => done(dish),
       error: (e: unknown): void => {
         this.notifications.error(e instanceof HttpErrorResponse ? parseHttpErrorMessage(e) : SOMETHING_WENT_WRONG_MESSAGE);
       }
@@ -205,8 +218,6 @@ export class PublicNavigateMenuV1Component implements OnInit {
 
   /**
    * Will listen for route change and load the categories and dishes accordingly.
-   * 
-   * TODO May cache categories and dishes: here re-fetching them every time.
    */
   private listenRouteParamsAndPopulateBreadcrumb(): void {
     this.route.params.pipe(
@@ -251,13 +262,13 @@ export class PublicNavigateMenuV1Component implements OnInit {
       return;
     }
 
-    this.menuService.searchCategories({ ids: categoryIds.join(",") }).pipe(
+    this.loadCategoriesByIds(categoryIds).pipe(
       takeUntil(this.destroy),
     ).subscribe({
-      next: (data: SearchResult<MenuCategory>): void => {
+      next: (loadedItems: MenuCategory[]): void => {
         const categories: MenuCategory[] = [];
         categoryIds.forEach((id: string): void => {
-          const category: MenuCategory | undefined = data.items.find((c: MenuCategory): boolean => c.id === Number(id) || c.secret == id);
+          const category: MenuCategory | undefined = loadedItems.find((c: MenuCategory): boolean => c.id === Number(id) || c.secret == id);
           if (category) categories.push(category);
           else console.error(`Category with id ${id} not found.`);
         });
@@ -269,5 +280,58 @@ export class PublicNavigateMenuV1Component implements OnInit {
 
   private scrollIntoView(): void {
     this.me.nativeElement.scrollIntoView({ behavior: "smooth" });
+  }
+
+  private loadCategoriesByIds(categoryIds: (string | number)[]): Observable<MenuCategory[]> {
+    const idsToLoad: (string | number)[] = [];
+    categoryIds.forEach((id: string | number): void => {
+      if (!this.readCategoriesCache(id)) idsToLoad.push(id);
+    });
+
+    const req: Observable<MenuCategory[]> = idsToLoad.length > 0 ?
+      this.menuService.searchCategories({ ids: idsToLoad.join(",") }).pipe(map((data: SearchResult<MenuCategory>) => data.items)) :
+      of([]);
+
+    if (isDevMode()) console.debug(`categories ids cache:`, { categoryIds, idsToLoad, cache: this.categoriesByIdCache });
+
+    return req.pipe(
+      tap(this.writeCategoriesCache.bind(this)),
+      map((): MenuCategory[] => {
+        return categoryIds.map((id: string | number): MenuCategory =>
+          // Here we're sure that the category is in the cache, since we just loaded it.
+          this.readCategoriesCache(id) as MenuCategory
+      );
+      }),
+    );
+  }
+
+  private writeDishesCache(dishes: Dish[]): void {
+    /**
+     * Clear cache if too big to avoid memory issues.
+     */
+    if (Object.keys(this.dishesByIdCache).length > 100) this.dishesByIdCache = {};
+
+    dishes.forEach((d: Dish) => {
+      if (d.id) this.dishesByIdCache[d.id] = d
+    });
+  }
+
+  private writeCategoriesCache(categories: MenuCategory[]): void {
+    /**
+      * Empty cache if too big to avoid memory issues.
+      */
+    if (Object.keys(this.categoriesByIdCache).length > 100) this.categoriesByIdCache = {};
+
+    categories.forEach((c: MenuCategory): void => {
+      if (c.id) this.categoriesByIdCache[typeof c.id === "string" ? c.id : `${c.id}`] = c;
+    });
+  }
+
+  private readCategoriesCache(id: string | number): MenuCategory | null {
+    return this.categoriesByIdCache[typeof id === "string" ? id : `${id}`] || null;
+  }
+
+  private readDishesCache(id: number): Dish | null {
+    return this.dishesByIdCache[id] || null;
   }
 }
