@@ -109,8 +109,8 @@ export class PublicNavigateMenuV1Component implements OnInit {
     ).pipe(
       takeUntil(this.destroy),
     ).subscribe({
-      next: (): void => {
-        this.router.navigate([], { queryParams: { dishId: null }, queryParamsHandling: "merge" });
+      complete: (): void => {
+        this.router.navigate([], { relativeTo: this.route, queryParams: { dishId: null }, queryParamsHandling: "merge" });
       },
       error: (error: unknown): void => console.error(error),
     })
