@@ -3,7 +3,7 @@
     @switch (reservation.payment.status) {
       @case("todo") {
         @if(isFreshReservation()){
-          <p class="text-xl text-center mb-3" i18n>Il pagamento di conferma della prenotazione <b class="text-danger">non risulta essere andato a buon fine</b>, ma è possibile che sia necessario aspettare qualche minuto. Riprova più tardi.</p>
+          <p class="text-xl text-center mb-3" i18n>Il pagamento di conferma della prenotazione <b class="text-danger">non risulta essere andato a buon fine</b>, ma è possibile che sia necessario aspettare qualche minuto. Qualora fosse il caso, tra poco ti forniremo il link per riprovare il pagamento. Riprova più tardi o contattaci.</p>
         } @else {
           <p class="text-xl text-center mb-3" i18n>Il pagamento di conferma della prenotazione <b class="text-danger">non risulta essere andato a buon fine</b>.</p>
 
@@ -63,13 +63,16 @@
     <app-public-message class="block mb-3 text-center text-xl"
                         [location]="'existing-reservation-form'"></app-public-message>
 
-  <div class="flex items-center justify-center mb-3 text-xl">
-    <ng-container i18n>Dimenticato qualcosa?</ng-container>
-    <app-contact-us>
-      <ng-container i18n>Contattaci</ng-container>
-    </app-contact-us>
-    <span class="mx-2">-</span>
-    <a routerLink="/cr/{{ reservation.secret }}" tuiLink><ng-container i18n>Cancella prenotazione</ng-container></a>
+  <div class="px-3 mb-3 text-xl">
+    <p class="block mb-2 text-center" i18n>Dimenticato qualcosa?</p>
+
+    <div class="flex items-center justify-center">
+      <app-contact-us>
+        <ng-container i18n>Contattaci</ng-container>
+      </app-contact-us>
+      <span class="mx-2">-</span>
+      <a routerLink="/cr/{{ reservation.secret }}" tuiLink><ng-container i18n>Cancella prenotazione</ng-container></a>
+    </div>
   </div>
 
 }
