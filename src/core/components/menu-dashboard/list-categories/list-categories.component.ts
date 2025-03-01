@@ -38,6 +38,7 @@ import { nue } from "@core/lib/nue";
 import { ExportMenuService } from "@core/services/http/export-menu.service";
 import { ObjectValuesPipe } from "../../../pipes/object-values.pipe";
 import { SumPipe } from '@core/pipes/sum.pipe';
+import { MenuCategoryVisibilitySummaryComponent } from "./menu-category-visibility-summary/menu-category-visibility-summary.component";
 
 @Component({
   selector: 'app-list-categories',
@@ -71,7 +72,8 @@ import { SumPipe } from '@core/pipes/sum.pipe';
     ObjectValuesPipe,
     SumPipe,
     TuiTooltipModule,
-  ],
+    MenuCategoryVisibilitySummaryComponent
+],
   templateUrl: './list-categories.component.html',
   styleUrl: './list-categories.component.scss',
   providers: [

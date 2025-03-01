@@ -14,6 +14,9 @@ export interface MenuCategoryData extends BaseModelData {
   secret_desc?: string;
   visibility_id?: number;
 
+  // Server-side calculated value if the category is between the public visible ones.
+  public_visible?: boolean;
+
   visibility?: MenuVisibilityData;
   parent?: MenuCategoryData;
   children?: MenuCategoryData[];
@@ -31,5 +34,5 @@ export interface MenuCategoryData extends BaseModelData {
   }
 }
 
-export const MenuCategoryStatuses = [`active`, `deleted`] as const;
+export const MenuCategoryStatuses = [`active`, `inactive`, `deleted`] as const;
 export type MenuCategoryStatus = typeof MenuCategoryStatuses[number];

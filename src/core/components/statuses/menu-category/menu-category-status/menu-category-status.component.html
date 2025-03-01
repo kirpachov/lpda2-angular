@@ -2,33 +2,10 @@
   <span class="d-flex flex-row" [ngStyle]="{color: color}">
     <i *ngIf="validStatus && validConfig" class="align-self-center fas fa-fw fa-{{icon}}"></i>
     <span class="align-self-center" #customTitle>
-      <ng-content select="[title]"></ng-content>
+      <ng-content></ng-content>
     </span>
     <span class="align-self-center" *ngIf="!customTitle.hasChildNodes()">
       {{humanStatus}}
     </span>
-
-<!--    <app-project-close-update-->
-<!--      class="ms-1"-->
-<!--      *ngIf="status === 'closed' && closingUpdates && project && closingUpdatesMode === 'progress'"-->
-<!--      [mode]="'progress'"-->
-<!--      [project]="project"-->
-<!--    ></app-project-close-update>-->
   </span>
-
-<!--  <span class="text-muted">-->
-<!--    <span #customDescription>-->
-<!--      <ng-content select="[description]"></ng-content>-->
-<!--    </span>-->
-<!--    <span *ngIf="!customDescription.hasChildNodes() && showDescription">-->
-<!--      {{humanDescription}}-->
-<!--    </span>-->
-<!--  </span>-->
-
-<!--  <app-project-close-update-->
-<!--    class="mt-2"-->
-<!--      *ngIf="status === 'closed' && closingUpdates && project && closingUpdatesMode === 'full'"-->
-<!--      [mode]="'full'"-->
-<!--      [project]="project"-->
-<!--    ></app-project-close-update>-->
 </span>

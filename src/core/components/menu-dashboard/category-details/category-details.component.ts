@@ -16,7 +16,7 @@ import {
 import {NameDescEipComponent} from "@core/components/name-desc-eip/name-desc-eip.component";
 import {TuiButtonModule, TuiDataListModule, TuiExpandModule, TuiHostedDropdownModule} from "@taiga-ui/core";
 import {MatIcon} from "@angular/material/icon";
-import {NgClass} from "@angular/common";
+import {DatePipe, NgClass} from "@angular/common";
 import {TuiDestroyService} from "@taiga-ui/cdk";
 import {MenuCategoriesService} from "@core/services/http/menu-categories.service";
 import {NotificationsService} from "@core/services/notifications.service";
@@ -50,6 +50,7 @@ import {CategoryPriceComponent} from "@core/components/menu-dashboard/category-p
     RouterLink,
     UrlToPipe,
     CategoryPriceComponent,
+    DatePipe,
   ],
   templateUrl: './category-details.component.html',
   styleUrl: './category-details.component.scss',

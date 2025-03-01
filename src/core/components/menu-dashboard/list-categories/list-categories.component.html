@@ -171,38 +171,7 @@
         <div>
           <a tuiLink [routerLink]="item.id | urlTo: 'menuCategory.show'" class="text-lg">{{ item.name }}</a>
 
-          <ng-container *ngIf="!parentCategoryId">
-            <p *ngIf="item.visibility" [ngClass]="{'text-red-400': item.visibility.public_visible === false}"
-              class="tui-island__category">
-              <ng-template #notVisiblePublic>
-                <ng-container i18n>NON pubblico</ng-container>
-
-                <ng-template #notPublicMenu>
-                  <ng-container i18n>Per renderlo pubblico, apri il menù, poi apri i dettagli e modifica la
-                    Visibilità.</ng-container>
-                </ng-template>
-
-                <tui-tooltip [content]="notPublicMenu"></tui-tooltip>
-              </ng-template>
-
-              <ng-container *ngIf="item.visibility.public_visible === true; else notVisiblePublic">
-                <ng-container i18n>Pubblico</ng-container>
-              </ng-container>
-            </p>
-          </ng-container>
-
-          <ng-container *ngIf="parentCategoryId">
-            <p *ngIf="!(item.stats && item.stats.dishes && item.stats.dishes['active'] && item.stats.dishes['active'] > 0)"
-              class="text-red-400 tui-island__category">
-              <ng-container i18n>NON pubblico</ng-container>
-
-              <ng-template #notPublicCategory>
-                <ng-container i18n>Non ci sono piatti attivi all'interno di questa categoria.</ng-container>
-              </ng-template>
-
-              <tui-tooltip [content]="notPublicCategory"></tui-tooltip>
-            </p>
-          </ng-container>
+          <app-menu-category-visibility-summary class="block" [item]="item"></app-menu-category-visibility-summary>
 
           @if(item.stats && item.stats.dishes && item.stats.dishes["inactive"]) {
           <p class="tui-island__category">

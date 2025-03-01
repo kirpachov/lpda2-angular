@@ -22,6 +22,7 @@ import {PolymorpheusComponent} from "@tinkoff/ng-polymorpheus";
 import {DatePipe, JsonPipe} from "@angular/common";
 import {ErrorsComponent} from "@core/components/errors/errors.component";
 import {MatIcon} from "@angular/material/icon";
+import { MenuCategoryVisibilitySummaryComponent } from "../menu-dashboard/list-categories/menu-category-visibility-summary/menu-category-visibility-summary.component";
 
 @Component({
   selector: 'app-eip-category-visibility',
@@ -30,11 +31,11 @@ import {MatIcon} from "@angular/material/icon";
     TuiToggleModule,
     ReactiveFormsModule,
     DatePipe,
-    ErrorsComponent,
+    // ErrorsComponent,
     TuiButtonModule,
     MatIcon,
-    JsonPipe
-  ],
+    MenuCategoryVisibilitySummaryComponent
+],
   templateUrl: './eip-category-visibility.component.html',
   styleUrl: './eip-category-visibility.component.scss',
   providers: [
@@ -51,6 +52,8 @@ export class EipCategoryVisibilityComponent {
   readonly private_visible: Signal<boolean> = computed(
     () => this.item()?.visibility?.private_visible ?? false
   );
+
+  readonly isInactive: Signal<boolean> = computed(() => this.item()?.status === "inactive");
 
   readonly public_from: Signal<Date | undefined> = computed(() => this.item()?.visibility?.public_from);
 

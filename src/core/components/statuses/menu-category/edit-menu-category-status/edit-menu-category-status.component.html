@@ -1,6 +1,22 @@
 <ng-template #dropdownContent>
   <tui-data-list>
-    <button (click)="delete()" tuiOption>
+    @if(category && category.status != 'active') {
+      <button type="button" (click)="updateStatus('active')" tuiOption>
+        <app-menu-category-status class="me-1" [status]="'active'">
+          <ng-container i18n>Attiva</ng-container>
+        </app-menu-category-status>
+      </button>
+    }
+
+    @if(category && category.status != 'inactive') {
+      <button type="button" (click)="updateStatus('inactive')" tuiOption>
+        <app-menu-category-status class="me-1" [status]="'inactive'">
+          <ng-container i18n>Disattiva</ng-container>
+        </app-menu-category-status>
+      </button>
+    }
+
+    <button type="button" (click)="delete()" tuiOption>
       <span class="flex items-center">
         <mat-icon class="me-1">delete</mat-icon>
         <span i18n>Elimina</span>

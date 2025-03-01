@@ -19,6 +19,7 @@ export class MenuCategoryStatusComponent extends CommonItemStatus {
 
   protected override readonly configs: { [key: string]: { text: string, color: string, icon: string } } = {
     active: {text: $localize`Attivo`, color: 'var(--tui-positive, lime)', icon: 'check'},
+    inactive: {text: $localize`Inattivo`, color: 'var(--tui-negative, red)', icon: 'close'},
     deleted: {text: $localize`Eliminato`, color: 'red', icon: 'trash'},
   }
 }

@@ -1,5 +1,7 @@
 <form (ngSubmit)="submit()" [formGroup]="form">
 
+  <p class="text-slate-400 block mb-3" i18n>La categoria sarà effettivamente visibile nel menù pubblico se sarà in stato 'attivo'; altrimenti, qualunque siano le impostazioni di seguito, la categoria non sarà pubblica.</p>
+
   <tui-loader [overlay]="true" [showLoader]="saving()">
     <h4>Visibilità pubblica</h4>
     <p class="text-sm text-slate-400" i18n>Se attivata, il menù sarà visibile nella pagina pubblica.</p>

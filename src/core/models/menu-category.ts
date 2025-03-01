@@ -15,6 +15,9 @@ export class MenuCategory extends BaseModel {
   secret_desc?: string;
   visibility_id?: number;
 
+  // Server-side calculated value if the category is between the public visible ones.
+  public_visible?: boolean;
+
   visibility?: MenuVisibility;
   parent?: MenuCategory;
   children?: MenuCategory[];
@@ -51,6 +54,7 @@ export class MenuCategory extends BaseModel {
     this.images = data.images ? data.images.map((image) => new Image(image)) : [];
 
     this.translations = data.translations;
+    this.public_visible = data.public_visible;
 
     this.stats = data.stats;
   }

@@ -48,4 +48,8 @@ export class EditMenuCategoryStatusComponent {
       }
     })
   }
+
+  updateStatus(status: MenuCategory['status']) {
+    this.statusChange.emit(status);
+  }
 }
