@@ -76,7 +76,8 @@ export class LoginComponent implements OnInit {
   private submitted: boolean = false;
   typing: boolean = false;
 
-  redirectUrl: string | null = null;
+  private readonly defaultRedirectUrl: string = `/admin`;
+  redirectUrl: string = this.defaultRedirectUrl;
 
   private submitSubscription: Subscription | undefined;
   get submitting(): boolean {
@@ -101,8 +102,7 @@ export class LoginComponent implements OnInit {
       takeUntil(this.destroy$),
     ).subscribe(
       (next: any) => {
-        if (this.redirectUrl) this.router.navigateByUrl(this.redirectUrl);
-        else this.router.navigate([`/admin`], { relativeTo: this.route });
+        this.router.navigateByUrl(this.redirectUrl || this.defaultRedirectUrl);
       },
       (error: HttpErrorResponse) => {
         const e: { message: string, details: Record<string, string[]> } = error.error;
