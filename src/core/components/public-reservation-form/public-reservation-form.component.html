@@ -72,7 +72,7 @@
         <div class="grow" >
           <tui-input [tuiAutoFocus]="true" class="grow me-2" [formControlName]="'firstName'">
             <ng-container i18n>Nome</ng-container>
-            <input tuiTextfield autocomplete="first_name">
+            <input tuiTextfield autocomplete="given-name">
           </tui-input>
 
           @if (showErrorsFor(2)) {
@@ -84,7 +84,7 @@
           <tui-input class="grow ms-2" [formControlName]="'lastName'">
             <ng-container i18n>Cognome</ng-container>
 
-            <input tuiTextfield autocomplete="last_name">
+            <input tuiTextfield autocomplete="family-name">
           </tui-input>
 
           @if (showErrorsFor(2)) {
