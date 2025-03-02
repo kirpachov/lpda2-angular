@@ -8,5 +8,7 @@ import { PublicImageHeaderComponent } from "../../../core/components/public-imag
   templateUrl: './disclaimers.component.html',
 })
 export class DisclaimersComponent {
-
+  ngOnInit() {
+    window.scrollTo(0, 0);
+  }
 }

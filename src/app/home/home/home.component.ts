@@ -27,4 +27,8 @@ import { Title } from "@angular/platform-browser";
 })
 export class HomeComponent {
   readonly _ = inject(Title).setTitle(`La Porta D'Acqua`);
+
+  ngOnInit() {
+    window.scrollTo(0, 0);
+  }
 }

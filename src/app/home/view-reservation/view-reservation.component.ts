@@ -34,6 +34,8 @@ export class ViewReservationComponent implements OnInit {
   readonly reservation: WritableSignal<Reservation | null> = signal(null);
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
+
     this.route.params.subscribe({
       next: (p: Params) => {
         const secret = p["secret"];

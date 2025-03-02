@@ -15,4 +15,8 @@ import { PublicImageHeaderComponent } from "../../../core/components/public-imag
 })
 export class AboutComponent {
   readonly _ = inject(Title).setTitle($localize`Chi siamo | La Porta D'Acqua`);
+
+  ngOnInit() {
+    window.scrollTo(0, 0);
+  }
 }

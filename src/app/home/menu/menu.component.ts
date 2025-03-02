@@ -11,4 +11,8 @@ import { PublicImageHeaderComponent } from "../../../core/components/public-imag
 })
 export class MenuComponent {
   readonly _ = inject(Title).setTitle($localize`Menu | La Porta D'Acqua`);
+
+  ngOnInit() {
+    window.scrollTo(0, 0);
+  }
 }

@@ -8,5 +8,7 @@ import { PublicImageHeaderComponent } from "../../../core/components/public-imag
   templateUrl: './privacy.component.html',
 })
 export class PrivacyComponent {
-
+  ngOnInit() {
+    window.scrollTo(0, 0);
+  }
 }
