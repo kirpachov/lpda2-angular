@@ -66,7 +66,7 @@
           ></app-reservation-people>
 
           @if (item.table) {
-            <span class="text-slate-400">
+            <span class="text-danger">
               <span class="flex items-center">
                 <span class="me-1" i18n>Tavolo</span>
                 <span class="me-1">{{ item.table }}</span>
@@ -76,7 +76,7 @@
         </span>
 
         @if(item.notes && item.notes.length > 0){
-          <p class="block mb-2 text-slate-400 overflow-wrap-anywhere"> {{ item.notes }} </p>
+          <p class="block mb-2 text-danger overflow-wrap-anywhere"> {{ item.notes }} </p>
         }
 
         <tui-expand #expand>
