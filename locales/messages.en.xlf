@@ -1117,6 +1117,17 @@
           <context context-type='linenumber'>84</context>
         </context-group>
       </trans-unit>
+      <trans-unit id='5917944760552502476' datatype='html'>
+        <source>Ricerca</source>
+        <target>Research</target>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/app/admin/reservations/export-reservations-modal/export-reservations-modal.component.html 
+          </context>
+          <context context-type='linenumber'>7</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id='687418209005337938' datatype='html'>
         <source>Stato prenotazione</source>
         <target>Booking status</target>
@@ -1125,7 +1136,7 @@
             
             src/app/admin/reservations/export-reservations-modal/export-reservations-modal.component.html 
           </context>
-          <context context-type='linenumber'>7</context>
+          <context context-type='linenumber'>15</context>
         </context-group>
       </trans-unit>
       <trans-unit id='8082254650178846756' datatype='html'>
@@ -1136,7 +1147,7 @@
             
             src/app/admin/reservations/export-reservations-modal/export-reservations-modal.component.html 
           </context>
-          <context context-type='linenumber'>15</context>
+          <context context-type='linenumber'>23</context>
         </context-group>
       </trans-unit>
       <trans-unit id='4621660415902462656' datatype='html'>
@@ -1147,7 +1158,7 @@
             
             src/app/admin/reservations/export-reservations-modal/export-reservations-modal.component.html 
           </context>
-          <context context-type='linenumber'>22</context>
+          <context context-type='linenumber'>30</context>
         </context-group>
       </trans-unit>
       <trans-unit id='5682414772693251522' datatype='html'>
@@ -1158,7 +1169,7 @@
             
             src/app/admin/reservations/export-reservations-modal/export-reservations-modal.component.html 
           </context>
-          <context context-type='linenumber'>24</context>
+          <context context-type='linenumber'>32</context>
         </context-group>
       </trans-unit>
       <trans-unit id='1125806643232195814' datatype='html'>
@@ -1169,7 +1180,7 @@
             
             src/app/admin/reservations/export-reservations-modal/export-reservations-modal.component.html 
           </context>
-          <context context-type='linenumber'>31</context>
+          <context context-type='linenumber'>39</context>
         </context-group>
       </trans-unit>
       <trans-unit id='1817007949945200502' datatype='html'>
@@ -1180,7 +1191,7 @@
             
             src/app/admin/reservations/export-reservations-modal/export-reservations-modal.component.html 
           </context>
-          <context context-type='linenumber'>35</context>
+          <context context-type='linenumber'>43</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/app/admin/settings/contacts/update/update.component.html</context>
