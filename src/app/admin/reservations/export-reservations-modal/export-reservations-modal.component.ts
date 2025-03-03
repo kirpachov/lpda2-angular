@@ -3,7 +3,7 @@ import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule } from '@a
 import { DatePeriodComponent } from '@core/components/date-period/date-period.component';
 import { isReservationStatus, ReservationStatus } from '@core/lib/interfaces/reservation-data';
 import { TuiDayRange, TuiDestroyService } from '@taiga-ui/cdk';
-import { TuiButtonModule } from '@taiga-ui/core';
+import { TuiButtonModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
 import { ErrorsComponent } from "../../../../core/components/errors/errors.component";
 import { ReservationsService } from '@core/services/http/reservations.service';
 import { DatePipe } from '@angular/common';
@@ -14,6 +14,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { NotificationsService } from '@core/services/notifications.service';
 import { parseHttpErrorMessage } from '@core/lib/parse-http-error-message';
 import { SOMETHING_WENT_WRONG_MESSAGE } from '@core/lib/something-went-wrong-message';
+import { TuiInputModule } from '@taiga-ui/kit';
 
 @Component({
   selector: 'app-export-reservations-modal',
@@ -25,6 +26,8 @@ import { SOMETHING_WENT_WRONG_MESSAGE } from '@core/lib/something-went-wrong-mes
     ErrorsComponent,
     ReservationStatusSelectComponent,
     RouterModule,
+    TuiInputModule,
+    TuiTextfieldControllerModule,
   ],
   templateUrl: './export-reservations-modal.component.html',
   providers: [
@@ -44,10 +47,12 @@ export class ExportReservationsModalComponent {
     created_at: AbstractControl<TuiDayRange | null>,
     status: AbstractControl<ReservationStatus | null>,
     datetime: AbstractControl<TuiDayRange | null>,
+    query: AbstractControl<string | null>,
   }>({
     created_at: new FormControl<TuiDayRange | null>(null),
     datetime: new FormControl<TuiDayRange | null>(null),
     status: new FormControl<ReservationStatus | null>(null),
+    query: new FormControl<string | null>(null),
   });
 
   export(): void {
@@ -64,6 +69,10 @@ export class ExportReservationsModalComponent {
 
   private formatFormValue(): Record<string, string | number | boolean> {
     const result: Record<string, string | number | boolean> = {};
+
+    if (this.form.value.query) {
+      result["query"] = this.form.value.query;
+    }
 
     if (this.form.value.created_at) {
       result["created_at_from"] = this.date.transform(this.form.value.created_at.from.toUtcNativeDate(), 'yyyy-MM-dd') || '';

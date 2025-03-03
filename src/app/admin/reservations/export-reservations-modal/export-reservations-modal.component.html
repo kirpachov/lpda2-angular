@@ -3,6 +3,14 @@
 <form [formGroup]="form" (ngSubmit)="export()">
 
   <div class="block mb-3">
+    <tui-input [formControlName]="'query'">
+      <ng-container i18n>Ricerca</ng-container>
+    </tui-input>
+
+    <app-errors [errors]="form.controls['query'].errors" ></app-errors>
+  </div>
+
+  <div class="block mb-3">
     <app-reservation-status-select [formControlName]="'status'">
       <ng-container i18n>Stato prenotazione</ng-container>
     </app-reservation-status-select>
