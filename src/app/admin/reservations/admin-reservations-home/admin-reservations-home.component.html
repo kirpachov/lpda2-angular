@@ -75,6 +75,10 @@
           }
         </span>
 
+        @if(item.notes && item.notes.length > 0){
+          <p class="block mb-2 text-slate-400 overflow-wrap-anywhere"> {{ item.notes }} </p>
+        }
+
         <tui-expand #expand>
           @if (item.phone && item.phone.length > 0) {
           <p class="block mb-2 overflow-wrap-anywhere" [phoneTo]="item.phone" [whatsapp]="true">{{ item.phone }}</p>
@@ -82,10 +86,6 @@
 
           @if (item.email && item.email.length > 0) {
           <p class="block mb-2 overflow-wrap-anywhere" [mailTo]="item.email">{{ item.email }}</p>
-          }
-
-          @if(item.notes && item.notes.length > 0){
-          <p class="block mb-2 text-slate-400 overflow-wrap-anywhere"> {{ item.notes }} </p>
           }
 
           <div class="block mb-2">
