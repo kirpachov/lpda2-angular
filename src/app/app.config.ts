@@ -30,9 +30,9 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(
       routes,
-      withInMemoryScrolling({
-        scrollPositionRestoration: 'enabled',
-      })
+      // withInMemoryScrolling({
+      //   scrollPositionRestoration: 'enabled',
+      // })
       // withHashLocation()
     ),
     importProvidersFrom(TuiRootModule),
