@@ -3309,7 +3309,7 @@
         <source>Chi siamo | La Porta D&apos;Acqua</source>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/app/home/about/about.component.ts</context>
-          <context context-type='linenumber'>17</context>
+          <context context-type='linenumber'>18</context>
         </context-group>
       </trans-unit>
       <trans-unit id='2922025001072258145' datatype='html'>
@@ -3400,14 +3400,14 @@
         <source>Elimina prenotazione | La Porta D&apos;Acqua</source>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/app/home/cancel-reservation/cancel-reservation.component.ts</context>
-          <context context-type='linenumber'>48</context>
+          <context context-type='linenumber'>49</context>
         </context-group>
       </trans-unit>
       <trans-unit id='6168094040476431637' datatype='html'>
         <source>Prenotazione cancellata.</source>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/app/home/cancel-reservation/cancel-reservation.component.ts</context>
-          <context context-type='linenumber'>84</context>
+          <context context-type='linenumber'>87</context>
         </context-group>
       </trans-unit>
       <trans-unit id='4991111665365985889' datatype='html'>
@@ -3550,11 +3550,18 @@
           <context context-type='linenumber'>31,33</context>
         </context-group>
       </trans-unit>
+      <trans-unit id='1678761841469338746' datatype='html'>
+        <source>Disclaimers | La Porta D&apos;Acqua</source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>src/app/home/disclaimers/disclaimers.component.ts</context>
+          <context context-type='linenumber'>13</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id='2426056137160348049' datatype='html'>
         <source>Il nostro menù</source>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/app/home/menu/menu.component.html</context>
-          <context context-type='linenumber'>2</context>
+          <context context-type='linenumber'>3</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/core/components/public-home-menu/public-home-menu.component.html</context>
@@ -3565,7 +3572,7 @@
         <source>Menu | La Porta D&apos;Acqua</source>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/app/home/menu/menu.component.ts</context>
-          <context context-type='linenumber'>13</context>
+          <context context-type='linenumber'>25</context>
         </context-group>
       </trans-unit>
       <trans-unit id='8440128775129354214' datatype='html'>
@@ -3953,7 +3960,7 @@
         <source>Prenota un tavolo | La Porta D&apos;Acqua</source>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/app/home/reserve/reserve.component.ts</context>
-          <context context-type='linenumber'>15</context>
+          <context context-type='linenumber'>16</context>
         </context-group>
       </trans-unit>
       <trans-unit id='1704846269944000137' datatype='html'>
