@@ -1,12 +1,13 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { PublicReservationConfirmationComponent } from "../../../core/components/public-reservation-confirmation/public-reservation-confirmation.component";
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router, Scroll } from '@angular/router';
 import { PublicReservationsService } from '@core/services/http/public-reservations.service';
 import { Reservation } from '@core/models/reservation';
 import { TuiDestroyService } from '@taiga-ui/cdk';
-import { finalize, takeUntil } from 'rxjs';
+import { filter, finalize, takeUntil } from 'rxjs';
 import { TuiLoaderModule } from '@taiga-ui/core';
-import { JsonPipe } from '@angular/common';
+import { JsonPipe, ViewportScroller } from '@angular/common';
+import { PublicPageComponent } from '../public-page-component';
 
 @Component({
   selector: 'app-view-reservation',
@@ -14,7 +15,7 @@ import { JsonPipe } from '@angular/common';
   imports: [
     PublicReservationConfirmationComponent,
     TuiLoaderModule,
-    JsonPipe
+    // JsonPipe
   ],
   templateUrl: './view-reservation.component.html',
   styleUrl: './view-reservation.component.scss',
@@ -23,7 +24,7 @@ import { JsonPipe } from '@angular/common';
     TuiDestroyService
   ]
 })
-export class ViewReservationComponent implements OnInit {
+export class ViewReservationComponent extends PublicPageComponent implements OnInit {
   private readonly destroy$ = inject(TuiDestroyService);
   private readonly router: Router = inject(Router);
   private readonly route: ActivatedRoute = inject(ActivatedRoute);
@@ -33,8 +34,8 @@ export class ViewReservationComponent implements OnInit {
   readonly loading: WritableSignal<boolean> = signal(true);
   readonly reservation: WritableSignal<Reservation | null> = signal(null);
 
-  ngOnInit(): void {
-    window.scrollTo(0, 0);
+  override ngOnInit(): void {
+    super.ngOnInit();
 
     this.route.params.subscribe({
       next: (p: Params) => {

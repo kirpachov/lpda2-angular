@@ -8,6 +8,7 @@ import {PublicHomeInstagramComponent} from "@core/components/public-home-instagr
 import {PublicHomeReserveComponent} from "@core/components/public-home-reserve/public-home-reserve.component";
 import {PublicMessageComponent} from "@core/components/public-message/public-message.component";
 import { Title } from "@angular/platform-browser";
+import { PublicPageComponent } from '../public-page-component';
 
 @Component({
   selector: 'app-home',
@@ -25,10 +26,6 @@ import { Title } from "@angular/platform-browser";
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class HomeComponent extends PublicPageComponent {
   readonly _ = inject(Title).setTitle(`La Porta D'Acqua`);
-
-  ngOnInit() {
-    window.scrollTo(0, 0);
-  }
 }

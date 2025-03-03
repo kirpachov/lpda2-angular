@@ -1,5 +1,7 @@
-<app-public-image-header [image]="'/assets/img/public-menu-landing.webp'" >
-  <ng-container i18n>Il nostro menù</ng-container>
-</app-public-image-header>
+<tui-expand [expanded]="showTitle()">
+  <app-public-image-header [image]="'/assets/img/public-menu-landing.webp'" >
+    <ng-container i18n>Il nostro menù</ng-container>
+  </app-public-image-header>
+</tui-expand>
 
 <app-public-navigate-menu-v1></app-public-navigate-menu-v1>

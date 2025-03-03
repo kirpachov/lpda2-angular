@@ -253,7 +253,7 @@ export class PublicNavigateMenuV1Component implements OnInit {
     const done = (categories: MenuCategory[]): void => {
       this.selectCategory(categories.length === 0 ? null : categories[categories.length - 1]);
       this.breadcrumbs.set(categories.splice(0, categories.length - 1));
-      if (categories.length > 0) this.scrollIntoView();
+      // if (categories.length > 0) this.scrollIntoView();
     };
 
     if (categoryIds.length === 0) {
@@ -278,9 +278,9 @@ export class PublicNavigateMenuV1Component implements OnInit {
     });
   }
 
-  private scrollIntoView(): void {
-    this.me.nativeElement.scrollIntoView({ behavior: "smooth" });
-  }
+  // private scrollIntoView(): void {
+    // this.me.nativeElement.scrollIntoView({ behavior: "smooth" });
+  // }
 
   private loadCategoriesByIds(categoryIds: (string | number)[]): Observable<MenuCategory[]> {
     const idsToLoad: (string | number)[] = [];

@@ -3,6 +3,7 @@ import {RouterOutlet} from "@angular/router";
 import {PublicNavbarComponent} from "@core/components/public-navbar/public-navbar.component";
 import {PublicFooterComponent} from "@core/components/public-footer/public-footer.component";
 import { PublicPagesDataService } from '@core/services/http/public-pages-data.service';
+import { PublicPageComponent } from '../public-page-component';
 
 @Component({
   selector: 'app-home-layout',
@@ -15,10 +16,6 @@ import { PublicPagesDataService } from '@core/services/http/public-pages-data.se
   templateUrl: './home-layout.component.html',
   styleUrl: './home-layout.component.scss'
 })
-export class HomeLayoutComponent implements OnInit {
+export class HomeLayoutComponent {
   private readonly PublicPagesDataService: PublicPagesDataService = inject(PublicPagesDataService);
-
-  ngOnInit() {
-    window.scrollTo(0, 0);
-  }
 }

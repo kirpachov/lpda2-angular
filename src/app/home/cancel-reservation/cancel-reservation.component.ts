@@ -14,6 +14,7 @@ import {parseHttpErrorMessage} from "@core/lib/parse-http-error-message";
 import {SOMETHING_WENT_WRONG_MESSAGE} from "@core/lib/something-went-wrong-message";
 import {DatePipe} from "@angular/common";
 import { Title } from '@angular/platform-browser';
+import { PublicPageComponent } from '../public-page-component';
 
 @Component({
   selector: 'app-cancel-reservation',
@@ -33,7 +34,7 @@ import { Title } from '@angular/platform-browser';
     TuiDestroyService
   ]
 })
-export class CancelReservationComponent implements OnInit {
+export class CancelReservationComponent extends PublicPageComponent implements OnInit {
   private readonly destroy$: TuiDestroyService = inject(TuiDestroyService);
   private readonly route: ActivatedRoute = inject(ActivatedRoute);
   private readonly router: Router = inject(Router);
@@ -47,9 +48,9 @@ export class CancelReservationComponent implements OnInit {
 
   readonly _ = inject(Title).setTitle($localize`Elimina prenotazione | La Porta D'Acqua`);
 
-  ngOnInit(): void {
-    window.scrollTo(0, 0);
-  
+  override ngOnInit(): void {
+    super.ngOnInit();
+
     this.route.params.pipe(
       takeUntil(this.destroy$),
       map((params: Params) => params["secret"]),

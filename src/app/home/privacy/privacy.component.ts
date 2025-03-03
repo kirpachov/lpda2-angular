@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { PublicImageHeaderComponent } from "../../../core/components/public-image-header/public-image-header.component";
+import { PublicPageComponent } from '../public-page-component';
 
 @Component({
   selector: 'app-privacy',
@@ -7,8 +8,5 @@ import { PublicImageHeaderComponent } from "../../../core/components/public-imag
   imports: [PublicImageHeaderComponent],
   templateUrl: './privacy.component.html',
 })
-export class PrivacyComponent {
-  ngOnInit() {
-    window.scrollTo(0, 0);
-  }
+export class PrivacyComponent extends PublicPageComponent {
 }

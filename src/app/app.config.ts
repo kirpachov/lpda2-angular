@@ -1,7 +1,7 @@
 import { BrowserAnimationsModule, provideAnimations } from "@angular/platform-browser/animations";
 import { TuiRootModule } from "@taiga-ui/core";
 import {ApplicationConfig, DEFAULT_CURRENCY_CODE, importProvidersFrom, LOCALE_ID, isDevMode} from '@angular/core';
-import { provideRouter, withHashLocation } from '@angular/router';
+import { provideRouter, withHashLocation, withInMemoryScrolling } from '@angular/router';
 import {
   HTTP_INTERCEPTORS,
   HttpClient,
@@ -30,6 +30,9 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(
       routes,
+      withInMemoryScrolling({
+        scrollPositionRestoration: 'enabled',
+      })
       // withHashLocation()
     ),
     importProvidersFrom(TuiRootModule),
