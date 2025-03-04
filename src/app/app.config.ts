@@ -26,6 +26,8 @@ import { catchRequireRootInterceptor } from "@core/interceptors/catch-require-ro
 registerLocaleData(localeIT);
 registerLocaleData(localeEN);
 
+export const usingHashLocation: boolean = false;
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(

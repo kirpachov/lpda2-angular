@@ -7,6 +7,7 @@ import {NgClass, NgForOf} from "@angular/common";
 import {LanguagePipe} from "@core/pipes/language.pipe";
 import { supportedLanguages } from '@core/lib/supported-languages';
 import { Router } from '@angular/router';
+import { usingHashLocation } from 'src/app/app.config';
 @Component({
   selector: 'app-admin-language-switcher',
   standalone: true,
@@ -15,7 +16,7 @@ import { Router } from '@angular/router';
     TuiHostedDropdownModule,
     MatIcon,
     TuiDataListModule,
-    NgForOf,
+    // NgForOf,
     LanguagePipe,
     NgClass
   ],
@@ -34,7 +35,7 @@ export class AdminLanguageSwitcherComponent {
 
   setLanguage(lang: string) {
     this.session.setLanguage(lang);
-    // window.location.reload();
-    location.replace(`/${lang}/#${this.router.url}`);
+    const hash: string = usingHashLocation ? '#' : '';
+    location.replace(`/${lang}/${hash}${this.router.url}`);
   }
 }

@@ -35,6 +35,7 @@ import {
 import {MenuIconModule} from "@core/components/menu-icon/menu-icon.module";
 import {ConfigsService} from "@core/services/configs.service";
 import { LangData, supportedLanguages } from "@core/lib/supported-languages";
+import { usingHashLocation } from 'src/app/app.config';
 
 @Component({
   selector: 'app-public-navbar',
@@ -109,7 +110,8 @@ export class PublicNavbarComponent implements OnInit, AfterViewInit {
   ngOnInit() { }
 
   changePath(code: LangData['code']) {
-    location.replace(`/${code}/#${this.router.url}`);
+    const hash: string = usingHashLocation ? '#' : '';
+    location.replace(`/${code}/${hash}${this.router.url}`);
   }
 
   @HostListener('window:resize', ['$event'])
