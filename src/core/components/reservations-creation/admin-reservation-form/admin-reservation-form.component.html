@@ -46,15 +46,23 @@
 
   <div class="mb-3">
     <div class="flex items-center">
-      <tui-input-number [tuiTextfieldSize]="inputSize" [formControlName]="'adults'" class="me-2 grow">
-        <ng-container i18n>N° adulti</ng-container>
-        <input tuiTextfield [autocomplete]="'off'" type="text">
-      </tui-input-number>
+      <div class="flex flex-col grow" >
+        <tui-input-number [tuiTextfieldSize]="inputSize" [formControlName]="'adults'" class="me-2 grow">
+          <ng-container i18n>N° adulti</ng-container>
+          <input tuiTextfield [autocomplete]="'off'" type="text">
+        </tui-input-number>
 
-      <tui-input-number [tuiTextfieldSize]="inputSize" [formControlName]="'children'" class="ms-2 grow">
-        <ng-container i18n>N° bambini</ng-container>
-        <input tuiTextfield [autocomplete]="'off'" type="text">
-      </tui-input-number>
+        <app-errors [errors]="e('adults')" ></app-errors>
+      </div>
+
+      <div class="flex flex-col grow" >
+        <tui-input-number [tuiTextfieldSize]="inputSize" [formControlName]="'children'" class="ms-2 grow">
+          <ng-container i18n>N° bambini</ng-container>
+          <input tuiTextfield [autocomplete]="'off'" type="text">
+        </tui-input-number>
+
+        <app-errors [errors]="e('children')" ></app-errors>
+      </div>
     </div>
   </div>
 

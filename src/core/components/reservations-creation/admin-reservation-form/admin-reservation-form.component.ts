@@ -94,7 +94,17 @@ export class AdminReservationFormComponent implements OnInit {
     })
   }
 
-  readonly form: FormGroup = new FormGroup({
+  readonly form = new FormGroup<{
+    date: FormControl<TuiDay | null>,
+    time: FormControl<TuiTime | null>, // ?
+    fullname: FormControl<string | null>,
+    adults: FormControl<number | null>,
+    children: FormControl<number | null>,
+    email: FormControl<string | null>,
+    table: FormControl<string | null>,
+    notes: FormControl<string | null>,
+    phone: FormControl<string | null>,
+  }>({
     date: new FormControl<TuiDay | null>(null, [Validators.required]),
     time: new FormControl(null, [Validators.required]),
     fullname: new FormControl(null, [Validators.required]),
@@ -114,7 +124,7 @@ export class AdminReservationFormComponent implements OnInit {
 
   readonly loadingTimes: WritableSignal<boolean> = signal(false);
 
-  private submitted: boolean = false;
+  submitted: boolean = false;
 
   constructor(
     @Inject(TUI_IS_MOBILE) public readonly isMobile: boolean,
@@ -155,7 +165,7 @@ export class AdminReservationFormComponent implements OnInit {
   }
 
   private formVal(): Record<string, any> {
-    const json = this.form.value;
+    const json: Record<string, any> = this.form.value;
 
     /**
      * Here we have an issue.
@@ -165,15 +175,11 @@ export class AdminReservationFormComponent implements OnInit {
      * new Date(...) will create a date in user's timezone.
      *
      */
-    json.datetime = tuiDatetimeToIsoString(json.date as TuiDay, json.time as TuiTime);
-    // json.datetime = new Date(str);
+    if (this.form.value.date && this.form.value.time)
+      json["datetime"] = tuiDatetimeToIsoString(this.form.value.date, this.form.value.time);
 
-    delete json.date;
-    delete json.time;
-
-    // if (!(json.table && json.table.length > 0)) delete json.table;
-    // if (!(json.notes && json.notes.length > 0)) delete json.notes;
-    // if (!(json.email && json.email.length > 0)) delete json.notes;
+    delete json["date"];
+    delete json["time"];
 
     return json;
   }
