@@ -135,20 +135,20 @@ export class AdminReservationFormComponent implements OnInit {
     this.dateOpen.set(true);
     // this.timeOpen.set(false);
 
-    // this.form.get(`date`)!.valueChanges.pipe(
-    //   takeUntil(this.destroy$),
-    //   filter((date: TuiDay | null): date is TuiDay => date instanceof TuiDay),
-    //   tap(() => this.dateOpen.set(false)),
-    //   // tap(() => this.timeOpen.set(true)),
-    //   tap(() => this.loadingTimes.set(true)),
-    //   switchMap((date: TuiDay) => this.publicRes.getValidTimes(date)),
-    //   finalize(() => this.loadingTimes.set(false)),
-    // ).subscribe({
-    //   next: (turns: ReservationTurn[]) => {
-    //     const times: string[] = turns.map((turn: ReservationTurn) => turn.valid_times).filter((times: string[] | undefined): times is string[] => Array.isArray(times) && times.length > 0).flat();
-    //     this.validTimes.set(times.map((time: string) => TuiTime.fromString(strTimeTimezone(time))));
-    //   }
-    // });
+    this.form.get(`date`)!.valueChanges.pipe(
+      takeUntil(this.destroy$),
+      filter((date: TuiDay | null): date is TuiDay => date instanceof TuiDay),
+      tap(() => this.dateOpen.set(false)),
+      // tap(() => this.timeOpen.set(true)),
+      // tap(() => this.loadingTimes.set(true)),
+      // switchMap((date: TuiDay) => this.publicRes.getValidTimes(date)),
+      // finalize(() => this.loadingTimes.set(false)),
+    ).subscribe({
+      // next: (turns: ReservationTurn[]) => {
+      //   const times: string[] = turns.map((turn: ReservationTurn) => turn.valid_times).filter((times: string[] | undefined): times is string[] => Array.isArray(times) && times.length > 0).flat();
+      //   this.validTimes.set(times.map((time: string) => TuiTime.fromString(strTimeTimezone(time))));
+      // }
+    });
 
     this.form.get(`time`)!.valueChanges.pipe(
       takeUntil(this.destroy$),
