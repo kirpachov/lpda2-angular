@@ -63,3 +63,52 @@ export function permitCORSCredentialsInterceptor(request: HttpRequest<any>, next
 ```
 
 Then, setup the [backend](https://github.com/kirpachov/lpda2-rails) side.
+
+## Local production setup with nginx
+After backend local setup was done:
+
+- Prepare nginx configuration in `/etc/nginx/sites-enabled/lpda2-frontend`, then `sudo nginx -t && sudo service nginx reload`
+- Build `ng build --watch -c development --localize --output-path=/var/www/lpda2`
+- (if issues with permissions) `sudo mkdir -p /var/www/lpda2 && sudo adduser "$(whoami)" www-data && sudo adduser www-data "$(whoami)" && sudo chown "$(whoami):www-data" -R /var/www/lpda2`
+
+Note that some things may not work properly but it's the most efficient way to see what you would see in production.
+For a more precise setup, you can build with: `./scripts/build.sh && rm -rf /var/www/lpda2/* && cp -r dist/lpda2/* /var/www/lpda2`
+
+Note that you may need to update `config.json` or `config.prod.json`
+```nginx
+# Nginx configuration in /etc/nginx/sites-enabled/lpda2-frontend
+server {
+	root /var/www/lpda2;
+
+	index index.html;
+
+	listen 80;
+
+	server_name lpda2.localhost;
+
+	set $first_language $http_accept_language;
+	if ($http_accept_language ~* '^(.+?),') {
+		set $first_language $1;
+	}
+
+	set $language_suffix 'en';
+	if ($first_language ~* 'it') {
+		set $language_suffix 'it';
+	}
+
+	location /it/ {
+		alias /var/www/lpda2/it/;
+		try_files $uri$args $uri$args/ /it/index.html;
+	}
+
+	location /en/ {
+		alias /var/www/lpda2/en/;
+		try_files $uri$args $uri$args/ /en/index.html;
+	}
+
+	location / {
+		alias /var/www/lpda2/$language_suffix/;
+                try_files $uri$args $uri$args/ $language_suffix/$uri$args /$language_suffix/index.html;
+	}
+}
+```
