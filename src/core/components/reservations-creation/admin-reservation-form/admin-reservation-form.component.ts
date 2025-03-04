@@ -59,15 +59,15 @@ import { PublicReservationsService } from '@core/services/http/public-reservatio
   ]
 })
 export class AdminReservationFormComponent implements OnInit {
-  private readonly reservationsService: ReservationsService = inject(ReservationsService);
-  private readonly publicRes = inject(PublicReservationsService);
+  // private readonly reservationsService: ReservationsService = inject(ReservationsService);
+  // private readonly publicRes = inject(PublicReservationsService);
   private readonly destroy$ = inject(TuiDestroyService);
-  private readonly datePipe = inject(DatePipe);
+  // private readonly datePipe = inject(DatePipe);
 
   @Output() formSubmit: EventEmitter<Record<string, any>> = new EventEmitter<Record<string, any>>();
   @Output() cancelled: EventEmitter<void> = new EventEmitter<void>();
 
-  readonly validTimes: WritableSignal<readonly TuiTime[]> = signal<readonly TuiTime[]>([]);
+  // readonly validTimes: WritableSignal<readonly TuiTime[]> = signal<readonly TuiTime[]>([]);
 
   readonly utcTime: WritableSignal<string | null> = signal(null);
 
@@ -120,9 +120,9 @@ export class AdminReservationFormComponent implements OnInit {
   @Input() loading: boolean = false;
 
   readonly dateOpen: WritableSignal<boolean> = signal(false);
-  readonly timeOpen: WritableSignal<boolean> = signal(false);
+  // readonly timeOpen: WritableSignal<boolean> = signal(false);
 
-  readonly loadingTimes: WritableSignal<boolean> = signal(false);
+  // readonly loadingTimes: WritableSignal<boolean> = signal(false);
 
   submitted: boolean = false;
 
@@ -133,26 +133,26 @@ export class AdminReservationFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.dateOpen.set(true);
-    this.timeOpen.set(false);
+    // this.timeOpen.set(false);
 
-    this.form.get(`date`)!.valueChanges.pipe(
-      takeUntil(this.destroy$),
-      filter((date: TuiDay | null): date is TuiDay => date instanceof TuiDay),
-      tap(() => this.dateOpen.set(false)),
-      tap(() => this.timeOpen.set(true)),
-      tap(() => this.loadingTimes.set(true)),
-      switchMap((date: TuiDay) => this.publicRes.getValidTimes(date)),
-      finalize(() => this.loadingTimes.set(false)),
-    ).subscribe({
-      next: (turns: ReservationTurn[]) => {
-        const times: string[] = turns.map((turn: ReservationTurn) => turn.valid_times).filter((times: string[] | undefined): times is string[] => Array.isArray(times) && times.length > 0).flat();
-        this.validTimes.set(times.map((time: string) => TuiTime.fromString(strTimeTimezone(time))));
-      }
-    });
+    // this.form.get(`date`)!.valueChanges.pipe(
+    //   takeUntil(this.destroy$),
+    //   filter((date: TuiDay | null): date is TuiDay => date instanceof TuiDay),
+    //   tap(() => this.dateOpen.set(false)),
+    //   // tap(() => this.timeOpen.set(true)),
+    //   tap(() => this.loadingTimes.set(true)),
+    //   switchMap((date: TuiDay) => this.publicRes.getValidTimes(date)),
+    //   finalize(() => this.loadingTimes.set(false)),
+    // ).subscribe({
+    //   next: (turns: ReservationTurn[]) => {
+    //     const times: string[] = turns.map((turn: ReservationTurn) => turn.valid_times).filter((times: string[] | undefined): times is string[] => Array.isArray(times) && times.length > 0).flat();
+    //     this.validTimes.set(times.map((time: string) => TuiTime.fromString(strTimeTimezone(time))));
+    //   }
+    // });
 
     this.form.get(`time`)!.valueChanges.pipe(
       takeUntil(this.destroy$),
-      tap(() => this.timeOpen.set(false)),
+      // tap(() => this.timeOpen.set(false)),
       tap((v: TuiTime | null) => this.utcTime.set(v ? strToUTC(v.toString("HH:MM")) : null)),
     ).subscribe(nue());
   }

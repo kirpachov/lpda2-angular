@@ -17,14 +17,15 @@
         <ng-container i18n>Data</ng-container>
       </tui-input-date>
 
-      <tui-input-time [tuiDropdownOpen]="timeOpen()" [tuiTextfieldSize]="inputSize" class="grow" formControlName="time"
-                      [items]="validTimes()">
+      <!-- [tuiDropdownOpen]="timeOpen()"  -->
+      <!-- [items]="validTimes()" -->
+      <tui-input-time [tuiTextfieldSize]="inputSize" class="grow" formControlName="time">
         <ng-container i18n>Ora</ng-container>
       </tui-input-time>
     </div>
 
     @if (isMobile) {
-      <button tuiButton appearance="icon" type="button" size="s" (click)="dateOpen.set(true); timeOpen.set(false)">
+      <button tuiButton appearance="icon" type="button" size="s" (click)="dateOpen.set(true)">
       <span class="flex items-center">
         <span class="me-1" i18n>Imposta data</span>
         <mat-icon>calendar_today</mat-icon>
@@ -32,7 +33,8 @@
       </button>
     }
 
-    <app-errors [errors]="e('datetime')"></app-errors>
+    <app-errors [errors]="e('date')"></app-errors>
+    <app-errors [errors]="e('time')"></app-errors>
   </div>
 
   <div class="mb-3">
