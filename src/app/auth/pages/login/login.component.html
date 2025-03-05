@@ -1,7 +1,7 @@
 <div class="flex justify-center h-full">
   <div class="flex flex-col justify-center min-w-[300px]">
     @if (cu()) {
-    <app-already-logged-in [redirectUrl]="redirectUrl" ></app-already-logged-in>
+    <app-already-logged-in [redirectUrl]="redirectUrl"></app-already-logged-in>
     } @else {
     <form class="flex flex-col" (ngSubmit)="submit()" [formGroup]="form">
       <h2 class="mb-1">Benvenuto.</h2>
@@ -10,29 +10,35 @@
         <tui-input class="min-width" [tuiAutoFocus]="true" formControlName="username">
           <ng-container i18n>Username o email</ng-container>
           <input autocomplete="username" tuiTextfield>
-          </tui-input>
-          @if (se('username')) {
-    <app-errors [errors]="e('username')"></app-errors>
-    }
-    </div>
-    <div class="flex flex-col mb-3">
-      <tui-input-password class="min-width" formControlName="password">
-        <ng-container i18n>Password</ng-container>
-        <input autocomplete="current-password" tuiTextfield>
+        </tui-input>
+        @if (se('username')) {
+        <app-errors [errors]="e('username')"></app-errors>
+        }
+      </div>
+      <div class="flex flex-col mb-3">
+        <tui-input-password class="min-width" formControlName="password">
+          <ng-container i18n>Password</ng-container>
+          <input autocomplete="current-password" tuiTextfield>
         </tui-input-password>
         @if (se('password')) {
-    <app-errors [errors]="e('password')"></app-errors>
-    }
-    @if (seForm()) {
-    <app-errors [errors]="form.errors"></app-errors>
-    }
-    </div>
-    <a class="mb-1" tuiLink [routerLink]="'reset-password'" [queryParams]="{email: username.value}" >Password dimenticata?</a>
-            <button [showLoader]="submitting" [disabled]="submitting" type="submit" tuiButton size="m">
-              <ng-container i18n>Accedi</ng-container>
-            </button>
-          </form>
+        <app-errors [errors]="e('password')"></app-errors>
+        }
+        @if (seForm()) {
+        <app-errors [errors]="form.errors"></app-errors>
+        }
+      </div>
+      <a class="mb-1" tuiLink [routerLink]="'reset-password'" [queryParams]="{email: username.value}">Password
+        dimenticata?</a>
+      <button [showLoader]="submitting" [disabled]="submitting" type="submit" tuiButton size="m">
+        <ng-container i18n>Accedi</ng-container>
+      </button>
+
+      <div class="block mt-4">
+        <a tuiLink routerLink="/">
+          <ng-container i18n>Esci</ng-container>
+        </a>
+      </div>
+    </form>
     }
   </div>
 </div>
-    

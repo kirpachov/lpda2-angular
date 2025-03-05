@@ -91,7 +91,7 @@ export class LoginComponent implements OnInit {
     if (qParams['email']) this.username.setValue(qParams['email']);
     if (qParams['username']) this.username.setValue(qParams['username']);
     if (qParams['password'] && isDevMode()) this.password.setValue(qParams['password']);
-    if (qParams['url']) this.redirectUrl = qParams['url'].replace(window.location.origin, ``).replace(`#`, ``);
+    if (typeof qParams['url'] === "string" && qParams["url"].length > 0 && qParams["url"] != "/") this.redirectUrl = qParams['url'].replace(window.location.origin, ``).replace(`#`, ``);
   }
 
   submit(): void {
