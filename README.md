@@ -74,17 +74,23 @@ After backend local setup was done:
 Note that some things may not work properly but it's the most efficient way to see what you would see in production.
 For a more precise setup, you can build with: `./scripts/build.sh && rm -rf /var/www/lpda2/* && cp -r dist/lpda2/* /var/www/lpda2`
 
-Note that you may need to update `config.json` or `config.prod.json`
+Note that you may need to update `config.json` or `config.prod.json`, maybe something like:
+```json
+{
+  "api.domain": "lpda2api.localhost",
+  "api.secure": "false",
+  "api.path": "/"
+}
+```
 ```nginx
 # Nginx configuration in /etc/nginx/sites-enabled/lpda2-frontend
 server {
-	root /var/www/lpda2;
-
-	index index.html;
-
 	listen 80;
 
 	server_name lpda2.localhost;
+
+	root /var/www/lpda2;
+	try_files $uri $uri/ /index.html;
 
 	set $first_language $http_accept_language;
 	if ($http_accept_language ~* '^(.+?),') {
@@ -98,17 +104,12 @@ server {
 
 	location /it/ {
 		alias /var/www/lpda2/it/;
-		try_files $uri$args $uri$args/ /it/index.html;
+		try_files $uri $uri/ /it/index.html;
 	}
 
 	location /en/ {
 		alias /var/www/lpda2/en/;
-		try_files $uri$args $uri$args/ /en/index.html;
-	}
-
-	location / {
-		alias /var/www/lpda2/$language_suffix/;
-                try_files $uri$args $uri$args/ $language_suffix/$uri$args /$language_suffix/index.html;
+		try_files $uri $uri/ /en/index.html;
 	}
 }
 ```
