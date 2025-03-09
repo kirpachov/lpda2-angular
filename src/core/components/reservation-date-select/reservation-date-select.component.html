@@ -8,11 +8,44 @@
 </ng-template>
 
 <ng-template #editDateModal let-obs>
-	<tui-calendar-range
-    [items]="periodOptions"
-    [value]="control.value"
-    (valueChange)="selectRange($event)"
-></tui-calendar-range>
+  <ng-template #rangeCalendarModal let-rangeCalendarObs >
+    <!-- [items]="periodOptions" -->
+    <tui-calendar-range
+      [min]="calendarMin"
+      [max]="calendarMax"
+      [value]="control.value"
+      (valueChange)="selectRangeAndUnsub($event, rangeCalendarObs, obs)"
+  ></tui-calendar-range>
+  </ng-template>
+
+  <div class="flex">
+    <tui-calendar
+      [value]="(control.value?.isSingleDay ? control.value?.from : control.value) || null"
+      [min]="calendarMin"
+      [max]="calendarMax"
+      (dayClick)="selectDayAndUnsub($event, obs)"
+    ></tui-calendar>
+
+    <tui-data-list class="grow">
+      @for(p of periodOptions; track p) {
+        <button type="button" tuiOption (click)="selectRangeAndUnsub(p.range, obs)">
+          {{ p.toString() }}
+
+          @if(control.value == p.range) {
+            <mat-icon>check</mat-icon>
+          }
+        </button>
+      }
+
+      <button type="button" (click)="fireModal(rangeCalendarModal)" tuiOption>
+        <ng-container i18n>Altro range</ng-container>
+      </button>
+
+    </tui-data-list>
+  </div>
+
+  <hr class="block w-[1px] my-3">
+	
 
 @if(control.value && control.valid) {
   <p class="text-slate-400 block mb-3">

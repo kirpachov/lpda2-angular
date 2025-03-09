@@ -81,9 +81,9 @@ export interface ReservationsFilters {
     TuiDataListWrapperModule,
     TuiSelectModule,
     TuiDataListModule,
-    NgSwitch,
-    NgSwitchCase,
-    NgSwitchDefault,
+    // NgSwitch,
+    // NgSwitchCase,
+    // NgSwitchDefault,
   ],
   templateUrl: './list-reservations-filters.component.html',
   providers: [

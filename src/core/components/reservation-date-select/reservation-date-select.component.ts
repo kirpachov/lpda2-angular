@@ -7,6 +7,8 @@ import { TuiCalendarRangeModule, TuiDayRangePeriod } from "@taiga-ui/kit";
 import { DatePipe } from '@angular/common';
 import { FromTuiDayPipe } from "../../pipes/from-tui-day.pipe";
 import {
+  TuiCalendarModule,
+  TuiDataListModule,
   TuiDialogContext, TuiDialogService,
    TuiHintModule,
 } from "@taiga-ui/core";
@@ -24,6 +26,9 @@ import { StringifyTuiDayRangePipe } from "../../pipes/stringify-tui-day-range.pi
     TuiCalendarRangeModule,
     StringifyTuiDayRangePipe,
     TuiHintModule,
+
+    TuiDataListModule,
+    TuiCalendarModule,
 ],
   templateUrl: './reservation-date-select.component.html',
   styleUrl: './reservation-date-select.component.scss',
@@ -39,12 +44,15 @@ import { StringifyTuiDayRangePipe } from "../../pipes/stringify-tui-day-range.pi
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReservationDateSelectComponent implements OnInit, ControlValueAccessor {
+
   private readonly cd: ChangeDetectorRef = inject(ChangeDetectorRef);
   private readonly dialogs: TuiDialogService = inject(TuiDialogService);
   private readonly destroy$: TuiDestroyService = inject(TuiDestroyService);
   private readonly date: DatePipe = inject(DatePipe);
 
   readonly today: TuiDay = TuiDay.currentLocal();
+  readonly calendarMin: TuiDay = new TuiDay(2019, 1, 1);
+  readonly calendarMax: TuiDay = this.today.append({ year: 1 });
 
   readonly control: FormControl<null | TuiDayRange> = new FormControl<null | TuiDayRange>(new TuiDayRange(this.today, this.today));
 
@@ -78,6 +86,7 @@ export class ReservationDateSelectComponent implements OnInit, ControlValueAcces
     )
   ];
 
+
   ngOnInit(): void { }
 
   registerOnChange(fn: () => unknown): void {
@@ -101,14 +110,29 @@ export class ReservationDateSelectComponent implements OnInit, ControlValueAcces
     this.control.patchValue(this.formatToTuiDayRange(obj));
   }
 
-  private modalSub?: Subscription;
+  // private modalSub?: Subscription;
   fireModal(temp: PolymorpheusContent<TuiDialogContext>): void {
-    this.modalSub = this.dialogs.open(temp).subscribe();
+    // this.modalSub =
+    this.dialogs.open(temp).subscribe();
   }
 
-  selectRange($event: TuiDayRange|null) {
+  selectRangeAndUnsub(range: TuiDayRange | null, ...subs: Subscription[]): void {
+    this.selectRange(range);
+    subs.forEach((s) => s.unsubscribe());
+  }
+
+  selectDayAndUnsub(day: TuiDay | null, sub: Subscription): void {
+    this.selectDay(day);
+    sub.unsubscribe();
+  }
+
+  private selectDay(day: TuiDay | null) {
+    this.selectRange(day ? new TuiDayRange(day, day) : null);
+  }
+
+  private selectRange($event: TuiDayRange|null) {
     this.control.setValue($event);
-    this.modalSub?.unsubscribe();
+    // this.modalSub?.unsubscribe();
     this.cd.markForCheck();
   }
 
