@@ -73,6 +73,8 @@ export class PublicNavigateMenuV1Component implements OnInit {
   readonly breadcrumbs: WritableSignal<MenuCategory[]> = signal([]);
   readonly breadcrumbUrls: WritableSignal<string[]> = signal([]);
 
+  readonly showDishPrice: WritableSignal<boolean> = signal(true);
+
   ngOnInit(): void {
     this.listenRouteParamsAndPopulateBreadcrumb();
 
@@ -254,6 +256,7 @@ export class PublicNavigateMenuV1Component implements OnInit {
     const done = (categories: MenuCategory[]): void => {
       this.selectCategory(categories.length === 0 ? null : categories[categories.length - 1]);
       this.breadcrumbs.set(categories.splice(0, categories.length - 1));
+      this.showDishPrice.set(this.calcShowDishPrice());
       // if (categories.length > 0) this.scrollIntoView();
     };
 
@@ -280,7 +283,7 @@ export class PublicNavigateMenuV1Component implements OnInit {
   }
 
   // private scrollIntoView(): void {
-    // this.me.nativeElement.scrollIntoView({ behavior: "smooth" });
+  // this.me.nativeElement.scrollIntoView({ behavior: "smooth" });
   // }
 
   private loadCategoriesByIds(categoryIds: (string | number)[]): Observable<MenuCategory[]> {
@@ -301,7 +304,7 @@ export class PublicNavigateMenuV1Component implements OnInit {
         return categoryIds.map((id: string | number): MenuCategory =>
           // Here we're sure that the category is in the cache, since we just loaded it.
           this.readCategoriesCache(id) as MenuCategory
-      );
+        );
       }),
     );
   }
@@ -334,5 +337,12 @@ export class PublicNavigateMenuV1Component implements OnInit {
 
   private readDishesCache(id: number): Dish | null {
     return this.dishesByIdCache[id] || null;
+  }
+
+  private calcShowDishPrice(): boolean {
+    let first: undefined | null | MenuCategory = this.breadcrumbs()[0]  || this.selectedCategory();
+    if (!first) return true;
+
+    return !(typeof first.price == "number" && first.price > 0);
   }
 }

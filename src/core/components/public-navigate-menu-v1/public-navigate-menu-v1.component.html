@@ -124,7 +124,7 @@
         <div class="text-lg w-fit text-primary rounded py-2 px-4">
           @if(dish.price == 0) {
           <ng-container>-</ng-container>
-          } @else {
+          } @else if (showDishPrice()) {
           {{ dish.price | currency }}
           }
         </div>
