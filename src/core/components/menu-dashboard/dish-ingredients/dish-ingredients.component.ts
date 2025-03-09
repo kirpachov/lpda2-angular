@@ -44,34 +44,28 @@ import {nue} from "@core/lib/nue";
   selector: 'app-dish-ingredients',
   standalone: true,
   imports: [
-    RouterLink,
     TuiLinkModule,
     MatIcon,
     TuiHostedDropdownModule,
     TuiButtonModule,
     TuiIslandModule,
-    NgForOf,
     TuiActionModule,
     TuiDropdownModule,
     TuiDataListModule,
     NgIf,
     ShowImageComponent,
-    UrlToPipe,
     ReactiveFormsModule,
     TuiInputModule,
     TuiAutoFocusModule,
     TuiTextfieldControllerModule,
     TuiLoaderModule,
-    NgClass,
     TuiTablePaginationModule,
     CdkDropList,
     CdkDrag,
     CdkDragHandle,
     TuiHintModule,
     TuiProgressModule,
-    RouterOutlet,
     IngredientSelectComponent,
-    JsonPipe,
   ],
   templateUrl: './dish-ingredients.component.html',
   styleUrl: `./dish-ingredients.component.scss`,
@@ -197,7 +191,9 @@ export class DishIngredientsComponent {
   }
 
   private defaultFilters(): Record<string, string | number> {
-    const result: Record<string, string | number> = {};
+    const result: Record<string, string | number> = {
+      per_page: 1000,
+    };
 
     if (this.dish && this.dish.id) result['associated_dish_id'] = this.dish.id;
 

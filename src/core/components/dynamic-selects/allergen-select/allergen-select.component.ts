@@ -9,6 +9,8 @@ import {TuiDestroyService} from "@taiga-ui/cdk";
 import {
   CommonDynamicSelectComponent
 } from "@core/components/dynamic-selects/common-dynamic-select/common-dynamic-select.component";
+import { AllergenSelectOptionComponent } from './allergen-select-option.component';
+import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 
 @Component({
   selector: 'app-allergen-select',
@@ -36,5 +38,7 @@ export class AllergenSelectComponent extends CommonDynamicSelectComponent<Allerg
 
   constructor() {
     super();
+
+    this.nativeOptionTemplate$.set(new PolymorpheusComponent(AllergenSelectOptionComponent));
   }
 }

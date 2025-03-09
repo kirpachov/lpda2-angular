@@ -4,76 +4,59 @@
 
 <div class="items-list" (cdkDropListDropped)="drop($event)" cdkDropList>
   @for (item of items(); track item.id) {
-    <tui-island cdkDrag class="mb-2">
-      <div class="flex justify-between items-center">
+  <tui-island cdkDrag class="mb-2">
+    <div class="flex justify-between items-center">
       <span class="flex items-center">
-      <app-show-image style="max-width: 100px;" class="inline-block rounded me-2"
-                      *ngIf="item && item.image"
-                      [image]="item.image"></app-show-image>
+        <app-show-image style="max-width: 100px;" class="inline-block rounded me-2" *ngIf="item && item.image"
+          [image]="item.image"></app-show-image>
 
         <div> {{ item.name }} </div>
-        </span>
+      </span>
 
-        <div class="flex items-center">
-          <ng-template #dragHint>
-            <ng-container i18n>Trascina per ordinare.</ng-container>
-          </ng-template>
+      <div class="flex items-center">
+        <ng-template #dragHint>
+          <ng-container i18n>Trascina per ordinare.</ng-container>
+        </ng-template>
 
-          <button size="m" cdkDragHandle [tuiHint]="dragHint" tuiIconButton type="button" appearance="outline" class="me-2">
-            <mat-icon>drag_handle</mat-icon>
+        <button size="m" cdkDragHandle [tuiHint]="dragHint" tuiIconButton type="button" appearance="outline"
+          class="me-2">
+          <mat-icon>drag_handle</mat-icon>
+        </button>
+
+        <ng-template #deleteDropdown>
+          <button class="m-4" tuiButton appearance="secondary-destructive" type="button" (click)="remove(item)">
+            <ng-container i18n>Rimuovi ingrediente dal piatto</ng-container>
           </button>
+        </ng-template>
 
-          <ng-template #deleteDropdown>
-            <button class="m-4" tuiButton appearance="secondary-destructive" type="button" (click)="remove(item)">
-              <ng-container i18n>Rimuovi ingrediente dal piatto</ng-container>
-            </button>
-          </ng-template>
-
-          <tui-hosted-dropdown [content]="deleteDropdown">
+        <tui-hosted-dropdown [content]="deleteDropdown">
           <button size="m" tuiIconButton type="button" appearance="outline">
             <mat-icon>delete</mat-icon>
           </button>
-          </tui-hosted-dropdown>
-        </div>
-
+        </tui-hosted-dropdown>
       </div>
-    </tui-island>
+
+    </div>
+  </tui-island>
   } @empty {
-    <p>
-      <ng-container i18n>Non ci sono ingredienti</ng-container>
-    </p>
+  <p>
+    <ng-container i18n>Non ci sono ingredienti</ng-container>
+  </p>
   }
 </div>
 
-<ng-template #addModal>
-  @if (dish && dish.id) {
-    <tui-loader [overlay]="true" [showLoader]="associatingIngredient()">
-      <form [formGroup]="newIngredientForm" (ngSubmit)="addIngredient()">
-        <div class="mb-4">
-          <app-ingredient-select [autofocus]="true" [filters]="{avoid_associated_dish_id: this.dish.id}" [formControlName]="'ingredient'">
-            <ng-container i18n>Cerca ingrediente</ng-container>
-          </app-ingredient-select>
-        </div>
+@if (dish && dish.id) {
+<form class="flex items-center" [formGroup]="newIngredientForm" (ngSubmit)="addIngredient()">
+  <div class="grow me-1">
+    <app-ingredient-select [filters]="{avoid_associated_dish_id: this.dish.id}" [formControlName]="'ingredient'">
+      <ng-container i18n>Aggiungi ingrediente</ng-container>
+    </app-ingredient-select>
+  </div>
 
-        <div class="flex items-center">
-          <button class="me-2" tuiButton size="m" type="submit">
-            <ng-container i18n>Aggiungi al piatto</ng-container>
-          </button>
-
-          <button type="button" appearance="outline" (click)="dismissAddIngredient()" tuiButton size="m">
-            <ng-container i18n>Annulla</ng-container>
-          </button>
-        </div>
-      </form>
-    </tui-loader>
-  } @else {
-    no dish or dish.id
-  }
-</ng-template>
-
-<button (click)="showAddIngredient(addModal)" type="button" size="m" appearance="flat" tuiButton>
-  <span class="flex items-center">
-    <mat-icon class="me-1">add</mat-icon>
-    <span i18n>Aggiungi ingrediente</span>
-  </span>
-</button>
+  <button [showLoader]="associatingIngredient()" class="me-2" tuiButton size="m" type="submit">
+    <ng-container i18n>Aggiungi ingrediente</ng-container>
+  </button>
+</form>
+} @else {
+error. no dish or dish.id
+}

@@ -195,7 +195,9 @@ export class DishTagsComponent {
   }
 
   private defaultFilters(): Record<string, string | number> {
-    const result: Record<string, string | number> = {};
+    const result: Record<string, string | number> = {
+      per_page: 1000
+    };
 
     if (this.dish && this.dish.id) result['associated_dish_id'] = this.dish.id;
 

@@ -9,6 +9,8 @@ import {
 } from "@core/components/dynamic-selects/common-dynamic-select/common-dynamic-select.component";
 import {Ingredient} from "@core/models/ingredient";
 import {IngredientsService} from "@core/services/http/ingredients.service";
+import { IngredientSelectOptionComponent } from './ingredient-select-option.component';
+import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 
 @Component({
   selector: 'app-ingredient-select',
@@ -36,5 +38,7 @@ export class IngredientSelectComponent extends CommonDynamicSelectComponent<Ingr
 
   constructor() {
     super();
+
+    this.nativeOptionTemplate$.set(new PolymorpheusComponent(IngredientSelectOptionComponent));
   }
 }

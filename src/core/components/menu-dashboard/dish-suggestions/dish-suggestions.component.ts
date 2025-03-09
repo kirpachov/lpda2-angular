@@ -21,7 +21,6 @@ import {
   TuiLoaderModule
 } from "@taiga-ui/core";
 import {Dish} from "@core/models/dish";
-import {SearchResult} from "@core/lib/search-result.model";
 import {finalize, Subscription, takeUntil} from "rxjs";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";

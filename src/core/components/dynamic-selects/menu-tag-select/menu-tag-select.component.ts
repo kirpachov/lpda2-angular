@@ -9,6 +9,8 @@ import {TagsService} from "@core/services/http/tags.service";
 import {
   CommonDynamicSelectComponentInputs, CommonDynamicSelectComponentOutputs, CommonDynamicSelectModuleImports
 } from "@core/components/dynamic-selects/common-dynamic-select/common-dynamic-select";
+import { MenuTagSelectOptionComponent } from './menu-tag-select-option.component';
+import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 
 @Component({
   selector: 'app-menu-tag-select',
@@ -36,5 +38,7 @@ export class MenuTagSelectComponent extends CommonDynamicSelectComponent<Tag> {
 
   constructor() {
     super();
+
+    this.nativeOptionTemplate$.set(new PolymorpheusComponent(MenuTagSelectOptionComponent));
   }
 }

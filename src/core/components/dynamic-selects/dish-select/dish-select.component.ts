@@ -14,7 +14,7 @@ import {
 import {MenuCategoriesService} from "@core/services/http/menu-categories.service";
 import {Dish} from "@core/models/dish";
 import {DishesService} from "@core/services/http/dishes.service";
-import { DishSelectOptionComponent } from './dish-select-option/dish-select-option.component';
+import { DishSelectOptionComponent } from './dish-select-option.component';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 
 @Component({

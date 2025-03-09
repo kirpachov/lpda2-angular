@@ -4,68 +4,50 @@
 
 <div class="items-list">
   @for (item of items(); track item.id) {
-    <tui-island class="mb-2">
-      <div class="flex justify-between items-center">
+  <tui-island class="mb-2">
+    <div class="flex justify-between items-center">
       <span class="flex items-center">
-      <app-show-image style="max-width: 100px;" class="inline-block rounded me-2"
-                      *ngIf="item && item.images && item.images[0]"
-                      [image]="item.images[0]"></app-show-image>
+        <app-show-image style="max-width: 100px;" class="inline-block rounded me-2"
+          *ngIf="item && item.images && item.images[0]" [image]="item.images[0]"></app-show-image>
 
         <div> {{ item.name }} </div>
-        </span>
+      </span>
 
-        <div class="flex items-center">
-          <ng-template #deleteDropdown>
-            <button class="m-4" tuiButton appearance="secondary-destructive" type="button" (click)="remove(item)">
-              <ng-container i18n>Rimuovi suggerimento</ng-container>
-            </button>
-          </ng-template>
+      <div class="flex items-center">
+        <ng-template #deleteDropdown>
+          <button class="m-4" tuiButton appearance="secondary-destructive" type="button" (click)="remove(item)">
+            <ng-container i18n>Rimuovi suggerimento</ng-container>
+          </button>
+        </ng-template>
 
-          <tui-hosted-dropdown [content]="deleteDropdown">
-            <button size="m" tuiIconButton type="button" appearance="outline">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </tui-hosted-dropdown>
-        </div>
-
+        <tui-hosted-dropdown [content]="deleteDropdown">
+          <button size="m" tuiIconButton type="button" appearance="outline">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </tui-hosted-dropdown>
       </div>
-    </tui-island>
+
+    </div>
+  </tui-island>
   } @empty {
-    <p>
-      <ng-container i18n>Non ci sono suggerimenti per questo piatto</ng-container>
-    </p>
+  <p>
+    <ng-container i18n>Non ci sono suggerimenti per questo piatto</ng-container>
+  </p>
   }
 </div>
 
-<ng-template #addModal>
-  @if (dish && dish.id) {
-    <tui-loader [overlay]="true" [showLoader]="addingDish()">
-      <form [formGroup]="newDishForm" (ngSubmit)="addDish()">
-        <div class="mb-4">
-          <app-dish-select [autofocus]="true" [filters]="{can_suggest: dish.id}" [formControlName]="'dish'">
-            <ng-container i18n>Cerca piatto</ng-container>
-          </app-dish-select>
-        </div>
+@if (dish && dish.id) {
+<form class="flex items-center" [formGroup]="newDishForm" (ngSubmit)="addDish()">
+  <div class="grow me-1">
+    <app-dish-select [filters]="{can_suggest: dish.id}" [formControlName]="'dish'">
+      <ng-container i18n>Aggiungi associazione consigliata</ng-container>
+    </app-dish-select>
+  </div>
 
-        <div class="flex items-center">
-          <button class="me-2" tuiButton size="m" type="submit">
-            <ng-container i18n>Aggiungi</ng-container>
-          </button>
-
-          <button type="button" appearance="outline" (click)="dismissAddDish()" tuiButton size="m">
-            <ng-container i18n>Annulla</ng-container>
-          </button>
-        </div>
-      </form>
-    </tui-loader>
-  } @else {
-    no dish or dish.id
-  }
-</ng-template>
-
-<button (click)="showAddDish(addModal)" type="button" size="m" appearance="flat" tuiButton>
-  <span class="flex items-center">
-    <mat-icon class="me-1">add</mat-icon>
-    <span i18n>Aggiungi suggerimento</span>
-  </span>
-</button>
+  <button [showLoader]="addingDish()" class="me-2" tuiButton size="m" type="submit">
+    <ng-container i18n>Salva</ng-container>
+  </button>
+</form>
+} @else {
+error. no dish or dish.id
+}
