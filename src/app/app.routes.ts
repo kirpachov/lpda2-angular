@@ -5,8 +5,8 @@ import { legacyRoutesRedirectGuard } from '@core/guards/legacy-routes-redirect.g
 export const routes: Routes = [
   {
     path: ``,
-    loadChildren: () => import(`./home/home.routes`).then(m => m.routes),
-    loadComponent: () => import(`./home/home-layout/home-layout.component`).then(m => m.HomeLayoutComponent),
+    loadChildren: () => import(`./public/home.routes`).then(m => m.routes),
+    loadComponent: () => import(`./public/home-layout/home-layout.component`).then(m => m.HomeLayoutComponent),
   },
   {
     path: `admin`,
