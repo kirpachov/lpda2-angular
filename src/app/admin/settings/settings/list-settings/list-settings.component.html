@@ -81,16 +81,27 @@
 
   <div class="mb-4">
     <p class="text-lg font-bold" i18n>Anticipo minino per cancellare una prenotazione</p>
-    <p class="text-slate-400" i18n>Specifica quante ore prima l'utente può cancellare la prenotazione.</p>
+    <p class="text-slate-400" i18n>Specifica quanto tempo prima l'utente può cancellare la prenotazione.</p>
 
-    <app-preferences-number-input
+    <!-- <app-preferences-number-input
         [formControlName]="'reservation_min_hours_advance_cancel'"
         (submit)="save('reservation_min_hours_advance_cancel', $event)"
         [inputSize]="inputSize"
         [postfix]="'ore'"
     >
       <ng-container i18n>Ore di anticipo minime.</ng-container>
-    </app-preferences-number-input>
+    </app-preferences-number-input> -->
+
+    <app-preferences-duration-input
+      [formControlName]="'reservation_min_hours_advance_cancel'"
+      (submit)="save('reservation_min_hours_advance_cancel', $event)"
+      [outputMeasure]="'hours'"
+      [inputMeasure]="'hours'"
+      [inputSize]="inputSize"
+    >
+    <ng-container i18n>Anticipo minimo.</ng-container>
+  </app-preferences-duration-input>
+
   </div>
 
   <div class="mb-4">
@@ -111,14 +122,15 @@
     <p class="text-lg font-bold" i18n>Anticipo minimo nuove prenotazioni</p>
     <p class="text-slate-400" i18n>Se impostato a zero le persone potranno prenotare in tempo reale per la stessa ora, altrimenti almeno {{ form.value['reservation_min_hours_in_advance'] }} ore dopo l'orario attuale.</p>
 
-    <app-preferences-number-input
-        [formControlName]="'reservation_min_hours_in_advance'"
-        (submit)="save('reservation_min_hours_in_advance', $event)"
-        [inputSize]="inputSize"
-        [postfix]="'ore'"
+    <app-preferences-duration-input
+      [formControlName]="'reservation_min_hours_in_advance'"
+      (submit)="save('reservation_min_hours_in_advance', $event)"
+      [outputMeasure]="'hours'"
+      [inputMeasure]="'hours'"
+      [inputSize]="inputSize"
     >
-      <ng-container i18n>Ore di anticipo minime per creare nuove prenotazioni.</ng-container>
-    </app-preferences-number-input>
+    <ng-container i18n>Anticipo minimo per creare nuove prenotazioni.</ng-container>
+  </app-preferences-duration-input>
   </div>
 
   <div class="mb-4">

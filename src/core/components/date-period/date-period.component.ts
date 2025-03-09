@@ -27,7 +27,7 @@ import { Observable, map, takeUntil } from 'rxjs';
   ]
 })
 export class DatePeriodComponent implements ControlValueAccessor {
-  private readonly destroy$ = new TuiDestroyService();
+  private readonly destroy$ = Inject(TuiDestroyService);
 
   readonly control = new FormControl<TuiDayRange | null>(null);
 

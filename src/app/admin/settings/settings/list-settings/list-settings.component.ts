@@ -42,6 +42,7 @@ import {
   PreferencesTextInputComponent
 } from "@core/components/preferences-inputs/preferences-text-input/preferences-text-input.component";
 import { Title } from '@angular/platform-browser';
+import { PreferencesDurationInputComponent } from '@core/components/preferences-inputs/preferences-duration-input/preferences-duration-input.component';
 
 @Component({
   selector: 'app-list-settings',
@@ -57,7 +58,8 @@ import { Title } from '@angular/platform-browser';
     PreferencesMultipleSelectComponent,
     PreferencesSelectComponent,
     PreferencesNumberInputComponent,
-    PreferencesTextInputComponent
+    PreferencesTextInputComponent,
+    PreferencesDurationInputComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [

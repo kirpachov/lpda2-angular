@@ -19,6 +19,14 @@ const dict: Record<string, string> = {
   "google_url": $localize`URL Google`,
   "it": $localize`Italiano`,
   "en": $localize`Inglese`,
+  "minutes": $localize`Minuti`,
+  "hours": $localize`Ore`,
+  "days": $localize`Giorni`,
+  "weeks": $localize`Settimane`,
+  "minute": $localize`Minuto`,
+  "hour": $localize`Ora`,
+  "day": $localize`Giorno`,
+  "week": $localize`Settimana`,
 };
 
 @Pipe({

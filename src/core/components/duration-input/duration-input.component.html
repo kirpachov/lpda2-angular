@@ -1,0 +1,14 @@
+<ng-template #stringifyOption let-all>
+  {{ all | commonTranslate }}
+</ng-template>
+
+<div class="flex items-center">
+  <tui-input-number class="grow me-2" [min]="0" [tuiTextfieldLabelOutside]="true" [tuiTextfieldSize]="inputSize" [step]="1" [formControl]="number">
+  </tui-input-number>
+
+  <tui-select [tuiTextfieldLabelOutside]="true" [valueContent]="stringifyOption" class="grow" [tuiTextfieldSize]="inputSize" [formControl]="measure">
+    <input tuiTextfield />
+  
+    <tui-data-list-wrapper *tuiDataList [items]="measureOptions" [itemContent]="stringifyOption" ></tui-data-list-wrapper>
+  </tui-select>
+</div>
