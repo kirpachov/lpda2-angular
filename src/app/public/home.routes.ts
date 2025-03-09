@@ -53,4 +53,9 @@ export const routes: Routes = [
     path: `reserve`,
     loadComponent: () => import(`./reserve/reserve.component`).then(m => m.ReserveComponent),
   },
+  {
+    path: `reservation`,
+    redirectTo: `reserve`,
+    pathMatch: `full`,
+  }
 ];
