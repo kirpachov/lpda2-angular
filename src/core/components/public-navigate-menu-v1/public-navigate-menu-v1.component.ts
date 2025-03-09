@@ -145,6 +145,7 @@ export class PublicNavigateMenuV1Component implements OnInit {
     this.loadingCategories.set(true);
     params ||= {};
     params["skip_empty_categories"] = true;
+    params["per_page"] = 1000;
     this.menuService.searchCategories(params).pipe(
       takeUntil(this.destroy),
       finalize(() => this.loadingCategories.set(false)),
