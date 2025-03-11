@@ -2107,7 +2107,7 @@
             
             src/core/components/public-navigate-menu-v1/public-navigate-menu-v1.component.html 
           </context>
-          <context context-type='linenumber'>136</context>
+          <context context-type='linenumber'>140</context>
         </context-group>
       </trans-unit>
       <trans-unit id='6520561070532383856' datatype='html'>
@@ -4283,7 +4283,7 @@
             
             src/core/components/public-navigate-menu-v1/public-navigate-menu-v1.component.html 
           </context>
-          <context context-type='linenumber'>67</context>
+          <context context-type='linenumber'>69</context>
         </context-group>
       </trans-unit>
       <trans-unit id='1796884652590216421' datatype='html'>
@@ -6279,7 +6279,7 @@
             
             src/core/components/public-navigate-menu-v1/public-navigate-menu-v1.component.html 
           </context>
-          <context context-type='linenumber'>58</context>
+          <context context-type='linenumber'>60</context>
         </context-group>
       </trans-unit>
       <trans-unit id='1229005893415965964' datatype='html'>
@@ -7147,6 +7147,23 @@
           <context context-type='linenumber'>100</context>
         </context-group>
       </trans-unit>
+      <trans-unit id='5854297332390689911' datatype='html'>
+        <source>Menù a prezzo fisso</source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/public-navigate-menu-v1/public-navigate-menu-v1.component.html 
+          </context>
+          <context context-type='linenumber'>26</context>
+        </context-group>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/public-navigate-menu-v1/public-navigate-menu-v1.component.html 
+          </context>
+          <context context-type='linenumber'>86</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id='8800044362055275389' datatype='html'>
         <source>Naviga attraverso il menù cliccando sopra ai piatti per consultarne i dettagli.</source>
         <context-group purpose='location'>
@@ -7154,7 +7171,7 @@
             
             src/core/components/public-navigate-menu-v1/public-navigate-menu-v1.component.html 
           </context>
-          <context context-type='linenumber'>59,60</context>
+          <context context-type='linenumber'>61,62</context>
         </context-group>
       </trans-unit>
       <trans-unit id='633961462470193792' datatype='html'>
@@ -7164,7 +7181,7 @@
             
             src/core/components/public-navigate-menu-v1/public-navigate-menu-v1.component.html 
           </context>
-          <context context-type='linenumber'>65</context>
+          <context context-type='linenumber'>67</context>
         </context-group>
       </trans-unit>
       <trans-unit id='8167274690213408728' datatype='html'>
@@ -7174,7 +7191,7 @@
             
             src/core/components/public-navigate-menu-v1/public-navigate-menu-v1.component.html 
           </context>
-          <context context-type='linenumber'>90</context>
+          <context context-type='linenumber'>94</context>
         </context-group>
       </trans-unit>
       <trans-unit id='7852544265325878305' datatype='html'>
