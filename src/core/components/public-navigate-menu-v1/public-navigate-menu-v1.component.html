@@ -22,7 +22,9 @@
     }
 
     @if(selectedCategory()?.price) {
-    <div class="text-lg w-fit text-primary rounded mb-2">Menù a prezzo fisso: {{ selectedCategory()?.price | currency }}
+    <div class="text-lg w-fit text-primary rounded mb-2">
+      <ng-container i18n>Menù a prezzo fisso</ng-container>
+      : {{ selectedCategory()?.price | currency }}
     </div>
     }
 
@@ -80,7 +82,9 @@
           <p class="text-xl">{{ category.name }}</p>
           <p class="text-lg text-slate-400">{{ category.description }}</p>
           @if(category.price) {
-          <div class="text-lg w-fit text-primary rounded">Menù a prezzo fisso: {{ category.price | currency }}</div>
+          <div class="text-lg w-fit text-primary rounded">
+            <ng-container i18n>Menù a prezzo fisso</ng-container>
+            : {{ category.price | currency }}</div>
           }
         </div>
       </div>

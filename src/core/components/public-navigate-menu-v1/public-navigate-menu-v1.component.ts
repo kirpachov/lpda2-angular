@@ -103,7 +103,7 @@ export class PublicNavigateMenuV1Component implements OnInit {
     this.dishDetailSub = this.dialogs.open<unknown>(
       new PolymorpheusComponent(PublicDishModalComponent, this.injector),
       {
-        data: { dish: dish },
+        data: { dish: dish, showPrice: this.showDishPrice() },
         dismissible: true,
         closeable: true,
         label: undefined,

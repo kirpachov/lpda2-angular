@@ -20,7 +20,7 @@
     <p class="text-xl text-slate-400 mb-3">{{ dish()?.description }}</p>
   }
 
-  @if((dish()?.price ?? 0) > 0) {
+  @if(showPrice() && (dish()?.price ?? 0) > 0) {
     <div class="text-lg w-fit text-success-dark rounded border border-success-dark py-2 px-4 mb-3">
       {{ dish()?.price | currency }}
     </div>

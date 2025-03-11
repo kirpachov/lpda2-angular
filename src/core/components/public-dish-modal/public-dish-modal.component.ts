@@ -38,12 +38,14 @@ import { MatIconModule } from '@angular/material/icon';
 export class PublicDishModalComponent {
 
   readonly dish: WritableSignal<Dish | null> = signal(null);
+  readonly showPrice: WritableSignal<boolean> = signal(false);
 
   constructor(
     @Inject(POLYMORPHEUS_CONTEXT)
-    private readonly context: TuiDialogContext<null, { dish: Dish }>,
+    private readonly context: TuiDialogContext<null, { dish: Dish, showPrice: boolean }>,
   ) {
     this.dish.set(this.context.data.dish);
+    this.showPrice.set(this.context.data.showPrice);
   }
 
   close(){
