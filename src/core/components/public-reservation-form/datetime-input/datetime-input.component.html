@@ -24,7 +24,7 @@
   <p class="text-xl mb-2">
     <ng-container i18n>Seleziona l'orario per il giorno</ng-container>
     <span (click)="date.reset()" class="cursor-pointer inline-flex items-center ms-2 underline">
-      {{ date.value.toLocalNativeDate() | date: 'EEEE d MMMM y' }}
+      {{ date.value.toUtcNativeDate() | date: 'EEEE d MMMM y' }}
 
       <mat-icon class="ms-1">edit</mat-icon>
     </span>

@@ -1,13 +1,15 @@
 import {TuiDateMode, TuiDay, TuiTime, TuiTimeMode} from "@taiga-ui/cdk";
+import { offsetHours } from "./str-time-timezone";
 
 export const isoTimezoneRexExp: RegExp = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/;
 
 /**
  * Will convert TuiDay and TuiTime to ISO string in UTC.
  */
-export function tuiDatetimeToIsoString(day: TuiDay, time: TuiTime): string {
-  const currentTimezoneDate: Date = new Date(`${day.formattedYear}-${day.formattedMonthPart}-${day.formattedDayPart} ${time.toString()}`);
-  return currentTimezoneDate.toISOString();
+export function tuiDatetimeToIsoString(day: TuiDay, _time: TuiTime): string {
+  const time = (new TuiTime(_time.hours, _time.minutes)).shift({hours: - offsetHours });
+  
+  return new Date(Date.UTC(day.year, day.month, day.day, time.hours, time.minutes)).toISOString();
 }
 
 /**

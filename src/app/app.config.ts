@@ -14,7 +14,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import {TuiRoutableDialogModule} from "@taiga-ui/kit";
 import { of } from 'rxjs';
 import {TUI_LANGUAGE, TUI_ITALIAN_LANGUAGE} from '@taiga-ui/i18n';
-import {DatePipe, registerLocaleData} from '@angular/common';
+import {DATE_PIPE_DEFAULT_OPTIONS, DatePipe, registerLocaleData} from '@angular/common';
 import localeIT from '@angular/common/locales/it';
 import localeEN from '@angular/common/locales/en';
 import {addLanguageHeaderInterceptor} from "@core/interceptors/add-language-header.interceptor";
@@ -39,6 +39,11 @@ export const appConfig: ApplicationConfig = {
     ),
     importProvidersFrom(TuiRootModule),
     DatePipe,
+    {
+      provide: DATE_PIPE_DEFAULT_OPTIONS, useValue: {
+        timezone: '+0100'
+      }
+    },
     provideHttpClient(withInterceptors([addLanguageHeaderInterceptor, jwtInterceptor, catchRequireRootInterceptor])),
     provideAnimations(),
     provideAnimationsAsync(),

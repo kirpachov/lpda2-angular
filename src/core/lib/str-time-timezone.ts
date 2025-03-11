@@ -1,5 +1,5 @@
-
-export const offsetHours: number = ((new Date()).getTimezoneOffset() / 60);
+export const timezoneOffset: number = ((new Date()).getTimezoneOffset() / 60);
+export const offsetHours: number = 1;
 
 /**
  * Given a string like
@@ -13,7 +13,9 @@ export function strTimeTimezone(string: unknown, offset: number = offsetHours): 
   }
 
   const startsAtHours: number = Number(string.split(`:`)[0]);
-  return `${startsAtHours - offset}:${string.split(`:`)[1]}`;
+  const hours: number = startsAtHours + offset;
+  const out  = `${hours < 10 ? '0' : ''}${hours}:${string.split(`:`)[1]}`;
+  return out;
 }
 
 /**
