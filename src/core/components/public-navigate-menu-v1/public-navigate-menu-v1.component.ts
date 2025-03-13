@@ -328,6 +328,7 @@ export class PublicNavigateMenuV1Component implements OnInit {
 
     categories.forEach((c: MenuCategory): void => {
       if (c.id) this.categoriesByIdCache[typeof c.id === "string" ? c.id : `${c.id}`] = c;
+      if (c.secret) this.categoriesByIdCache[typeof c.secret === "string" ? c.secret : `${c.secret}`] = c;
     });
   }
 
