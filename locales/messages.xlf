@@ -3955,6 +3955,41 @@
           <context context-type='linenumber'>16</context>
         </context-group>
       </trans-unit>
+      <trans-unit id='7310366498758593975' datatype='html'>
+        <source>Termini e condizioni d&apos;utilizzo</source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>src/app/public/terms-and-conditions/terms-and-conditions.component.html</context>
+          <context context-type='linenumber'>2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='2018735240079522098' datatype='html'>
+        <source>Pagamenti e preautorizzazioni</source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>src/app/public/terms-and-conditions/terms-and-conditions.component.html</context>
+          <context context-type='linenumber'>6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='3878200801763809221' datatype='html'>
+        <source>
+           La prenotazione deve essere cancellata entro i termini stabiliti,
+          altrimenti si potrà incorrere in penali. Nel caso di ritardo nel
+          cancellare o di mancata presentazione, verrà trattenuta la somma
+          pattuita in fase di prenotazione. La cancellazione della prenotazione
+          nel pieno rispetto dei termini e condizioni non porteranno ad alcuna
+          penale. 
+        </source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>src/app/public/terms-and-conditions/terms-and-conditions.component.html</context>
+          <context context-type='linenumber'>7,13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='7286389282625981324' datatype='html'>
+        <source>Termini e condizioni | La Porta D&apos;Acqua</source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>src/app/public/terms-and-conditions/terms-and-conditions.component.ts</context>
+          <context context-type='linenumber'>14</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id='25203634920198586' datatype='html'>
         <source>Pagata</source>
         <context-group purpose='location'>
@@ -6980,7 +7015,7 @@
         <source>Amministrazione</source>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/core/components/public-footer/public-footer.component.html</context>
-          <context context-type='linenumber'>98</context>
+          <context context-type='linenumber'>99</context>
         </context-group>
       </trans-unit>
       <trans-unit id='1790782688237677861' datatype='html'>
@@ -7553,24 +7588,14 @@
           <context context-type='linenumber'>134</context>
         </context-group>
       </trans-unit>
-      <trans-unit id='8039085386398703393' datatype='html'>
-        <source>Informazioni aggiuntive, se necessario, sono da aggiungere qui!</source>
+      <trans-unit id='4977744915189218986' datatype='html'>
+        <source>Occasione speciale? Intolleranze particolari? Faccelo sapere!</source>
         <context-group purpose='location'>
           <context context-type='sourcefile'>
             
             src/core/components/public-reservation-form/public-reservation-form.component.html 
           </context>
           <context context-type='linenumber'>140</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id='5707499839083461572' datatype='html'>
-        <source>Accetto i termini e le condizioni</source>
-        <context-group purpose='location'>
-          <context context-type='sourcefile'>
-            
-            src/core/components/public-reservation-form/public-reservation-form.component.html 
-          </context>
-          <context context-type='linenumber'>146</context>
         </context-group>
       </trans-unit>
       <trans-unit id='4420379438902982268' datatype='html'>
@@ -7580,7 +7605,7 @@
             
             src/core/components/public-reservation-form/public-reservation-form.component.html 
           </context>
-          <context context-type='linenumber'>152</context>
+          <context context-type='linenumber'>156</context>
         </context-group>
       </trans-unit>
       <trans-unit id='3234495913862971526' datatype='html'>
@@ -7593,7 +7618,7 @@
             
             src/core/components/public-reservation-form/public-reservation-form.component.ts 
           </context>
-          <context context-type='linenumber'>355</context>
+          <context context-type='linenumber'>359</context>
         </context-group>
       </trans-unit>
       <trans-unit id='7810101333022324148' datatype='html'>
@@ -8074,6 +8099,16 @@
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/core/components/tag-form/tag-form.component.html</context>
           <context context-type='linenumber'>20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='8749431896507060116' datatype='html'>
+        <source>Termini e condizioni</source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/terms-and-conditions-link/terms-and-conditions-link.component.html 
+          </context>
+          <context context-type='linenumber'>6</context>
         </context-group>
       </trans-unit>
       <trans-unit id='4319064864421405306' datatype='html'>
