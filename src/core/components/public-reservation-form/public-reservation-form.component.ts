@@ -13,6 +13,7 @@ import {AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators
 import {CustomValidators} from "@core/lib/custom-validators";
 import {
   TuiCarouselModule, TuiCheckboxBlockModule,
+  TuiCheckboxLabeledModule,
   TuiInputModule, TuiInputNumberModule, tuiInputNumberOptionsProvider,
   TuiInputPhoneInternationalModule,
   TuiStepperModule,
@@ -47,6 +48,7 @@ import {ReactiveErrors} from "@core/lib/reactive-errors/reactive-errors";
 import {ErrorsComponent} from "@core/components/errors/errors.component";
 import { ConfigsService } from '@core/services/configs.service';
 import { Router } from '@angular/router';
+import { TermsAndConditionsLinkComponent } from "../terms-and-conditions-link/terms-and-conditions-link.component";
 
 interface FormStep {
   form: FormGroup | AbstractControl;
@@ -70,10 +72,12 @@ interface FormStep {
     TuiInputPhoneInternationalModule,
     TuiTextareaModule,
     TuiInputNumberModule,
-    TuiCheckboxBlockModule,
+    // TuiCheckboxBlockModule,
     TuiExpandModule,
-    ErrorsComponent
-  ],
+    ErrorsComponent,
+    TuiCheckboxLabeledModule,
+    TermsAndConditionsLinkComponent
+],
   templateUrl: './public-reservation-form.component.html',
   styleUrl: './public-reservation-form.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

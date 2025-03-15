@@ -1,0 +1,14 @@
+<a [target]="target" tuiLink routerLink="/terms-and-conditions">
+  <span class="flex items-center text-primary">
+    <span #content><ng-content></ng-content></span>
+  
+    @if(!content.childNodes.length){ 
+      <ng-container i18n>Termini e condizioni</ng-container>
+     }
+
+     @if (target == '_blank' && showIcon) {
+       <mat-icon>open_in_new</mat-icon>
+     }
+
+  </span>
+</a>

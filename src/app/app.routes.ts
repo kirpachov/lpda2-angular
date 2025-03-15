@@ -5,7 +5,7 @@ import { legacyRoutesRedirectGuard } from '@core/guards/legacy-routes-redirect.g
 export const routes: Routes = [
   {
     path: ``,
-    loadChildren: () => import(`./public/home.routes`).then(m => m.routes),
+    loadChildren: () => import(`./public/public.routes`).then(m => m.routes),
     loadComponent: () => import(`./public/home-layout/home-layout.component`).then(m => m.HomeLayoutComponent),
   },
   {

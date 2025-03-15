@@ -1,5 +1,6 @@
 <tui-input-date-range [min]="appProductionDate" [max]="max" [formControl]="control" [items]="periodOptions">
   <span #content><ng-content></ng-content></span>
+  <!-- TODO shouldn't be 'content.childNodes' ??? -->
   @if(!content.children.length){ {{label}} }
 
 </tui-input-date-range>
