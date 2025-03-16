@@ -7,7 +7,8 @@ export interface StatsParams {
 }
 
 export const StatsKeys = [
-  "reservations-by-hour"
+  "reservations-by-hour",
+  "reservations-count"
 ] as const;
 
 export type StatsKeys = typeof StatsKeys[number];
@@ -21,6 +22,57 @@ export interface Stats {
    * Value is the sum of the people that made a reservation in that hour.
    */
   ["reservations-by-hour"]: Record<string, number>;
+
+  /**
+   * Total number of reservations.
+   */
+  ["reservations-count"]: {
+    count_by_month: Record<string, number>,
+    // {
+    //   "2023-01": 2,
+    //   "2021-01": 3,
+    //   "2021-05": 1,
+    //   "2025-03": 21,
+    //   "2025-05": 11
+    // },
+
+    count_by_year: Record<string, number>,
+    // count_by_year: {
+    //   "2025": 21 + 11,
+    //   "2023": 2,
+    //   "2021": 4
+    // },
+
+    count_by_day_current_month: Record<string, number>,
+    // count_by_day_current_month: {
+    //   "2025-03-08": 3,
+    //   "2025-03-09": 5,
+    //   "2025-03-14": 2,
+    //   "2025-03-15": 4,
+    //   "2025-03-16": 3,
+    //   "2025-03-17": 4
+    // },
+
+    count_by_day_current_week: Record<string, number>,
+    // count_by_day_current_week: {
+    //   "2025-03-14": 2,
+    //   "2025-03-15": 4
+    // },
+
+
+    current: {
+      day: number,
+      week: number,
+      month: number,
+      year: number
+    },
+    // current: {
+    //   day: 4,
+    //   week: 6,
+    //   month: 21,
+    //   year: 21 + 11
+    // }
+  }
 }
 
 export function isStatsReservationsByHour(arg: unknown): arg is Stats["reservations-by-hour"] {

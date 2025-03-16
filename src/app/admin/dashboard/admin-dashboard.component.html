@@ -1,4 +1,76 @@
-<h1 i18n>La porta d'acqua - dashboard</h1>
+<ng-template #currentDayReservations>
+  <ng-container i18n>Numero di prenotati per la giornata odierna. Vengono escluse prenotazioni cancellate o annullate.
+    Vengono contati sia adulti che bambini.</ng-container>
+</ng-template>
+
+<ng-template #currentWeekReservationsHint>
+  <ng-container i18n>Numero di prenotati dall'ultimo lunedì alla prossima domenica.</ng-container>
+</ng-template>
+
+<ng-template #currentMonthReservationsHint>
+  <ng-container i18n>Numero di prenotati dal primo giorno fino all'ultimo giorno del mese corrente.</ng-container>
+</ng-template>
+
+<ng-template #currentYearReservationsHint>
+  <ng-container i18n>Numero di prenotati dal primo giorno fino all'ultimo giorno dell'anno corrente.</ng-container>
+</ng-template>
+
+<div class="flex items-center">
+  <h1 i18n>La porta d'acqua - dashboard</h1>
+  <button [showLoader]="loading()" tuiIconButton appearance="icon" type="button" (click)="loadStats()">
+    <mat-icon>refresh</mat-icon>
+  </button>
+</div>
+
+<div class="flex flex-wrap items-center">
+  <div class="col-12 md:col-6 lg:col-3 p-1">
+    <tui-island>
+      <h3 [tuiHint]="currentDayReservations" class="tui-island__title">
+        <ng-container i18n>Prenotati per oggi</ng-container>
+      </h3>
+      <p class="tui-island__paragraph">
+        {{ stats()?.["reservations-count"]?.current?.day ?? '?' }}
+      </p>
+    </tui-island>
+  </div>
+
+  <div class="col-12 md:col-6 lg:col-3 p-1">
+    <tui-island>
+      <h3 [tuiHint]="currentWeekReservationsHint" class="tui-island__title">
+        <ng-container i18n>Prenotati per questa settimana</ng-container>
+      </h3>
+      <p class="tui-island__paragraph">
+        {{ stats()?.["reservations-count"]?.current?.week ?? '?' }}
+      </p>
+    </tui-island>
+  </div>
+
+
+  <div class="col-12 md:col-6 lg:col-3 p-1">
+    <tui-island>
+      <h3 [tuiHint]="currentMonthReservationsHint" class="tui-island__title">
+        <ng-container i18n>Prenotati per questo mese</ng-container>
+      </h3>
+      <p class="tui-island__paragraph">
+        {{ stats()?.["reservations-count"]?.current?.month ?? '?' }}
+      </p>
+    </tui-island>
+  </div>
+
+
+  <div class="col-12 md:col-6 lg:col-3 p-1">
+    <tui-island>
+      <h3 [tuiHint]="currentYearReservationsHint" class="tui-island__title">
+        <ng-container i18n>Prenotati per quest'anno</ng-container>
+      </h3>
+      <p class="tui-island__paragraph">
+        {{ stats()?.["reservations-count"]?.current?.year ?? '?' }}
+      </p>
+    </tui-island>
+  </div>
+
+
+</div>
 
 <div>
   <a tuiLink routerLink="/admin/reservations">
@@ -11,5 +83,8 @@
     Di seguito la quantità di prenotati per oggi.
   </p>
 
-  <app-reservations-by-hour-bar-chart></app-reservations-by-hour-bar-chart>
+  <app-reservations-by-hour-bar-chart
+    [stats]="stats()"
+    [loading]="loading()"
+  ></app-reservations-by-hour-bar-chart>
 </div>
