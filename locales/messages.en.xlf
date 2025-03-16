@@ -2,12 +2,89 @@
 <xliff xmlns='urn:oasis:names:tc:xliff:document:1.2' version='1.2'>
   <file source-language='it' datatype='plaintext' original='ng2.template'>
     <body>
+      <trans-unit id='1675331545962922461' datatype='html'>
+        <source>
+           Numero di prenotati per la giornata odierna. Vengono escluse
+          prenotazioni cancellate o annullate. Vengono contati sia adulti che
+          bambini. 
+        </source>
+        <target>
+           Number of bookings for today. Canceled or annulled bookings are
+          excluded. Both adults and children are counted. 
+        </target>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>src/app/admin/dashboard/admin-dashboard.component.html</context>
+          <context context-type='linenumber'>2,3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='1454677232979502649' datatype='html'>
+        <source>Numero di prenotati dall'ultimo lunedì alla prossima domenica.</source>
+        <target>Number of bookings from last Monday to next Sunday.</target>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>src/app/admin/dashboard/admin-dashboard.component.html</context>
+          <context context-type='linenumber'>7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='8076056751498918933' datatype='html'>
+        <source>
+           Numero di prenotati dal primo giorno fino all'ultimo giorno del mese
+          corrente. 
+        </source>
+        <target>Number of bookings from the first day until the last day of the current month.</target>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>src/app/admin/dashboard/admin-dashboard.component.html</context>
+          <context context-type='linenumber'>11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='2156623823869452678' datatype='html'>
+        <source>
+           Numero di prenotati dal primo giorno fino all'ultimo giorno dell'anno
+          corrente. 
+        </source>
+        <target>Number of bookings from the first day until the last day of the current year.</target>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>src/app/admin/dashboard/admin-dashboard.component.html</context>
+          <context context-type='linenumber'>15</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id='4811079809430785365' datatype='html'>
         <source>La porta d'acqua - dashboard</source>
         <target>La porta d'acqua - dashboard</target>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/app/admin/dashboard/admin-dashboard.component.html</context>
-          <context context-type='linenumber'>1</context>
+          <context context-type='linenumber'>19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='4306158159696173205' datatype='html'>
+        <source>Prenotati per oggi</source>
+        <target>Booked for today</target>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>src/app/admin/dashboard/admin-dashboard.component.html</context>
+          <context context-type='linenumber'>29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='1104690253387911753' datatype='html'>
+        <source>Prenotati per questa settimana</source>
+        <target>Booked for this week.</target>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>src/app/admin/dashboard/admin-dashboard.component.html</context>
+          <context context-type='linenumber'>40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='3002080170101874605' datatype='html'>
+        <source>Prenotati per questo mese</source>
+        <target>Booked for this month.</target>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>src/app/admin/dashboard/admin-dashboard.component.html</context>
+          <context context-type='linenumber'>52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='2654705911527143992' datatype='html'>
+        <source>Prenotati per quest'anno</source>
+        <target>Booked for this year.</target>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>src/app/admin/dashboard/admin-dashboard.component.html</context>
+          <context context-type='linenumber'>64</context>
         </context-group>
       </trans-unit>
       <trans-unit id='677648337612842352' datatype='html'>
@@ -15,7 +92,7 @@
         <target>Reservations</target>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/app/admin/dashboard/admin-dashboard.component.html</context>
-          <context context-type='linenumber'>5,7</context>
+          <context context-type='linenumber'>77,79</context>
         </context-group>
       </trans-unit>
       <trans-unit id='8900740861435834060' datatype='html'>
@@ -23,7 +100,7 @@
         <target>Below is the number of bookings for today.</target>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/app/admin/dashboard/admin-dashboard.component.html</context>
-          <context context-type='linenumber'>10,12</context>
+          <context context-type='linenumber'>82,84</context>
         </context-group>
       </trans-unit>
       <trans-unit id='8230350809485058915' datatype='html'>
@@ -31,7 +108,7 @@
         <target>Dashboard | La Porta D'Acqua</target>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/app/admin/dashboard/admin-dashboard.component.ts</context>
-          <context context-type='linenumber'>21</context>
+          <context context-type='linenumber'>35</context>
         </context-group>
       </trans-unit>
       <trans-unit id='7532968965335544251' datatype='html'>
@@ -9192,7 +9269,7 @@
             
             src/core/components/reservations-by-hour-bar-chart/reservations-by-hour-bar-chart.component.ts 
           </context>
-          <context context-type='linenumber'>84</context>
+          <context context-type='linenumber'>50</context>
         </context-group>
       </trans-unit>
       <trans-unit id='7232080267030042355' datatype='html'>
@@ -9203,7 +9280,7 @@
             
             src/core/components/reservations-by-hour-bar-chart/reservations-by-hour-bar-chart.component.ts 
           </context>
-          <context context-type='linenumber'>88</context>
+          <context context-type='linenumber'>54</context>
         </context-group>
       </trans-unit>
       <trans-unit id='40109521701643383' datatype='html'>

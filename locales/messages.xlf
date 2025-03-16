@@ -2,32 +2,98 @@
 <xliff version='1.2' xmlns='urn:oasis:names:tc:xliff:document:1.2'>
   <file source-language='it' datatype='plaintext' original='ng2.template'>
     <body>
+      <trans-unit id='1675331545962922461' datatype='html'>
+        <source>
+           Numero di prenotati per la giornata odierna. Vengono escluse
+          prenotazioni cancellate o annullate. Vengono contati sia adulti che
+          bambini. 
+        </source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>src/app/admin/dashboard/admin-dashboard.component.html</context>
+          <context context-type='linenumber'>2,3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='1454677232979502649' datatype='html'>
+        <source>Numero di prenotati dall&apos;ultimo lunedì alla prossima domenica.</source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>src/app/admin/dashboard/admin-dashboard.component.html</context>
+          <context context-type='linenumber'>7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='8076056751498918933' datatype='html'>
+        <source>
+           Numero di prenotati dal primo giorno fino all&apos;ultimo giorno del
+          mese corrente. 
+        </source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>src/app/admin/dashboard/admin-dashboard.component.html</context>
+          <context context-type='linenumber'>11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='2156623823869452678' datatype='html'>
+        <source>
+           Numero di prenotati dal primo giorno fino all&apos;ultimo giorno
+          dell&apos;anno corrente. 
+        </source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>src/app/admin/dashboard/admin-dashboard.component.html</context>
+          <context context-type='linenumber'>15</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id='4811079809430785365' datatype='html'>
         <source>La porta d&apos;acqua - dashboard</source>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/app/admin/dashboard/admin-dashboard.component.html</context>
-          <context context-type='linenumber'>1</context>
+          <context context-type='linenumber'>19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='4306158159696173205' datatype='html'>
+        <source>Prenotati per oggi</source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>src/app/admin/dashboard/admin-dashboard.component.html</context>
+          <context context-type='linenumber'>29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='1104690253387911753' datatype='html'>
+        <source>Prenotati per questa settimana</source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>src/app/admin/dashboard/admin-dashboard.component.html</context>
+          <context context-type='linenumber'>40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='3002080170101874605' datatype='html'>
+        <source>Prenotati per questo mese</source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>src/app/admin/dashboard/admin-dashboard.component.html</context>
+          <context context-type='linenumber'>52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='2654705911527143992' datatype='html'>
+        <source>Prenotati per quest&apos;anno</source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>src/app/admin/dashboard/admin-dashboard.component.html</context>
+          <context context-type='linenumber'>64</context>
         </context-group>
       </trans-unit>
       <trans-unit id='677648337612842352' datatype='html'>
         <source> Prenotazioni </source>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/app/admin/dashboard/admin-dashboard.component.html</context>
-          <context context-type='linenumber'>5,7</context>
+          <context context-type='linenumber'>77,79</context>
         </context-group>
       </trans-unit>
       <trans-unit id='8900740861435834060' datatype='html'>
         <source> Di seguito la quantità di prenotati per oggi. </source>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/app/admin/dashboard/admin-dashboard.component.html</context>
-          <context context-type='linenumber'>10,12</context>
+          <context context-type='linenumber'>82,84</context>
         </context-group>
       </trans-unit>
       <trans-unit id='8230350809485058915' datatype='html'>
         <source>Dashboard | La Porta D&apos;Acqua</source>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/app/admin/dashboard/admin-dashboard.component.ts</context>
-          <context context-type='linenumber'>21</context>
+          <context context-type='linenumber'>35</context>
         </context-group>
       </trans-unit>
       <trans-unit id='7532968965335544251' datatype='html'>
@@ -7928,7 +7994,7 @@
             
             src/core/components/reservations-by-hour-bar-chart/reservations-by-hour-bar-chart.component.ts 
           </context>
-          <context context-type='linenumber'>84</context>
+          <context context-type='linenumber'>50</context>
         </context-group>
       </trans-unit>
       <trans-unit id='7232080267030042355' datatype='html'>
@@ -7938,7 +8004,7 @@
             
             src/core/components/reservations-by-hour-bar-chart/reservations-by-hour-bar-chart.component.ts 
           </context>
-          <context context-type='linenumber'>88</context>
+          <context context-type='linenumber'>54</context>
         </context-group>
       </trans-unit>
       <trans-unit id='40109521701643383' datatype='html'>
