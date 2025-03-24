@@ -1,0 +1,17 @@
+<h1 i18n>Modifica tipologia di tavolo {{ item()?.name }}</h1>
+
+@if(item()){
+<app-table-type-form
+  [item]="item()"
+  (onSubmit)="submit($event)"
+  (onCancel)="cancel()"
+  [loading]="loading()"
+></app-table-type-form>
+
+} @else if (loading()) {
+  <tui-loader [showLoader]="true" ></tui-loader>
+} @else {
+  <p>
+    <ng-container i18n>Non trovato :'(</ng-container>
+  </p>
+}

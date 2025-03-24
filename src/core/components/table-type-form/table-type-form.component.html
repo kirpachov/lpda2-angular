@@ -1,0 +1,43 @@
+<form (ngSubmit)="submit()" [formGroup]="form">
+  <div class="block mb-3">
+    <app-i18n-input [autofocus]="true" [formControl]="form.controls.name">
+      <ng-container i18n>Nome tiplogia di tavolo</ng-container>
+    </app-i18n-input>
+
+    <app-errors [errors]="form.controls.name.errors"></app-errors>
+  </div>
+
+  <div class="block mb-3">
+    <app-i18n-input [formControl]="form.controls.description" [long]="true">
+      <ng-container i18n>Descrizione tiplogia di tavolo</ng-container>
+    </app-i18n-input>
+
+    <app-errors [errors]="form.controls.description.errors"></app-errors>
+  </div>
+
+  <div class="block mb-3">
+    <tui-input-number [formControl]="form.controls.default_people_per_turn" [min]="1" [max]="1000">
+      <ng-container i18n>Posti a sedere per turno (default)</ng-container>
+    </tui-input-number>
+
+    <app-errors [errors]="form.controls.default_people_per_turn.errors"></app-errors>
+  </div>
+
+  <div class="block mb-3">
+    <tui-input-number [formControl]="form.controls.default_price" [min]="0" [max]="1000">
+      <ng-container i18n>Prezzo a persona per turno (default)</ng-container>
+    </tui-input-number>
+
+    <app-errors [errors]="form.controls.default_price.errors"></app-errors>
+  </div>
+
+  <div>
+    <button [showLoader]="loading" type="submit" tuiButton>
+      <ng-container i18n>Conferma</ng-container>
+    </button>
+
+    <button type="button" tuiButton (click)="cancel()" appearance="icon">
+      <ng-container i18n>Annulla</ng-container>
+    </button>
+  </div>
+</form>

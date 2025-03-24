@@ -40,5 +40,9 @@ export const routes: Routes = [
   {
     path: `contacts`,
     loadChildren: () => import(`./contacts/routes`).then(m => m.routes)
-  }
+  },
+  {
+    path: `table_types`,
+    loadChildren: () => import(`./table_types/routes`).then(m => m.routes)
+  },
 ];

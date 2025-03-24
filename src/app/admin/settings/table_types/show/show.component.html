@@ -1,0 +1,87 @@
+<h1 i18n>Dettagli tipologia di tavolo {{ item()?.name }}</h1>
+
+@if(item()){
+
+    <app-show-images class="mb-3" [recordType]="'TableType'" [recordId]="item()?.id"
+                     [images]="item()?.images"></app-show-images>
+
+  <table class="tui-table mb-3">
+    <tbody>
+      <tr class="tui-table__tr tui-table__tr_border_none">
+        <td class="tui-table__td">
+          <span class="text-xl" i18n>Nome</span>
+        </td>
+
+        <td class="tui-table__td">
+            <app-show-translations [translations]="item()?.translations?.name" ></app-show-translations>
+        </td>
+      </tr>
+
+      <tr class="tui-table__tr tui-table__tr_border_none">
+        <td class="tui-table__td">
+          <span class="text-xl" i18n>Descrizione</span>
+        </td>
+
+        <td class="tui-table__td">
+            <app-show-translations [translations]="item()?.translations?.description" ></app-show-translations>
+        </td>
+      </tr>
+
+      <tr class="tui-table__tr tui-table__tr_border_none">
+        <td class="tui-table__td">
+          <span class="text-xl" i18n>
+            Posti a sedere per turno (default)
+          </span>
+        </td>
+
+        <td class="tui-table__td">
+          {{ item()?.default_people_per_turn }}
+        </td>
+      </tr>
+
+      <tr class="tui-table__tr tui-table__tr_border_none">
+        <td class="tui-table__td">
+          <span class="text-xl" i18n>
+            Prezzo a persona per turno (default)
+          </span>
+        </td>
+
+        <td class="tui-table__td">
+          {{ item()?.default_price | currency }}
+        </td>
+      </tr>
+
+      <tr class="tui-table__tr tui-table__tr_border_none">
+        <td class="tui-table__td">
+          <span class="text-xl" i18n>
+            Utilizzato nei seguenti "Pagamenti alla prenotazione"
+          </span>
+        </td>
+
+        <td class="tui-table__td">
+          <div class="text-danger">TODO</div>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <div>
+    <a class="mb-3" routerLink="edit" tuiButton appearance="flat">
+      <ng-container i18n>Modifica</ng-container>
+    </a>
+  
+    <div>
+      <button (click)="delete()" tuiButton appearance="secondary-destructive" type="button">
+        <ng-container i18n>Elimina</ng-container>
+      </button>
+    </div>
+  </div>
+
+} @else if (loading()) {
+  <tui-loader [showLoader]="true" ></tui-loader>
+} @else {
+  <p>
+    <ng-container i18n>Non trovato :'(</ng-container>
+  </p>
+}

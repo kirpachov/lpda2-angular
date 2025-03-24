@@ -45,7 +45,7 @@ export class ShowImagesComponent {
   readonly loading = computed(() => this.loadingImages());
 
   @Input({required: true}) images: (Image | File)[] | undefined | null = [];
-  @Input({required: true}) recordType?: "Menu::Category" | "Menu::Dish";
+  @Input({required: true}) recordType?: "Menu::Category" | "Menu::Dish" | "TableType";
   @Input({required: true}) recordId?: number;
   cIndex: WritableSignal<number> = signal(0);
 

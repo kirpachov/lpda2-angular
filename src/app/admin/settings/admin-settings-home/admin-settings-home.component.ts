@@ -113,5 +113,14 @@ export class AdminSettingsHomeComponent {
         name: `view_timeline`
       }
     },
+    {
+      name: $localize`Tipologie di tavoli`,
+      description: $localize`Amministra le tiplogie di tavoli disponibili`,
+      path: `table_types`,
+      icon: {
+        source: `material`,
+        name: `table_restaurant`
+      }
+    },
   ];
 }

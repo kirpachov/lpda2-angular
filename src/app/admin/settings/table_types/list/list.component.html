@@ -1,0 +1,71 @@
+<h1>
+  <ng-container i18n>Tipologie di tavoli</ng-container>
+</h1>
+
+<p class="text-slate-400" i18n>
+  Configura le tipologie di tavoli presenti nel tuo locale. Potrai richiedere un pagamento specifico per ciascuna
+  tipologia nella sezione "Pagamenti alla prenotazione".
+</p>
+
+<a class="mb-3 me-3" tuiButton appearance="flat" routerLink="new">
+  <span class="flex items-center">
+    <mat-icon>add</mat-icon>
+    <span i18n>Crea nuovo</span>
+  </span>
+</a>
+
+@if(items().length > 0){
+@for(item of items(); track item.id){
+<div class="border rounded-lg flex flex-col mb-5 p-4">
+  <p class="block text-xl">{{ item.name }} </p>
+
+  <app-show-images class="block mb-3" [recordType]="'TableType'" [recordId]="item?.id"
+  [images]="item?.images" ></app-show-images>
+
+  <div class="block">
+    <span>{{ item.description }}</span>
+  </div>
+
+  <div class="block">
+    <span class="text-slate-400 me-2" i18n>Posti a sedere per turno (default):</span>
+    <span>{{ item.default_people_per_turn }}</span>
+  </div>
+
+  <div class="block">
+    <span class="text-slate-400 me-2" i18n>Prezzo a persona per turno (default):</span>
+    <span>{{ item.default_price }}</span>
+  </div>
+
+  <div class="flex items-center justify-end">
+    <div>
+      <button type="button" size="m" tuiButton appearance="secondary-destructive" (click)="delete(item.id)">
+        <span class="flex items-center justify-between p-4">
+          <span class="me-1" i18n>Elimina</span>
+          <mat-icon>delete</mat-icon>
+        </span>
+      </button>
+    </div>
+
+    <div>
+      <a routerLink="{{ item.id }}" tuiLink>
+        <span class="flex items-center justify-between p-4">
+          <span class="me-1" i18n>Dettagli</span>
+          <mat-icon>info</mat-icon>
+        </span>
+      </a>
+    </div>
+  </div>
+</div>
+}
+
+<tui-table-pagination class="my-2" [items]="[10, 20, 50, 100]" [total]="data()?.metadata?.total_count ?? 0"
+  (paginationChange)="paginationChange($event)">
+</tui-table-pagination>
+
+} @else {
+<p>
+  <ng-container i18n>Nessun elemento trovato.</ng-container>
+</p>
+}
+
+<router-outlet></router-outlet>
