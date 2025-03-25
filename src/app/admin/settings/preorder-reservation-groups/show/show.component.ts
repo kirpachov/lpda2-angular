@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, Params, RouterModule } from '@angular/router';
 import { PreorderReservationGroup } from '@core/models/preorder-reservation-group';
 import { PreorderReservationGroupsService } from '@core/services/http/preorder-reservation-groups.service';
 import { TuiDestroyService } from '@taiga-ui/cdk';
-import { TuiButtonModule, TuiLinkModule, TuiLoaderModule } from '@taiga-ui/core';
+import { TuiButtonModule, TuiExpandModule, TuiLinkModule, TuiLoaderModule } from '@taiga-ui/core';
 import { finalize, takeUntil } from 'rxjs';
 import { PreorderReservationGroupPreorderTypeComponent } from "../../../../../core/components/preorder-reservation-group-preorder-type/preorder-reservation-group-preorder-type.component";
 import { PreorderReservationGroupStatusComponent } from "../../../../../core/components/preorder-reservation-group-status/preorder-reservation-group-status.component";
@@ -12,6 +12,10 @@ import { NotificationsService } from '@core/services/notifications.service';
 import { PreorderReservationGroupCasesComponent } from "../../../../../core/components/preorder-reservation-group-cases/preorder-reservation-group-cases.component";
 import { SelectTurnsPaymentv2Component } from "../../../../../core/components/select-turns-paymentv2/select-turns-paymentv2.component";
 import { ShowTranslationsComponent } from "../../../../../core/components/show-translations/show-translations.component";
+import { ShowImageComponent } from "../../../../../core/components/show-image/show-image.component";
+import { TableType } from '@core/models/table-type';
+import { SearchResult } from '@core/lib/search-result.model';
+import { TableTypesService } from '@core/services/http/table-types.service';
 
 @Component({
   selector: 'app-show',
@@ -26,7 +30,9 @@ import { ShowTranslationsComponent } from "../../../../../core/components/show-t
     TuiButtonModule,
     PreorderReservationGroupCasesComponent,
     SelectTurnsPaymentv2Component,
-    ShowTranslationsComponent
+    ShowTranslationsComponent,
+    TuiExpandModule,
+    ShowImageComponent
 ],
   templateUrl: './show.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -46,7 +52,21 @@ export class ShowComponent {
   readonly loading: WritableSignal<boolean> = signal(false);
   private itemId: number | null = null;
 
+  readonly tableTypeByIds: WritableSignal<Record<number, TableType>> = signal({});
+
+  private readonly tableTypes: TableTypesService = inject(TableTypesService);
+
   ngOnInit(): void {
+    this.tableTypes.search({ per_page: 1000 }).subscribe((data: SearchResult<TableType>) => {
+      const tableTypeByIds: Record<number, TableType> = {};
+
+      data.items.forEach((tableType: TableType) => {
+        if (tableType.id) tableTypeByIds[tableType.id] = tableType;
+      });
+
+      this.tableTypeByIds.set(tableTypeByIds);
+    });
+
     this.route.params.pipe(
       takeUntil(this.destroy$)
     ).subscribe({

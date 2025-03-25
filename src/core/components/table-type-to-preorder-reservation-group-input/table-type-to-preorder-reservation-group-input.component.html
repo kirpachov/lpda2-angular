@@ -1,0 +1,43 @@
+@for(form of forms.controls; track form; let index = $index) {
+@if(form.value.table_type_id) {
+
+<form class="flex items-center" [formGroup]="form">
+  <app-show-image class="max-w-[300px]"
+    [image]="(tableTypeByIds()[form.value.table_type_id].images || [])[0]"></app-show-image>
+
+  <div class="block p-4">
+    <p class="block text-lg">
+      {{ tableTypeByIds()[form.value.table_type_id].name }}
+    </p>
+
+    <div class="block mb-2">
+      <tui-input [tuiTextfieldPrefix]="'€'" [formControl]="form.controls.price">
+        <ng-container i18n>Prezzo per persona</ng-container>
+      </tui-input>
+
+      <app-errors [errors]="form.controls.price.errors"></app-errors>
+    </div>
+
+    <div class="block mb-2">
+      <tui-input [formControl]="form.controls.people_per_turn">
+        <ng-container i18n>Ospiti per turno</ng-container>
+      </tui-input>
+
+      <app-errors [errors]="form.controls.people_per_turn.errors"></app-errors>
+    </div>
+
+    <div class="block mb-2">
+      <button type="button" (click)="removeAt(index)" tuiButton appearance="secondary-destructive">
+        <ng-container i18n>Rimuovi</ng-container>
+      </button>
+    </div>
+
+  </div>
+</form>
+
+}
+}
+
+<app-table-type-select [formControl]="addTable">
+  <ng-container i18n>Aggiungi tavolo</ng-container>
+</app-table-type-select>

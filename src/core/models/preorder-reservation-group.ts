@@ -4,6 +4,7 @@ import { ReservationTurn } from "./reservation-turn";
 import { PreorderReservationDate } from "./preorder-reservation-date";
 import { ReservationTurnData } from "@core/lib/interfaces/reservation-turn-data";
 import { PreorderReservationDateData } from "@core/lib/interfaces/preorder-reservation-date-data";
+import { TableTypeToPreorderReservationGroup } from "@core/lib/interfaces/table-type-to-preorder-reservation-group";
 
 export class PreorderReservationGroup extends BaseModel {
   title?: string;
@@ -23,6 +24,8 @@ export class PreorderReservationGroup extends BaseModel {
   turns: ReservationTurn[] = [];
   dates: PreorderReservationDate[] = [];
 
+  table_type_to_preorder_reservation_groups?: TableTypeToPreorderReservationGroup[];
+
   constructor(data: PreorderReservationGroupData) {
     super(data);
 
@@ -37,5 +40,7 @@ export class PreorderReservationGroup extends BaseModel {
     this.turns = (data.turns || []).map((datum: ReservationTurnData) => new ReservationTurn(datum));
     this.dates = (data.dates || []).map((datum: PreorderReservationDateData) => new PreorderReservationDate(datum));
     this.translations = data.translations || {};
+
+    this.table_type_to_preorder_reservation_groups = data.table_type_to_preorder_reservation_groups;
   }
 }

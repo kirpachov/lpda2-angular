@@ -1,6 +1,7 @@
 import { BaseModelData } from "./base-model-data";
 import { PreorderReservationDateData } from "./preorder-reservation-date-data";
 import { ReservationTurnData } from "./reservation-turn-data";
+import { TableTypeToPreorderReservationGroup } from "./table-type-to-preorder-reservation-group";
 
 export interface PreorderReservationGroupData extends BaseModelData {
   title?: string;
@@ -19,6 +20,7 @@ export interface PreorderReservationGroupData extends BaseModelData {
 
   turns: ReservationTurnData[];
   dates: PreorderReservationDateData[];
+  table_type_to_preorder_reservation_groups?: TableTypeToPreorderReservationGroup[];
 }
 
 export const PreorderReservationGroupStatuses = ["active", "inactive"] as const;
