@@ -8,6 +8,7 @@ export interface CreateReservationData {
   last_name: string;
   notes: string | null;
   lang: string;
+  table_type_id: number | null;
 }
 
 export function formatReservationData(data: {
@@ -20,6 +21,7 @@ export function formatReservationData(data: {
   firstName: unknown;
   lastName: unknown;
   lang: unknown;
+  tableTypeId: unknown;
 }): CreateReservationData | null {
   const invalid = (fieldName: string, value: unknown) => {
     console.warn(`Invalid field ${fieldName}`, value);
@@ -36,6 +38,7 @@ export function formatReservationData(data: {
 
   if (!(typeof data.children === "number" && data.children >= 0)) return invalid(`children`, data.children);
   if (!(typeof data.adults === "number" && data.adults >= 0)) return invalid(`adults`, data.adults);
+  if (!(data.tableTypeId === null || data.tableTypeId === undefined || (typeof data.tableTypeId === "number" && data.tableTypeId >= 0))) return invalid(`tableTypeId`, data.tableTypeId);
 
   return {
     lang: data.lang,
@@ -46,6 +49,7 @@ export function formatReservationData(data: {
     notes: data.notes,
     adults: data.adults,
     first_name: data.firstName,
-    last_name: data.lastName
+    last_name: data.lastName,
+    table_type_id: data.tableTypeId || null
   }
 }

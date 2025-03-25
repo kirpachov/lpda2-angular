@@ -54,6 +54,27 @@
   </div>
   }
 
+   <tui-expand [expanded]="tableTypes().length > 0">
+     <div class="w-full my-5 border border-primary p-3 rounded-lg">
+       <p class="text-xl text-pretty">
+         <ng-container i18n>Seleziona il tipo di tavolo (opzionale)</ng-container>
+       </p>
+   
+       <div>
+         @for (item of tableTypes(); track item) {
+          <app-public-show-images class="block" [images]="item?.table_type?.images || []"></app-public-show-images>
+
+          <p> <ng-container i18n>Prezzo:</ng-container> {{ item.price | currency }} <ng-container i18n>per persona</ng-container> </p>
+
+          <tui-checkbox-block [contentAlign]="'left'" [ngModel]="tableTypeId() === item.table_type_id"
+            (ngModelChange)="updateTableTypeId($event ? item.table_type_id : null)">
+            <ng-container i18n>Richiedi questo tavolo</ng-container>
+          </tui-checkbox-block>
+         }
+       </div>
+      </div>
+   </tui-expand>
+
   @if(warningsToShow().length > 0){
   <div #warningsDiv class="w-full my-5 border border-primary p-3 rounded-lg">
     @for(w of warningsToShow(); track w){

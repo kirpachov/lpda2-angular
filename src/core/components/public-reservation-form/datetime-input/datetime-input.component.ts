@@ -29,6 +29,8 @@ import { PreorderReservationGroup } from '@core/models/preorder-reservation-grou
 import { TuiCheckboxBlockModule, TuiCheckboxModule } from '@taiga-ui/kit';
 import { PublicReservationsV2Service, vtimes } from '@core/services/http/public-reservationsv2.service';
 import { LinkifyPipe } from "../../../pipes/linkify.pipe";
+import { TableTypeToPreorderReservationGroup } from '@core/lib/interfaces/table-type-to-preorder-reservation-group';
+import { PublicShowImagesComponent } from "../../public-show-images/public-show-images.component";
 
 @Component({
   selector: 'app-datetime-input',
@@ -43,11 +45,12 @@ import { LinkifyPipe } from "../../../pipes/linkify.pipe";
     TuiLoaderModule,
     TuiCheckboxBlockModule,
     ReactiveFormsModule,
-    JsonPipe,
+    // JsonPipe,
     CurrencyPipe,
     TuiCheckboxModule,
     FormsModule,
-    LinkifyPipe
+    LinkifyPipe,
+    PublicShowImagesComponent
 ],
   templateUrl: './datetime-input.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -94,6 +97,17 @@ export class DatetimeInputComponent implements OnInit, ControlValueAccessor {
 
   readonly today: WritableSignal<TuiDay> = signal(TuiDay.currentLocal());
 
+  private readonly paymentGroupDefaultMessage: string = $localize`Per assicurarti uno dei nostri tavoli sarà necessario un pagamento che verrà scalato dal conto finale al ristorante.`;
+  readonly tableTypes: WritableSignal<TableTypeToPreorderReservationGroup[]> = signal<TableTypeToPreorderReservationGroup[]>([]);
+
+  @Output() tableTypeIdChange: EventEmitter<number | null> = new EventEmitter<number | null>();
+  tableTypeId: WritableSignal<number | null> = signal(null);
+  @Input({alias: `tableTypeId`}) set tableTypeIdInput(value: number | null) {
+    this.tableTypeId.set(value);
+  }
+
+  // @Input() tableTypeIdControl: FormControl<number | null> = new FormControl<number | null>(null);
+
   @Input() maxDaysInAdvance: number = 300;
 
   readonly maxDate: WritableSignal<TuiDay | null> = signal(null);
@@ -122,8 +136,6 @@ export class DatetimeInputComponent implements OnInit, ControlValueAccessor {
     return (this.validDates().find((d: TuiDay) => d.daySame(day))) ? false : true;
   };
 
-  private readonly paymentGroupDefaultMessage: string = $localize`Per assicurarti uno dei nostri tavoli sarà necessario un pagamento che verrà scalato dal conto finale al ristorante.`;
-
   ngOnInit(): void {
     this.updateMaxDate();
     this.loadDates();
@@ -141,16 +153,18 @@ export class DatetimeInputComponent implements OnInit, ControlValueAccessor {
         this.warningAccepted.setValue(false);
 
         let warnings: string[] = [];
+        this.tableTypes.set([]);
 
-        const groups = { ...this.groups() };
         if (p) {
-          const paymentGrp: PreorderReservationGroup = groups[p.toString()];
+          const paymentGrp: PreorderReservationGroup | null = this.groups()[p.toString()];
 
           if (paymentGrp) {
             warnings.push(
               paymentGrp?.message || this.paymentGroupDefaultMessage
             );
           }
+
+          this.tableTypes.set(paymentGrp?.table_type_to_preorder_reservation_groups || [])
 
           const msg: string[] = this.messages()[p.toString()];
           if (msg) {
@@ -246,6 +260,11 @@ export class DatetimeInputComponent implements OnInit, ControlValueAccessor {
         this.notifications.error(error instanceof HttpErrorResponse ? parseHttpErrorMessage(error) : SOMETHING_WENT_WRONG_MESSAGE);
       }
     });
+  }
+
+  updateTableTypeId(tid: number | null) {
+    this.tableTypeId.set(tid);
+    this.tableTypeIdChange.emit(tid);
   }
 
   findValidDate(): void {

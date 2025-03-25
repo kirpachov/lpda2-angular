@@ -51,7 +51,7 @@
 
   <div class="p-3 flex items-center justify-center" *tuiItem>
     <div class="max-w-[500px]">
-      <app-datetime-input #datetimeInput class="block mb-3" [maxDaysInAdvance]="maxDaysInAdvance()"
+      <app-datetime-input #datetimeInput [(tableTypeId)]="tableTypeId" class="block mb-3" [maxDaysInAdvance]="maxDaysInAdvance()"
                           [formControl]="datetime"></app-datetime-input>
 
       @if (showErrorsFor(1)) {

@@ -4,6 +4,7 @@ import { Image } from '@core/models/image';
 import { TuiButtonModule, TuiLoaderModule } from '@taiga-ui/core';
 import { TuiCarouselModule, TuiIslandModule, TuiMarkerIconModule } from '@taiga-ui/kit';
 import { ShowImageComponent } from '../show-image/show-image.component';
+import {ImageData, ImageStatus} from "@core/lib/interfaces/image-data";
 
 @Component({
   selector: 'app-public-show-images',
@@ -15,14 +16,14 @@ import { ShowImageComponent } from '../show-image/show-image.component';
     TuiLoaderModule,
     TuiMarkerIconModule,
     ShowImageComponent,
-    MatIcon
+    // MatIcon
   ],
   templateUrl: './public-show-images.component.html',
   styleUrl: './public-show-images.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PublicShowImagesComponent {
-  @Input({required: true}) images?: Image[] | null;
+  @Input({required: true}) images?: (Image | ImageData)[] | null;
 
   /**
    * Duration in milliseconds for each slide for automatic rotation (use 0 to disable automatic rotation)
