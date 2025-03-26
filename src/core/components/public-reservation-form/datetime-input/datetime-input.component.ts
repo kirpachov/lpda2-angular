@@ -106,6 +106,8 @@ export class DatetimeInputComponent implements OnInit, ControlValueAccessor {
     this.tableTypeId.set(value);
   }
 
+  @Input() people: number | null = null;
+
   // @Input() tableTypeIdControl: FormControl<number | null> = new FormControl<number | null>(null);
 
   @Input() maxDaysInAdvance: number = 300;
@@ -216,7 +218,7 @@ export class DatetimeInputComponent implements OnInit, ControlValueAccessor {
       takeUntil(this.destroy$),
       filter((date: TuiDay | null): date is TuiDay => date instanceof TuiDay),
       tap(() => this.loadingTimes.set(true)),
-      switchMap((date: TuiDay) => this.reservationsv2.getValidTimes(date).pipe(
+      switchMap((date: TuiDay) => this.reservationsv2.getValidTimes({ date, people: this.people }).pipe(
         finalize(() => this.loadingTimes.set(false)),
       ))
     ).subscribe({
