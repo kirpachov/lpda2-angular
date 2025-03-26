@@ -55,23 +55,31 @@
   }
 
    <tui-expand [expanded]="tableTypes().length > 0">
-     <div class="w-full my-5 border border-primary p-3 rounded-lg">
+     <div class="w-full my-5">
        <p class="text-xl text-pretty">
          <ng-container i18n>Seleziona il tipo di tavolo (opzionale)</ng-container>
        </p>
    
-       <div>
-         @for (item of tableTypes(); track item) {
-          <app-public-show-images class="block" [images]="item?.table_type?.images || []"></app-public-show-images>
+       @for (item of tableTypes(); track item; let isLast = $last) {
+          <div class="w-full mb-3 border border-primary p-3 rounded-lg" >
+            <p class="font-bold block mb-2 text-lg">
+              {{ item.table_type?.name }}
+            </p>
 
-          <p> <ng-container i18n>Prezzo:</ng-container> {{ item.price | currency }} <ng-container i18n>per persona</ng-container> </p>
+            <p class="block mb-2" >
+              {{ item.table_type?.description }}
+            </p>
 
-          <tui-checkbox-block [contentAlign]="'left'" [ngModel]="tableTypeId() === item.table_type_id"
-            (ngModelChange)="updateTableTypeId($event ? item.table_type_id : null)">
-            <ng-container i18n>Richiedi questo tavolo</ng-container>
-          </tui-checkbox-block>
+            <app-public-show-images class="block" [images]="item?.table_type?.images || []"></app-public-show-images>
+
+            <p> <ng-container i18n>Prezzo:</ng-container> {{ item.price | currency }} <ng-container i18n>per persona</ng-container> </p>
+
+            <tui-checkbox-block [contentAlign]="'left'" [ngModel]="tableTypeId() === item.table_type_id"
+              (ngModelChange)="updateTableTypeId($event ? item.table_type_id : null)">
+              <ng-container i18n>Richiedi questo tavolo</ng-container>
+            </tui-checkbox-block>
+          </div>
          }
-       </div>
       </div>
    </tui-expand>
 
