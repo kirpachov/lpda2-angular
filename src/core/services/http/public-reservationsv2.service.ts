@@ -28,13 +28,15 @@ export class PublicReservationsV2Service extends DomainService {
     super(`reservations`);
   }
 
-  getValidTimes(d: TuiDay): Observable<vtimes> {
-    let date: string = "";
+  getValidTimes(data: { date: TuiDay, people?: number | null }): Observable<vtimes> {
+    const params: Record<string, string | number> = {};
 
-    if (d instanceof TuiDay) {
-      date = `${d.year}-${(d.month + 1) % 13}-${d.day}`;
+    if (data.date instanceof TuiDay) {
+      params["date"] = `${data.date.year}-${(data.date.month + 1) % 13}-${data.date.day}`;
     }
 
-    return this.get<vtimes>(`valid_times`, {params: { date: date }})
+    if (typeof data.people == "number" && data.people) params["people"] = data.people;
+
+    return this.get<vtimes>(`valid_times`, {params: params})
   }
 }

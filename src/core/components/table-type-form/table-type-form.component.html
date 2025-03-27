@@ -17,14 +17,14 @@
 
   <div class="block mb-3">
     <tui-input-number [formControl]="form.controls.default_people_per_turn" [min]="1" [max]="1000">
-      <ng-container i18n>Posti a sedere per turno (default)</ng-container>
+      <ng-container i18n>Ospiti per turno (default)</ng-container>
     </tui-input-number>
 
     <app-errors [errors]="form.controls.default_people_per_turn.errors"></app-errors>
   </div>
 
   <div class="block mb-3">
-    <tui-input-number [formControl]="form.controls.default_price" [min]="0" [max]="1000">
+    <tui-input-number [tuiTextfieldPrefix]="'€'" [formControl]="form.controls.default_price" [min]="0" [max]="1000">
       <ng-container i18n>Prezzo a persona per turno (default)</ng-container>
     </tui-input-number>
 

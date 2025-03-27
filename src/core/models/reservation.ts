@@ -3,6 +3,7 @@ import {BaseModel} from "@core/lib/base-model";
 import {DeliveredEmail} from "@core/models/delivered-email";
 import {DeliveredEmailData} from "@core/lib/interfaces/delivered-email-data";
 import { ReservationPayment } from "./reservation-payment";
+import { TableType } from "./table-type";
 
 export class Reservation extends BaseModel {
   fullname?: string;
@@ -18,6 +19,9 @@ export class Reservation extends BaseModel {
   payment?: ReservationPayment;
 
   delivered_emails?: DeliveredEmail[];
+
+  table_type_id?: number;
+  table_type?: TableType;
 
   constructor(data: ReservationData) {
     super(data);
@@ -35,5 +39,7 @@ export class Reservation extends BaseModel {
     this.payment = data.payment ? new ReservationPayment(data.payment) : undefined;
 
     this.delivered_emails = data.delivered_emails ? data.delivered_emails.map((data: DeliveredEmailData) => new DeliveredEmail(data)) : [];
+    this.table_type_id = data.table_type_id;
+    this.table_type = data.table_type ? new TableType(data.table_type) : undefined;
   }
 }

@@ -120,6 +120,8 @@ export class PublicReservationFormComponent implements OnInit {
   readonly people: FormControl<number | null> = new FormControl(null, [Validators.required, CustomValidators.min(0)]);
   readonly datetime: FormControl<string | null> = new FormControl(null, [Validators.required, CustomValidators.pattern(isoTimezoneRexExp)]);
 
+  tableTypeId: number | null = null;
+
   readonly contacts: FormGroup = new FormGroup({
     firstName: new FormControl<string | null>(null, [Validators.required, Validators.minLength(2)]),
     lastName: new FormControl<string | null>(null, [Validators.required, Validators.minLength(2)]),
@@ -312,6 +314,7 @@ export class PublicReservationFormComponent implements OnInit {
     const children: number | undefined | null = this.notesForm.get(`children`)?.value;
     const people: number | undefined | null = this.people.value;
     const notes: string | null | undefined = this.notesForm.get(`notes`)?.value;
+    const tableTypeId: number | null = this.tableTypeId;
 
     let adults = people || 0;
     if (children) adults -= children;
@@ -323,9 +326,10 @@ export class PublicReservationFormComponent implements OnInit {
       children,
       notes,
       adults,
+      tableTypeId,
+      firstName,
+      lastName,
       lang: this.locale,
-      firstName: firstName,
-      lastName: lastName
     });
   }
 

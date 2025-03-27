@@ -8,6 +8,7 @@ import {Image} from "@core/models/image";
 import {ImagesService} from "@core/services/http/images.service";
 import {BehaviorSubject, Observable, of, startWith, switchMap} from "rxjs";
 import {AsyncPipe} from "@angular/common";
+import { ImageData } from '@core/lib/interfaces/image-data';
 
 @Component({
   selector: 'app-show-image',
@@ -25,13 +26,13 @@ export class ShowImageComponent {
 
   @Input() imgClass: string = `block rounded`;
 
-  readonly image$: BehaviorSubject<Image | Blob |null> = new BehaviorSubject<Image | Blob | null>(null);
-  @Input({ required: true }) set image(value: Image | null | undefined | Blob) {
+  readonly image$: BehaviorSubject<Image | ImageData | Blob |null> = new BehaviorSubject<Image | ImageData | Blob | null>(null);
+  @Input({ required: true }) set image(value: Image | ImageData | null | undefined | Blob) {
     this.image$.next(value ?? null);
   }
 
   readonly imageSrc$: Observable<string | null> = this.image$.pipe(
-    switchMap((image: Image | Blob | null): Observable<string | null> => {
+    switchMap((image: Image | ImageData | Blob | null): Observable<string | null> => {
       if (image instanceof Blob) {
         return of(URL.createObjectURL(image));
       }

@@ -61,18 +61,43 @@
     </tbody>
   </table>
 
+  <h2 class="mb-3 text-2xl" i18n>Tipologie di tavolo abilitate ({{(item()?.table_type_to_preorder_reservation_groups || []).length}})</h2>
+  <div class="block">
+    @for(join of item()?.table_type_to_preorder_reservation_groups; track join.id) {
+      @if(join.table_type_id) {
+        <div class="flex items-center">
+          <app-show-image class="max-w-[300px]"
+            [image]="(tableTypeByIds()[join.table_type_id].images || [])[0]"></app-show-image>
+        
+          <div class="block p-4">
+            <p class="block text-xl font-bold">
+              {{ tableTypeByIds()[join.table_type_id].name }}
+            </p>
+        
+            <div class="block mb-2">
+                <ng-container i18n>Prezzo per persona</ng-container>
+                {{ join.price | currency }}
+            </div>
+        
+            <div class="block mb-2">
+                <ng-container i18n>Ospiti per turno</ng-container>
+
+                {{ join.people_per_turn }}
+            </div>
+          </div>
+        </div>
+      }
+      
+    }
+  </div>
+
   <h2 class="mb-3 text-2xl" i18n>Quando sono richiesti pagamenti?</h2>
 
   <app-select-turns-paymentv2
-  class="block mb-3"
-  [item]="item()"
-  [editable]="false"
-></app-select-turns-paymentv2>
-
-  <!-- <app-preorder-reservation-group-cases
     class="block mb-3"
     [item]="item()"
-  ></app-preorder-reservation-group-cases> -->
+    [editable]="false"
+  ></app-select-turns-paymentv2>
 
   <div>
     <a class="mb-3" routerLink="edit" tuiButton appearance="flat">

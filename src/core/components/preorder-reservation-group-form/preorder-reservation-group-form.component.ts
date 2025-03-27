@@ -19,6 +19,9 @@ import { PreorderReservationGroupCasesComponent, TurnDateOutputFormat } from "..
 import { SelectTurnsPaymentv2Component } from "../select-turns-paymentv2/select-turns-paymentv2.component";
 import { I18nInputComponent } from '../i18n-input/i18n-input.component';
 import { SelectPreorderTypeComponent } from "../select-preorder-type/select-preorder-type.component";
+import { AllergenSelectComponent } from "../dynamic-selects/table-type-select/table-type-select.component";
+import { TableTypeToPreorderReservationGroupInputComponent } from "../table-type-to-preorder-reservation-group-input/table-type-to-preorder-reservation-group-input.component";
+import { TableTypeToPreorderReservationGroup } from '@core/lib/interfaces/table-type-to-preorder-reservation-group';
 
 @Component({
   selector: 'app-preorder-reservation-group-form',
@@ -42,6 +45,9 @@ import { SelectPreorderTypeComponent } from "../select-preorder-type/select-preo
     SelectTurnsPaymentv2Component,
     I18nInputComponent,
     SelectPreorderTypeComponent,
+    AllergenSelectComponent,
+    TableTypeToPreorderReservationGroupInputComponent,
+    JsonPipe,
 ],
   templateUrl: './preorder-reservation-group-form.component.html',
   styleUrl: './preorder-reservation-group-form.component.scss',
@@ -65,13 +71,15 @@ export class PreorderReservationGroupFormComponent {
     active: FormControl<boolean | null>,
     payment_value: FormControl<number | null>,
     message: FormControl<Record<string, string> | null>,
-    preorder_type: FormControl<PreorderReservationGroup["preorder_type"] | null>
+    preorder_type: FormControl<PreorderReservationGroup["preorder_type"] | null>,
+    table_types: FormControl<TableTypeToPreorderReservationGroup[] | null> 
   }>({
     title: new FormControl<string | null>($localize`Pagamento alla prenotazione richiesto ${Date.now()}`, [Validators.required]),
     active: new FormControl<boolean | null>(true, [Validators.required, Validators.pattern(/^(true|false)$/)]),
     payment_value: new FormControl<number | null>(null, [Validators.required]),
     message: new FormControl<Record<string, string> | null>(null, []),
     preorder_type: new FormControl<PreorderReservationGroup["preorder_type"] | null>(null, [Validators.required]),
+    table_types: new FormControl<TableTypeToPreorderReservationGroup[] | null>(null, [])
   });
 
   private submitted: boolean = false;
@@ -96,6 +104,7 @@ export class PreorderReservationGroupFormComponent {
       active: obj.status === "active",
       message: obj.translations?.message || {},
       preorder_type: obj.preorder_type,
+      table_types: obj.table_type_to_preorder_reservation_groups ?? []
     })
   }
 

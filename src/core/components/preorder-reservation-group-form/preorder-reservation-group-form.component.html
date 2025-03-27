@@ -44,20 +44,15 @@
     <app-errors [errors]="e('active')"></app-errors>
   </div>
 
-  <h2 class="mb-3 text-2xl" i18n>Quando sono richiesti pagamenti?</h2>
-
-  <!-- <div class="block mb-3">
-    <app-preorder-reservation-group-cases
-      class="block mb-3"
-      [item]="item"
-      [editable]="true"
-      (outputMamiChanges)="cases.set($event)"
-    ></app-preorder-reservation-group-cases>
+  <h2 class="mb-3 text-2xl" i18n>Tipologie di tavolo abilitate</h2>
+  <div class="block mb-3">
+    <app-table-type-to-preorder-reservation-group-input
+      [formControl]="form.controls.table_types"
+    ></app-table-type-to-preorder-reservation-group-input>
   </div>
 
-  <hr> -->
+  <h2 class="mb-3 text-2xl" i18n>Quando sono richiesti pagamenti?</h2>
 
-    <!-- <h1>NEW:</h1> -->
   <div class="block mb-3">
     <app-select-turns-paymentv2
       class="block mb-3"
