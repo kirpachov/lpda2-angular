@@ -33,6 +33,10 @@
       </p>
     }
 
+    <div>
+      Tipologia ordine: {{ payment()?.preorder_type }}
+    </div>
+
     <div class="flex items-center">
       <div class="me-2">
         <ng-container *ngTemplateOutlet="paymentStatus" ></ng-container>
@@ -75,5 +79,72 @@
 
   <button type="button" (click)="showDialog(modalTemplate)" tuiButton size="m" appearance="outline">
     <ng-container *ngTemplateOutlet="paymentStatus" ></ng-container>
+  </button>
+} @else if(reservation()) {
+
+  <ng-template #createPaymentTemplate let-obs>
+    <h2 class="text-xl bold mb-3" i18n>Crea pagamento</h2>
+
+    <p class="block text-slate-400 mb-2">
+      {{ reservation()?.fullname }} - {{ reservation()?.datetime | date: 'full' }}
+      - <app-reservation-people [adults]="reservation()?.adults" [children]="reservation()?.children" ></app-reservation-people>
+    </p>
+
+    <form (ngSubmit)="createPayment(obs)" [formGroup]="newPaymentForm">
+      <div class="block mb-3">
+        <tui-input-number [tuiAutoFocus]="true" [tuiTextfieldPostfix]="'€'" [formControl]="newPaymentForm.controls.amount">
+          <ng-container i18n>
+            Valore pagamento (assoluto)
+          </ng-container>
+        </tui-input-number>
+
+        <p class="block my-2" i18n>Il valore che inserisci non verrà moltiplicato per il numero di persone.</p>
+
+        <app-errors [errors]="newPaymentForm.controls.amount.errors"></app-errors>
+      </div>
+
+      <div class="block mb-3">
+        
+        <ng-template #deferredValue let-deferred>
+          @if(deferred) {
+            <ng-container i18n>Autorizzazione</ng-container>
+          } @else {
+            <ng-container i18n>Pagamento</ng-container>
+          }
+        </ng-template>
+        
+
+        <tui-select [valueContent]="deferredValue" [formControl]="newPaymentForm.controls.deferred">
+
+          <ng-container i18n>Tipologia di addebito</ng-container>
+
+          <tui-data-list-wrapper
+            *tuiDataList
+            [itemContent]="deferredValue"
+            [items]="[true, false]"
+          ></tui-data-list-wrapper>
+        </tui-select>
+
+        <app-errors [errors]="newPaymentForm.controls.deferred.errors"></app-errors>
+      </div>
+
+      <app-errors [errors]="newPaymentForm.errors"></app-errors>
+
+      <button class="me-2" tuiButton appearance="primary" type="submit">
+        <ng-container i18n>
+          Conferma
+        </ng-container>
+      </button>
+
+      <button tuiButton appearance="outline" type="button">
+        <ng-container i18n>
+          Annulla
+        </ng-container>
+      </button>
+    </form>
+  </ng-template>
+
+  <button type="button" (click)="showDialog(createPaymentTemplate)" tuiButton size="m" appearance="outline">
+     <ng-container i18n>Crea pagamento</ng-container>
   </button>
 }

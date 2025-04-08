@@ -11,6 +11,17 @@ import { HttpResponse } from '@angular/common/http';
 import { exportFilenameFromContentDisposition } from '@core/lib/export-filename-from-content-disposition';
 import { ReservationStatus } from '@core/lib/interfaces/reservation-data';
 
+
+export type CreatePaymentData = {
+  amount: number;
+
+  // May be present, absent, null or boolean.
+  deferred?: boolean | null;
+
+  // When present, must be valid.
+  table_type_id?: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,6 +29,12 @@ export class ReservationsService extends CommonHttpService<Reservation> {
 
   constructor() {
     super(Reservation, `admin/reservations`);
+  }
+
+  createPayment(reservationId: number, data: CreatePaymentData): Observable<Reservation> {
+    return this.post(`${reservationId}/payment`, data).pipe(
+      map((data: unknown) => this.mapItem(data))
+    );
   }
 
   updateStatus(id: number, status: ReservationStatus): Observable<Reservation> {
