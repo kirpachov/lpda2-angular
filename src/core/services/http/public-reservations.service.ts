@@ -27,18 +27,6 @@ export class PublicReservationsService extends DomainService {
     });
   }
 
-  getValidTimes(d: TuiDay): Observable<ReservationTurn[]> {
-    let date: string = "";
-
-    if (d instanceof TuiDay) {
-      date = `${d.year}-${(d.month + 1) % 13}-${d.day}`;
-    }
-
-    return this.get<ReservationTurnData[]>(`valid_times`, {params: { date: date }}).pipe(
-      map((data: ReservationTurnData[]): ReservationTurn[] => data.map((d: ReservationTurnData): ReservationTurn => new ReservationTurn(d))),
-    )
-  }
-
   getValidDates(params?: { from_date: string, to_date: string }): Observable<TuiDay[]> {
     return this.get<string[]>(`valid_dates`, { params: params }).pipe(
       map((data: string[]): TuiDay[] => data.map((d: string): TuiDay => TuiDay.fromLocalNativeDate(new Date(d)))),
