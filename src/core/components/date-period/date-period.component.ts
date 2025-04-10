@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component, Inject, Input, OnDestroy, Optional, Self, forwardRef } from '@angular/core';
+import { Component, Input, OnDestroy, Optional, Self, forwardRef, inject } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, NgControl, ReactiveFormsModule } from '@angular/forms';
 import { DatePeriodSummaryPipe } from '@core/pipes/date-period-summary.pipe';
 import { TuiDay, TuiDayRange, TuiDestroyService } from '@taiga-ui/cdk';
@@ -27,7 +27,7 @@ import { Observable, map, takeUntil } from 'rxjs';
   ]
 })
 export class DatePeriodComponent implements ControlValueAccessor {
-  private readonly destroy$ = Inject(TuiDestroyService);
+  private readonly destroy$ = inject(TuiDestroyService);
 
   readonly control = new FormControl<TuiDayRange | null>(null);
 
@@ -72,13 +72,13 @@ export class DatePeriodComponent implements ControlValueAccessor {
   registerOnChange(fn: any): void {
     this.control.valueChanges.pipe(
       takeUntil(this.destroy$),
-    ).subscribe((...data) => fn(...data));
+    ).subscribe((data) => fn(data));
   }
 
   registerOnTouched(fn: any): void {
     this.control.valueChanges.pipe(
       takeUntil(this.destroy$),
-    ).subscribe((...data) => fn(...data));
+    ).subscribe((data) => fn(data));
   }
 
   setDisabledState(isDisabled: boolean): void {
