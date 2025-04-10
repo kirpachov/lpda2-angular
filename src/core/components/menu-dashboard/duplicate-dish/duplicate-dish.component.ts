@@ -48,7 +48,6 @@ import {JsonPipe} from "@angular/common";
     UrlToPipe,
     MenuCategorySelectComponent,
     TuiAccordionModule,
-    JsonPipe,
     TuiLoaderModule
   ],
   templateUrl: './duplicate-dish.component.html',
