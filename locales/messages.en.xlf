@@ -732,7 +732,7 @@
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/core/components/menu-dashboard/duplicate-dish/duplicate-dish.component.html</context>
-          <context context-type='linenumber'>158</context>
+          <context context-type='linenumber'>156</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/core/components/menu-dashboard/link-category/link-category.component.html</context>
@@ -1402,7 +1402,7 @@
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/core/components/menu-dashboard/duplicate-dish/duplicate-dish.component.html</context>
-          <context context-type='linenumber'>162</context>
+          <context context-type='linenumber'>160</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/core/components/menu-dashboard/link-category/link-category.component.html</context>
@@ -5000,25 +5000,74 @@
           <context context-type='linenumber'>6</context>
         </context-group>
       </trans-unit>
-      <trans-unit id='3878200801763809221' datatype='html'>
+      <trans-unit id='1034799207268777997' datatype='html'>
         <source>
-           La prenotazione deve essere cancellata entro i termini stabiliti,
-          altrimenti si potrà incorrere in penali. Nel caso di ritardo nel
-          cancellare o di mancata presentazione, verrà trattenuta la somma
-          pattuita in fase di prenotazione. La cancellazione della prenotazione
-          nel pieno rispetto dei termini e condizioni non porteranno ad alcuna
-          penale. 
+           Al momento della prenotazione non sarà prelevata alcuna somma, e le
+          informazioni e l’inserimento della carta di credito saranno trattenute
+          solo a garanzia della prenotazione. Ristorante La Porta d’Acqua non
+          avrà accesso ai dati forniti, i quali verranno gestiti esclusivamente
+          dal nostro partner che processa i pagamenti (Nexi Payments S.p.A) e
+          tali informazioni saranno gestite secondo 
         </source>
         <target>
-           The reservation must be cancelled within the established terms,
-          otherwise, penalties may apply. In the event of a delay in cancelling
-          or a no-show, the amount agreed upon at the time of booking will be
-          retained. Cancelling the reservation in full compliance with the terms
-          and conditions will not result in any penalty. 
+           At the time of booking, no amount will be charged, and the
+          information and credit card details will be retained only as a
+          guarantee for the reservation. Restaurant La Porta d’Acqua will not
+          have access to the provided data, which will be managed exclusively by
+          our payment processing partner (Nexi Payments S.p.A), and such
+          information will be handled in accordance with 
         </target>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/app/public/terms-and-conditions/terms-and-conditions.component.html</context>
-          <context context-type='linenumber'>7,13</context>
+          <context context-type='linenumber'>8,13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='3390616722539931305' datatype='html'>
+        <source>i termini e le condizioni d'utilizzo di Nexi Payments S.p.A</source>
+        <target>the terms and conditions of use of Nexi Payments S.p.A.</target>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>src/app/public/terms-and-conditions/terms-and-conditions.component.html</context>
+          <context context-type='linenumber'>16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='3130182980199124592' datatype='html'>
+        <source>POLITICA DI CANCELLAZIONE:</source>
+        <target>CANCELLATION POLICY:</target>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>src/app/public/terms-and-conditions/terms-and-conditions.component.html</context>
+          <context context-type='linenumber'>22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='3894229926488891463' datatype='html'>
+        <source>
+           Sarà possibile cancellare la prenotazione attraverso la mail di
+          conferma entro 12 ore dall’orario della vostra prenotazione senza
+          incorrere in nessuna penalità. LE CANCELLAZIONI DEVONO ESSERE FATTE
+          ESCLUSIVAMENTE SUL SITO WEB. La somma pre autorizzata verrà rilasciata
+          al momento dell’arrivo al ristorante nell’orario confermato Le
+          modifiche o la cancellazione della prenotazione nel pieno rispetto dei
+          termini e condizioni non porteranno ad alcuna penale. Nel caso di
+          ritardo nel cancellare o di mancata presentazione, saranno addebitati
+          25€ a persona prenotata. Verrà emessa fattura per l’importo addebitato
+          in carta di credito. In caso di modifica successiva della prenotazione
+          si fa riferimento alla data dell’ultima modifica. 
+        </source>
+        <target>
+           It will be possible to cancel the reservation through the
+          confirmation email within 12 hours of your reservation time without
+          incurring any penalties. CANCELLATIONS MUST BE MADE EXCLUSIVELY ON THE
+          WEBSITE. The pre-authorized amount will be released upon arrival at
+          the restaurant at the confirmed time. Changes or cancellations of the
+          reservation in full compliance with the terms and conditions will not
+          incur any penalty. In the case of a delay in cancellation or no-show,
+          €25 will be charged per reserved person. An invoice will be issued for
+          the amount charged to the credit card. In the event of a subsequent
+          modification of the reservation, the date of the last modification
+          will apply. 
+        </target>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>src/app/public/terms-and-conditions/terms-and-conditions.component.html</context>
+          <context context-type='linenumber'>23,35</context>
         </context-group>
       </trans-unit>
       <trans-unit id='7286389282625981324' datatype='html'>
@@ -5942,7 +5991,7 @@
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/core/components/menu-dashboard/duplicate-dish/duplicate-dish.component.ts</context>
-          <context context-type='linenumber'>140</context>
+          <context context-type='linenumber'>139</context>
         </context-group>
       </trans-unit>
       <trans-unit id='9159624537988357290' datatype='html'>
@@ -7461,7 +7510,7 @@
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/core/components/menu-dashboard/duplicate-dish/duplicate-dish.component.ts</context>
-          <context context-type='linenumber'>125</context>
+          <context context-type='linenumber'>124</context>
         </context-group>
       </trans-unit>
       <trans-unit id='5416399164908272142' datatype='html'>
@@ -7476,7 +7525,7 @@
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/core/components/menu-dashboard/duplicate-dish/duplicate-dish.component.ts</context>
-          <context context-type='linenumber'>142</context>
+          <context context-type='linenumber'>141</context>
         </context-group>
       </trans-unit>
       <trans-unit id='8833028141712899434' datatype='html'>
