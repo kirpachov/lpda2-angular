@@ -1,0 +1,11 @@
+@switch(value){
+  @case("html_nexi_authorization") {
+    <ng-container i18n>Autorizzazione</ng-container>
+  }
+  @case("html_nexi_payment") {
+    <ng-container i18n>Pagamento</ng-container>
+  }
+  @default {
+    {{ value }}
+  }
+}

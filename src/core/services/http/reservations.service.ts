@@ -63,6 +63,12 @@ export class ReservationsService extends CommonHttpService<Reservation> {
     )
   }
 
+  confirmPayment(id: number): Observable<Reservation> {
+    return this.post(`${id}/record_deferred_payment`, {}).pipe(
+      map((data: unknown) => this.mapItem(data))
+    );
+  }
+
   refreshPaymentStatus(id: number): Observable<Reservation> {
     return this.post(`${id}/refresh_payment_status`, {}).pipe(
       map((data: unknown) => this.mapItem(data))

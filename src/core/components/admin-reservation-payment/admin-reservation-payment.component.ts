@@ -23,6 +23,7 @@ import { ReservationPeopleComponent } from "@core/components/reservation-people/
 import {TuiDataListModule} from '@taiga-ui/core';
 import {TuiDataListWrapperModule} from '@taiga-ui/kit';
 import { PreorderReservationGroupPreorderTypeComponent } from "../preorder-reservation-group-preorder-type/preorder-reservation-group-preorder-type.component";
+import { ReservationPaymentPreorderTypeComponent } from "../reservation-payment-preorder-type/reservation-payment-preorder-type.component";
 
 @Component({
   selector: 'app-admin-reservation-payment',
@@ -46,7 +47,8 @@ import { PreorderReservationGroupPreorderTypeComponent } from "../preorder-reser
     TuiSelectModule,
     TuiDataListModule,
     TuiDataListWrapperModule,
-    PreorderReservationGroupPreorderTypeComponent
+    PreorderReservationGroupPreorderTypeComponent,
+    ReservationPaymentPreorderTypeComponent
 ],
   templateUrl: './admin-reservation-payment.component.html',
   styleUrl: './admin-reservation-payment.component.scss',
@@ -146,6 +148,31 @@ export class AdminReservationPaymentComponent {
 
         this.loading.set(true);
         this.reservations.refoundPayment(id).pipe(
+          takeUntil(this.destroy),
+          finalize(() => this.loading.set(false)),
+        ).subscribe((reservation: Reservation) => {
+          this.reservationValue = reservation;
+        }, (e: HttpErrorResponse) => {
+          this.notifications.error(parseHttpErrorMessage(e));
+        });
+
+      }
+    })
+  }
+
+  confirmPayment() {
+    const id = this.reservation()?.id;
+    if (!(id)) {
+      this.notifications.error();
+      return;
+    }
+
+    this.notifications.confirm($localize`La transazione verrà confermata. Sei sicuro?`).subscribe({
+      next: (confirmed: boolean) => {
+        if (!confirmed) return;
+
+        this.loading.set(true);
+        this.reservations.confirmPayment(id).pipe(
           takeUntil(this.destroy),
           finalize(() => this.loading.set(false)),
         ).subscribe((reservation: Reservation) => {

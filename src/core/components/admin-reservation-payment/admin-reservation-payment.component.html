@@ -5,6 +5,9 @@
         @case("paid"){
           <span class="text-center text-success-dark text-nowrap" i18n>Pagata</span>
         }
+        @case("authorized") {
+          <span class="text-center text-success text-nowrap" i18n>Autorizzata</span>
+        }
         @case("todo") {
           <span class="text-center text-danger text-nowrap" i18n>Non pagata</span>
         }
@@ -34,7 +37,8 @@
     }
 
     <div>
-      Tipologia ordine: {{ payment()?.preorder_type }}
+      <ng-container i18n>Tipologia ordine</ng-container>
+      : <app-reservation-payment-preorder-type [value]="payment()?.preorder_type" ></app-reservation-payment-preorder-type>
     </div>
 
     <div class="flex items-center">
@@ -54,6 +58,17 @@
     @switch(status()){
       @case("paid"){
         <p class="my-3" i18n>Il pagamento è stato completato con successo.</p>
+
+        <button [showLoader]="loading()" (click)="cancelPayment()" tuiButton type="button" size="m" appearance="secondary-destructive" >
+          <ng-container i18n>Storna pagamento</ng-container>
+        </button>
+      }
+      @case("authorized") {
+        <p class="my-3" i18n>Il pagamento è stato autorizzato.</p>
+
+        <button class="me-2" [showLoader]="loading()" (click)="confirmPayment()" tuiButton type="button" size="m" appearance="outline" >
+          <ng-container i18n>CONFERMA pagamento</ng-container>
+        </button>
 
         <button [showLoader]="loading()" (click)="cancelPayment()" tuiButton type="button" size="m" appearance="secondary-destructive" >
           <ng-container i18n>Storna pagamento</ng-container>

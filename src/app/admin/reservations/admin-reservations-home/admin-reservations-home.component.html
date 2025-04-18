@@ -86,6 +86,31 @@
               </span>
             </span>
           }
+
+          @if(item.payment){
+            <ng-template #paymentStatusHint>
+              @switch(item.payment.status){
+                @case("todo") {
+                  <ng-container i18n>Il pagamento è in attesa di essere completato</ng-container>
+                }
+                @case("authorized") {
+                  <ng-container i18n>Il pagamento è stato autorizzato</ng-container>
+                }
+                @case("paid") {
+                  <ng-container i18n>Il pagamento è stato completato con successo</ng-container>
+                }
+                @case("refunded") {
+                  <ng-container i18n>Il pagamento è stato rimborsato</ng-container>
+                }
+              }
+            </ng-template>
+
+            <mat-icon [tuiHint]="paymentStatusHint" [ngClass]="{
+              'text-success': item.payment.status == 'authorized' || item.payment.status == 'paid',
+              'text-warn': item.payment.status == 'refunded',
+              'text-danger': item.payment.status == 'todo'
+            }" >attach_money</mat-icon>
+          }
         </span>
 
         @if(item.notes && item.notes.length > 0){
