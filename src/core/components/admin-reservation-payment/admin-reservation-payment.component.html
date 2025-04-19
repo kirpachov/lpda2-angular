@@ -1,23 +1,25 @@
 @if(payment()) {
 
   <ng-template #paymentStatus>
+    <span class="text-center {{ status() | paymentStatusColor }} text-nowrap">
       @switch(status()){
         @case("paid"){
-          <span class="text-center text-success-dark text-nowrap" i18n>Pagata</span>
+          <ng-container i18n>Pagata</ng-container>
         }
         @case("authorized") {
-          <span class="text-center text-success text-nowrap" i18n>Autorizzata</span>
+          <ng-container i18n>Autorizzata</ng-container>
         }
         @case("todo") {
-          <span class="text-center text-danger text-nowrap" i18n>Non pagata</span>
+          <ng-container i18n>Non pagata</ng-container>
         }
         @case("refunded") {
-          <span class="text-center text-warning text-nowrap" i18n>Rimborsata</span>
+          <ng-container i18n>Rimborsata</ng-container>
         }
         @default{
-          error
+          {{ status() }}
         }
       }
+    </span>
   </ng-template>
 
   <ng-template #modalTemplate>

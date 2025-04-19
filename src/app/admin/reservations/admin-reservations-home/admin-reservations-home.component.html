@@ -105,11 +105,7 @@
               }
             </ng-template>
 
-            <mat-icon [tuiHint]="paymentStatusHint" [ngClass]="{
-              'text-success': item.payment.status == 'authorized' || item.payment.status == 'paid',
-              'text-warn': item.payment.status == 'refunded',
-              'text-danger': item.payment.status == 'todo'
-            }" >attach_money</mat-icon>
+            <mat-icon [tuiHint]="paymentStatusHint" [ngClass]="item.payment.status | paymentStatusColor">attach_money</mat-icon>
           }
         </span>
 
