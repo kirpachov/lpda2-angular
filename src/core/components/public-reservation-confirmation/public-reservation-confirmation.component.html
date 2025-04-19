@@ -2,20 +2,43 @@
   @if(reservation.payment) {
     @switch (reservation.payment.status) {
       @case("todo") {
-        @if(isFreshReservation()){
-          <p class="text-xl text-center mb-3" i18n>Il pagamento di conferma della prenotazione <b class="text-danger">non risulta essere andato a buon fine</b>, ma è possibile che sia necessario aspettare qualche minuto. Qualora fosse il caso, tra poco ti forniremo il link per riprovare il pagamento. Riprova più tardi o contattaci.</p>
+        <p class="text-xl text-center mb-3" i18n>La prenotazione <b class="text-danger">non risulta essere andato a buon fine </b>.</p>
+
+        @if(reservation.payment.preorder_type == "html_nexi_payment") {
+          <p class="text-xl text-center mb-3" i18n>
+            È necessario completare il pagamento per confermare la prenotazione.
+          </p>
+        } @else if(reservation.payment.preorder_type == "html_nexi_authorization") {
+          <p class="text-xl text-center mb-3" i18n>
+            Per effettuare la prenotazione è richiesta carta di credito a garanzia.
+          </p>
+
+          <p class="text-xl text-center mb-3" i18n>
+            Non sarà prelevata alcuna somma, e le informazioni e l’inserimento della carta di credito saranno trattenute solo a garanzia della prenotazione. Ristorante  La Porta d’Acqua non avrà accesso ai dati forniti, i quali verranno gestiti esclusivamente dal nostro partner che processa i pagamenti (Nexi Payments S.p.A) e tali informazioni saranno gestite secondo la loro Privacy Policy.
+          </p>
+        }
+
+        <p class="text-xl mb-3 flex items-center justify-center" >
+          <ng-container i18n>Per ulteriori informazioni, anche sulla politica di cancellazione, visita i </ng-container>
+          <app-terms-and-conditions-link class="ms-1"></app-terms-and-conditions-link>
+        </p>
+
+        <div class="flex items-center justify-center mb-3">
+          <a href="{{ reservation.payment.hpp_url }}" class="btn-primary me-2" size="m" tuiButton appearance="custom">
+            <ng-container i18n>Conferma la prenotazione</ng-container>
+
+            @if(reservation.payment.value) {
+              {{ reservation.payment.value | currency }}
+            }
+          </a>
+        </div>
+      }
+
+      @case("authorized") {
+        @if(reservation.payment.value) {
+          <p class="text-xl text-center mb-3" i18n>È stato completata l'autorizzazione di {{ reservation.payment.value | currency }}.</p>
         } @else {
-          <p class="text-xl text-center mb-3" i18n>Il pagamento di conferma della prenotazione <b class="text-danger">non risulta essere andato a buon fine</b>.</p>
-
-          <div class="flex items-center justify-center mb-3">
-            <a href="{{ reservation.payment.hpp_url }}" class="btn-primary me-2" size="m" tuiButton appearance="custom">
-              <ng-container i18n>Esegui pagamento</ng-container>
-
-              @if(reservation.payment.value) {
-                {{ reservation.payment.value | currency }}
-              }
-            </a>
-          </div>
+          <p class="text-xl text-center mb-3" i18n>Il pagamento di conferma della prenotazione è stato autorizzato e la prenotazione è confermata.</p>
         }
       }
 
