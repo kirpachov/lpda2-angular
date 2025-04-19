@@ -968,6 +968,46 @@
           <context context-type='linenumber'>71</context>
         </context-group>
       </trans-unit>
+      <trans-unit id='4672066605255219681' datatype='html'>
+        <source>Il pagamento è in attesa di essere completato</source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/app/admin/reservations/admin-reservations-home/admin-reservations-home.component.html 
+          </context>
+          <context context-type='linenumber'>94</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='5068827953535014050' datatype='html'>
+        <source>Il pagamento è stato autorizzato</source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/app/admin/reservations/admin-reservations-home/admin-reservations-home.component.html 
+          </context>
+          <context context-type='linenumber'>97</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='2644120655683811300' datatype='html'>
+        <source>Il pagamento è stato completato con successo</source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/app/admin/reservations/admin-reservations-home/admin-reservations-home.component.html 
+          </context>
+          <context context-type='linenumber'>100</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='6752078980955417604' datatype='html'>
+        <source>Il pagamento è stato rimborsato</source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/app/admin/reservations/admin-reservations-home/admin-reservations-home.component.html 
+          </context>
+          <context context-type='linenumber'>103</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id='953494472416517212' datatype='html'>
         <source>Modifica prenotazione</source>
         <context-group purpose='location'>
@@ -975,7 +1015,7 @@
             
             src/app/admin/reservations/admin-reservations-home/admin-reservations-home.component.html 
           </context>
-          <context context-type='linenumber'>106</context>
+          <context context-type='linenumber'>131</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/app/admin/reservations/edit-reservation/edit-reservation.component.html</context>
@@ -989,7 +1029,7 @@
             
             src/app/admin/reservations/admin-reservations-home/admin-reservations-home.component.html 
           </context>
-          <context context-type='linenumber'>112</context>
+          <context context-type='linenumber'>137</context>
         </context-group>
       </trans-unit>
       <trans-unit id='6652677406345413363' datatype='html'>
@@ -999,7 +1039,7 @@
             
             src/app/admin/reservations/admin-reservations-home/admin-reservations-home.component.html 
           </context>
-          <context context-type='linenumber'>127</context>
+          <context context-type='linenumber'>152</context>
         </context-group>
       </trans-unit>
       <trans-unit id='7156597206608384051' datatype='html'>
@@ -1009,7 +1049,7 @@
             
             src/app/admin/reservations/admin-reservations-home/admin-reservations-home.component.html 
           </context>
-          <context context-type='linenumber'>129</context>
+          <context context-type='linenumber'>154</context>
         </context-group>
       </trans-unit>
       <trans-unit id='8138307764428444886' datatype='html'>
@@ -1019,7 +1059,7 @@
             
             src/app/admin/reservations/admin-reservations-home/admin-reservations-home.component.html 
           </context>
-          <context context-type='linenumber'>148</context>
+          <context context-type='linenumber'>173</context>
         </context-group>
       </trans-unit>
       <trans-unit id='8272843536846027906' datatype='html'>
@@ -3437,7 +3477,7 @@
             
             src/core/components/public-reservation-confirmation/public-reservation-confirmation.component.html 
           </context>
-          <context context-type='linenumber'>71</context>
+          <context context-type='linenumber'>94</context>
         </context-group>
       </trans-unit>
       <trans-unit id='1763642922374597515' datatype='html'>
@@ -3648,7 +3688,7 @@
             
             src/core/components/public-reservation-confirmation/public-reservation-confirmation.component.html 
           </context>
-          <context context-type='linenumber'>74</context>
+          <context context-type='linenumber'>97</context>
         </context-group>
       </trans-unit>
       <trans-unit id='6606022092476675135' datatype='html'>
@@ -3678,7 +3718,7 @@
             
             src/core/components/public-reservation-confirmation/public-reservation-confirmation.component.html 
           </context>
-          <context context-type='linenumber'>67</context>
+          <context context-type='linenumber'>90</context>
         </context-group>
       </trans-unit>
       <trans-unit id='3332318425722395223' datatype='html'>
@@ -4326,6 +4366,16 @@
           <context context-type='linenumber'>6</context>
         </context-group>
       </trans-unit>
+      <trans-unit id='1764554907563239072' datatype='html'>
+        <source>Autorizzata</source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/admin-reservation-payment/admin-reservation-payment.component.html 
+          </context>
+          <context context-type='linenumber'>9</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id='4037129097368663638' datatype='html'>
         <source>Non pagata</source>
         <context-group purpose='location'>
@@ -4333,7 +4383,7 @@
             
             src/core/components/admin-reservation-payment/admin-reservation-payment.component.html 
           </context>
-          <context context-type='linenumber'>9</context>
+          <context context-type='linenumber'>12</context>
         </context-group>
       </trans-unit>
       <trans-unit id='595928741001465405' datatype='html'>
@@ -4343,7 +4393,7 @@
             
             src/core/components/admin-reservation-payment/admin-reservation-payment.component.html 
           </context>
-          <context context-type='linenumber'>12</context>
+          <context context-type='linenumber'>15</context>
         </context-group>
       </trans-unit>
       <trans-unit id='4954680478698545335' datatype='html'>
@@ -4353,7 +4403,7 @@
             
             src/core/components/admin-reservation-payment/admin-reservation-payment.component.html 
           </context>
-          <context context-type='linenumber'>21</context>
+          <context context-type='linenumber'>24</context>
         </context-group>
       </trans-unit>
       <trans-unit id='4520105535179187660' datatype='html'>
@@ -4363,7 +4413,17 @@
             
             src/core/components/admin-reservation-payment/admin-reservation-payment.component.html 
           </context>
-          <context context-type='linenumber'>31</context>
+          <context context-type='linenumber'>34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='9050528647440145250' datatype='html'>
+        <source>Tipologia ordine</source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/admin-reservation-payment/admin-reservation-payment.component.html 
+          </context>
+          <context context-type='linenumber'>40</context>
         </context-group>
       </trans-unit>
       <trans-unit id='1660941505323661734' datatype='html'>
@@ -4373,7 +4433,7 @@
             
             src/core/components/admin-reservation-payment/admin-reservation-payment.component.html 
           </context>
-          <context context-type='linenumber'>46</context>
+          <context context-type='linenumber'>50</context>
         </context-group>
       </trans-unit>
       <trans-unit id='974343309225149229' datatype='html'>
@@ -4383,7 +4443,7 @@
             
             src/core/components/admin-reservation-payment/admin-reservation-payment.component.html 
           </context>
-          <context context-type='linenumber'>56</context>
+          <context context-type='linenumber'>60</context>
         </context-group>
       </trans-unit>
       <trans-unit id='5038493072667542559' datatype='html'>
@@ -4393,7 +4453,34 @@
             
             src/core/components/admin-reservation-payment/admin-reservation-payment.component.html 
           </context>
-          <context context-type='linenumber'>59</context>
+          <context context-type='linenumber'>63</context>
+        </context-group>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/admin-reservation-payment/admin-reservation-payment.component.html 
+          </context>
+          <context context-type='linenumber'>74</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='9014039924336550017' datatype='html'>
+        <source>Il pagamento è stato autorizzato.</source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/admin-reservation-payment/admin-reservation-payment.component.html 
+          </context>
+          <context context-type='linenumber'>67</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='6475874890975541434' datatype='html'>
+        <source>CONFERMA pagamento</source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/admin-reservation-payment/admin-reservation-payment.component.html 
+          </context>
+          <context context-type='linenumber'>70</context>
         </context-group>
       </trans-unit>
       <trans-unit id='1386125935524612074' datatype='html'>
@@ -4403,7 +4490,7 @@
             
             src/core/components/admin-reservation-payment/admin-reservation-payment.component.html 
           </context>
-          <context context-type='linenumber'>63</context>
+          <context context-type='linenumber'>78</context>
         </context-group>
       </trans-unit>
       <trans-unit id='3412181149239801929' datatype='html'>
@@ -4413,7 +4500,7 @@
             
             src/core/components/admin-reservation-payment/admin-reservation-payment.component.html 
           </context>
-          <context context-type='linenumber'>72</context>
+          <context context-type='linenumber'>87</context>
         </context-group>
       </trans-unit>
       <trans-unit id='4979112640088423114' datatype='html'>
@@ -4423,14 +4510,14 @@
             
             src/core/components/admin-reservation-payment/admin-reservation-payment.component.html 
           </context>
-          <context context-type='linenumber'>86</context>
+          <context context-type='linenumber'>101</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>
             
             src/core/components/admin-reservation-payment/admin-reservation-payment.component.html 
           </context>
-          <context context-type='linenumber'>148</context>
+          <context context-type='linenumber'>163</context>
         </context-group>
       </trans-unit>
       <trans-unit id='7119009506420922024' datatype='html'>
@@ -4440,7 +4527,7 @@
             
             src/core/components/admin-reservation-payment/admin-reservation-payment.component.html 
           </context>
-          <context context-type='linenumber'>96,98</context>
+          <context context-type='linenumber'>111,113</context>
         </context-group>
       </trans-unit>
       <trans-unit id='164737029632404945' datatype='html'>
@@ -4450,7 +4537,7 @@
             
             src/core/components/admin-reservation-payment/admin-reservation-payment.component.html 
           </context>
-          <context context-type='linenumber'>101</context>
+          <context context-type='linenumber'>116</context>
         </context-group>
       </trans-unit>
       <trans-unit id='950332067828349098' datatype='html'>
@@ -4460,7 +4547,14 @@
             
             src/core/components/admin-reservation-payment/admin-reservation-payment.component.html 
           </context>
-          <context context-type='linenumber'>110</context>
+          <context context-type='linenumber'>125</context>
+        </context-group>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/reservation-payment-preorder-type/reservation-payment-preorder-type.component.html 
+          </context>
+          <context context-type='linenumber'>3</context>
         </context-group>
       </trans-unit>
       <trans-unit id='2519221048669104768' datatype='html'>
@@ -4470,7 +4564,14 @@
             
             src/core/components/admin-reservation-payment/admin-reservation-payment.component.html 
           </context>
-          <context context-type='linenumber'>112</context>
+          <context context-type='linenumber'>127</context>
+        </context-group>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/reservation-payment-preorder-type/reservation-payment-preorder-type.component.html 
+          </context>
+          <context context-type='linenumber'>6</context>
         </context-group>
       </trans-unit>
       <trans-unit id='1879379955545598460' datatype='html'>
@@ -4480,7 +4581,7 @@
             
             src/core/components/admin-reservation-payment/admin-reservation-payment.component.html 
           </context>
-          <context context-type='linenumber'>119</context>
+          <context context-type='linenumber'>134</context>
         </context-group>
       </trans-unit>
       <trans-unit id='1518707382761405061' datatype='html'>
@@ -4490,7 +4591,7 @@
             
             src/core/components/admin-reservation-payment/admin-reservation-payment.component.html 
           </context>
-          <context context-type='linenumber'>134,136</context>
+          <context context-type='linenumber'>149,151</context>
         </context-group>
       </trans-unit>
       <trans-unit id='5659516738684077952' datatype='html'>
@@ -4500,7 +4601,7 @@
             
             src/core/components/admin-reservation-payment/admin-reservation-payment.component.html 
           </context>
-          <context context-type='linenumber'>140,142</context>
+          <context context-type='linenumber'>155,157</context>
         </context-group>
       </trans-unit>
       <trans-unit id='3934468025214350650' datatype='html'>
@@ -4510,7 +4611,7 @@
             
             src/core/components/admin-reservation-payment/admin-reservation-payment.component.ts 
           </context>
-          <context context-type='linenumber'>95</context>
+          <context context-type='linenumber'>97</context>
         </context-group>
       </trans-unit>
       <trans-unit id='389171984491796079' datatype='html'>
@@ -4520,7 +4621,7 @@
             
             src/core/components/admin-reservation-payment/admin-reservation-payment.component.ts 
           </context>
-          <context context-type='linenumber'>108</context>
+          <context context-type='linenumber'>110</context>
         </context-group>
       </trans-unit>
       <trans-unit id='5442610267591695204' datatype='html'>
@@ -4530,7 +4631,17 @@
             
             src/core/components/admin-reservation-payment/admin-reservation-payment.component.ts 
           </context>
-          <context context-type='linenumber'>143</context>
+          <context context-type='linenumber'>145</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='2664816162055160197' datatype='html'>
+        <source>La transazione verrà confermata. Sei sicuro?</source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/admin-reservation-payment/admin-reservation-payment.component.ts 
+          </context>
+          <context context-type='linenumber'>170</context>
         </context-group>
       </trans-unit>
       <trans-unit id='2102825898069375693' datatype='html'>
@@ -7703,27 +7814,9 @@
           <context context-type='linenumber'>94</context>
         </context-group>
       </trans-unit>
-      <trans-unit id='7852544265325878305' datatype='html'>
+      <trans-unit id='313943784688138616' datatype='html'>
         <source>
-           Il pagamento di conferma della prenotazione 
-          <x id='START_BOLD_TEXT' ctype='x-b' equiv-text='&lt;b class=&quot;text-danger&quot;&gt;'/>
-           non risulta essere andato a buon fine 
-          <x id='CLOSE_BOLD_TEXT' ctype='x-b' equiv-text='&lt;/b&gt;'/>
-           , ma è possibile che sia necessario aspettare qualche minuto. Qualora
-          fosse il caso, tra poco ti forniremo il link per riprovare il
-          pagamento. Riprova più tardi o contattaci. 
-        </source>
-        <context-group purpose='location'>
-          <context context-type='sourcefile'>
-            
-            src/core/components/public-reservation-confirmation/public-reservation-confirmation.component.html 
-          </context>
-          <context context-type='linenumber'>6</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id='7151745239124932725' datatype='html'>
-        <source>
-           Il pagamento di conferma della prenotazione 
+           La prenotazione 
           <x id='START_BOLD_TEXT' ctype='x-b' equiv-text='&lt;b class=&quot;text-danger&quot;&gt;'/>
            non risulta essere andato a buon fine 
           <x id='CLOSE_BOLD_TEXT' ctype='x-b' equiv-text='&lt;/b&gt;'/>
@@ -7734,17 +7827,91 @@
             
             src/core/components/public-reservation-confirmation/public-reservation-confirmation.component.html 
           </context>
-          <context context-type='linenumber'>8</context>
+          <context context-type='linenumber'>5</context>
         </context-group>
       </trans-unit>
-      <trans-unit id='8211048762234866952' datatype='html'>
-        <source>Esegui pagamento</source>
+      <trans-unit id='8783058196389832438' datatype='html'>
+        <source> È necessario completare il pagamento per confermare la prenotazione. </source>
         <context-group purpose='location'>
           <context context-type='sourcefile'>
             
             src/core/components/public-reservation-confirmation/public-reservation-confirmation.component.html 
           </context>
-          <context context-type='linenumber'>12</context>
+          <context context-type='linenumber'>8,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='3427387999282700758' datatype='html'>
+        <source> Per effettuare la prenotazione è richiesta carta di credito a garanzia. </source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/public-reservation-confirmation/public-reservation-confirmation.component.html 
+          </context>
+          <context context-type='linenumber'>12,14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='4149212967722550032' datatype='html'>
+        <source>
+           Non sarà prelevata alcuna somma, e le informazioni e l’inserimento
+          della carta di credito saranno trattenute solo a garanzia della
+          prenotazione. Ristorante La Porta d’Acqua non avrà accesso ai dati
+          forniti, i quali verranno gestiti esclusivamente dal nostro partner
+          che processa i pagamenti (Nexi Payments S.p.A) e tali informazioni
+          saranno gestite secondo la loro Privacy Policy. 
+        </source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/public-reservation-confirmation/public-reservation-confirmation.component.html 
+          </context>
+          <context context-type='linenumber'>16,18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='5250444787693009404' datatype='html'>
+        <source>Per ulteriori informazioni, anche sulla politica di cancellazione, visita i </source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/public-reservation-confirmation/public-reservation-confirmation.component.html 
+          </context>
+          <context context-type='linenumber'>22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='6125151904801669052' datatype='html'>
+        <source>Conferma la prenotazione</source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/public-reservation-confirmation/public-reservation-confirmation.component.html 
+          </context>
+          <context context-type='linenumber'>28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='4162873463158082672' datatype='html'>
+        <source>
+           È stato completata l&apos;autorizzazione di 
+          <x id='INTERPOLATION' equiv-text='{{ reservation.payment.value | currency }}'/>
+           . 
+        </source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/public-reservation-confirmation/public-reservation-confirmation.component.html 
+          </context>
+          <context context-type='linenumber'>39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='1809680933179531233' datatype='html'>
+        <source>
+           Il pagamento di conferma della prenotazione è stato autorizzato e la
+          prenotazione è confermata. 
+        </source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/public-reservation-confirmation/public-reservation-confirmation.component.html 
+          </context>
+          <context context-type='linenumber'>41</context>
         </context-group>
       </trans-unit>
       <trans-unit id='7507816368737373054' datatype='html'>
@@ -7758,7 +7925,7 @@
             
             src/core/components/public-reservation-confirmation/public-reservation-confirmation.component.html 
           </context>
-          <context context-type='linenumber'>24</context>
+          <context context-type='linenumber'>47</context>
         </context-group>
       </trans-unit>
       <trans-unit id='3312404120728222492' datatype='html'>
@@ -7771,7 +7938,7 @@
             
             src/core/components/public-reservation-confirmation/public-reservation-confirmation.component.html 
           </context>
-          <context context-type='linenumber'>26</context>
+          <context context-type='linenumber'>49</context>
         </context-group>
       </trans-unit>
       <trans-unit id='4942762863275698959' datatype='html'>
@@ -7789,7 +7956,7 @@
             
             src/core/components/public-reservation-confirmation/public-reservation-confirmation.component.html 
           </context>
-          <context context-type='linenumber'>32</context>
+          <context context-type='linenumber'>55</context>
         </context-group>
       </trans-unit>
       <trans-unit id='5564018058127201043' datatype='html'>
@@ -7805,7 +7972,7 @@
             
             src/core/components/public-reservation-confirmation/public-reservation-confirmation.component.html 
           </context>
-          <context context-type='linenumber'>34</context>
+          <context context-type='linenumber'>57</context>
         </context-group>
       </trans-unit>
       <trans-unit id='3231006223234931818' datatype='html'>
@@ -7815,7 +7982,7 @@
             
             src/core/components/public-reservation-confirmation/public-reservation-confirmation.component.html 
           </context>
-          <context context-type='linenumber'>40</context>
+          <context context-type='linenumber'>63</context>
         </context-group>
       </trans-unit>
       <trans-unit id='4656224817834381285' datatype='html'>
@@ -7825,7 +7992,7 @@
             
             src/core/components/public-reservation-confirmation/public-reservation-confirmation.component.html 
           </context>
-          <context context-type='linenumber'>45</context>
+          <context context-type='linenumber'>68</context>
         </context-group>
       </trans-unit>
       <trans-unit id='5686653886333750844' datatype='html'>
@@ -7835,7 +8002,7 @@
             
             src/core/components/public-reservation-confirmation/public-reservation-confirmation.component.html 
           </context>
-          <context context-type='linenumber'>47</context>
+          <context context-type='linenumber'>70</context>
         </context-group>
       </trans-unit>
       <trans-unit id='3363345048546884042' datatype='html'>
@@ -7845,7 +8012,7 @@
             
             src/core/components/public-reservation-confirmation/public-reservation-confirmation.component.html 
           </context>
-          <context context-type='linenumber'>53</context>
+          <context context-type='linenumber'>76</context>
         </context-group>
       </trans-unit>
       <trans-unit id='5531751494832260160' datatype='html'>
@@ -7855,7 +8022,7 @@
             
             src/core/components/public-reservation-confirmation/public-reservation-confirmation.component.html 
           </context>
-          <context context-type='linenumber'>60</context>
+          <context context-type='linenumber'>83</context>
         </context-group>
       </trans-unit>
       <trans-unit id='1735177371852870303' datatype='html'>
@@ -7865,7 +8032,7 @@
             
             src/core/components/public-reservation-confirmation/public-reservation-confirmation.component.ts 
           </context>
-          <context context-type='linenumber'>65</context>
+          <context context-type='linenumber'>67</context>
         </context-group>
       </trans-unit>
       <trans-unit id='4112716103375632835' datatype='html'>
