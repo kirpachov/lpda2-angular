@@ -62,6 +62,12 @@
   </table>
 
   <h2 class="mb-3 text-2xl" i18n>Tipologie di tavolo abilitate ({{(item()?.table_type_to_preorder_reservation_groups || []).length}})</h2>
+
+  <p class="text-xl text-slate-400" i18n>
+    Quando si seleziona una tipologia di tavolo, si tratta sempre di un pagamento e mai di un autorizzazione.
+    Indipendentemente dalla configurazione qui presente.
+  </p>
+
   <div class="block">
     @for(join of item()?.table_type_to_preorder_reservation_groups; track join.id) {
       @if(join.table_type_id) {
