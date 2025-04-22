@@ -1,5 +1,6 @@
 @if(reservation()) {
   <app-public-reservation-confirmation
+  [shareDetailsLinkShown]="false"
   [reservation]="reservation()"
 ></app-public-reservation-confirmation>
 } @else if (loading()) {

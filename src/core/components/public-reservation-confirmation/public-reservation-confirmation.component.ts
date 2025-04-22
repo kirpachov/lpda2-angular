@@ -44,6 +44,12 @@ export class PublicReservationConfirmationComponent {
 
   @Input({required: true}) reservation?: Reservation | null;
 
+  /**
+   * When true, on the bottom of the page a link for the details page will be shown.
+   * Should always be true except when the location of the component is already the details page.
+   */
+  @Input({required: true}) shareDetailsLinkShown: boolean = true;
+
   // @tuiPure
   isFreshReservation(): boolean {
     if (!(this.reservation && this.reservation.created_at)) {

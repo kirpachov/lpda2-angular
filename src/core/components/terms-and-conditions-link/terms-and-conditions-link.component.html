@@ -1,5 +1,5 @@
 <a [target]="target" tuiLink routerLink="/terms-and-conditions">
-  <span class="flex items-center text-primary">
+  <span class="text-primary whitespace-nowrap">
     <span #content><ng-content></ng-content></span>
   
     @if(!content.childNodes.length){ 
@@ -7,7 +7,7 @@
      }
 
      @if (target == '_blank' && showIcon) {
-       <mat-icon>open_in_new</mat-icon>
+       <mat-icon class="ms-1 inline align-middle" >open_in_new</mat-icon>
      }
 
   </span>

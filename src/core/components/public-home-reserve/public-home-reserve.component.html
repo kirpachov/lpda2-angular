@@ -1,17 +1,13 @@
-<div class="mx-4 md:mx-8 lg:mx-12 my-3">
-  <h2 class="text-5xl text-center text-primary mb-2">
-    @if (createdReservation()) {
-      <ng-container i18n>Prenotazione confermata!</ng-container>
-    } @else {
+@if (createdReservation()) {
+  <app-public-reservation-confirmation [shareDetailsLinkShown]="true" [reservation]="createdReservation()"></app-public-reservation-confirmation>
+} @else {
+  <div class="mx-4 md:mx-8 lg:mx-12 my-3">
+    <h2 class="text-5xl text-center text-primary mb-2">
       <ng-container i18n>Prenota ora</ng-container>
-    }
-  </h2>
+    </h2>
+  
+    <hr class="bg-primary w-3/4 mx-auto h-[1px] mb-5">
 
-  <hr class="bg-primary w-3/4 mx-auto h-[1px] mb-5">
-
-  @if (createdReservation()) {
-    <app-public-reservation-confirmation [reservation]="createdReservation()"></app-public-reservation-confirmation>
-  } @else {
     <p class="text-xl text-center mb-3">
       <ng-container i18n>Riserva il tuo posto ad uno dei nostri tavoli e garantisciti la nostra esperienza esclusiva.
       </ng-container>
@@ -20,5 +16,5 @@
     <app-public-message class="block mb-3 text-center text-xl" [location]="'new-reservation-form'"></app-public-message>
 
     <app-public-reservation-form></app-public-reservation-form>
-  }
-</div>
+  </div>
+}

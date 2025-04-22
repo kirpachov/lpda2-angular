@@ -16,7 +16,6 @@ export const PublicMessageLocations = [
   "home-instagram",
   "home-reserve",
   "new-reservation-form",
-  "existing-reservation-form",
   "openings_monday",
   "openings_tuesday",
   "openings_wednesday",
@@ -24,7 +23,14 @@ export const PublicMessageLocations = [
   "openings_friday",
   "openings_saturday",
   "openings_sunday",
-  "cancel-reservation"
+  "cancel-reservation",
+
+  "existing-reservation-form",
+  "existing-reservation-todo-payment",
+  "existing-reservation-todo-authorization",
+  "existing-reservation-authorized-payment",
+  "existing-reservation-paid-payment",
+  "existing-reservation-refunded-payment",
 ] as const;
 
 export type PublicMessageLocation = typeof PublicMessageLocations[number];
@@ -42,7 +48,6 @@ export const PublicMessageLocationExplanation: Record<PublicMessageLocation, str
   "home-instagram": $localize`Pagina principale, subito dopo la sezione instagram.`,
   "home-reserve": $localize`Pagina principale, interno alla sezione prenotazione.`,
 
-  "new-reservation-form": $localize`Form di prenotazione pubblica.`,
   "existing-reservation-form": $localize`Pagina prenotazione esistente.`,
   "openings_monday": $localize`Orari di apertura per lunedì.`,
   "openings_tuesday": $localize`Orari di apertura per martedì.`,
@@ -53,4 +58,11 @@ export const PublicMessageLocationExplanation: Record<PublicMessageLocation, str
   "openings_sunday": $localize`Orari di apertura per domenica.`,
 
   "cancel-reservation": $localize`Messaggio mostrato a chi volesse annullare la prenotazione.`,
+
+  "new-reservation-form": $localize`Form di prenotazione pubblica.`,
+  "existing-reservation-todo-payment": $localize`Pagina di prenotazione esistente. Pagamento da fare.`,
+  "existing-reservation-todo-authorization": $localize`Pagina di prenotazione esistente. Autorizzazione da fare.`,
+  "existing-reservation-authorized-payment": $localize`Pagina di prenotazione esistente. Autorizzazione completata.`,
+  "existing-reservation-paid-payment": $localize`Pagina di prenotazione esistente. Pagamento completato.`,
+  "existing-reservation-refunded-payment": $localize`Pagina di prenotazione esistente. Pagamento rimborsato.`,
 };
