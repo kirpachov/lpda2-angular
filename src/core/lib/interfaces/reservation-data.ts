@@ -15,6 +15,7 @@ export interface ReservationData extends BaseModelData {
   email?: string;
   phone?: string;
   payment?: ReservationPaymentData;
+  cancelled_at?: string;
 
   delivered_emails?: DeliveredEmailData[];
 

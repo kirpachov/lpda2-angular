@@ -128,11 +128,18 @@
             </a>
           </div>
 
-          <div class="block mb-2">
-            <span class="text-slate-400">
+          <div class="block">
+            <span class="text-slate-400 block mb-2">
               <span class="me-1" i18n>Creazione:</span>
               <span>{{ item.created_at | date: 'medium' }}</span>
             </span>
+
+            @if(item.cancelled_at) {
+              <span [tuiHint] class="text-slate-400 block mb-2">
+                <span class="me-1" i18n>Annullamento:</span>
+                <span>{{ item.cancelled_at | date: 'medium' }}</span>
+              </span>
+            }
           </div>
 
           <div class="block mb-2">

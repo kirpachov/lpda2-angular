@@ -18,6 +18,8 @@ export class Reservation extends BaseModel {
   phone?: string;
   payment?: ReservationPayment;
 
+  cancelled_at?: Date;
+
   delivered_emails?: DeliveredEmail[];
 
   table_type_id?: number;
@@ -28,6 +30,7 @@ export class Reservation extends BaseModel {
 
     this.fullname = data.fullname;
     this.datetime = data.datetime ? new Date(data.datetime) : undefined;
+    this.cancelled_at = data.cancelled_at ? new Date(data.cancelled_at) : undefined;
     this.status = data.status;
     this.secret = data.secret;
     this.adults = data.adults;
