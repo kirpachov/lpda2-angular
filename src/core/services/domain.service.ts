@@ -19,7 +19,7 @@ import { HttpCustomDomain } from '../lib/http-custom-domain';
 export abstract class DomainService extends HttpCustomDomain {
   private readonly configs: ConfigsService = inject(ConfigsService);
 
-  protected readonly version: number = 1;
+  protected readonly version: number | null = 1;
 
   protected constructor(
     protected basePath: string,
@@ -28,12 +28,12 @@ export abstract class DomainService extends HttpCustomDomain {
   }
 
   url(path: string | number = ``): Observable<string> {
-    return this.baseUrl().pipe(
+    return this.baseHttpUrl().pipe(
       map(baseUrl => cleanUrl(`${baseUrl}/${path}`)),
     )
   }
 
-  private baseUrl(): Observable<string> {
+  private baseHttpUrl(): Observable<string> {
     return combineLatest(
       this.configs.get(`api.domain`),
       this.configs.get(`api.secure`),
@@ -45,7 +45,7 @@ export abstract class DomainService extends HttpCustomDomain {
         const secure: boolean = s === `true`;
         const apiPath: string = p as string;
         const protocol: string = `http${secure ? `s` : ``}://`;
-        const versionNamespace: string = `/v${this.version}/`;
+        const versionNamespace: string = this.version != null ? `/v${this.version}/` : '';
 
         return `${protocol}${domain}${apiPath}${versionNamespace}${this.basePath}`;
       }),

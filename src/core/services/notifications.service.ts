@@ -12,8 +12,8 @@ import { SOMETHING_WENT_WRONG_MESSAGE } from '@core/lib/something-went-wrong-mes
 })
 export class NotificationsService {
 
-  private readonly alertService: TuiAlertService = inject(TuiAlertService);
-  private readonly dialogs: TuiDialogService = inject(TuiDialogService);
+  protected readonly alertService: TuiAlertService = inject(TuiAlertService);
+  protected readonly dialogs: TuiDialogService = inject(TuiDialogService);
   public snackBar: MatSnackBar = inject(MatSnackBar);
 
   fireSnackBar(message: string, action?: string, config?: MatSnackBarConfig): MatSnackBarRef<TextOnlySnackBar> {
@@ -30,10 +30,36 @@ export class NotificationsService {
     return this.alertService.open(message, params);
   }
 
+  info(message: string, params: Partial<TuiAlertOptions<any>> = {}): void {
+    this.open(message, {
+      ...{
+        status: TuiNotification.Info,
+        hasIcon: true,
+        autoClose: false,
+        hasCloseButton: true,
+      },
+      ...params
+    }).subscribe(nue());
+  }
+
   success(message: string, params: Partial<TuiAlertOptions<any>> = {}): void {
     this.open(message, {
       ...{
         status: TuiNotification.Success,
+        hasIcon: true,
+        autoClose: false,
+        hasCloseButton: true,
+      },
+      ...params
+    }).subscribe(nue());
+  }
+
+  warn(message?: string | null, params: Partial<TuiAlertOptions<any>> = {}): void {
+    message ??= SOMETHING_WENT_WRONG_MESSAGE;
+
+    this.open(message, {
+      ...{
+        status: TuiNotification.Warning,
         hasIcon: true,
         autoClose: false,
         hasCloseButton: true,
