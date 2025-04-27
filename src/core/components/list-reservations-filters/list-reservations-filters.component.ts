@@ -39,13 +39,16 @@ import {
 } from "@core/components/reservation-tables-summary/reservation-tables-summary.component";
 import { ReservationStatusComponent } from "../reservation-status/reservation-status.component";
 import { ChipComponent } from "../chip/chip.component";
-import { ReservationPaymentStatus } from '@core/lib/interfaces/reservation-payment-data';
+import { ReservationPaymentPreorderType, ReservationPaymentStatus } from '@core/lib/interfaces/reservation-payment-data';
 import { PreorderReservationGroupPreorderTypeComponent } from '../preorder-reservation-group-preorder-type/preorder-reservation-group-preorder-type.component';
 import { PreorderType } from '@core/lib/interfaces/preorder-reservation-group-data';
 import { TableType } from '@core/models/table-type';
 import { TableTypeSelectComponent } from '../dynamic-selects/table-type-select/table-type-select.component';
 import { SelectPaymentStatusComponent } from "../select-payment-status/select-payment-status.component";
 import { PaymentStatusComponent } from "../payment-status/payment-status.component";
+import { SelectPreorderTypeComponent } from "../select-preorder-type/select-preorder-type.component";
+import { ReservationPaymentPreorderTypeComponent } from "../reservation-payment-preorder-type/reservation-payment-preorder-type.component";
+import { SelectReservationPaymentPreorderTypeComponent } from "../select-reservation-payment-preorder-type/select-reservation-payment-preorder-type.component";
 // import { FilterTableTypeInputComponent } from '../filter-table-type-input/filter-table-type-input.component';
 
 // export type ReservationsFilters = ReservationsFiltersWithDate | ReservationsFiltersWithDatetime;
@@ -72,6 +75,7 @@ export interface ReservationsFilters {
   table_types: string;
 
   payment_status: ReservationPaymentStatus;
+  preorder_type: ReservationPaymentPreorderType;
 }
 
 @Component({
@@ -99,7 +103,11 @@ export interface ReservationsFilters {
     TuiMultiSelectModule,
     TableTypeSelectComponent,
     SelectPaymentStatusComponent,
-    PaymentStatusComponent
+    PaymentStatusComponent,
+    SelectPreorderTypeComponent,
+    // PreorderReservationGroupPreorderTypeComponent,
+    ReservationPaymentPreorderTypeComponent,
+    SelectReservationPaymentPreorderTypeComponent
 ],
   templateUrl: './list-reservations-filters.component.html',
   providers: [
@@ -138,7 +146,7 @@ export class ListReservationsFiltersComponent implements OnInit, AfterViewInit {
     /**
      * If payment is preorder or actual payment.
      */
-    payment_types: new FormControl<PreorderType | null>(null),
+    preorder_type: new FormControl<ReservationPaymentPreorderType | null>(null),
 
     /**
      * Providers id.
@@ -198,6 +206,7 @@ export class ListReservationsFiltersComponent implements OnInit, AfterViewInit {
       this.orderBy,
       this.hiddenFormGroup.controls.table_type,
       this.hiddenFormGroup.controls.payment_status,
+      this.hiddenFormGroup.controls.preorder_type,
     ].map((control: FormControl): void => {
       control.valueChanges.pipe(
         takeUntil(this.destroy$),
@@ -262,6 +271,10 @@ export class ListReservationsFiltersComponent implements OnInit, AfterViewInit {
 
     if (this.hiddenFormGroup.controls.payment_status.value && this.hiddenFormGroup.controls.payment_status.value) {
       filters["payment_status"] = this.hiddenFormGroup.controls.payment_status.value;
+    }
+
+    if (this.hiddenFormGroup.controls.preorder_type.value && this.hiddenFormGroup.controls.preorder_type.value) {
+      filters["preorder_type"] = this.hiddenFormGroup.controls.preorder_type.value;
     }
 
     // console.log(`formVal`, this.hiddenFormGroup.value);
