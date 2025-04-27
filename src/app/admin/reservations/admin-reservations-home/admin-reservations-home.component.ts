@@ -66,6 +66,7 @@ import { ReservationTablesSummaryComponent } from "../../../../core/components/r
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 import { EditReservationTableModalComponent } from '@core/components/edit-reservation-table-modal/edit-reservation-table-modal.component';
 import { PaymentStatusColorPipe } from "../../../../core/pipes/payment-status-color.pipe";
+import { ReservationsEventsNotifier } from '@core/services/reservations-events-notifier';
 
 @Component({
   selector: 'app-admin-reservations-home',
@@ -116,6 +117,7 @@ export class AdminReservationsHomeComponent implements OnInit {
   private readonly date = inject(DatePipe);
   private readonly destroy$: TuiDestroyService = inject(TuiDestroyService);
   readonly _ = inject(Title).setTitle($localize`Prenotazioni | La Porta D'Acqua`);
+  private readonly reservationsEvents: ReservationsEventsNotifier = inject(ReservationsEventsNotifier);
 
   @ViewChild(ReservationTurnSelectComponent, {static: true}) turnSelect?: ReservationTurnSelectComponent;
 
@@ -124,6 +126,10 @@ export class AdminReservationsHomeComponent implements OnInit {
   filters: Partial<ReservationsFilters> = {};
 
   ngOnInit(): void {
+    this.reservationsEvents.listenWsChanges().subscribe({
+      next: () => this.search(),
+    });
+
     this.router.events.pipe(
       takeUntil(this.destroy$)
     ).subscribe({

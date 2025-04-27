@@ -25,6 +25,10 @@ export class Reservation extends BaseModel {
   table_type_id?: number;
   table_type?: TableType;
 
+  get people(): number {
+    return (this.adults || 0) + (this.children || 0);
+  }
+
   constructor(data: ReservationData) {
     super(data);
 

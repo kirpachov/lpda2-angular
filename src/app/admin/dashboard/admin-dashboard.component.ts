@@ -14,6 +14,7 @@ import { takeUntil, finalize } from 'rxjs';
 import { Stats } from '@core/lib/interfaces/stats';
 import { TuiIslandModule, TuiTilesModule } from '@taiga-ui/kit';
 import { MatIconModule } from '@angular/material/icon';
+import { ReservationsEventsNotifier } from '@core/services/reservations-events-notifier';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -34,10 +35,11 @@ import { MatIconModule } from '@angular/material/icon';
 export class AdminDashboardComponent implements OnInit {
   readonly _ = inject(Title).setTitle($localize`Dashboard | La Porta D'Acqua`);
 
- private readonly service = inject(StatsService);
+  private readonly service = inject(StatsService);
   private readonly destroy$ = inject(TuiDestroyService);
   private readonly notifications = inject(NotificationsService);
   private readonly datePipe = inject(DatePipe);
+  private readonly reservationsEvents = inject(ReservationsEventsNotifier);
 
   readonly loading: WritableSignal<boolean> = signal(false);
 
@@ -47,6 +49,9 @@ export class AdminDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadStats();
+    this.reservationsEvents.listenWsChanges().subscribe({
+      next: () => this.loadStats(),
+    });
   }
 
   loadStats() {
