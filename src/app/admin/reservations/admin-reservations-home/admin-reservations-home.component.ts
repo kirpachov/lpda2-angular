@@ -67,6 +67,7 @@ import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 import { EditReservationTableModalComponent } from '@core/components/edit-reservation-table-modal/edit-reservation-table-modal.component';
 import { PaymentStatusColorPipe } from "../../../../core/pipes/payment-status-color.pipe";
 import { ReservationsEventsNotifier } from '@core/services/reservations-events-notifier';
+import { AdminListReservationsComponent } from "../../../../core/components/admin-list-reservations/admin-list-reservations.component";
 
 @Component({
   selector: 'app-admin-reservations-home',
@@ -96,7 +97,8 @@ import { ReservationsEventsNotifier } from '@core/services/reservations-events-n
     EipReservationStatusComponent,
     TuiExpandModule,
     ReservationTablesSummaryComponent,
-    PaymentStatusColorPipe
+    PaymentStatusColorPipe,
+    AdminListReservationsComponent
 ],
   templateUrl: './admin-reservations-home.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
