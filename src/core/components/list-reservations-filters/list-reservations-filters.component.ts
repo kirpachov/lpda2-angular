@@ -139,8 +139,7 @@ export class ListReservationsFiltersComponent implements OnInit, AfterViewInit {
     status: this.status,
 
     /**
-     * If reservations payment status is one of these.
-     * If null, all reservations are included (no filters applied).
+     * Filtering by reservations payment status
      */
     payment_status: new FormControl<ReservationPaymentStatus | null>(null),
 
@@ -154,16 +153,7 @@ export class ListReservationsFiltersComponent implements OnInit, AfterViewInit {
      */
     payment_external_id: new FormControl<string | null>(null),
 
-    /**
-     * TODO
-     * Tipologia di tavolo: "qualcuno", "nessuno", "specifico x". Se "qualcuno" basta che diverso da nil. Se "nessuno" basta che nil. Se array di id, basta che sia uno di quelli
-     */
     table_type: new FormControl<TableType | null>(null),
-
-    /**
-     * If reservation has a payment associated.
-     */
-    payment_present: new FormControl<boolean | null>(null),
   });
 
   // Date formatted as string
