@@ -93,7 +93,7 @@ export class CommonDynamicSelectComponent<T> implements ControlValueAccessor, On
   filters: Record<string, any> | null = null;
 
   /* @Input() */
-  multiple: boolean = false;
+  // multiple: boolean = false;
 
   /* @Input() */
   service: {

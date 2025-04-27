@@ -38,7 +38,7 @@ export {moduleImports as CommonDynamicSelectModuleImports};
 
 const componentInputs: string[] = [
   `outputType`,
-  `multiple`,
+  // `multiple`,
   `service`,
   `stringify`,
   `query`,

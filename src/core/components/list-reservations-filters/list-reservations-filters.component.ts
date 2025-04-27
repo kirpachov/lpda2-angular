@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { TuiButtonModule, TuiDataListModule, TuiDialogService, TuiHostedDropdownModule, TuiLinkModule, TuiTextfieldControllerModule } from "@taiga-ui/core";
 import { MatIcon } from "@angular/material/icon";
-import { TuiDataListWrapperModule, TuiInputModule, TuiSelectModule } from "@taiga-ui/kit";
+import { TuiDataListWrapperModule, TuiInputModule, TuiMultiSelectModule, TuiSelectModule } from "@taiga-ui/kit";
 import { TuiAutoFocusModule, TuiDay, TuiDayRange, TuiDestroyService } from "@taiga-ui/cdk";
 import { RouterLink } from "@angular/router";
 import {
@@ -39,6 +39,17 @@ import {
 } from "@core/components/reservation-tables-summary/reservation-tables-summary.component";
 import { ReservationStatusComponent } from "../reservation-status/reservation-status.component";
 import { ChipComponent } from "../chip/chip.component";
+import { ReservationPaymentPreorderType, ReservationPaymentStatus } from '@core/lib/interfaces/reservation-payment-data';
+import { PreorderReservationGroupPreorderTypeComponent } from '../preorder-reservation-group-preorder-type/preorder-reservation-group-preorder-type.component';
+import { PreorderType } from '@core/lib/interfaces/preorder-reservation-group-data';
+import { TableType } from '@core/models/table-type';
+import { TableTypeSelectComponent } from '../dynamic-selects/table-type-select/table-type-select.component';
+import { SelectPaymentStatusComponent } from "../select-payment-status/select-payment-status.component";
+import { PaymentStatusComponent } from "../payment-status/payment-status.component";
+import { SelectPreorderTypeComponent } from "../select-preorder-type/select-preorder-type.component";
+import { ReservationPaymentPreorderTypeComponent } from "../reservation-payment-preorder-type/reservation-payment-preorder-type.component";
+import { SelectReservationPaymentPreorderTypeComponent } from "../select-reservation-payment-preorder-type/select-reservation-payment-preorder-type.component";
+// import { FilterTableTypeInputComponent } from '../filter-table-type-input/filter-table-type-input.component';
 
 // export type ReservationsFilters = ReservationsFiltersWithDate | ReservationsFiltersWithDatetime;
 
@@ -57,6 +68,15 @@ export interface ReservationsFilters {
 
   offset: number;
   per_page: number;
+
+  /**
+   * comma-separated list of table type ids
+   */
+  table_types: string;
+
+  payment_status: ReservationPaymentStatus;
+  preorder_type: ReservationPaymentPreorderType;
+  payment_external_id: string;
 }
 
 @Component({
@@ -81,10 +101,15 @@ export interface ReservationsFilters {
     TuiDataListWrapperModule,
     TuiSelectModule,
     TuiDataListModule,
-    // NgSwitch,
-    // NgSwitchCase,
-    // NgSwitchDefault,
-  ],
+    TuiMultiSelectModule,
+    TableTypeSelectComponent,
+    SelectPaymentStatusComponent,
+    PaymentStatusComponent,
+    SelectPreorderTypeComponent,
+    // PreorderReservationGroupPreorderTypeComponent,
+    ReservationPaymentPreorderTypeComponent,
+    SelectReservationPaymentPreorderTypeComponent
+],
   templateUrl: './list-reservations-filters.component.html',
   providers: [
     TuiDestroyService
@@ -112,7 +137,34 @@ export class ListReservationsFiltersComponent implements OnInit, AfterViewInit {
   readonly hiddenFormGroup = new FormGroup({
     query: this.query,
     status: this.status,
-  })
+
+    /**
+     * If reservations payment status is one of these.
+     * If null, all reservations are included (no filters applied).
+     */
+    payment_status: new FormControl<ReservationPaymentStatus | null>(null),
+
+    /**
+     * If payment is preorder or actual payment.
+     */
+    preorder_type: new FormControl<ReservationPaymentPreorderType | null>(null),
+
+    /**
+     * Providers id.
+     */
+    payment_external_id: new FormControl<string | null>(null),
+
+    /**
+     * TODO
+     * Tipologia di tavolo: "qualcuno", "nessuno", "specifico x". Se "qualcuno" basta che diverso da nil. Se "nessuno" basta che nil. Se array di id, basta che sia uno di quelli
+     */
+    table_type: new FormControl<TableType | null>(null),
+
+    /**
+     * If reservation has a payment associated.
+     */
+    payment_present: new FormControl<boolean | null>(null),
+  });
 
   // Date formatted as string
   readonly dateStr: WritableSignal<string | null> = signal(this.formatDate(this.date.value));
@@ -152,7 +204,10 @@ export class ListReservationsFiltersComponent implements OnInit, AfterViewInit {
       this.date,
       this.turn,
       this.status,
-      this.orderBy
+      this.orderBy,
+      this.hiddenFormGroup.controls.table_type,
+      this.hiddenFormGroup.controls.payment_status,
+      this.hiddenFormGroup.controls.preorder_type,
     ].map((control: FormControl): void => {
       control.valueChanges.pipe(
         takeUntil(this.destroy$),
@@ -168,7 +223,8 @@ export class ListReservationsFiltersComponent implements OnInit, AfterViewInit {
 
     // Wait some time before querying again.
     [
-      this.query
+      this.query,
+      this.hiddenFormGroup.controls.payment_external_id,
     ].map((control: FormControl): void => {
       control.valueChanges.pipe(
         takeUntil(this.destroy$),
@@ -206,8 +262,28 @@ export class ListReservationsFiltersComponent implements OnInit, AfterViewInit {
   currentFilters(): Partial<ReservationsFilters> {
     const filters: Partial<ReservationsFilters> = {
       offset: this.offset,
-      per_page: this.per_page
+      per_page: this.per_page,
+      // table_types: this.hiddenFormGroup.controls.table_types.value,
     };
+
+    if (this.hiddenFormGroup.controls.table_type.value && this.hiddenFormGroup.controls.table_type.value.id) {
+      filters["table_types"] = this.hiddenFormGroup.controls.table_type.value.id.toString();
+    }
+
+
+    if (this.hiddenFormGroup.controls.payment_status.value && this.hiddenFormGroup.controls.payment_status.value) {
+      filters["payment_status"] = this.hiddenFormGroup.controls.payment_status.value;
+    }
+
+    if (this.hiddenFormGroup.controls.preorder_type.value && this.hiddenFormGroup.controls.preorder_type.value) {
+      filters["preorder_type"] = this.hiddenFormGroup.controls.preorder_type.value;
+    }
+
+    if (this.hiddenFormGroup.controls.payment_external_id.value && this.hiddenFormGroup.controls.payment_external_id.value) {
+      filters["payment_external_id"] = this.hiddenFormGroup.controls.payment_external_id.value;
+    }
+
+    // console.log(`formVal`, this.hiddenFormGroup.value);
 
     if (typeof this.query.value == 'string' && this.query.valid && this.query.value.length > 0) {
       filters['query'] = this.query.value;
