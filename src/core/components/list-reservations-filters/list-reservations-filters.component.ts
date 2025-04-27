@@ -76,6 +76,7 @@ export interface ReservationsFilters {
 
   payment_status: ReservationPaymentStatus;
   preorder_type: ReservationPaymentPreorderType;
+  payment_external_id: string;
 }
 
 @Component({
@@ -222,7 +223,8 @@ export class ListReservationsFiltersComponent implements OnInit, AfterViewInit {
 
     // Wait some time before querying again.
     [
-      this.query
+      this.query,
+      this.hiddenFormGroup.controls.payment_external_id,
     ].map((control: FormControl): void => {
       control.valueChanges.pipe(
         takeUntil(this.destroy$),
@@ -275,6 +277,10 @@ export class ListReservationsFiltersComponent implements OnInit, AfterViewInit {
 
     if (this.hiddenFormGroup.controls.preorder_type.value && this.hiddenFormGroup.controls.preorder_type.value) {
       filters["preorder_type"] = this.hiddenFormGroup.controls.preorder_type.value;
+    }
+
+    if (this.hiddenFormGroup.controls.payment_external_id.value && this.hiddenFormGroup.controls.payment_external_id.value) {
+      filters["payment_external_id"] = this.hiddenFormGroup.controls.payment_external_id.value;
     }
 
     // console.log(`formVal`, this.hiddenFormGroup.value);

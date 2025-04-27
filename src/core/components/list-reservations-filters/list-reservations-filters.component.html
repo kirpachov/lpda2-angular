@@ -16,21 +16,30 @@
     </div>
 
     <div class="block mb-3">
-      <app-select-payment-status [formControlName]="'payment_status'" >
+      <app-select-payment-status [formControlName]="'payment_status'">
         <ng-container i18n>Stato del pagamento</ng-container>
       </app-select-payment-status>
     </div>
 
     <div class="block mb-3">
-       <app-select-reservation-payment-preorder-type [formControlName]="'preorder_type'">
-         <ng-container i18n>Tipologia di pagamento</ng-container>
-       </app-select-reservation-payment-preorder-type>
+      <app-select-reservation-payment-preorder-type [formControlName]="'preorder_type'">
+        <ng-container i18n>Tipologia di pagamento</ng-container>
+      </app-select-reservation-payment-preorder-type>
     </div>
 
     <div class="block mb-3">
       <app-reservation-status-select [showCleaner]="true" [inputSize]="'l'" [formControl]="status">
         <ng-container i18n>Stato</ng-container>
       </app-reservation-status-select>
+    </div>
+
+    <div class="block mb-3">
+      <div class="flex items-center">
+        <tui-input [tuiTextfieldSize]="'l'" class="grow me-2" [formControlName]="'payment_external_id'">
+          <ng-container i18n>ID esterno pagamento (N. ordine nexi)</ng-container>
+          <input tuiTextfield>
+        </tui-input>
+      </div>
     </div>
 
     <button tuiButton appearance="primary" type="submit">
@@ -94,18 +103,26 @@
     }
 
     @if(hiddenFormGroup.controls.payment_status.value) {
-      <app-chip (removeClick)="hiddenFormGroup.controls.payment_status.patchValue(null)">
-        <ng-container i18n>Stato pagamento</ng-container>: 
-        <app-payment-status [status]="hiddenFormGroup.controls.payment_status.value"></app-payment-status>
-      </app-chip>
-      }
+    <app-chip (removeClick)="hiddenFormGroup.controls.payment_status.patchValue(null)">
+      <ng-container i18n>Stato pagamento</ng-container>:
+      <app-payment-status [status]="hiddenFormGroup.controls.payment_status.value"></app-payment-status>
+    </app-chip>
+    }
 
-      @if(hiddenFormGroup.controls.preorder_type.value) {
-        <app-chip (removeClick)="hiddenFormGroup.controls.preorder_type.patchValue(null)">
-          <ng-container i18n>Stato pagamento</ng-container>: 
-          <app-reservation-payment-preorder-type [value]="hiddenFormGroup.controls.preorder_type.value" ></app-reservation-payment-preorder-type>
-        </app-chip>
-        }
+    @if(hiddenFormGroup.controls.preorder_type.value) {
+    <app-chip (removeClick)="hiddenFormGroup.controls.preorder_type.patchValue(null)">
+      <ng-container i18n>Tipologia pagamento</ng-container>:
+      <app-reservation-payment-preorder-type
+        [value]="hiddenFormGroup.controls.preorder_type.value"></app-reservation-payment-preorder-type>
+    </app-chip>
+    }
+
+    @if(hiddenFormGroup.controls.payment_external_id.value) {
+    <app-chip (removeClick)="hiddenFormGroup.controls.payment_external_id.patchValue(null)">
+      <ng-container i18n>N. Ordine nexi</ng-container>:
+      {{ hiddenFormGroup.controls.payment_external_id.value }}
+    </app-chip>
+    }
   </div>
 </div>
 
