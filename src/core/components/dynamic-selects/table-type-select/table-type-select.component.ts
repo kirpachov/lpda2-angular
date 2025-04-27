@@ -24,7 +24,7 @@ import { TableTypesService } from '@core/services/http/table-types.service';
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => AllergenSelectComponent),
+      useExisting: forwardRef(() => TableTypeSelectComponent),
       multi: true
     },
 
@@ -32,7 +32,7 @@ import { TableTypesService } from '@core/services/http/table-types.service';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AllergenSelectComponent extends CommonDynamicSelectComponent<TableType> {
+export class TableTypeSelectComponent extends CommonDynamicSelectComponent<TableType> {
   override stringify = (c: TableType): string => c.name ?? ``;
 
   override readonly service: TableTypesService = inject(TableTypesService);

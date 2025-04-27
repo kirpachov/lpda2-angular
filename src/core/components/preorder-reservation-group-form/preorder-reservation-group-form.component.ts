@@ -19,7 +19,7 @@ import { PreorderReservationGroupCasesComponent, TurnDateOutputFormat } from "..
 import { SelectTurnsPaymentv2Component } from "../select-turns-paymentv2/select-turns-paymentv2.component";
 import { I18nInputComponent } from '../i18n-input/i18n-input.component';
 import { SelectPreorderTypeComponent } from "../select-preorder-type/select-preorder-type.component";
-import { AllergenSelectComponent } from "../dynamic-selects/table-type-select/table-type-select.component";
+import { TableTypeSelectComponent } from "../dynamic-selects/table-type-select/table-type-select.component";
 import { TableTypeToPreorderReservationGroupInputComponent } from "../table-type-to-preorder-reservation-group-input/table-type-to-preorder-reservation-group-input.component";
 import { TableTypeToPreorderReservationGroup } from '@core/lib/interfaces/table-type-to-preorder-reservation-group';
 
@@ -45,7 +45,7 @@ import { TableTypeToPreorderReservationGroup } from '@core/lib/interfaces/table-
     SelectTurnsPaymentv2Component,
     I18nInputComponent,
     SelectPreorderTypeComponent,
-    AllergenSelectComponent,
+    TableTypeSelectComponent,
     TableTypeToPreorderReservationGroupInputComponent,
     JsonPipe,
 ],

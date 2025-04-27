@@ -10,6 +10,12 @@
     </div>
 
     <div class="block mb-3">
+        <app-table-type-select [formControlName]="'table_type'">
+          <ng-container i18n>Tipologia di tavolo associata</ng-container>
+        </app-table-type-select>
+    </div>
+
+    <div class="block mb-3">
       <app-reservation-status-select [showCleaner]="true" [inputSize]="'l'" [formControl]="status">
         <ng-container i18n>Stato</ng-container>
       </app-reservation-status-select>
@@ -67,6 +73,12 @@
     <app-chip (removeClick)="query.patchValue(null)">
       <ng-container i18n>Ricerca per</ng-container>: {{ query.value }}
     </app-chip>
+    }
+
+    @if(hiddenFormGroup.controls.table_type.value) {
+      <app-chip (removeClick)="hiddenFormGroup.controls.table_type.patchValue(null)">
+        <ng-container i18n>Tipologia di tavolo</ng-container>: {{ hiddenFormGroup.controls.table_type.value.name }}
+      </app-chip>
     }
   </div>
 </div>

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, OnChanges, OnInit, signal, 
 import { ControlValueAccessor, FormArray, FormControl, FormGroup, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { TuiButtonModule, TuiPrimitiveTextfieldModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
 import { TuiInputModule } from '@taiga-ui/kit';
-import { AllergenSelectComponent } from "../dynamic-selects/table-type-select/table-type-select.component";
+import { TableTypeSelectComponent } from "../dynamic-selects/table-type-select/table-type-select.component";
 import { TableType } from '@core/models/table-type';
 import { TableTypesService } from '@core/services/http/table-types.service';
 import { SearchResult } from '@core/lib/search-result.model';
@@ -20,7 +20,7 @@ import { TuiDestroyService } from '@taiga-ui/cdk';
     TuiInputModule,
     TuiTextfieldControllerModule,
     TuiPrimitiveTextfieldModule,
-    AllergenSelectComponent,
+    TableTypeSelectComponent,
     ShowImagesComponent,
     ShowImageComponent,
     ErrorsComponent
