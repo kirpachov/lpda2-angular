@@ -25,6 +25,7 @@ import {TuiDataListWrapperModule} from '@taiga-ui/kit';
 import { PreorderReservationGroupPreorderTypeComponent } from "../preorder-reservation-group-preorder-type/preorder-reservation-group-preorder-type.component";
 import { ReservationPaymentPreorderTypeComponent } from "../reservation-payment-preorder-type/reservation-payment-preorder-type.component";
 import { PaymentStatusColorPipe } from "../../pipes/payment-status-color.pipe";
+import { PaymentStatusComponent } from "../payment-status/payment-status.component";
 
 @Component({
   selector: 'app-admin-reservation-payment',
@@ -50,7 +51,8 @@ import { PaymentStatusColorPipe } from "../../pipes/payment-status-color.pipe";
     TuiDataListWrapperModule,
     PreorderReservationGroupPreorderTypeComponent,
     ReservationPaymentPreorderTypeComponent,
-    PaymentStatusColorPipe
+    PaymentStatusColorPipe,
+    PaymentStatusComponent
 ],
   templateUrl: './admin-reservation-payment.component.html',
   styleUrl: './admin-reservation-payment.component.scss',

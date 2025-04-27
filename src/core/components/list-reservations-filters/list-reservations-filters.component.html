@@ -10,9 +10,15 @@
     </div>
 
     <div class="block mb-3">
-        <app-table-type-select [formControlName]="'table_type'">
-          <ng-container i18n>Tipologia di tavolo associata</ng-container>
-        </app-table-type-select>
+      <app-table-type-select [formControlName]="'table_type'">
+        <ng-container i18n>Tipologia di tavolo associata</ng-container>
+      </app-table-type-select>
+    </div>
+
+    <div class="block mb-3">
+      <app-select-payment-status [formControlName]="'payment_status'" >
+        <ng-container i18n>Stato del pagamento</ng-container>
+      </app-select-payment-status>
     </div>
 
     <div class="block mb-3">
@@ -76,10 +82,17 @@
     }
 
     @if(hiddenFormGroup.controls.table_type.value) {
-      <app-chip (removeClick)="hiddenFormGroup.controls.table_type.patchValue(null)">
-        <ng-container i18n>Tipologia di tavolo</ng-container>: {{ hiddenFormGroup.controls.table_type.value.name }}
-      </app-chip>
+    <app-chip (removeClick)="hiddenFormGroup.controls.table_type.patchValue(null)">
+      <ng-container i18n>Tipologia di tavolo</ng-container>: {{ hiddenFormGroup.controls.table_type.value.name }}
+    </app-chip>
     }
+
+    @if(hiddenFormGroup.controls.payment_status.value) {
+      <app-chip (removeClick)="hiddenFormGroup.controls.payment_status.patchValue(null)">
+        <ng-container i18n>Stato pagamento</ng-container>: 
+        <app-payment-status [status]="hiddenFormGroup.controls.payment_status.value"></app-payment-status>
+      </app-chip>
+      }
   </div>
 </div>
 

@@ -1,0 +1,8 @@
+<tui-select [formControl]="control" [valueContent]="cardContent">
+  <ng-content></ng-content>
+  <tui-data-list-wrapper *tuiDataList [itemContent]="cardContent" [items]="ReservationPaymentStatusOptions"></tui-data-list-wrapper>
+</tui-select>
+
+<ng-template #cardContent let-item>
+  <app-payment-status [status]="item"></app-payment-status>
+</ng-template>

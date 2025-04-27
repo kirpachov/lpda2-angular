@@ -44,6 +44,8 @@ import { PreorderReservationGroupPreorderTypeComponent } from '../preorder-reser
 import { PreorderType } from '@core/lib/interfaces/preorder-reservation-group-data';
 import { TableType } from '@core/models/table-type';
 import { TableTypeSelectComponent } from '../dynamic-selects/table-type-select/table-type-select.component';
+import { SelectPaymentStatusComponent } from "../select-payment-status/select-payment-status.component";
+import { PaymentStatusComponent } from "../payment-status/payment-status.component";
 // import { FilterTableTypeInputComponent } from '../filter-table-type-input/filter-table-type-input.component';
 
 // export type ReservationsFilters = ReservationsFiltersWithDate | ReservationsFiltersWithDatetime;
@@ -68,6 +70,8 @@ export interface ReservationsFilters {
    * comma-separated list of table type ids
    */
   table_types: string;
+
+  payment_status: ReservationPaymentStatus;
 }
 
 @Component({
@@ -94,12 +98,9 @@ export interface ReservationsFilters {
     TuiDataListModule,
     TuiMultiSelectModule,
     TableTypeSelectComponent,
-    // JsonPipe,
-    // FilterTableTypeInputComponent,
-    // NgSwitch,
-    // NgSwitchCase,
-    // NgSwitchDefault,
-  ],
+    SelectPaymentStatusComponent,
+    PaymentStatusComponent
+],
   templateUrl: './list-reservations-filters.component.html',
   providers: [
     TuiDestroyService
@@ -132,7 +133,7 @@ export class ListReservationsFiltersComponent implements OnInit, AfterViewInit {
      * If reservations payment status is one of these.
      * If null, all reservations are included (no filters applied).
      */
-    payment_statuses: new FormControl<ReservationPaymentStatus[] | null>(null),
+    payment_status: new FormControl<ReservationPaymentStatus | null>(null),
 
     /**
      * If payment is preorder or actual payment.
@@ -196,6 +197,7 @@ export class ListReservationsFiltersComponent implements OnInit, AfterViewInit {
       this.status,
       this.orderBy,
       this.hiddenFormGroup.controls.table_type,
+      this.hiddenFormGroup.controls.payment_status,
     ].map((control: FormControl): void => {
       control.valueChanges.pipe(
         takeUntil(this.destroy$),
@@ -257,7 +259,12 @@ export class ListReservationsFiltersComponent implements OnInit, AfterViewInit {
       filters["table_types"] = this.hiddenFormGroup.controls.table_type.value.id.toString();
     }
 
-    console.log(`formVal`, this.hiddenFormGroup.value);
+
+    if (this.hiddenFormGroup.controls.payment_status.value && this.hiddenFormGroup.controls.payment_status.value) {
+      filters["payment_status"] = this.hiddenFormGroup.controls.payment_status.value;
+    }
+
+    // console.log(`formVal`, this.hiddenFormGroup.value);
 
     if (typeof this.query.value == 'string' && this.query.valid && this.query.value.length > 0) {
       filters['query'] = this.query.value;

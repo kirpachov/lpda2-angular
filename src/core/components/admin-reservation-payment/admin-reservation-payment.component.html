@@ -1,24 +1,8 @@
 @if(payment()) {
 
   <ng-template #paymentStatus>
-    <span class="text-center {{ status() | paymentStatusColor }} text-nowrap">
-      @switch(status()){
-        @case("paid"){
-          <ng-container i18n>Pagata</ng-container>
-        }
-        @case("authorized") {
-          <ng-container i18n>Autorizzata</ng-container>
-        }
-        @case("todo") {
-          <ng-container i18n>Non pagata</ng-container>
-        }
-        @case("refunded") {
-          <ng-container i18n>Rimborsata</ng-container>
-        }
-        @default{
-          {{ status() }}
-        }
-      }
+    <span class="text-center text-nowrap">
+      <app-payment-status [status]="status()" ></app-payment-status>
     </span>
   </ng-template>
 
