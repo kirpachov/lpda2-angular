@@ -28,9 +28,10 @@ import { ReservationsService } from '@core/services/http/reservations.service';
 import { NotificationsService } from '@core/services/notifications.service';
 import { ReservationsEventsNotifier } from '@core/services/reservations-events-notifier';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
-import { takeUntil, finalize } from 'rxjs';
+import { takeUntil, finalize, Subscription } from 'rxjs';
 import { ReservationTurnSelectComponent } from '../dynamic-selects/reservation-turn-select/reservation-turn-select.component';
 import { EditReservationTableModalComponent } from '../edit-reservation-table-modal/edit-reservation-table-modal.component';
+import { SOMETHING_WENT_WRONG_MESSAGE } from '@core/lib/something-went-wrong-message';
 
 @Component({
   selector: 'app-admin-list-reservations',
@@ -105,6 +106,18 @@ export class AdminListReservationsComponent implements OnInit, OnChanges {
 
   ngOnChanges(): void {
     this.search();
+  }
+
+  export(): void {
+    this.loading.set(true);
+    this.service.export(this.filters).pipe(
+      takeUntil(this.destroy$),
+      finalize(() => this.loading.set(false))
+    ).subscribe({
+      error: (h: HttpErrorResponse) => {
+        this.notifications.error(parseHttpErrorMessage(h) || SOMETHING_WENT_WRONG_MESSAGE);
+      }
+    });
   }
 
   updateStatus(item: Reservation, status: ReservationStatus): void {
@@ -197,12 +210,15 @@ export class AdminListReservationsComponent implements OnInit, OnChanges {
     })
   }
 
+  private searchSub?: Subscription | null = null;
   private search(filters: Partial<ReservationsFilters> = this.filters): void {
     filters ||= {};
     filters = { ...filters };
 
+    this.searchSub?.unsubscribe();
+
     this.loading.set(true);
-    this.service.search(filters).pipe(
+    this.searchSub = this.service.search(filters).pipe(
       takeUntil(this.destroy$),
       finalize(() => this.loading.set(false)),
     ).subscribe({

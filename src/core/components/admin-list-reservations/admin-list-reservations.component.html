@@ -132,3 +132,10 @@
   <span i18n>Prova a modificare i filtri di ricerca</span>
 </app-no-items>
 }
+
+<button type="button" (click)="export()" [size]="'s'" [showLoader]="loading()" tuiButton appearance="flat">
+  <span class="flex items-center">
+    <mat-icon>download_file</mat-icon>
+    <ng-container i18n>Esporta prenotazioni filtrate</ng-container>
+  </span>
+</button>
