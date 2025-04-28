@@ -108,7 +108,7 @@
         <target>Dashboard | La Porta D'Acqua</target>
         <context-group purpose='location'>
           <context context-type='sourcefile'>src/app/admin/dashboard/admin-dashboard.component.ts</context>
-          <context context-type='linenumber'>38</context>
+          <context context-type='linenumber'>40</context>
         </context-group>
       </trans-unit>
       <trans-unit id='7532968965335544251' datatype='html'>
@@ -348,7 +348,7 @@
             
             src/core/components/admin-list-reservations/admin-list-reservations.component.ts 
           </context>
-          <context context-type='linenumber'>208</context>
+          <context context-type='linenumber'>212</context>
         </context-group>
       </trans-unit>
       <trans-unit id='1154814451457829825' datatype='html'>
@@ -840,7 +840,7 @@
             
             src/core/components/admin-list-reservations/admin-list-reservations.component.html 
           </context>
-          <context context-type='linenumber'>79</context>
+          <context context-type='linenumber'>83</context>
         </context-group>
       </trans-unit>
       <trans-unit id='6058606105267498053' datatype='html'>
@@ -1695,7 +1695,7 @@
             
             src/core/components/admin-list-reservations/admin-list-reservations.component.ts 
           </context>
-          <context context-type='linenumber'>229</context>
+          <context context-type='linenumber'>233</context>
         </context-group>
       </trans-unit>
       <trans-unit id='7936067117742615976' datatype='html'>
@@ -1821,7 +1821,7 @@
             
             src/core/components/list-reservations-filters/list-reservations-filters.component.html 
           </context>
-          <context context-type='linenumber'>123</context>
+          <context context-type='linenumber'>142</context>
         </context-group>
       </trans-unit>
       <trans-unit id='5192236064370594385' datatype='html'>
@@ -1870,7 +1870,7 @@
             
             src/core/components/list-reservations-filters/list-reservations-filters.component.html 
           </context>
-          <context context-type='linenumber'>98</context>
+          <context context-type='linenumber'>117</context>
         </context-group>
       </trans-unit>
       <trans-unit id='6617209430190852929' datatype='html'>
@@ -4796,7 +4796,7 @@
             
             src/core/components/admin-list-reservations/admin-list-reservations.component.html 
           </context>
-          <context context-type='linenumber'>21</context>
+          <context context-type='linenumber'>25</context>
         </context-group>
       </trans-unit>
       <trans-unit id='8065907609101976641' datatype='html'>
@@ -4807,7 +4807,7 @@
             
             src/core/components/admin-list-reservations/admin-list-reservations.component.html 
           </context>
-          <context context-type='linenumber'>35</context>
+          <context context-type='linenumber'>39</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>
@@ -4825,7 +4825,7 @@
             
             src/core/components/admin-list-reservations/admin-list-reservations.component.html 
           </context>
-          <context context-type='linenumber'>45</context>
+          <context context-type='linenumber'>49</context>
         </context-group>
       </trans-unit>
       <trans-unit id='5068827953535014050' datatype='html'>
@@ -4836,7 +4836,7 @@
             
             src/core/components/admin-list-reservations/admin-list-reservations.component.html 
           </context>
-          <context context-type='linenumber'>48</context>
+          <context context-type='linenumber'>52</context>
         </context-group>
       </trans-unit>
       <trans-unit id='2644120655683811300' datatype='html'>
@@ -4847,7 +4847,7 @@
             
             src/core/components/admin-list-reservations/admin-list-reservations.component.html 
           </context>
-          <context context-type='linenumber'>51</context>
+          <context context-type='linenumber'>55</context>
         </context-group>
       </trans-unit>
       <trans-unit id='6752078980955417604' datatype='html'>
@@ -4858,7 +4858,7 @@
             
             src/core/components/admin-list-reservations/admin-list-reservations.component.html 
           </context>
-          <context context-type='linenumber'>54</context>
+          <context context-type='linenumber'>58</context>
         </context-group>
       </trans-unit>
       <trans-unit id='5969828721903363967' datatype='html'>
@@ -4869,7 +4869,7 @@
             
             src/core/components/admin-list-reservations/admin-list-reservations.component.html 
           </context>
-          <context context-type='linenumber'>85</context>
+          <context context-type='linenumber'>89</context>
         </context-group>
       </trans-unit>
       <trans-unit id='6354801873993169052' datatype='html'>
@@ -4880,7 +4880,7 @@
             
             src/core/components/admin-list-reservations/admin-list-reservations.component.html 
           </context>
-          <context context-type='linenumber'>91</context>
+          <context context-type='linenumber'>95</context>
         </context-group>
       </trans-unit>
       <trans-unit id='6652677406345413363' datatype='html'>
@@ -4891,7 +4891,7 @@
             
             src/core/components/admin-list-reservations/admin-list-reservations.component.html 
           </context>
-          <context context-type='linenumber'>107</context>
+          <context context-type='linenumber'>111</context>
         </context-group>
       </trans-unit>
       <trans-unit id='7156597206608384051' datatype='html'>
@@ -4902,7 +4902,7 @@
             
             src/core/components/admin-list-reservations/admin-list-reservations.component.html 
           </context>
-          <context context-type='linenumber'>109</context>
+          <context context-type='linenumber'>113</context>
         </context-group>
       </trans-unit>
       <trans-unit id='8138307764428444886' datatype='html'>
@@ -4913,7 +4913,7 @@
             
             src/core/components/admin-list-reservations/admin-list-reservations.component.html 
           </context>
-          <context context-type='linenumber'>124</context>
+          <context context-type='linenumber'>128</context>
         </context-group>
       </trans-unit>
       <trans-unit id='3353001027748947593' datatype='html'>
@@ -4924,7 +4924,7 @@
             
             src/core/components/admin-list-reservations/admin-list-reservations.component.html 
           </context>
-          <context context-type='linenumber'>131</context>
+          <context context-type='linenumber'>135</context>
         </context-group>
       </trans-unit>
       <trans-unit id='8442747418992370904' datatype='html'>
@@ -4935,7 +4935,7 @@
             
             src/core/components/admin-list-reservations/admin-list-reservations.component.html 
           </context>
-          <context context-type='linenumber'>132</context>
+          <context context-type='linenumber'>136</context>
         </context-group>
       </trans-unit>
       <trans-unit id='18717562728077167' datatype='html'>
@@ -4946,7 +4946,7 @@
             
             src/core/components/admin-list-reservations/admin-list-reservations.component.html 
           </context>
-          <context context-type='linenumber'>139</context>
+          <context context-type='linenumber'>144</context>
         </context-group>
       </trans-unit>
       <trans-unit id='1265862338076652065' datatype='html'>
@@ -4971,7 +4971,7 @@
             
             src/core/components/admin-list-reservations/admin-list-reservations.component.ts 
           </context>
-          <context context-type='linenumber'>130</context>
+          <context context-type='linenumber'>133</context>
         </context-group>
       </trans-unit>
       <trans-unit id='6923005459778676818' datatype='html'>
@@ -4982,7 +4982,7 @@
             
             src/core/components/admin-list-reservations/admin-list-reservations.component.ts 
           </context>
-          <context context-type='linenumber'>142</context>
+          <context context-type='linenumber'>145</context>
         </context-group>
       </trans-unit>
       <trans-unit id='1405502572574239258' datatype='html'>
@@ -4993,7 +4993,7 @@
             
             src/core/components/admin-list-reservations/admin-list-reservations.component.ts 
           </context>
-          <context context-type='linenumber'>189</context>
+          <context context-type='linenumber'>193</context>
         </context-group>
       </trans-unit>
       <trans-unit id='3564020598943330712' datatype='html'>
@@ -5004,7 +5004,7 @@
             
             src/core/components/admin-list-reservations/admin-list-reservations.component.ts 
           </context>
-          <context context-type='linenumber'>193</context>
+          <context context-type='linenumber'>197</context>
         </context-group>
       </trans-unit>
       <trans-unit id='4954680478698545335' datatype='html'>
@@ -5022,7 +5022,7 @@
             
             src/core/components/list-reservations-filters/list-reservations-filters.component.html 
           </context>
-          <context context-type='linenumber'>116</context>
+          <context context-type='linenumber'>135</context>
         </context-group>
       </trans-unit>
       <trans-unit id='4520105535179187660' datatype='html'>
@@ -6435,6 +6435,28 @@
           <context context-type='linenumber'>44</context>
         </context-group>
       </trans-unit>
+      <trans-unit id='2437420830797738451' datatype='html'>
+        <source>Numero minimo di persone</source>
+        <target>Minimum number of people</target>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/list-reservations-filters/list-reservations-filters.component.html 
+          </context>
+          <context context-type='linenumber'>53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='8400904047613129053' datatype='html'>
+        <source>Numero massimo di persone</source>
+        <target>Maximum number of people</target>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/list-reservations-filters/list-reservations-filters.component.html 
+          </context>
+          <context context-type='linenumber'>63</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id='145878132662787436' datatype='html'>
         <source>Chiudi</source>
         <target>Close</target>
@@ -6443,7 +6465,7 @@
             
             src/core/components/list-reservations-filters/list-reservations-filters.component.html 
           </context>
-          <context context-type='linenumber'>55</context>
+          <context context-type='linenumber'>74</context>
         </context-group>
       </trans-unit>
       <trans-unit id='146442697456175258' datatype='html'>
@@ -6454,7 +6476,7 @@
             
             src/core/components/list-reservations-filters/list-reservations-filters.component.html 
           </context>
-          <context context-type='linenumber'>63</context>
+          <context context-type='linenumber'>82</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>
@@ -6472,7 +6494,7 @@
             
             src/core/components/list-reservations-filters/list-reservations-filters.component.html 
           </context>
-          <context context-type='linenumber'>70</context>
+          <context context-type='linenumber'>89</context>
         </context-group>
       </trans-unit>
       <trans-unit id='843993869846882439' datatype='html'>
@@ -6483,7 +6505,7 @@
             
             src/core/components/list-reservations-filters/list-reservations-filters.component.html 
           </context>
-          <context context-type='linenumber'>81</context>
+          <context context-type='linenumber'>100</context>
         </context-group>
       </trans-unit>
       <trans-unit id='4479909772748521405' datatype='html'>
@@ -6494,7 +6516,7 @@
             
             src/core/components/list-reservations-filters/list-reservations-filters.component.html 
           </context>
-          <context context-type='linenumber'>104</context>
+          <context context-type='linenumber'>123</context>
         </context-group>
       </trans-unit>
       <trans-unit id='8773930385196991917' datatype='html'>
@@ -6505,7 +6527,7 @@
             
             src/core/components/list-reservations-filters/list-reservations-filters.component.html 
           </context>
-          <context context-type='linenumber'>110</context>
+          <context context-type='linenumber'>129</context>
         </context-group>
       </trans-unit>
       <trans-unit id='7142615505437696639' datatype='html'>
@@ -6516,7 +6538,47 @@
             
             src/core/components/list-reservations-filters/list-reservations-filters.component.html 
           </context>
-          <context context-type='linenumber'>131</context>
+          <context context-type='linenumber'>150</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='6421231421109800676' datatype='html'>
+        <source>Almeno</source>
+        <target>At least</target>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/list-reservations-filters/list-reservations-filters.component.html 
+          </context>
+          <context context-type='linenumber'>157</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='2722011117668717888' datatype='html'>
+        <source>persone</source>
+        <target>people</target>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/list-reservations-filters/list-reservations-filters.component.html 
+          </context>
+          <context context-type='linenumber'>161</context>
+        </context-group>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/list-reservations-filters/list-reservations-filters.component.html 
+          </context>
+          <context context-type='linenumber'>171</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='1971183954955725376' datatype='html'>
+        <source>Massimo</source>
+        <target>Maximum</target>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/list-reservations-filters/list-reservations-filters.component.html 
+          </context>
+          <context context-type='linenumber'>167</context>
         </context-group>
       </trans-unit>
       <trans-unit id='5483766987007506956' datatype='html'>
@@ -6527,7 +6589,7 @@
             
             src/core/components/list-reservations-filters/list-reservations-filters.component.ts 
           </context>
-          <context context-type='linenumber'>167</context>
+          <context context-type='linenumber'>181</context>
         </context-group>
       </trans-unit>
       <trans-unit id='7715713225970241929' datatype='html'>
@@ -6538,7 +6600,7 @@
             
             src/core/components/list-reservations-filters/list-reservations-filters.component.ts 
           </context>
-          <context context-type='linenumber'>168</context>
+          <context context-type='linenumber'>182</context>
         </context-group>
       </trans-unit>
       <trans-unit id='7740102693403996510' datatype='html'>
@@ -6549,7 +6611,7 @@
             
             src/core/components/list-reservations-filters/list-reservations-filters.component.ts 
           </context>
-          <context context-type='linenumber'>169</context>
+          <context context-type='linenumber'>183</context>
         </context-group>
       </trans-unit>
       <trans-unit id='3104645625547587526' datatype='html'>
@@ -6560,7 +6622,25 @@
             
             src/core/components/list-reservations-filters/list-reservations-filters.component.ts 
           </context>
-          <context context-type='linenumber'>170</context>
+          <context context-type='linenumber'>184</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='5630635519116865599' datatype='html'>
+        <source>
+           Prenotazioni con gruppi ( 
+          <x id='INTERPOLATION' equiv-text='{{list.items().length}}'/>
+           ) 
+        </source>
+        <target>Group bookings (
+          <x id='INTERPOLATION' equiv-text='{{list.items().length}}'/>
+        )
+        </target>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/list-reservations-having-groups/list-reservations-having-groups.component.html 
+          </context>
+          <context context-type='linenumber'>3</context>
         </context-group>
       </trans-unit>
       <trans-unit id='4187231370050299936' datatype='html'>
@@ -6569,9 +6649,11 @@
           <x id='INTERPOLATION' equiv-text='{{list.items().length}}'/>
            ) 
         </source>
-        <target>Unpaid bookings (
+        <target>
+           Unpaid bookings ( 
           <x id='INTERPOLATION' equiv-text='{{list.items().length}}'/>
-        )</target>
+           ) 
+        </target>
         <context-group purpose='location'>
           <context context-type='sourcefile'>
             
