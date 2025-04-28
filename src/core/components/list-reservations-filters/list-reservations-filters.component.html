@@ -10,37 +10,46 @@
     </div>
 
     <div class="block mb-3">
-      <app-table-type-select [formControlName]="'table_type'">
-        <ng-container i18n>Tipologia di tavolo associata</ng-container>
-      </app-table-type-select>
-    </div>
-
-    <div class="block mb-3">
-      <app-select-payment-status [formControlName]="'payment_status'">
-        <ng-container i18n>Stato del pagamento</ng-container>
-      </app-select-payment-status>
-    </div>
-
-    <div class="block mb-3">
-      <app-select-reservation-payment-preorder-type [formControlName]="'preorder_type'">
-        <ng-container i18n>Tipologia di pagamento</ng-container>
-      </app-select-reservation-payment-preorder-type>
-    </div>
-
-    <div class="block mb-3">
       <app-reservation-status-select [showCleaner]="true" [inputSize]="'l'" [formControl]="status">
-        <ng-container i18n>Stato</ng-container>
+        <ng-container i18n>Stato prenotazione</ng-container>
       </app-reservation-status-select>
     </div>
 
-    <div class="block mb-3">
-      <div class="flex items-center">
-        <tui-input [tuiTextfieldSize]="'l'" class="grow me-2" [formControlName]="'payment_external_id'">
-          <ng-container i18n>ID esterno pagamento (N. ordine nexi)</ng-container>
-          <input tuiTextfield>
-        </tui-input>
-      </div>
-    </div>
+    <tui-accordion class="block mb-3" >
+      <tui-accordion-item>
+        <ng-container i18n>Filtri aggiuntivi</ng-container>
+        <ng-template tuiAccordionItemContent>
+
+          <div class="block mb-3">
+            <app-table-type-select [inputSize]="'l'" [formControlName]="'table_type'">
+              <ng-container i18n>Tipologia di tavolo associata</ng-container>
+            </app-table-type-select>
+          </div>
+
+          <div class="block mb-3">
+            <app-select-payment-status [formControlName]="'payment_status'">
+              <ng-container i18n>Stato del pagamento</ng-container>
+            </app-select-payment-status>
+          </div>
+
+          <div class="block mb-3">
+            <app-select-reservation-payment-preorder-type [formControlName]="'preorder_type'">
+              <ng-container i18n>Tipologia di pagamento</ng-container>
+            </app-select-reservation-payment-preorder-type>
+          </div>
+
+          <div class="block mb-3">
+            <div class="flex items-center">
+              <tui-input [tuiTextfieldSize]="'l'" class="grow me-2" [formControlName]="'payment_external_id'">
+                <ng-container i18n>ID esterno pagamento (N. ordine nexi)</ng-container>
+                <input tuiTextfield>
+              </tui-input>
+            </div>
+          </div>
+
+        </ng-template>
+      </tui-accordion-item>
+    </tui-accordion>
 
     <button tuiButton appearance="primary" type="submit">
       <ng-container i18n>Chiudi</ng-container>
@@ -85,32 +94,32 @@
 
   <div class="col-12">
     @if(status.value){
-    <app-chip (removeClick)="status.patchValue(null)">
+    <app-chip class="me-1" (removeClick)="status.patchValue(null)">
       <ng-container i18n>Stato</ng-container>: <app-reservation-status [status]="status.value"></app-reservation-status>
     </app-chip>
     }
 
     @if(query.value){
-    <app-chip (removeClick)="query.patchValue(null)">
+    <app-chip class="me-1" (removeClick)="query.patchValue(null)">
       <ng-container i18n>Ricerca per</ng-container>: {{ query.value }}
     </app-chip>
     }
 
     @if(hiddenFormGroup.controls.table_type.value) {
-    <app-chip (removeClick)="hiddenFormGroup.controls.table_type.patchValue(null)">
+    <app-chip class="me-1" (removeClick)="hiddenFormGroup.controls.table_type.patchValue(null)">
       <ng-container i18n>Tipologia di tavolo</ng-container>: {{ hiddenFormGroup.controls.table_type.value.name }}
     </app-chip>
     }
 
     @if(hiddenFormGroup.controls.payment_status.value) {
-    <app-chip (removeClick)="hiddenFormGroup.controls.payment_status.patchValue(null)">
+    <app-chip class="me-1" (removeClick)="hiddenFormGroup.controls.payment_status.patchValue(null)">
       <ng-container i18n>Stato pagamento</ng-container>:
       <app-payment-status [status]="hiddenFormGroup.controls.payment_status.value"></app-payment-status>
     </app-chip>
     }
 
     @if(hiddenFormGroup.controls.preorder_type.value) {
-    <app-chip (removeClick)="hiddenFormGroup.controls.preorder_type.patchValue(null)">
+    <app-chip class="me-1" (removeClick)="hiddenFormGroup.controls.preorder_type.patchValue(null)">
       <ng-container i18n>Tipologia pagamento</ng-container>:
       <app-reservation-payment-preorder-type
         [value]="hiddenFormGroup.controls.preorder_type.value"></app-reservation-payment-preorder-type>
@@ -118,7 +127,7 @@
     }
 
     @if(hiddenFormGroup.controls.payment_external_id.value) {
-    <app-chip (removeClick)="hiddenFormGroup.controls.payment_external_id.patchValue(null)">
+    <app-chip class="me-1" (removeClick)="hiddenFormGroup.controls.payment_external_id.patchValue(null)">
       <ng-container i18n>N. Ordine nexi</ng-container>:
       {{ hiddenFormGroup.controls.payment_external_id.value }}
     </app-chip>

@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { TuiButtonModule, TuiDataListModule, TuiDialogService, TuiHostedDropdownModule, TuiLinkModule, TuiTextfieldControllerModule } from "@taiga-ui/core";
 import { MatIcon } from "@angular/material/icon";
-import { TuiDataListWrapperModule, TuiInputModule, TuiMultiSelectModule, TuiSelectModule } from "@taiga-ui/kit";
+import { TuiAccordionModule, TuiDataListWrapperModule, TuiInputModule, TuiMultiSelectModule, TuiSelectModule } from "@taiga-ui/kit";
 import { TuiAutoFocusModule, TuiDay, TuiDayRange, TuiDestroyService } from "@taiga-ui/cdk";
 import { RouterLink } from "@angular/router";
 import {
@@ -106,6 +106,7 @@ export interface ReservationsFilters {
     SelectPaymentStatusComponent,
     PaymentStatusComponent,
     SelectPreorderTypeComponent,
+    TuiAccordionModule,
     // PreorderReservationGroupPreorderTypeComponent,
     ReservationPaymentPreorderTypeComponent,
     SelectReservationPaymentPreorderTypeComponent
