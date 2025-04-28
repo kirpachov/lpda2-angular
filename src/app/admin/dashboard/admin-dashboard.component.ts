@@ -16,6 +16,7 @@ import { TuiIslandModule, TuiTilesModule } from '@taiga-ui/kit';
 import { MatIconModule } from '@angular/material/icon';
 import { ReservationsEventsNotifier } from '@core/services/reservations-events-notifier';
 import { ListReservationsRequiringPaymentComponent } from "../../../core/components/list-reservations-requiring-payment/list-reservations-requiring-payment.component";
+import { ListReservationsHavingGroupsComponent } from "../../../core/components/list-reservations-having-groups/list-reservations-having-groups.component";
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -29,7 +30,8 @@ import { ListReservationsRequiringPaymentComponent } from "../../../core/compone
     TuiHintModule,
     TuiButtonModule,
     MatIconModule,
-    ListReservationsRequiringPaymentComponent
+    ListReservationsRequiringPaymentComponent,
+    ListReservationsHavingGroupsComponent
 ],
   templateUrl: './admin-dashboard.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -8,11 +8,11 @@
       </ng-template>
 
       <span [tuiHint]="detailDatetime" class="me-2">
-        {{ item.datetime | date: 'HH:mm' }}
-
         @if(showFullDate()) {
-          {{ item.datetime | date: 'fullDate' }}
+          {{ item.datetime | date: 'fullDate' }} -
         }
+
+        {{ item.datetime | date: 'HH:mm' }}
       </span>
 
       <span class="me-2">{{ item.fullname }}</span>

@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { TuiButtonModule, TuiDataListModule, TuiDialogService, TuiHostedDropdownModule, TuiLinkModule, TuiTextfieldControllerModule } from "@taiga-ui/core";
 import { MatIcon } from "@angular/material/icon";
-import { TuiAccordionModule, TuiDataListWrapperModule, TuiInputModule, TuiMultiSelectModule, TuiSelectModule } from "@taiga-ui/kit";
+import { TuiAccordionModule, TuiDataListWrapperModule, TuiInputModule, TuiInputNumberModule, TuiMultiSelectModule, TuiSelectModule } from "@taiga-ui/kit";
 import { TuiAutoFocusModule, TuiDay, TuiDayRange, TuiDestroyService } from "@taiga-ui/cdk";
 import { RouterLink } from "@angular/router";
 import {
@@ -77,6 +77,9 @@ export interface ReservationsFilters {
   payment_status: ReservationPaymentStatus;
   preorder_type: ReservationPaymentPreorderType;
   payment_external_id: string;
+
+  people_more_than: number; // >=
+  people_less_than: number; // <=
 }
 
 @Component({
@@ -109,7 +112,8 @@ export interface ReservationsFilters {
     TuiAccordionModule,
     // PreorderReservationGroupPreorderTypeComponent,
     ReservationPaymentPreorderTypeComponent,
-    SelectReservationPaymentPreorderTypeComponent
+    SelectReservationPaymentPreorderTypeComponent,
+    TuiInputNumberModule,
 ],
   templateUrl: './list-reservations-filters.component.html',
   providers: [
@@ -155,6 +159,16 @@ export class ListReservationsFiltersComponent implements OnInit, AfterViewInit {
     payment_external_id: new FormControl<string | null>(null),
 
     table_type: new FormControl<TableType | null>(null),
+
+    /**
+     * Tables where children + adults >= x
+     */
+    people_more_than: new FormControl<number | null>(null),
+
+    /**
+     * Tables where children + adults <= x
+     */
+    people_less_than: new FormControl<number | null>(null),
   });
 
   // Date formatted as string
@@ -216,6 +230,8 @@ export class ListReservationsFiltersComponent implements OnInit, AfterViewInit {
     [
       this.query,
       this.hiddenFormGroup.controls.payment_external_id,
+      this.hiddenFormGroup.controls.people_more_than,
+      this.hiddenFormGroup.controls.people_less_than,
     ].map((control: FormControl): void => {
       control.valueChanges.pipe(
         takeUntil(this.destroy$),
@@ -274,7 +290,13 @@ export class ListReservationsFiltersComponent implements OnInit, AfterViewInit {
       filters["payment_external_id"] = this.hiddenFormGroup.controls.payment_external_id.value;
     }
 
-    // console.log(`formVal`, this.hiddenFormGroup.value);
+    if (this.hiddenFormGroup.controls.people_more_than.value && this.hiddenFormGroup.controls.people_more_than.value) {
+      filters["people_more_than"] = Number(this.hiddenFormGroup.controls.people_more_than.value);
+    }
+
+    if (this.hiddenFormGroup.controls.people_less_than.value && this.hiddenFormGroup.controls.people_less_than.value) {
+      filters["people_less_than"] = Number(this.hiddenFormGroup.controls.people_less_than.value);
+    }
 
     if (typeof this.query.value == 'string' && this.query.valid && this.query.value.length > 0) {
       filters['query'] = this.query.value;

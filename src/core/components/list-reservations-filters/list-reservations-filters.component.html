@@ -15,35 +15,54 @@
       </app-reservation-status-select>
     </div>
 
-    <tui-accordion class="block mb-3" >
+    <tui-accordion class="block mb-3">
       <tui-accordion-item>
         <ng-container i18n>Filtri aggiuntivi</ng-container>
         <ng-template tuiAccordionItemContent>
 
           <div class="block mb-3">
-            <app-table-type-select [inputSize]="'l'" [formControlName]="'table_type'">
+            <app-table-type-select [inputSize]="'l'" [formControl]="hiddenFormGroup.controls.table_type">
               <ng-container i18n>Tipologia di tavolo associata</ng-container>
             </app-table-type-select>
           </div>
 
           <div class="block mb-3">
-            <app-select-payment-status [formControlName]="'payment_status'">
+            <app-select-payment-status [formControl]="hiddenFormGroup.controls.payment_status">
               <ng-container i18n>Stato del pagamento</ng-container>
             </app-select-payment-status>
           </div>
 
           <div class="block mb-3">
-            <app-select-reservation-payment-preorder-type [formControlName]="'preorder_type'">
+            <app-select-reservation-payment-preorder-type [formControl]="hiddenFormGroup.controls.preorder_type">
               <ng-container i18n>Tipologia di pagamento</ng-container>
             </app-select-reservation-payment-preorder-type>
           </div>
 
           <div class="block mb-3">
             <div class="flex items-center">
-              <tui-input [tuiTextfieldSize]="'l'" class="grow me-2" [formControlName]="'payment_external_id'">
+              <tui-input [tuiTextfieldSize]="'l'" class="grow me-2" [formControl]="hiddenFormGroup.controls.payment_external_id">
                 <ng-container i18n>ID esterno pagamento (N. ordine nexi)</ng-container>
                 <input tuiTextfield>
               </tui-input>
+            </div>
+          </div>
+
+          <div class="block mb-3">
+            <div class="flex items-center">
+              <tui-input-number [tuiTextfieldSize]="'l'" class="grow me-2" [formControl]="hiddenFormGroup.controls.people_more_than">
+                <ng-container i18n>Numero minimo di persone</ng-container>
+                <input tuiTextfield>
+              </tui-input-number>
+            </div>
+          </div>
+
+
+          <div class="block mb-3">
+            <div class="flex items-center">
+              <tui-input-number [tuiTextfieldSize]="'l'" class="grow me-2" [formControl]="hiddenFormGroup.controls.people_less_than">
+                <ng-container i18n>Numero massimo di persone</ng-container>
+                <input tuiTextfield>
+              </tui-input-number>
             </div>
           </div>
 
@@ -130,6 +149,26 @@
     <app-chip class="me-1" (removeClick)="hiddenFormGroup.controls.payment_external_id.patchValue(null)">
       <ng-container i18n>N. Ordine nexi</ng-container>:
       {{ hiddenFormGroup.controls.payment_external_id.value }}
+    </app-chip>
+    }
+
+    @if(hiddenFormGroup.controls.people_more_than.value) {
+    <app-chip class="me-1" (removeClick)="hiddenFormGroup.controls.people_more_than.patchValue(null)">
+      <ng-container i18n>Almeno</ng-container>
+      <b>
+        {{ hiddenFormGroup.controls.people_more_than.value }}
+      </b>
+      <ng-container i18n>persone</ng-container>
+    </app-chip>
+    }
+
+    @if(hiddenFormGroup.controls.people_less_than.value) {
+    <app-chip class="me-1" (removeClick)="hiddenFormGroup.controls.people_less_than.patchValue(null)">
+      <ng-container i18n>Massimo</ng-container>
+      <b>
+        {{ hiddenFormGroup.controls.people_less_than.value }}
+      </b>
+      <ng-container i18n>persone</ng-container>
     </app-chip>
     }
   </div>
