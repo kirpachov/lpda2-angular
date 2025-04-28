@@ -1,0 +1,10 @@
+<tui-expand [expanded]="list.items().length > 0">
+  <p class="text-lg">
+    <ng-container i18n>Prenotazioni non pagate ({{list.items().length}})</ng-container>
+  </p>
+
+  <app-admin-list-reservations
+    #list
+    [filters]="filters"
+  ></app-admin-list-reservations>
+</tui-expand>

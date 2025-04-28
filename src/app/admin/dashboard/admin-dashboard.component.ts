@@ -15,6 +15,7 @@ import { Stats } from '@core/lib/interfaces/stats';
 import { TuiIslandModule, TuiTilesModule } from '@taiga-ui/kit';
 import { MatIconModule } from '@angular/material/icon';
 import { ReservationsEventsNotifier } from '@core/services/reservations-events-notifier';
+import { ListReservationsRequiringPaymentComponent } from "../../../core/components/list-reservations-requiring-payment/list-reservations-requiring-payment.component";
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -28,7 +29,8 @@ import { ReservationsEventsNotifier } from '@core/services/reservations-events-n
     TuiHintModule,
     TuiButtonModule,
     MatIconModule,
-  ],
+    ListReservationsRequiringPaymentComponent
+],
   templateUrl: './admin-dashboard.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

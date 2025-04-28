@@ -2,53 +2,13 @@
   <ng-container i18n>Prenotazioni</ng-container>
 </h1>
 
-
-<ng-template #datetimeCol>
-  <ng-container i18n>Orario</ng-container>
-</ng-template>
-
-<ng-template #nameCol>
-  <ng-container i18n>Nome</ng-container>
-</ng-template>
-
-<ng-template #emailCol>
-  <ng-container i18n>Email</ng-container>
-</ng-template>
-
-<ng-template #peopleCol>
-  <ng-container i18n>N°</ng-container>
-</ng-template>
-
-<ng-template #statusCol>
-  <ng-container i18n>Stato</ng-container>
-</ng-template>
-
-<ng-template #tableCol>
-  <ng-container i18n>Tavolo</ng-container>
-</ng-template>
-
-<ng-template #detailsCol>
-  <ng-container i18n>Note</ng-container>
-</ng-template>
-
-<ng-template #contactsCol>
-  <ng-container i18n>Contatti</ng-container>
-</ng-template>
-
-<ng-template #noItems>
-  <app-no-items [showLoader]="false">
-    <h4 i18n>Nessuna prenotazione</h4>
-    <span i18n>Prova a modificare i filtri di ricerca</span>
-  </app-no-items>
-</ng-template>
-
-<app-list-reservations-filters [loading]="loading()" (filtersChanged)="filtersChanged($event)" [data]="data()">
-  <tui-loader [overlay]="true" [showLoader]="loading()">
-    <app-admin-list-reservations (editTable)="editTable($event)" (updateStatus)="updateStatus($event[0], $event[1])"  [reservations]="items()"></app-admin-list-reservations>
+<app-list-reservations-filters [loading]="list.loading()" (filtersChanged)="filtersChanged($event)" [data]="list.data()">
+  <tui-loader [overlay]="true" [showLoader]="list.loading()">
+    <app-admin-list-reservations #list [filters]="filters"></app-admin-list-reservations>
   </tui-loader>
 </app-list-reservations-filters>
 
 
-<app-reservation-tables-summary [showLoader]="loading()" [filters]="this.filters"></app-reservation-tables-summary>
+<app-reservation-tables-summary [showLoader]="list.loading()" [filters]="this.filters"></app-reservation-tables-summary>
 
 <router-outlet></router-outlet>

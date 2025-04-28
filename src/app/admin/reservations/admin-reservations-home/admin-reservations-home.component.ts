@@ -15,7 +15,7 @@ import {TuiInputModule} from "@taiga-ui/kit";
 import {TuiAutoFocusModule, TuiDay, TuiDestroyService} from "@taiga-ui/cdk";
 import {TuiButtonModule, TuiDialogService, TuiExpandModule, TuiHintModule, TuiLinkModule, TuiLoaderModule} from "@taiga-ui/core";
 import {MatIcon} from "@angular/material/icon";
-import {NavigationEnd, Router, RouterLink, RouterOutlet} from "@angular/router";
+import {NavigationEnd, Router, RouterLink, RouterModule, RouterOutlet} from "@angular/router";
 import {ShowImageComponent} from "@core/components/show-image/show-image.component";
 import {TuiTablePagination, TuiTablePaginationModule} from "@taiga-ui/addon-table";
 import {SearchResult} from "@core/lib/search-result.model";
@@ -73,32 +73,11 @@ import { AdminListReservationsComponent } from "../../../../core/components/admi
   selector: 'app-admin-reservations-home',
   standalone: true,
   imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    TuiInputModule,
-    TuiAutoFocusModule,
-    TuiButtonModule,
-    MatIcon,
-    RouterLink,
-    TuiLinkModule,
-    RouterOutlet,
-    TuiTablePaginationModule,
-    TuiHintModule,
     ListReservationsFiltersComponent,
-    ListReservationsFiltersComponent,
-    ReservationEventsComponent,
-    PhoneToComponent,
-    MailToComponent,
-    ReservationPeopleComponent,
-    NoItemsComponent,
-    TuiLoaderModule,
-    AdminReservationPaymentComponent,
-    FormsModule,
-    EipReservationStatusComponent,
-    TuiExpandModule,
+    AdminListReservationsComponent,
     ReservationTablesSummaryComponent,
-    PaymentStatusColorPipe,
-    AdminListReservationsComponent
+    RouterModule,
+    TuiLoaderModule,
 ],
   templateUrl: './admin-reservations-home.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -106,147 +85,12 @@ import { AdminListReservationsComponent } from "../../../../core/components/admi
     TuiDestroyService
   ],
 })
-export class AdminReservationsHomeComponent implements OnInit {
-  readonly loading: WritableSignal<boolean> = signal(false);
-  readonly data: WritableSignal<SearchResult<Reservation> | null> = signal(null);
-  readonly items: Signal<Reservation[]> = computed(() => this.data()?.items || []);
-
-  private readonly dialogs: TuiDialogService = inject(TuiDialogService);
-  private readonly injector: Injector = inject(Injector);
-  private readonly service: ReservationsService = inject(ReservationsService);
-  private readonly router = inject(Router);
-  private readonly notifications: NotificationsService = inject(NotificationsService);
-  private readonly date = inject(DatePipe);
-  private readonly destroy$: TuiDestroyService = inject(TuiDestroyService);
+export class AdminReservationsHomeComponent {
   readonly _ = inject(Title).setTitle($localize`Prenotazioni | La Porta D'Acqua`);
-  private readonly reservationsEvents: ReservationsEventsNotifier = inject(ReservationsEventsNotifier);
-
-  @ViewChild(ReservationTurnSelectComponent, {static: true}) turnSelect?: ReservationTurnSelectComponent;
-
-  readonly inputSize: "s" | "m" | "l" = 'm';
 
   filters: Partial<ReservationsFilters> = {};
 
-  ngOnInit(): void {
-    this.reservationsEvents.listenWsChanges().subscribe({
-      next: () => this.search(),
-    });
-
-    this.router.events.pipe(
-      takeUntil(this.destroy$)
-    ).subscribe({
-      next: (e: unknown) => {
-        if (e instanceof NavigationEnd) this.search();
-      }
-    });
-  }
-
-  updateStatus(item: Reservation, status: ReservationStatus): void {
-    const id = item.id;
-    if (!(id && status)) {
-      this.notifications.error();
-      return;
-    }
-
-    this.notifications.confirm(`La prenotazione verrà aggiornata.`, { title: $localize`Prenotazione ${item.fullname} x ${(item.adults || 0) + (item.children || 0)} in stato ${ReservationStatusTranslations[status].title}` }).subscribe({
-      next: (confirmed: boolean): void => {
-        if (confirmed) {
-          this.confirmedUpdateStatus(id, status);
-        }
-      }
-    });
-  }
-
-  delete(reservationId: number | undefined): void {
-    if (!(reservationId)) return;
-
-    this.notifications.confirm($localize`Sei sicuro di voler cancellare questa prenotazione?`).subscribe({
-      next: (confirmed: boolean): void => {
-        if (confirmed) this.confirmedDelete(reservationId);
-      }
-    });
-  }
-
   filtersChanged(filters: Partial<ReservationsFilters>): void {
-    this.filters = filters;
-    this.search(filters);
-  }
-
-  editTable(reservation: Reservation) {
-    this.dialogs.open<string | false | null>(
-      new PolymorpheusComponent(EditReservationTableModalComponent, this.injector),
-      {
-        data: {
-          item: reservation
-        }
-      }
-    ).pipe(
-      takeUntil(this.destroy$)
-    ).subscribe({
-      next: (result: string | null | false): void => {
-        // console.log(`result`, {result});
-        if (result != false && reservation.id) {
-          this.loading.set(true);
-          this.service.update(reservation.id, { table: result }).pipe(
-            takeUntil(this.destroy$),
-            finalize(() => this.loading.set(false)),
-            finalize(() => this.search()),
-          ).subscribe();
-        }
-      },
-      error: (error: any): void => console.error(error),
-    })
-  }
-
-  private confirmedUpdateStatus(id: number, status: ReservationStatus): void {
-    this.loading.set(true);
-    const req = status == "deleted" ? this.service.destroy(id) : this.service.updateStatus(id, status);
-
-    req.pipe(
-      takeUntil(this.destroy$),
-      finalize(() => this.loading.set(false)),
-    ).subscribe({
-      next: () => {
-        this.notifications.fireSnackBar($localize`Stato aggiornato con successo.`);
-        this.search();
-      },
-      error: (error: HttpErrorResponse) => {
-        this.notifications.error(parseHttpErrorMessage(error) || $localize`Qualcosa è andato storto nell'aggiornamento dello stato.`);
-      }
-    });
-  }
-
-  private confirmedDelete(id: number): void {
-    this.loading.set(true);
-    this.service.destroy(id).pipe(
-      takeUntil(this.destroy$),
-      finalize(() => {
-        this.loading.set(false);
-        this.search();
-      }),
-    ).subscribe({
-      error: (error: HttpErrorResponse) => {
-        this.notifications.error(parseHttpErrorMessage(error) || $localize`Qualcosa è andato storto nella cancellazione.`);
-      }
-    })
-  }
-
-  private search(filters: Partial<ReservationsFilters> = this.filters): void {
-    filters ||= {};
-    filters = {...filters};
-
-    this.loading.set(true);
-    this.service.search(filters).pipe(
-      takeUntil(this.destroy$),
-      finalize(() => this.loading.set(false)),
-    ).subscribe({
-      next: (result: SearchResult<Reservation>) => {
-        this.data.set(result);
-      },
-      error: (error: HttpErrorResponse) => {
-        this.notifications.error(parseHttpErrorMessage(error) || $localize`Qualcosa è andato storto nella ricerca.`);
-        console.error(error);
-      }
-    });
+    this.filters = {...filters};
   }
 }
