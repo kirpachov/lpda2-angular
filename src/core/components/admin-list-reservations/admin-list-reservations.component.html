@@ -9,6 +9,10 @@
 
       <span [tuiHint]="detailDatetime" class="me-2">
         {{ item.datetime | date: 'HH:mm' }}
+
+        @if(showFullDate()) {
+          {{ item.datetime | date: 'fullDate' }}
+        }
       </span>
 
       <span class="me-2">{{ item.fullname }}</span>
@@ -133,9 +137,11 @@
 </app-no-items>
 }
 
-<button type="button" (click)="export()" [size]="'s'" [showLoader]="loading()" tuiButton appearance="flat">
-  <span class="flex items-center">
-    <mat-icon>download_file</mat-icon>
-    <ng-container i18n>Esporta prenotazioni filtrate</ng-container>
-  </span>
-</button>
+@if(items().length > 0) {
+  <button type="button" (click)="export()" [size]="'s'" [showLoader]="loading()" tuiButton appearance="flat">
+    <span class="flex items-center">
+      <mat-icon>download_file</mat-icon>
+      <ng-container i18n>Esporta prenotazioni filtrate</ng-container>
+    </span>
+  </button>
+}

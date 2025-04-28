@@ -78,8 +78,11 @@ export class AdminListReservationsComponent implements OnInit, OnChanges {
   private readonly destroy$: TuiDestroyService = inject(TuiDestroyService);
   private readonly reservationsEvents: ReservationsEventsNotifier = inject(ReservationsEventsNotifier);
 
+  readonly showFullDate: WritableSignal<boolean> = signal(false);
+
   @Input() set filters(filters: Partial<ReservationsFilters>) {
     this._filters = filters;
+    this.filtersChanged()
   }
 
   get filters(): Partial<ReservationsFilters> {
@@ -146,9 +149,10 @@ export class AdminListReservationsComponent implements OnInit, OnChanges {
     });
   }
 
-  filtersChanged(filters: Partial<ReservationsFilters>): void {
-    this.filters = filters;
-    this.search(filters);
+  private filtersChanged(): void {
+    // this.filters = filters;
+    // this.search(filters);
+    this.showFullDate.set(this.filters.date_from !== this.filters.date_to);
   }
 
   editTable(reservation: Reservation) {
