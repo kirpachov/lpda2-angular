@@ -1,0 +1,65 @@
+<div class="block">
+
+  <form class="block px-2" [formGroup]="form">
+    <ng-template #peopleOptionTemplate let-people>
+      {{ people }}
+
+      @if(people > 1) {
+      <ng-container i18n>persone</ng-container>
+      } @else {
+      <ng-container i18n>persona</ng-container>
+      }
+    </ng-template>
+
+    <ng-template #peopleIcon>
+      @switch(form.controls.people.value) {
+        @case(1) {
+          <mat-icon>person</mat-icon>
+        } @case(2) {
+          <mat-icon>people</mat-icon>
+        } @default {
+          <mat-icon>groups</mat-icon>
+        }
+      }
+    </ng-template>
+
+    <div tuiGroup class="block mb-2" [collapsed]="false">
+      <tui-select  [tuiTextfieldIconLeft]="peopleIcon"  [valueContent]="peopleOptionTemplate" [formControl]="form.controls.people"
+        [tuiTextfieldLabelOutside]="true">
+        <tui-data-list-wrapper [itemContent]="peopleOptionTemplate" *tuiDataList tuiMultiSelectGroup
+          [items]="peopleArray()"></tui-data-list-wrapper>
+
+        <select [items]="peopleArray()" tuiSelect></select>
+      </tui-select>
+
+      <!-- CALENDAR -->
+
+      <ng-template #calendarIcon>
+        <mat-icon>calendar_today</mat-icon>
+      </ng-template>
+
+      <ng-template #calendarTemplate>
+        <tui-calendar (dayClick)="form.controls.date.setValue($event); dateDropdown.close()"></tui-calendar>
+      </ng-template>
+
+      <tui-hosted-dropdown #dateDropdown [content]="calendarTemplate">
+
+        <ng-template #icon>
+          <div appearance="icon" tuiWrapper>
+            <ng-container *polymorpheusOutlet="TUI_ARROW"></ng-container>
+          </div>
+        </ng-template>
+
+        <tui-primitive-textfield [tuiTextfieldIconLeft]="calendarIcon" [tuiTextfieldIcon]="icon" class="w-full !rounded-tl-none !rounded-bl-none"
+          [editable]="false" [tuiTextfieldLabelOutside]="true" [value]="dateReadonly()">
+        </tui-primitive-textfield>
+      </tui-hosted-dropdown>
+    </div>
+
+    <button class="w-full" appearance="primary" size="l" tuiButton type="submit">
+      Cerca tavolo
+    </button>
+
+  </form>
+
+</div>
