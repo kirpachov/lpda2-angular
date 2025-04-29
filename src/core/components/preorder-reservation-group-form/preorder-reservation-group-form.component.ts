@@ -72,14 +72,16 @@ export class PreorderReservationGroupFormComponent {
     payment_value: FormControl<number | null>,
     message: FormControl<Record<string, string> | null>,
     preorder_type: FormControl<PreorderReservationGroup["preorder_type"] | null>,
-    table_types: FormControl<TableTypeToPreorderReservationGroup[] | null> 
+    table_types: FormControl<TableTypeToPreorderReservationGroup[] | null>,
+    min_people: FormControl<number | null>,
   }>({
     title: new FormControl<string | null>($localize`Pagamento alla prenotazione richiesto ${Date.now()}`, [Validators.required]),
     active: new FormControl<boolean | null>(true, [Validators.required, Validators.pattern(/^(true|false)$/)]),
     payment_value: new FormControl<number | null>(null, [Validators.required]),
     message: new FormControl<Record<string, string> | null>(null, []),
     preorder_type: new FormControl<PreorderReservationGroup["preorder_type"] | null>(null, [Validators.required]),
-    table_types: new FormControl<TableTypeToPreorderReservationGroup[] | null>(null, [])
+    table_types: new FormControl<TableTypeToPreorderReservationGroup[] | null>(null, []),
+    min_people: new FormControl<number | null>(null, [Validators.required, Validators.min(1)]),
   });
 
   private submitted: boolean = false;
@@ -104,7 +106,8 @@ export class PreorderReservationGroupFormComponent {
       active: obj.status === "active",
       message: obj.translations?.message || {},
       preorder_type: obj.preorder_type,
-      table_types: obj.table_type_to_preorder_reservation_groups ?? []
+      table_types: obj.table_type_to_preorder_reservation_groups ?? [],
+      min_people: obj.min_people ?? null,
     })
   }
 
