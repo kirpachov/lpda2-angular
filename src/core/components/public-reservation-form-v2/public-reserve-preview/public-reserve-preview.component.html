@@ -1,69 +1,10 @@
 <div class="block">
 
   <form (ngSubmit)="onFormSubmit()" class="block px-2" [formGroup]="form">
-    <ng-template #peopleOptionTemplate let-people>
-      {{ people }}
-
-      @if(people > 1) {
-      <ng-container i18n>persone</ng-container>
-      } @else {
-      <ng-container i18n>persona</ng-container>
-      }
-    </ng-template>
-
-    <ng-template #peopleIcon>
-      @switch(form.controls.people.value) {
-      @case(1) {
-      <mat-icon>person</mat-icon>
-      } @case(2) {
-      <mat-icon>people</mat-icon>
-      } @default {
-      <mat-icon>groups</mat-icon>
-      }
-      }
-    </ng-template>
-
     <div tuiGroup class="block mb-2" [collapsed]="false">
-      <tui-select [tuiTextfieldIconLeft]="peopleIcon" [valueContent]="peopleOptionTemplate"
-        [formControl]="form.controls.people" [tuiTextfieldLabelOutside]="true">
-        <tui-data-list-wrapper [itemContent]="peopleOptionTemplate" *tuiDataList tuiMultiSelectGroup
-          [items]="peopleArray()"></tui-data-list-wrapper>
+      <app-people-input [formControl]="form.controls.people"></app-people-input>
 
-        <select [items]="peopleArray()" tuiSelect></select>
-      </tui-select>
-
-      <!-- CALENDAR -->
-
-      <ng-template #calendarIcon>
-        <mat-icon>calendar_today</mat-icon>
-      </ng-template>
-
-      <ng-template #calendarTemplate>
-        <tui-calendar class="m-auto" [min]="form.controls.showOnlyValidDates.value ? today() : null"
-          [max]="form.controls.showOnlyValidDates.value ? maxDate() : null" (monthChange)="onMonthChange($event)"
-          [disabledItemHandler]="disabledDates" (touchend)="touched()" (dayClick)="onDayClick($event, dateDropdown)"
-          [value]="this.form.controls.date.value"></tui-calendar>
-
-        <tui-checkbox-block class="m-1" contentAlign="right" [formControl]="form.controls.showOnlyValidDates" size="l">
-          <ng-container i18n>Mostra solo date selezionabili</ng-container>
-        </tui-checkbox-block>
-
-      </ng-template>
-
-      <tui-hosted-dropdown #dateDropdown [content]="calendarTemplate">
-
-        <ng-template #icon>
-          <div appearance="icon" tuiWrapper>
-            <ng-container *polymorpheusOutlet="TUI_ARROW"></ng-container>
-          </div>
-        </ng-template>
-
-        <tui-primitive-textfield [tuiTextfieldIconLeft]="calendarIcon" [tuiTextfieldIcon]="icon"
-          class="w-full !rounded-tl-none !rounded-bl-none" [editable]="false" [tuiTextfieldLabelOutside]="true"
-          [value]="dateReadonly()">
-          <input tuiTextfield class="cursor-pointer">
-        </tui-primitive-textfield>
-      </tui-hosted-dropdown>
+      <app-date-input #date [formControl]="form.controls.date"></app-date-input>
     </div>
 
     <button [showLoader]="loadingTimes()" class="w-full" appearance="primary" size="l" tuiButton type="submit">
@@ -72,53 +13,49 @@
   </form>
 
   @if(loadedValidTimes() && !loadingTimes()) {
-    @for (item of validTimes(); track item) {
-    <button type="button" (click)="onTimeClick(item)" size="m" tuiButton appearance="custom"
-      [ngClass]="{'btn-primary': form.controls.time.value && form.controls.time.value.hours == item.hours && form.controls.time.value.minutes == item.minutes, 'btn-primary-outline': !(form.controls.time.value && form.controls.time.value.hours == item.hours && form.controls.time.value.minutes == item.minutes)}">
-      {{ item }}
-    </button>
-    }
-  
-    @if(validTimes().length == 0) {
-    <div>
-      <p class="text-center text-xl text-danger block mb-3">
-        <ng-container i18n>Siamo spiacenti, non sono disponibili orari per la data selezionata.</ng-container>
-  
-        @if(this.form.controls.date.value && this.maxDate() && this.form.controls.date.value.dayAfter(this.maxDate()!)) {
-      <p>
-        <ng-container i18n>L'ultimo giorno prenotabile è</ng-container>
-        {{ maxDate()?.toLocalNativeDate() | date: 'fullDate' }}
-      </p>
-      }
-      </p>
-  
-      <button appearance="outline" tuiButton type="button" (click)="findValidDate()">
-        <ng-container i18n>Trova una data</ng-container>
-      </button>
-    </div>
-    }
-  
-  
-    @if(holidayMessages().length){
-    <div class="w-full my-5 border border-primary p-3 rounded-lg">
-      @for(w of holidayMessages(); track w){
-      <div class="w-full text-pretty my-3 text-xl" [innerHTML]="w | linkify"></div>
-      }
-    </div>
-    }
-  
-  
-    @if(warningsToShow().length > 0){
-    <div #warningsDiv class="w-full my-5 border border-primary p-3 rounded-lg">
-      @for(w of warningsToShow(); track w){
-      <div class="w-full text-pretty my-3 text-xl" [innerHTML]="w | linkify"></div>
-      }
-      <button class="mb-3" tuiButton (click)="warningAccepted.setValue(true)" appearance="primary" size="m" type="button">
-        <ng-container i18n>Conferma</ng-container>
-      </button>
-    </div>
-    }
+  @for (item of validTimes(); track item) {
+  <button type="button" (click)="onTimeClick(item)" size="m" tuiButton appearance="custom"
+    [ngClass]="{'btn-primary': form.controls.time.value && form.controls.time.value.hours == item.hours && form.controls.time.value.minutes == item.minutes, 'btn-primary-outline': !(form.controls.time.value && form.controls.time.value.hours == item.hours && form.controls.time.value.minutes == item.minutes)}">
+    {{ item }}
+  </button>
   }
 
+  @if(validTimes().length == 0) {
+  <div>
+    <p class="text-center text-xl text-danger block mb-3">
+      <ng-container i18n>Siamo spiacenti, non sono disponibili orari per la data selezionata.</ng-container>
 
+      @if(this.form.controls.date.value && date.maxDate() && this.form.controls.date.value.dayAfter(date.maxDate()!)) {
+    <p>
+      <ng-container i18n>L'ultimo giorno prenotabile è</ng-container>
+      {{ date.maxDate()?.toLocalNativeDate() | date: 'fullDate' }}
+    </p>
+    }
+    </p>
+
+    <button appearance="outline" tuiButton type="button" (click)="date.findValidDate()">
+      <ng-container i18n>Trova una data</ng-container>
+    </button>
+  </div>
+  }
+
+  @if(holidayMessages().length){
+  <div class="w-full my-5 border border-primary p-3 rounded-lg">
+    @for(w of holidayMessages(); track w){
+    <div class="w-full text-pretty my-3 text-xl" [innerHTML]="w | linkify"></div>
+    }
+  </div>
+  }
+
+  @if(warningsToShow().length > 0){
+  <div #warningsDiv class="w-full my-5 border border-primary p-3 rounded-lg">
+    @for(w of warningsToShow(); track w){
+    <div class="w-full text-pretty my-3 text-xl" [innerHTML]="w | linkify"></div>
+    }
+    <button class="mb-3" tuiButton (click)="warningAccepted.setValue(true)" appearance="primary" size="m" type="button">
+      <ng-container i18n>Conferma</ng-container>
+    </button>
+  </div>
+  }
+  }
 </div>

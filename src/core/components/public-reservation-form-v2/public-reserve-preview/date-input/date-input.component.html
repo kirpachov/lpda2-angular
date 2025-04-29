@@ -1,0 +1,28 @@
+<ng-template #calendarIcon>
+  <mat-icon>calendar_today</mat-icon>
+</ng-template>
+
+<ng-template #calendarTemplate>
+  <tui-calendar class="m-auto" [min]="showOnlyValidDates() ? today() : null"
+    [max]="showOnlyValidDates() ? maxDate() : null" (monthChange)="onMonthChange($event)"
+    [disabledItemHandler]="disabledDates" (touchend)="touched()" (dayClick)="onDayClick($event)"
+    [value]="control.value"></tui-calendar>
+
+  <!-- <tui-checkbox-block class="m-1" contentAlign="right" size="l">
+    <ng-container i18n>Mostra solo date selezionabili</ng-container>
+  </tui-checkbox-block> -->
+</ng-template>
+
+<tui-hosted-dropdown class="w-full" #dateDropdown [content]="calendarTemplate">
+  <ng-template #icon>
+    <div appearance="icon" tuiWrapper>
+      <ng-container *polymorpheusOutlet="TUI_ARROW"></ng-container>
+    </div>
+  </ng-template>
+
+  <tui-primitive-textfield [tuiTextfieldIconLeft]="calendarIcon" [tuiTextfieldIcon]="icon"
+    class="w-full !rounded-tl-none !rounded-bl-none" [editable]="false" [tuiTextfieldLabelOutside]="true"
+    [value]="dateReadonly()">
+    <input tuiTextfield class="cursor-pointer">
+  </tui-primitive-textfield>
+</tui-hosted-dropdown>
