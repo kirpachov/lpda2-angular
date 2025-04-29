@@ -14,6 +14,8 @@ export class PreorderReservationGroup extends BaseModel {
   preorder_type?: PreorderType;
   payment_value?: number;
 
+  min_people?: number;
+
   // Translated message: {language: message}
   message?: string;
 
@@ -35,6 +37,7 @@ export class PreorderReservationGroup extends BaseModel {
     // this.active_to = data.active_to ? new Date(data.active_to) : undefined;
     this.preorder_type = data.preorder_type;
     this.payment_value = data.payment_value;
+    this.min_people = data.min_people;
     this.message = data.message;
 
     this.turns = (data.turns || []).map((datum: ReservationTurnData) => new ReservationTurn(datum));

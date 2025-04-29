@@ -35,6 +35,22 @@
         </td>
       </tr>
 
+      <tr class="tui-table__tr tui-table__tr_border_none">
+        <td class="tui-table__td">
+          <span class="text-xl block mb-2">
+            <ng-container i18n>N° minimo di persone eleggibilità</ng-container>
+          </span>
+
+          <p class="text-slate-400">
+            <ng-container i18n>Quando il valore è presente, il pagamento verrà richiesto solo per prenotazioni più grandi del numero indicato.</ng-container>
+          </p>
+        </td>
+
+        <td class="tui-table__td">
+          {{ item()!.min_people }}
+        </td>
+      </tr>
+
 
       <tr class="tui-table__tr tui-table__tr_border_none">
         <td class="tui-table__td">

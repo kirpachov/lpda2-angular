@@ -18,7 +18,7 @@
 
   <div class="block mb-3">
     <tui-input-number
-      [formControlName]="'payment_value'" [tuiTextfieldPrefix]="'€'">
+      [formControl]="form.controls.payment_value" [tuiTextfieldPrefix]="'€'">
       <ng-container i18n>Valore pagamento</ng-container>
       <input tuiTextfield>
     </tui-input-number>
@@ -27,7 +27,21 @@
   </div>
 
   <div class="block mb-3">
-    <app-i18n-input [long]="false" [formControlName]="'message'">
+    <tui-input-number
+      [formControl]="form.controls.min_people">
+      <ng-container i18n>N° minimo di persone eleggibilità</ng-container>
+      <input tuiTextfield>
+    </tui-input-number>
+
+    <p class="text-slate-400">
+      <ng-container i18n>Quando il valore è presente, il pagamento verrà richiesto solo per prenotazioni più grandi del numero indicato.</ng-container>
+    </p>
+
+    <app-errors [errors]="e('min_people')"></app-errors>
+  </div>
+
+  <div class="block mb-3">
+    <app-i18n-input [long]="false" [formControl]="form.controls.message">
       <ng-container i18n>Messaggio per i clienti che cercano di prenotare</ng-container>
     </app-i18n-input>
 
