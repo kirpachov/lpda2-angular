@@ -7,7 +7,7 @@ import { PublicPagesDataService } from '@core/services/http/public-pages-data.se
 import { PublicReservationsService } from '@core/services/http/public-reservations.service';
 import { NotificationsService } from '@core/services/notifications.service';
 import { TuiBooleanHandler, TuiContextWithImplicit, TuiDay, TuiDestroyService, TuiMonth, TuiTime } from '@taiga-ui/cdk';
-import { takeUntil, filter, finalize, merge } from 'rxjs';
+import { takeUntil, filter, finalize, merge, map, distinctUntilChanged } from 'rxjs';
 import { ErrorsComponent } from "../../errors/errors.component";
 import { TuiButtonModule, TuiCalendarModule, TuiDataListModule, TuiGroupModule, TuiHostedDropdownModule, TuiPrimitiveTextfieldModule, TuiSizeL, TuiSizeM, TuiSizeS, TuiSvgModule, TuiTextfieldControllerModule, TuiWrapperModule } from '@taiga-ui/core';
 import { MatIconModule } from '@angular/material/icon';
@@ -24,6 +24,8 @@ import { LinkifyPipe } from "../../../pipes/linkify.pipe";
 import { PeopleInputComponent } from "./people-input/people-input.component";
 import { DateInputComponent } from "./date-input/date-input.component";
 import { TimeInputComponent } from "./time-input/time-input.component";
+import { ActivatedRoute, Params } from '@angular/router';
+import { stringToTuiDay } from '@core/lib/tui-datetime-to-iso-string';
 
 @Component({
   selector: 'app-public-reserve-preview',
@@ -47,6 +49,7 @@ import { TimeInputComponent } from "./time-input/time-input.component";
 })
 export class PublicReservePreviewComponent {
 
+  private readonly route = inject(ActivatedRoute);
   private readonly cd: ChangeDetectorRef = inject(ChangeDetectorRef);
   private readonly destroy$: TuiDestroyService = inject(TuiDestroyService);
   private readonly reservationsv2: PublicReservationsV2Service = inject(PublicReservationsV2Service);
@@ -58,8 +61,11 @@ export class PublicReservePreviewComponent {
 
   readonly warningsToShow: WritableSignal<string[]> = signal<string[]>([]);
   readonly form = new FormGroup({
-    people: new FormControl<number | null>(2, [Validators.required, Validators.min(1), Validators.max(20)]),
-    date: new FormControl<TuiDay | null>(TuiDay.currentLocal(), [Validators.required]),
+    people: new FormControl<number | null>(
+      Number(this.route.snapshot.queryParams["people"]) || 2, [Validators.required, Validators.min(1), Validators.max(20)]),
+    date: new FormControl<TuiDay | null>(
+      stringToTuiDay(this.route.snapshot.queryParams["date"]) || TuiDay.currentLocal(), [Validators.required]),
+
     time: new FormControl<TuiTime | null>(null, [Validators.required]),
   });
 
@@ -143,6 +149,7 @@ export class PublicReservePreviewComponent {
 
     this.formUpdated();
     this.loadValidTimes();
+    this.listenQueryParamsAndUpdateForm()
   }
 
   onFormSubmit() {
@@ -224,5 +231,21 @@ export class PublicReservePreviewComponent {
     this.validTimes.set([]);
     this.groups.set({});
     this.loadValidTimes();
+  }
+
+  private listenQueryParamsAndUpdateForm(): void {
+    this.route.queryParams.pipe(
+      takeUntil(this.destroy$)
+    ).subscribe({
+      next: (p: Params) => {
+        const data: { date?: TuiDay, people?: number } = {};
+        if (p["people"]) data["people"] = Number(p["people"]);
+        
+        const date: TuiDay | null = stringToTuiDay(p["date"]);
+        if (date)  data["date"] = date;
+
+        this.form.patchValue(data);
+      }
+    });
   }
 }
