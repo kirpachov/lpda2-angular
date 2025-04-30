@@ -1,4 +1,4 @@
-<div class="block">
+<div class="container max-w-[600px] mx-auto">
 
   <form (ngSubmit)="onFormSubmit()" class="block px-2" [formGroup]="form">
     <div tuiGroup class="block mb-2" [collapsed]="false">
@@ -7,18 +7,19 @@
       <app-date-input #date [formControl]="form.controls.date"></app-date-input>
     </div>
 
-    <button [showLoader]="loadingTimes()" class="w-full" appearance="primary" size="l" tuiButton type="submit">
-      Cerca tavolo
+    <div class="block mb-2">
+      <app-time-input [formControl]="form.controls.time" [options]="validTimes()" ></app-time-input>
+    </div>
+
+    <button [disabled]="form.invalid" [showLoader]="loadingTimes()" class="w-full" appearance="primary" size="l" tuiButton type="submit">
+      Prenota un tavolo
+      @if(form.controls.time.value) {
+        alle {{ form.controls.time.value.toString("HH:MM") }}
+      }
     </button>
   </form>
 
   @if(loadedValidTimes() && !loadingTimes()) {
-  @for (item of validTimes(); track item) {
-  <button type="button" (click)="onTimeClick(item)" size="m" tuiButton appearance="custom"
-    [ngClass]="{'btn-primary': form.controls.time.value && form.controls.time.value.hours == item.hours && form.controls.time.value.minutes == item.minutes, 'btn-primary-outline': !(form.controls.time.value && form.controls.time.value.hours == item.hours && form.controls.time.value.minutes == item.minutes)}">
-    {{ item }}
-  </button>
-  }
 
   @if(validTimes().length == 0) {
   <div>
@@ -59,3 +60,5 @@
   }
   }
 </div>
+
+<!-- <pre [innerText]="form.value | json" ></pre> -->

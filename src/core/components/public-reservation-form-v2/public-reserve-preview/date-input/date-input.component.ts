@@ -67,12 +67,12 @@ export class DateInputComponent implements ControlValueAccessor, OnInit {
   readonly TUI_ARROW = TUI_ARROW;
 
   readonly maxDate: WritableSignal<TuiDay | null> = signal(null);
-  readonly showOnlyValidDates: WritableSignal<boolean> = signal(false);
+  readonly onlyValidDates: FormControl<boolean | null> = new FormControl<boolean | null>(true);
 
   readonly today: WritableSignal<TuiDay> = signal(TuiDay.currentLocal());
   readonly validDates: WritableSignal<readonly TuiDay[]> = signal<readonly TuiDay[]>([]);
   readonly disabledDates: TuiBooleanHandler<TuiDay> = (day: TuiDay): boolean => {
-    if (!this.showOnlyValidDates()) return false;
+    if (!this.onlyValidDates.value) return false;
 
     if (day.dayBefore(this.today())) return true;
     if (day.dayAfter(this.today().append({ day: this.maxDaysInAdvance() }))) return true;
@@ -93,7 +93,6 @@ export class DateInputComponent implements ControlValueAccessor, OnInit {
 
   onDayClick($event: TuiDay): void {
     this.control.setValue($event);
-    // dropdownToClose.close();
     this.dropdown?.close();
   }
 
@@ -137,7 +136,7 @@ export class DateInputComponent implements ControlValueAccessor, OnInit {
 
   findValidDate(): void {
     // this.hasSeenInvalidDateMessage.set(true);
-    this.showOnlyValidDates.set(true);
+    this.onlyValidDates.setValue(true);
     this.control.reset(this.defaultDateValue);
     if (this.dropdown) {
       this.dropdown.open = true;
@@ -188,8 +187,6 @@ export class DateInputComponent implements ControlValueAccessor, OnInit {
   }
 
   private formUpdated(): void {
-    // this.formSubmitted.set(false);
-
     this.dateReadonly.set(
       this.datePipe.transform(this.control.value?.toUtcNativeDate(), "d MMMM") ?? this.defaultDateReadonly
     );

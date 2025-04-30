@@ -23,6 +23,7 @@ import { ReservationTurn } from '@core/models/reservation-turn';
 import { LinkifyPipe } from "../../../pipes/linkify.pipe";
 import { PeopleInputComponent } from "./people-input/people-input.component";
 import { DateInputComponent } from "./date-input/date-input.component";
+import { TimeInputComponent } from "./time-input/time-input.component";
 
 @Component({
   selector: 'app-public-reserve-preview',
@@ -31,12 +32,13 @@ import { DateInputComponent } from "./date-input/date-input.component";
     ReactiveFormsModule,
     TuiGroupModule,
     TuiButtonModule,
-    NgClass,
     LinkifyPipe,
     DatePipe,
     PeopleInputComponent,
-    DateInputComponent
-  ],
+    DateInputComponent,
+    TimeInputComponent,
+    // JsonPipe,
+],
   templateUrl: './public-reserve-preview.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
@@ -140,6 +142,7 @@ export class PublicReservePreviewComponent {
     });
 
     this.formUpdated();
+    this.loadValidTimes();
   }
 
   onFormSubmit() {
@@ -150,10 +153,6 @@ export class PublicReservePreviewComponent {
   onDayClick($event: TuiDay, dropdownToClose: { close: () => void }): void {
     this.form.controls.date.setValue($event);
     dropdownToClose.close();
-  }
-
-  onTimeClick(time: TuiTime) {
-    this.form.controls.time.setValue(time);
   }
 
   touched(): void {
