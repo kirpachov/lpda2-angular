@@ -12,7 +12,7 @@
     </div>
 
 
-    @if(!loadingTimes()) {
+    @if(!loadingTimes() && this.form.controls.date.touched) {
 
     @if(validTimes().length == 0) {
     <div class="text-center text-xl text-danger block mb-3">
