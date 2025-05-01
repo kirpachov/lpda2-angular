@@ -8,7 +8,7 @@ import { PublicPageComponent } from '../public-page-component';
   standalone: true,
   imports: [
     PublicHomeReserveComponent
-  ],
+],
   templateUrl: './reserve.component.html',
   styleUrl: './reserve.component.scss'
 })

@@ -1,0 +1,7 @@
+
+<app-public-reserve-preview
+  [formControl]="datePeopleControl"
+  (submitted)="previewSubmitted($event)"
+></app-public-reserve-preview>
+
+<pre [innerText]="{ datePeopleControl: datePeopleControl.value } | json" ></pre>

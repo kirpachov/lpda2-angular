@@ -1,6 +1,6 @@
 import { DatePipe, JsonPipe, NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, ElementRef, EventEmitter, Inject, inject, Input, Output, signal, ViewChild, WritableSignal } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, ElementRef, EventEmitter, Inject, inject, Input, OnInit, Output, signal, ViewChild, WritableSignal } from '@angular/core';
+import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PublicData } from '@core/lib/interfaces/public-data';
 import { SettingValue } from '@core/lib/settings';
 import { PublicPagesDataService } from '@core/services/http/public-pages-data.service';
@@ -45,16 +45,20 @@ import { stringToTuiDay, stringToTuiTime } from '@core/lib/tui-datetime-to-iso-s
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     TuiDestroyService,
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: PublicReservePreviewComponent,
+      multi: true,
+    }
   ],
 })
-export class PublicReservePreviewComponent {
-
+export class PublicReservePreviewComponent implements ControlValueAccessor, OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly destroy$: TuiDestroyService = inject(TuiDestroyService);
   private readonly reservationsv2: PublicReservationsV2Service = inject(PublicReservationsV2Service);
   private readonly notifications: NotificationsService = inject(NotificationsService);
 
-  @Output() submitted: EventEmitter<{ date: string, time: string, people: number }> = new EventEmitter<{ date: string, time: string, people: number }>();
+  @Output() submitted: EventEmitter<{ date: TuiDay, time: TuiTime, people: number }> = new EventEmitter<{ date: TuiDay, time: TuiTime, people: number }>();
 
   readonly warningsToShow: WritableSignal<string[]> = signal<string[]>([]);
   readonly form = new FormGroup({
@@ -94,9 +98,40 @@ export class PublicReservePreviewComponent {
     this.loadValidTimes();
   }
 
+  writeValue(obj: any): void {
+    this.form.patchValue(obj);
+  }
+
+  registerOnChange(fn: any): void {
+    this.form.valueChanges.pipe(
+      takeUntil(this.destroy$),
+    ).subscribe({
+      next: (v) => fn(v)
+    });
+  }
+
+  registerOnTouched(fn: any): void {
+    this.form.valueChanges.pipe(
+      takeUntil(this.destroy$),
+    ).subscribe({
+      next: (v) => fn(v)
+    });
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+    if (isDisabled) {
+      this.form.disable();
+    } else {
+      this.form.enable();
+    }
+  }
+
   onFormSubmit() {
-    // this.formSubmitted.set(true);
-    // this.loadValidTimes();
+    const output = this.formatOutput();
+    if (output) 
+      this.submitted.emit(output)
+    else
+      this.notifications.error($localize`Verifica che i dati siano corretti`);
   }
 
   onDayClick($event: TuiDay, dropdownToClose: { close: () => void }): void {
@@ -156,5 +191,19 @@ export class PublicReservePreviewComponent {
     this.form.controls.time.setValue(null);
     this.validTimes.set([]);
     this.loadValidTimes();
+  }
+
+  private formatOutput(): null | { date: TuiDay, time: TuiTime, people: number } {
+    const date: TuiDay | null = this.form.controls.date.value;
+    const time: TuiTime | null = this.form.controls.time.value;
+    const people: number | null = this.form.controls.people.value;
+
+    if (!date || !time || !people) return null;
+
+    return {
+      date: date,
+      time: time,
+      people: people
+    };
   }
 }
