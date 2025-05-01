@@ -25,7 +25,7 @@ import { PeopleInputComponent } from "./people-input/people-input.component";
 import { DateInputComponent } from "./date-input/date-input.component";
 import { TimeInputComponent } from "./time-input/time-input.component";
 import { ActivatedRoute, Params } from '@angular/router';
-import { stringToTuiDay } from '@core/lib/tui-datetime-to-iso-string';
+import { stringToTuiDay, stringToTuiTime } from '@core/lib/tui-datetime-to-iso-string';
 
 @Component({
   selector: 'app-public-reserve-preview',
@@ -40,7 +40,7 @@ import { stringToTuiDay } from '@core/lib/tui-datetime-to-iso-string';
     DateInputComponent,
     TimeInputComponent,
     // JsonPipe,
-],
+  ],
   templateUrl: './public-reserve-preview.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
@@ -50,44 +50,34 @@ import { stringToTuiDay } from '@core/lib/tui-datetime-to-iso-string';
 export class PublicReservePreviewComponent {
 
   private readonly route = inject(ActivatedRoute);
-  private readonly cd: ChangeDetectorRef = inject(ChangeDetectorRef);
   private readonly destroy$: TuiDestroyService = inject(TuiDestroyService);
   private readonly reservationsv2: PublicReservationsV2Service = inject(PublicReservationsV2Service);
   private readonly notifications: NotificationsService = inject(NotificationsService);
 
   @Output() submitted: EventEmitter<{ date: string, time: string, people: number }> = new EventEmitter<{ date: string, time: string, people: number }>();
 
-  readonly formSubmitted: WritableSignal<boolean> = signal(false);
-
   readonly warningsToShow: WritableSignal<string[]> = signal<string[]>([]);
   readonly form = new FormGroup({
     people: new FormControl<number | null>(
       Number(this.route.snapshot.queryParams["people"]) || 2, [Validators.required, Validators.min(1), Validators.max(20)]),
+
     date: new FormControl<TuiDay | null>(
       stringToTuiDay(this.route.snapshot.queryParams["date"]) || TuiDay.currentLocal(), [Validators.required]),
 
-    time: new FormControl<TuiTime | null>(null, [Validators.required]),
+    time: new FormControl<TuiTime | null>(
+      stringToTuiTime(this.route.snapshot.queryParams["time"]) || null
+      , [Validators.required]),
   });
-
-  private readonly paymentGroupDefaultMessage: string = $localize`Per assicurarti uno dei nostri tavoli sarà necessaria una preautorizzazione della carta di credito.`;
-  readonly warningAccepted: FormControl<boolean | null> = new FormControl<boolean | null>(false);
-  readonly groups: WritableSignal<{ [time: string]: PreorderReservationGroup }> = signal<{ [time: string]: PreorderReservationGroup }>({});
-  private readonly reservationsService: PublicReservationsService = inject(PublicReservationsService);
 
   readonly messages: WritableSignal<{ [time: string]: string[] }> = signal<{ [time: string]: string[] }>({});
 
   readonly loadingTimes: WritableSignal<boolean> = signal(false);
-  private readonly datePipe = inject(DatePipe);
   readonly holidayMessages: WritableSignal<string[]> = signal<string[]>([]);
   readonly validTimes: WritableSignal<readonly TuiTime[]> = signal<readonly TuiTime[]>([]);
-  // readonly hasSeenInvalidDateMessage: WritableSignal<boolean> = signal(false);
-
-  readonly loadedValidTimes: WritableSignal<boolean> = signal(false);
 
   @ViewChild("warningsDiv") warningsDiv?: ElementRef<HTMLDivElement>;
 
   ngOnInit(): void {
-
     merge(
       this.form.controls.people.valueChanges.pipe(
         takeUntil(this.destroy$),
@@ -101,60 +91,12 @@ export class PublicReservePreviewComponent {
       this.peopleOrDateChanged();
     });
 
-    this.form.valueChanges.pipe(
-      takeUntil(this.destroy$)
-    ).subscribe(() => {
-      this.formUpdated();
-    });
-
-    this.form.controls.time.valueChanges.pipe(
-      takeUntil(this.destroy$)
-    ).subscribe({
-      next: (p: TuiTime | null): void => {
-        this.warningAccepted.setValue(false);
-
-        let warnings: string[] = [];
-        // this.tableTypes.set([]);
-
-        if (p) {
-          const paymentGrp: PreorderReservationGroup | null = this.groups()[p.toString()];
-
-          if (paymentGrp) {
-            warnings.push(
-              paymentGrp?.message || this.paymentGroupDefaultMessage
-            );
-          }
-
-          // this.tableTypes.set(paymentGrp?.table_type_to_preorder_reservation_groups || [])
-
-          const msg: string[] = this.messages()[p.toString()];
-          if (msg) {
-            warnings = [...warnings, ...msg];
-          }
-        }
-
-        this.warningsToShow.set(warnings);
-
-        setTimeout(() => {
-          if (this.warningsToShow().length && this.warningsDiv?.nativeElement) {
-            this.warningsDiv.nativeElement.scrollIntoView({
-              behavior: "smooth",
-              block: "center",
-              inline: "center"
-            });
-          }
-        })
-      }
-    });
-
-    this.formUpdated();
     this.loadValidTimes();
-    this.listenQueryParamsAndUpdateForm()
   }
 
   onFormSubmit() {
-    this.formSubmitted.set(true);
-    this.loadValidTimes();
+    // this.formSubmitted.set(true);
+    // this.loadValidTimes();
   }
 
   onDayClick($event: TuiDay, dropdownToClose: { close: () => void }): void {
@@ -167,7 +109,7 @@ export class PublicReservePreviewComponent {
   }
 
   private loadValidTimes(): void {
-    this.loadedValidTimes.set(true);
+    // this.loadedValidTimes.set(true);
     const date: TuiDay | null = this.form.controls.date.value;
     const people: number | null = this.form.controls.people.value;
 
@@ -191,16 +133,6 @@ export class PublicReservePreviewComponent {
         const times: string[] = data.turns.map((turn: ReservationTurn) => turn.valid_times).filter((times: string[] | undefined): times is string[] => Array.isArray(times) && times.length > 0).flat();
         this.validTimes.set(times.map((time: string) => TuiTime.fromString(strTimeTimezone(time))).sort((a: TuiTime, b: TuiTime) => a.toAbsoluteMilliseconds() - b.toAbsoluteMilliseconds()));
 
-        this.groups.set(
-          data.turns.reduce((acc: { [time: string]: PreorderReservationGroup }, turn: ReservationTurn) => {
-            turn.valid_times?.forEach((time: string) => {
-              if (turn.preorder_reservation_group) acc[strTimeTimezone(time)] = turn.preorder_reservation_group;
-            });
-            return acc;
-          }, {})
-        );
-
-
         const messages: Record<string, string[]> = {};
         data.turns.forEach((turn: ReservationTurn) => {
           turn.valid_times?.forEach((time: string) => {
@@ -220,32 +152,9 @@ export class PublicReservePreviewComponent {
     });
   }
 
-  private formUpdated(): void {
-    this.formSubmitted.set(false);
-
-    this.cd.detectChanges();
-  }
-
   private peopleOrDateChanged(): void {
     this.form.controls.time.setValue(null);
     this.validTimes.set([]);
-    this.groups.set({});
     this.loadValidTimes();
-  }
-
-  private listenQueryParamsAndUpdateForm(): void {
-    this.route.queryParams.pipe(
-      takeUntil(this.destroy$)
-    ).subscribe({
-      next: (p: Params) => {
-        const data: { date?: TuiDay, people?: number } = {};
-        if (p["people"]) data["people"] = Number(p["people"]);
-        
-        const date: TuiDay | null = stringToTuiDay(p["date"]);
-        if (date)  data["date"] = date;
-
-        this.form.patchValue(data);
-      }
-    });
   }
 }

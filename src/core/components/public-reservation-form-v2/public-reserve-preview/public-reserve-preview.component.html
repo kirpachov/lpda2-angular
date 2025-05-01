@@ -8,57 +8,64 @@
     </div>
 
     <div class="block mb-2">
-      <app-time-input [formControl]="form.controls.time" [options]="validTimes()" ></app-time-input>
+      <app-time-input [formControl]="form.controls.time" [options]="validTimes()"></app-time-input>
     </div>
 
-    <button [disabled]="form.invalid" [showLoader]="loadingTimes()" class="w-full" appearance="primary" size="l" tuiButton type="submit">
+
+    @if(!loadingTimes()) {
+
+    @if(validTimes().length == 0) {
+    <div class="text-center text-xl text-danger block mb-3">
+      @for(w of holidayMessages(); track w){
+      <p [innerHTML]="w | linkify"></p>
+      } @empty {
+      <p i18n>Siamo spiacenti, non sono disponibili orari per la data selezionata.</p>
+      }
+
+      @if(this.form.controls.date.value && date.maxDate() && this.form.controls.date.value.dayAfter(date.maxDate()!))
+      {
+      <p>
+        <ng-container i18n>L'ultimo giorno prenotabile è</ng-container>
+        {{ date.maxDate()?.toLocalNativeDate() | date: 'fullDate' }}
+      </p>
+      }
+    </div>
+
+    } @else {
+
+    <!-- Messages for partial closes: has turns but not all of them are available -->
+    @if(holidayMessages().length){
+    <div class="w-full my-5 border border-primary p-3 rounded-lg">
+      @for(w of holidayMessages(); track w){
+      <div class="w-full text-pretty my-3 text-xl" [innerHTML]="w | linkify"></div>
+      }
+    </div>
+    }
+    }
+    }
+
+    @if(this.form.controls.time.value && messages()[this.form.controls.time.value.toString()]?.length){
+    <div class="w-full my-5 border border-primary p-3 rounded-lg">
+      @for(w of messages()[this.form.controls.time.value.toString()]; track w){
+      <div class="w-full text-pretty my-3 text-xl" [innerHTML]="w | linkify"></div>
+      }
+    </div>
+    }
+
+    @if(loadingTimes() || validTimes().length > 0) {
+    <button [disabled]="form.invalid" [showLoader]="loadingTimes()" class="w-full" appearance="primary" size="l"
+      tuiButton type="submit">
       Prenota un tavolo
       @if(form.controls.time.value) {
-        alle {{ form.controls.time.value.toString("HH:MM") }}
+      alle {{ form.controls.time.value.toString("HH:MM") }}
       }
     </button>
-  </form>
-
-  @if(loadedValidTimes() && !loadingTimes()) {
-
-  @if(validTimes().length == 0) {
-  <div>
-    <p class="text-center text-xl text-danger block mb-3">
-      <ng-container i18n>Siamo spiacenti, non sono disponibili orari per la data selezionata.</ng-container>
-
-      @if(this.form.controls.date.value && date.maxDate() && this.form.controls.date.value.dayAfter(date.maxDate()!)) {
-    <p>
-      <ng-container i18n>L'ultimo giorno prenotabile è</ng-container>
-      {{ date.maxDate()?.toLocalNativeDate() | date: 'fullDate' }}
-    </p>
-    }
-    </p>
-
-    <button appearance="outline" tuiButton type="button" (click)="date.findValidDate()">
+    } @else {
+    <button class="w-full" appearance="outline" tuiButton type="button" (click)="date.findValidDate()">
       <ng-container i18n>Trova una data</ng-container>
     </button>
-  </div>
-  }
-
-  @if(holidayMessages().length){
-  <div class="w-full my-5 border border-primary p-3 rounded-lg">
-    @for(w of holidayMessages(); track w){
-    <div class="w-full text-pretty my-3 text-xl" [innerHTML]="w | linkify"></div>
     }
-  </div>
-  }
-
-  @if(warningsToShow().length > 0){
-  <div #warningsDiv class="w-full my-5 border border-primary p-3 rounded-lg">
-    @for(w of warningsToShow(); track w){
-    <div class="w-full text-pretty my-3 text-xl" [innerHTML]="w | linkify"></div>
-    }
-    <button class="mb-3" tuiButton (click)="warningAccepted.setValue(true)" appearance="primary" size="m" type="button">
-      <ng-container i18n>Conferma</ng-container>
-    </button>
-  </div>
-  }
-  }
+  </form>
 </div>
 
 <!-- <pre [innerText]="form.value | json" ></pre> -->

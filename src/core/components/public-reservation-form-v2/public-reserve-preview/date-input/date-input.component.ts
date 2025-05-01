@@ -89,6 +89,14 @@ export class DateInputComponent implements ControlValueAccessor, OnInit {
   ngOnInit(): void {
     this.loadPublicData();
     this.formUpdated();
+    this.loadDates();
+
+    this.control.valueChanges.pipe(
+      takeUntil(this.destroy$),
+      filter((value: TuiDay | null) => value !== null)
+    ).subscribe((value: TuiDay | null) => {
+      this.formUpdated();
+    });
   }
 
   onDayClick($event: TuiDay): void {
@@ -112,7 +120,6 @@ export class DateInputComponent implements ControlValueAccessor, OnInit {
     this.control.valueChanges.pipe(
       takeUntil(this.destroy$)
     ).subscribe((value: TuiDay | null) => {
-      this.formUpdated();
       fn(value);
     });
   }
