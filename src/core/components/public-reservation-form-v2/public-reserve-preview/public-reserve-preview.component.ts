@@ -73,6 +73,8 @@ export class PublicReservePreviewComponent implements ControlValueAccessor, OnIn
       , [Validators.required]),
   });
 
+  @Input() showLoader: boolean = false;
+
   readonly messages: WritableSignal<{ [time: string]: string[] }> = signal<{ [time: string]: string[] }>({});
 
   readonly loadingTimes: WritableSignal<boolean> = signal(false);

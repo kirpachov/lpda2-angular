@@ -53,7 +53,7 @@
     }
 
     @if(loadingTimes() || validTimes().length > 0) {
-    <button [disabled]="form.invalid" [showLoader]="loadingTimes()" class="w-full" appearance="primary" size="l"
+    <button [disabled]="form.invalid" [showLoader]="loadingTimes() || showLoader" class="w-full" appearance="primary" size="l"
       tuiButton type="submit">
       Prenota un tavolo
       @if(form.controls.time.value) {
@@ -61,7 +61,7 @@
       }
     </button>
     } @else {
-    <button class="w-full" appearance="outline" tuiButton type="button" (click)="date.findValidDate()">
+    <button class="w-full" appearance="outline" [showLoader]="loadingTimes() || showLoader" tuiButton type="button" (click)="date.findValidDate()">
       <ng-container i18n>Trova una data</ng-container>
     </button>
     }

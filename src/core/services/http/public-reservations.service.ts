@@ -7,8 +7,10 @@ import {DomainService} from "@core/services/domain.service";
 import {PublicPagesDataService} from "@core/services/http/public-pages-data.service";
 import {ReservationTurn} from "@core/models/reservation-turn";
 import {ReservationTurnData} from "@core/lib/interfaces/reservation-turn-data";
-import {JWT_INTERCEPTOR_SKIP_REQUEST_PARAM} from "@core/interceptors/jwt.interceptor";
+// import {JWT_INTERCEPTOR_SKIP_REQUEST_PARAM} from "@core/interceptors/jwt.interceptor";
 import { TuiDay } from '@taiga-ui/cdk';
+import { PreorderReservationGroupData } from '@core/lib/interfaces/preorder-reservation-group-data';
+import { PreorderReservationGroup } from '@core/models/preorder-reservation-group';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +27,27 @@ export class PublicReservationsService extends DomainService {
         this.created.next(data?.reservation ? new Reservation(data.reservation) : null);
       }
     });
+  }
+
+  datetimeRequiresPayment(data: { date: string, time: string, people: number }): Observable<{ preorder_reservation_group: PreorderReservationGroup } | null> {
+    return this.get<{ preorder_reservation_group: PreorderReservationGroupData } | null>(`datetime_requires_payment`, {
+      params: {
+        date: data.date,
+        time: data.time,
+        people: data.people,
+        // [JWT_INTERCEPTOR_SKIP_REQUEST_PARAM]: true
+      }
+    }).pipe(
+      map((data: { preorder_reservation_group: PreorderReservationGroupData } | null): { preorder_reservation_group: PreorderReservationGroup } | null => {
+        if (data) {
+          return {
+            preorder_reservation_group: new PreorderReservationGroup(data.preorder_reservation_group)
+          }
+        }
+
+        return null;
+      })
+    )
   }
 
   getValidDates(params?: { from_date: string, to_date: string }): Observable<TuiDay[]> {

@@ -2,6 +2,7 @@
 <app-public-reserve-preview
   [formControl]="datePeopleControl"
   (submitted)="previewSubmitted($event)"
+  [showLoader]="loadingTableTypes()"
 ></app-public-reserve-preview>
 
 <pre [innerText]="{ datePeopleControl: datePeopleControl.value } | json" ></pre>
