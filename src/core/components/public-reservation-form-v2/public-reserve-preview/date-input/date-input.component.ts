@@ -19,7 +19,6 @@ import { TuiButtonModule, TuiCalendarModule, TuiHostedDropdownComponent, TuiHost
 import { TUI_ARROW, TuiCheckboxBlockModule } from '@taiga-ui/kit';
 import { merge, takeUntil, filter, finalize } from 'rxjs';
 import { PolymorpheusContent, PolymorpheusModule } from '@tinkoff/ng-polymorpheus';
-import { TuiDayToUtcNativeDatePipe } from "../../../../pipes/tui-day-to-utc-native-date.pipe";
 
 @Component({
   selector: 'app-date-input',
@@ -34,7 +33,6 @@ import { TuiDayToUtcNativeDatePipe } from "../../../../pipes/tui-day-to-utc-nati
     TuiCalendarModule,
     TuiCheckboxBlockModule,
     PolymorpheusModule,
-    TuiDayToUtcNativeDatePipe,
     DatePipe,
 ],
   templateUrl: './date-input.component.html',

@@ -26,7 +26,7 @@
       {
       <p>
         <ng-container i18n>L'ultimo giorno prenotabile è</ng-container>
-        {{ date.maxDate()?.toLocalNativeDate() | date: 'fullDate' }}
+        {{ date.maxDate()?.toUtcNativeDate() | date: 'fullDate' }}
       </p>
       }
     </div>
@@ -40,7 +40,7 @@
     }
 
     <!-- Common public messages. -->
-    @if(this.form.controls.time.value && messages() && messages()[this.form.controls.time.value.toString()]?.length){
+    @if(this.form.controls.time.value && messages()){
     <app-show-messages [messages]="messages()[this.form.controls.time.value.toString()]"></app-show-messages>
     }
 
