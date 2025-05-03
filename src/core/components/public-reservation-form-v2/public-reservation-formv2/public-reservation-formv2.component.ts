@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal, ViewChild, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, inject, signal, ViewChild, WritableSignal } from '@angular/core';
 import { PublicReservePreviewComponent } from "../public-reserve-preview/public-reserve-preview.component";
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TuiDay, TuiDestroyService, TuiTime } from '@taiga-ui/cdk';
@@ -99,6 +99,8 @@ export class PublicReservationFormv2Component {
   // may be 1,2,3
   readonly stepIndex: WritableSignal<1 | 2 | 3> = signal<1 | 2 | 3>(1);
 
+  @ViewChild('stepperHeader', { static: true }) stepper: ElementRef<HTMLDivElement> | null = null;
+
   ngOnInit(): void {
     this.configs.locale$.pipe(takeUntil(this.destroy$)).subscribe((locale) => {
       this.locale = locale ? locale.split('-')[0] : 'en';
@@ -126,7 +128,7 @@ export class PublicReservationFormv2Component {
 
   tableTypeSubmitted($event: { tableType: TableTypeData | null; }) {
     this.tableTypeControl.setValue($event);
-    this.stepIndex.set(3);
+    this.showLastPage();
   }
 
   /**
@@ -163,11 +165,13 @@ export class PublicReservationFormv2Component {
   // Step 2
   askTableType(): void {
     this.stepIndex.set(2);
+    this.scrollTop();
   }
 
   // Step 3
   showLastPage(): void {
     this.stepIndex.set(3);
+    this.scrollTop();
   }
 
   /**
@@ -255,6 +259,21 @@ export class PublicReservationFormv2Component {
       lastName,
       lang: this.locale,
     });
+  }
+
+  private scrollTop(): void {
+    setTimeout(() => {
+      if (!this.stepper) {
+        console.warn("stepper is null");
+        return;
+      }
+
+      this.stepper?.nativeElement?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "center"
+      });
+    }, 100);
   }
 
   private manageUnprocessableEntity(response: unknown): void {
