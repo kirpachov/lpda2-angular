@@ -27,7 +27,6 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Reservation } from '@core/models/reservation';
 import { ReactiveErrors } from '@core/lib/reactive-errors/reactive-errors';
 import { ActiveError } from '@core/lib/interfaces/active-error';
-import { TuiDayToUtcNativeDatePipe } from "../../../pipes/tui-day-to-utc-native-date.pipe";
 
 type mario = { date: TuiDay, time: TuiTime, people: number };
 
@@ -96,6 +95,9 @@ export class PublicReservationFormv2Component {
   readonly stepIndex: WritableSignal<1 | 2 | 3> = signal<1 | 2 | 3>(1);
 
   @ViewChild('stepperHeader', { static: true }) stepper: ElementRef<HTMLDivElement> | null = null;
+
+  @ViewChild(PublicReservePreviewComponent) datePeopleInput: PublicReservePreviewComponent | null = null;
+  @ViewChild(ContactConfirmComponent) contactInput: ContactConfirmComponent | null = null;
 
   ngOnInit(): void {
     this.configs.locale$.pipe(takeUntil(this.destroy$)).subscribe((locale) => {
@@ -286,41 +288,46 @@ export class PublicReservationFormv2Component {
 
     const error: Record<string, ActiveError[]> = response.error.details;
     console.warn(`manageUnprocessableEntity()`, { error, response });
-    if (error["people"]) {
-      ReactiveErrors.assignErrorsToFormFromArray(this.datePeopleControl, error["people"]);
-      delete error["adults"];
-      delete error["children"];
-      delete error["people"];
+
+    if (this.datePeopleInput) {
+      if (error["people"]) {
+        ReactiveErrors.assignErrorsToFormFromArray(this.datePeopleInput.form, error["people"]);
+        delete error["adults"];
+        delete error["children"];
+        delete error["people"];
+      }
+  
+      if (error["datetime"]) {
+        ReactiveErrors.assignErrorsToFormFromArray(this.datePeopleInput.form, error["datetime"]);
+        delete error["datetime"];
+      }
     }
 
-    if (error["datetime"]) {
-      ReactiveErrors.assignErrorsToFormFromArray(this.datePeopleControl, error["datetime"]);
-      delete error["datetime"];
-    }
-
-    if (error["first_name"]) {
-      ReactiveErrors.assignErrorsToFormFromArray(this.contactControl, error["first_name"]);
-      delete error["first_name"];
-    }
-
-    if (error["last_name"]) {
-      ReactiveErrors.assignErrorsToFormFromArray(this.contactControl, error["last_name"]);
-      delete error["last_name"];
-    }
-
-    if (error["phone"]) {
-      ReactiveErrors.assignErrorsToFormFromArray(this.contactControl, error["phone"]);
-      delete error["phone"];
-    }
-
-    if (error["email"]) {
-      ReactiveErrors.assignErrorsToFormFromArray(this.contactControl, error["email"]);
-      delete error["email"];
-    }
-
-    if (error["notes"]) {
-      ReactiveErrors.assignErrorsToFormFromArray(this.contactControl, error["notes"]);
-      delete error["notes"];
+    if (this.contactInput) {
+      if (error["first_name"]) {
+        ReactiveErrors.assignErrorsToFormFromArray(this.contactInput.form, error["first_name"]);
+        delete error["first_name"];
+      }
+  
+      if (error["last_name"]) {
+        ReactiveErrors.assignErrorsToFormFromArray(this.contactInput.form, error["last_name"]);
+        delete error["last_name"];
+      }
+  
+      if (error["phone"]) {
+        ReactiveErrors.assignErrorsToFormFromArray(this.contactInput.form, error["phone"]);
+        delete error["phone"];
+      }
+  
+      if (error["email"]) {
+        ReactiveErrors.assignErrorsToFormFromArray(this.contactInput.form, error["email"]);
+        delete error["email"];
+      }
+  
+      if (error["notes"]) {
+        ReactiveErrors.assignErrorsToFormFromArray(this.contactInput.form, error["notes"]);
+        delete error["notes"];
+      }
     }
 
     if (Object.keys(error).length > 0) {
