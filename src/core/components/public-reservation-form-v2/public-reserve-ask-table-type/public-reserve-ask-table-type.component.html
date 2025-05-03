@@ -1,40 +1,32 @@
-<p class="font-bold text-2xl">
-  <ng-container i18n>Seleziona aggiunte</ng-container>
-</p>
-
-<p class="text-slate-400 text-lg mb-2">
-  <ng-container i18n>Personalizza la tua esperienza selezionando il tavolo che più ti piace!</ng-container>
-</p>
-
-@for (item of tableTypes(); track item; let isLast = $last) {
-<div class="w-full mb-3 border border-primary p-3 rounded-lg">
-  <p class="font-bold text-xl">
-    {{ item.table_type?.name }}
+@if(tableTypes()?.length) {
+  <p class="font-bold text-2xl">
+    <ng-container i18n>Seleziona aggiunte</ng-container>
   </p>
-
-  <p class="my-1 uppercase">{{ item.price | currency }} <ng-container i18n>per persona</ng-container> </p>
-
-  @if(item.table_type?.description) {
-  <p class="text-lg mb-4 text-slate-600" [innerHTML]="item.table_type?.description | linkify"></p>
+  
+  <p class="text-slate-400 text-lg mb-2">
+    <ng-container i18n>Personalizza la tua esperienza selezionando il tavolo che più ti piace!</ng-container>
+  </p>
+  
+  @for (item of tableTypes(); track item; let isLast = $last) {
+  <div class="w-full mb-3 border border-primary p-3 rounded-lg">
+    <p class="font-bold text-xl">
+      {{ item.table_type?.name }}
+    </p>
+  
+    <p class="my-1 uppercase">{{ item.price | currency }} <ng-container i18n>per persona</ng-container> </p>
+  
+    @if(item.table_type?.description) {
+    <p class="text-lg mb-4 text-slate-600" [innerHTML]="item.table_type?.description | linkify"></p>
+    }
+  
+    <app-public-show-images class="block mb-3" [images]="item?.table_type?.images || []"></app-public-show-images>
+  
+    <tui-checkbox-block [contentAlign]="'left'" [ngModel]="control.value?.id == item.table_type_id"
+      (ngModelChange)="updateTableType($event ? item.table_type : null)">
+      <ng-container i18n>Richiedi questo tavolo</ng-container>
+    </tui-checkbox-block>
+  </div>
   }
-
-  <app-public-show-images class="block mb-3" [images]="item?.table_type?.images || []"></app-public-show-images>
-
-  <tui-checkbox-block [contentAlign]="'left'" [ngModel]="control.value?.id == item.table_type_id"
-    (ngModelChange)="updateTableType($event ? item.table_type : null)">
-    <ng-container i18n>Richiedi questo tavolo</ng-container>
-  </tui-checkbox-block>
-</div>
-} @empty {
-<div class="w-full mb-3 border border-primary p-3 rounded-lg">
-  <p class="font-bold block mb-2 text-lg">
-    <ng-container i18n>Non sono disponibili tavoli</ng-container>
-  </p>
-
-  <p class="block mb-2">
-    <ng-container i18n>Contatta il ristorante per maggiori informazioni.</ng-container>
-  </p>
-</div>
 }
 
 @if(message()) {
@@ -47,6 +39,6 @@
   <ng-container i18n>Richiedi</ng-container>
   <span class="ms-1 uppercase">{{ control.value.name }}</span>
   } @else {
-  <ng-container i18n>Procedi senza</ng-container>
+  <ng-container i18n>Continua</ng-container>
   }
 </button>
