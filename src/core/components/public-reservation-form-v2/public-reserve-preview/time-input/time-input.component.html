@@ -1,0 +1,10 @@
+<div class="grid grid-cols-3 gap-x-2 gap-y-2">
+  @for (item of options; track item) {
+
+  <button [ngClass]="time.value && time.value.hours == item.hours && time.value.minutes == item.minutes ? 'btn-primary' : 'btn-primary-outline'" type="button" (click)="onTimeClick(item)" size="l" tuiButton appearance="custom">
+    <span class="text-xl">
+      {{ item }}
+    </span>
+  </button>
+  }
+</div>

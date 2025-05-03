@@ -1,0 +1,64 @@
+<div class="container max-w-[600px] mx-auto">
+
+  <form (ngSubmit)="onFormSubmit()" class="block px-2" [formGroup]="form">
+    <div tuiGroup class="block mb-2" [collapsed]="false">
+      <app-people-input [formControl]="form.controls.people"></app-people-input>
+
+      <app-date-input #date [formControl]="form.controls.date"></app-date-input>
+    </div>
+
+    <div class="block mb-2">
+      <app-time-input [formControl]="form.controls.time" [options]="validTimes()"></app-time-input>
+    </div>
+
+
+    @if(!loadingTimes() && this.form.controls.date.touched) {
+
+    @if(validTimes().length == 0) {
+    <div class="text-center text-xl text-danger block mb-3">
+      @for(w of holidayMessages(); track w){
+      <p [innerHTML]="w | linkify"></p>
+      } @empty {
+      <p i18n>Siamo spiacenti, non sono disponibili orari per la data selezionata.</p>
+      }
+
+      @if(this.form.controls.date.value && date.maxDate() && this.form.controls.date.value.dayAfter(date.maxDate()!))
+      {
+      <p>
+        <ng-container i18n>L'ultimo giorno prenotabile è</ng-container>
+        {{ date.maxDate()?.toUtcNativeDate() | date: 'fullDate' }}
+      </p>
+      }
+    </div>
+
+    } @else {
+
+    <!-- Messages for partial closes: has turns but not all of them are available -->
+    <app-show-messages [messages]="holidayMessages()"></app-show-messages>
+
+    }
+    }
+
+    <!-- Common public messages. -->
+    @if(this.form.controls.time.value && messages()){
+    <app-show-messages [messages]="messages()[this.form.controls.time.value.toString()]"></app-show-messages>
+    }
+
+    @if(loadingTimes() || validTimes().length > 0) {
+    <button [disabled]="form.invalid" [showLoader]="loadingTimes() || showLoader" class="w-full" appearance="primary"
+      size="l" tuiButton type="submit">
+      Prenota un tavolo
+      @if(form.controls.time.value) {
+      alle {{ form.controls.time.value.toString("HH:MM") }}
+      }
+    </button>
+    } @else {
+    <button class="w-full" appearance="outline" [showLoader]="loadingTimes() || showLoader" tuiButton type="button"
+      (click)="date.findValidDate()">
+      <ng-container i18n>Trova una data</ng-container>
+    </button>
+    }
+  </form>
+</div>
+
+<!-- <pre [innerText]="form.value | json" ></pre> -->

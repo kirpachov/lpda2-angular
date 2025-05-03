@@ -64,6 +64,16 @@ export function permitCORSCredentialsInterceptor(request: HttpRequest<any>, next
 
 Then, setup the [backend](https://github.com/kirpachov/lpda2-rails) side.
 
+
+## Local development setup
+Allows you to see the webapp from the phone, if in the same network.
+```bash
+# 1. Update config.(example).json and set your private ip on "api.domain"
+# 2. Update proxy.conf.json same
+
+ng s --host 0.0.0.0 --disable-host-check
+```
+
 ## Local production setup with nginx
 After backend local setup was done:
 

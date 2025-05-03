@@ -1,0 +1,29 @@
+<ng-template #peopleIcon>
+  @switch(people.value) {
+  @case(1) {
+  <mat-icon>person</mat-icon>
+  } @case(2) {
+  <mat-icon>people</mat-icon>
+  } @default {
+  <mat-icon>groups</mat-icon>
+  }
+  }
+</ng-template>
+
+<ng-template #peopleOptionTemplate let-people>
+  {{ people }}
+
+  @if(people > 1) {
+  <ng-container i18n>persone</ng-container>
+  } @else {
+  <ng-container i18n>persona</ng-container>
+  }
+</ng-template>
+
+<tui-select class="!rounded-tr-none !rounded-br-none" [tuiTextfieldIconLeft]="peopleIcon"
+  [valueContent]="peopleOptionTemplate" [formControl]="people" [tuiTextfieldLabelOutside]="true">
+  <tui-data-list-wrapper [itemContent]="peopleOptionTemplate" *tuiDataList tuiMultiSelectGroup
+    [items]="peopleArray()"></tui-data-list-wrapper>
+
+  <select [items]="peopleArray()" tuiSelect></select>
+</tui-select>

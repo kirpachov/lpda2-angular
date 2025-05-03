@@ -34,7 +34,7 @@ export function formatReservationData(data: {
   if (!(typeof data.firstName === "string" && data.firstName.length > 0)) return invalid(`firstName`, data.firstName);
   if (!(typeof data.lastName === "string" && data.lastName.length > 0)) return invalid(`lastName`, data.lastName);
   if (!(typeof data.datetime === "string" && data.datetime.length > 0)) return invalid(`datetime`, data.datetime);
-  if (!(data.notes === null || (typeof data.notes === "string" && data.notes.length > 0))) return invalid(`notes`, data.notes);
+  if (!(data.notes === null || data.notes === undefined || (typeof data.notes === "string" && data.notes.length > 0))) return invalid(`notes`, data.notes);
 
   if (!(typeof data.children === "number" && data.children >= 0)) return invalid(`children`, data.children);
   if (!(typeof data.adults === "number" && data.adults >= 0)) return invalid(`adults`, data.adults);
@@ -46,7 +46,7 @@ export function formatReservationData(data: {
     phone: data.phone,
     datetime: data.datetime,
     children: data.children,
-    notes: data.notes,
+    notes: data.notes || null,
     adults: data.adults,
     first_name: data.firstName,
     last_name: data.lastName,

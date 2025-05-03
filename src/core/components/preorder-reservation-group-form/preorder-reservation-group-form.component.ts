@@ -81,7 +81,7 @@ export class PreorderReservationGroupFormComponent {
     message: new FormControl<Record<string, string> | null>(null, []),
     preorder_type: new FormControl<PreorderReservationGroup["preorder_type"] | null>(null, [Validators.required]),
     table_types: new FormControl<TableTypeToPreorderReservationGroup[] | null>(null, []),
-    min_people: new FormControl<number | null>(null, [Validators.required, Validators.min(1)]),
+    min_people: new FormControl<number | null>(null, [Validators.min(1)]),
   });
 
   private submitted: boolean = false;
