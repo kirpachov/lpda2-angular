@@ -587,14 +587,14 @@
             
             src/core/components/public-reservation-form-v2/public-reservation-formv2/public-reservation-formv2.component.html 
           </context>
-          <context context-type='linenumber'>31</context>
+          <context context-type='linenumber'>33</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>
             
             src/core/components/public-reservation-form-v2/public-reservation-formv2/public-reservation-formv2.component.html 
           </context>
-          <context context-type='linenumber'>44</context>
+          <context context-type='linenumber'>46</context>
         </context-group>
       </trans-unit>
       <trans-unit id='2968162645627162144' datatype='html'>
@@ -8221,7 +8221,7 @@
             
             src/core/components/public-reservation-form-v2/public-reservation-formv2/public-reservation-formv2.component.html 
           </context>
-          <context context-type='linenumber'>10</context>
+          <context context-type='linenumber'>11</context>
         </context-group>
       </trans-unit>
       <trans-unit id='4200109414422607887' datatype='html'>
@@ -8231,7 +8231,7 @@
             
             src/core/components/public-reservation-form-v2/public-reservation-formv2/public-reservation-formv2.component.html 
           </context>
-          <context context-type='linenumber'>17</context>
+          <context context-type='linenumber'>18</context>
         </context-group>
       </trans-unit>
       <trans-unit id='3129604876054849035' datatype='html'>
@@ -8271,7 +8271,7 @@
             
             src/core/components/public-reservation-form-v2/public-reserve-ask-table-type/public-reserve-ask-table-type.component.html 
           </context>
-          <context context-type='linenumber'>2</context>
+          <context context-type='linenumber'>3</context>
         </context-group>
       </trans-unit>
       <trans-unit id='4257791840184802501' datatype='html'>
@@ -8281,7 +8281,7 @@
             
             src/core/components/public-reservation-form-v2/public-reserve-ask-table-type/public-reserve-ask-table-type.component.html 
           </context>
-          <context context-type='linenumber'>6</context>
+          <context context-type='linenumber'>7</context>
         </context-group>
       </trans-unit>
       <trans-unit id='4176361840751396478' datatype='html'>
@@ -8291,7 +8291,7 @@
             
             src/core/components/public-reservation-form-v2/public-reserve-ask-table-type/public-reserve-ask-table-type.component.html 
           </context>
-          <context context-type='linenumber'>15</context>
+          <context context-type='linenumber'>16</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>
@@ -8308,7 +8308,7 @@
             
             src/core/components/public-reservation-form-v2/public-reserve-ask-table-type/public-reserve-ask-table-type.component.html 
           </context>
-          <context context-type='linenumber'>25</context>
+          <context context-type='linenumber'>26</context>
         </context-group>
         <context-group purpose='location'>
           <context context-type='sourcefile'>
@@ -8318,26 +8318,6 @@
           <context context-type='linenumber'>79</context>
         </context-group>
       </trans-unit>
-      <trans-unit id='7068385385873213693' datatype='html'>
-        <source>Non sono disponibili tavoli</source>
-        <context-group purpose='location'>
-          <context context-type='sourcefile'>
-            
-            src/core/components/public-reservation-form-v2/public-reserve-ask-table-type/public-reserve-ask-table-type.component.html 
-          </context>
-          <context context-type='linenumber'>31</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id='103131431748258394' datatype='html'>
-        <source>Contatta il ristorante per maggiori informazioni.</source>
-        <context-group purpose='location'>
-          <context context-type='sourcefile'>
-            
-            src/core/components/public-reservation-form-v2/public-reserve-ask-table-type/public-reserve-ask-table-type.component.html 
-          </context>
-          <context context-type='linenumber'>35</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id='3036800568210714479' datatype='html'>
         <source>Richiedi</source>
         <context-group purpose='location'>
@@ -8345,17 +8325,31 @@
             
             src/core/components/public-reservation-form-v2/public-reserve-ask-table-type/public-reserve-ask-table-type.component.html 
           </context>
-          <context context-type='linenumber'>47</context>
+          <context context-type='linenumber'>39</context>
         </context-group>
       </trans-unit>
-      <trans-unit id='4127713855117332841' datatype='html'>
-        <source>Procedi senza</source>
+      <trans-unit id='7524056536807970266' datatype='html'>
+        <source>Continua</source>
         <context-group purpose='location'>
           <context context-type='sourcefile'>
             
             src/core/components/public-reservation-form-v2/public-reserve-ask-table-type/public-reserve-ask-table-type.component.html 
           </context>
-          <context context-type='linenumber'>50</context>
+          <context context-type='linenumber'>42</context>
+        </context-group>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/public-reservation-form/public-reservation-form.component.html 
+          </context>
+          <context context-type='linenumber'>46</context>
+        </context-group>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/public-reservation-form/public-reservation-form.component.html 
+          </context>
+          <context context-type='linenumber'>123</context>
         </context-group>
       </trans-unit>
       <trans-unit id='7019434462100829361' datatype='html'>
@@ -8577,23 +8571,6 @@
             src/core/components/public-reservation-form/public-reservation-form.component.html 
           </context>
           <context context-type='linenumber'>37</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id='7524056536807970266' datatype='html'>
-        <source>Continua</source>
-        <context-group purpose='location'>
-          <context context-type='sourcefile'>
-            
-            src/core/components/public-reservation-form/public-reservation-form.component.html 
-          </context>
-          <context context-type='linenumber'>46</context>
-        </context-group>
-        <context-group purpose='location'>
-          <context context-type='sourcefile'>
-            
-            src/core/components/public-reservation-form/public-reservation-form.component.html 
-          </context>
-          <context context-type='linenumber'>123</context>
         </context-group>
       </trans-unit>
       <trans-unit id='1228068933367959368' datatype='html'>
