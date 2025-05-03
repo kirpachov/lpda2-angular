@@ -5,10 +5,10 @@ import {PublicHomeLandingComponent} from "@core/components/public-home-landing/p
 import {PublicHomeAboutComponent} from "@core/components/public-home-about/public-home-about.component";
 import {PublicHomeMenuComponent} from "@core/components/public-home-menu/public-home-menu.component";
 import {PublicHomeInstagramComponent} from "@core/components/public-home-instagram/public-home-instagram.component";
-import {PublicHomeReserveComponent} from "@core/components/public-home-reserve/public-home-reserve.component";
 import {PublicMessageComponent} from "@core/components/public-message/public-message.component";
 import { Title } from "@angular/platform-browser";
 import { PublicPageComponent } from '../public-page-component';
+import { PublicHomeReserveV2Component } from "../../../core/components/public-home-reservev2/public-home-reservev2.component";
 
 @Component({
   selector: 'app-home',
@@ -20,9 +20,9 @@ import { PublicPageComponent } from '../public-page-component';
     PublicHomeAboutComponent,
     PublicHomeMenuComponent,
     PublicHomeInstagramComponent,
-    PublicHomeReserveComponent,
     PublicMessageComponent,
-  ],
+    PublicHomeReserveV2Component
+],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })

@@ -55,10 +55,6 @@ export const routes: Routes = [
   },
   {
     path: `reserve`,
-    loadComponent: () => import(`./reserve/reserve.component`).then(m => m.ReserveComponent),
-  },
-  {
-    path: `reservev2`,
     loadComponent: () => import(`./reservev2/reserve.component`).then(m => m.ReserveComponent),
   },
   {

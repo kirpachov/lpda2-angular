@@ -2,9 +2,6 @@ import {ChangeDetectionStrategy, Component, inject, OnInit, signal, WritableSign
 import {Reservation} from "@core/models/reservation";
 import {DatePipe} from "@angular/common";
 import {TuiButtonModule, TuiLinkModule} from "@taiga-ui/core";
-import {
-  PublicReservationFormComponent
-} from "@core/components/public-reservation-form/public-reservation-form.component";
 import {NotificationsService} from "@core/services/notifications.service";
 import {ReservationsService} from "@core/services/http/reservations.service";
 import {TuiDestroyService} from "@taiga-ui/cdk";

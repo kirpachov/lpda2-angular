@@ -13,7 +13,6 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TuiButtonModule, TuiLinkModule, TuiLoaderModule } from '@taiga-ui/core';
 import { ContactUsComponent } from '../contact-us/contact-us.component';
-import { PublicReservationFormComponent } from '../public-reservation-form/public-reservation-form.component';
 import { TermsAndConditionsLinkComponent } from "../terms-and-conditions-link/terms-and-conditions-link.component";
 
 @Component({
