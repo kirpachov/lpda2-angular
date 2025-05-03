@@ -9611,9 +9611,9 @@
           <context context-type='linenumber'>363</context>
         </context-group>
       </trans-unit>
-      <trans-unit id='2438414314355829092' datatype='html'>
-        <source>Seleziona aggiunte</source>
-        <target>Select additions.</target>
+      <trans-unit id='4770217417962251536' datatype='html'>
+        <source>Seleziona aggiunte (opzionale)</source>
+        <target>Select optional additions.</target>
         <context-group purpose='location'>
           <context context-type='sourcefile'>
             
