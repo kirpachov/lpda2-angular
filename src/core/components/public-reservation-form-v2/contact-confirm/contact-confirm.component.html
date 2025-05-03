@@ -65,8 +65,10 @@
 
   <div class="mb-3">
     <tui-checkbox-labeled [size]="'l'" [formControl]="form.controls.acceptTerms">
-      <ng-container i18n>Accetto i</ng-container>
-       <app-terms-and-conditions-link>termini e le condizioni</app-terms-and-conditions-link>
+      <span class="me-1" i18n>Accetto i</span>
+       <app-terms-and-conditions-link>
+        <ng-container i18n>termini e le condizioni</ng-container>
+       </app-terms-and-conditions-link>
     </tui-checkbox-labeled>
 
     @if(form.controls.acceptTerms.touched || this.formSubmitted()) {
