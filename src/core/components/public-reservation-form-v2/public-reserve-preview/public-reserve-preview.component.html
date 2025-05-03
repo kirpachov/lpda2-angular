@@ -47,9 +47,11 @@
     @if(loadingTimes() || validTimes().length > 0) {
     <button [disabled]="form.invalid" [showLoader]="loadingTimes() || showLoader" class="w-full" appearance="primary"
       size="l" tuiButton type="submit">
-      Prenota un tavolo
       @if(form.controls.time.value) {
-      alle {{ form.controls.time.value.toString("HH:MM") }}
+        <ng-container i18n>Prenota un tavolo alle</ng-container>
+       {{ form.controls.time.value.toString("HH:MM") }}
+      } @else {
+        <ng-container i18n>Prenota un tavolo</ng-container>
       }
     </button>
     } @else {
