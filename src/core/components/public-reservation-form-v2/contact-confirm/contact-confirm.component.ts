@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, inject, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, inject, Input, OnInit, Output, signal, WritableSignal } from '@angular/core';
 import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PreorderReservationGroup } from '@core/models/preorder-reservation-group';
 import { TableType } from '@core/models/table-type';
@@ -46,6 +46,8 @@ export class ContactConfirmComponent implements ControlValueAccessor, OnInit {
   @Output() submitted: EventEmitter<PublicReserve2.ContactData> = new EventEmitter<PublicReserve2.ContactData>();
 
   @Input() showLoader: boolean = false;
+
+  readonly formSubmitted: WritableSignal<boolean> = signal<boolean>(false);
 
   readonly form = new FormGroup<{
     firstName: FormControl<string | null>,
@@ -97,6 +99,7 @@ export class ContactConfirmComponent implements ControlValueAccessor, OnInit {
 
   formSubmit(): void {
     const out = this.formatOutput();
+    this.formSubmitted.set(true);
 
     if (out) this.submitted.emit(out);
     else this.notifications.error("Please fill in all required fields");

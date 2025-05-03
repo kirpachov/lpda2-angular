@@ -6,7 +6,9 @@
         <input tuiTextfield autocomplete="given-name">
       </tui-input>
 
-      <app-errors [errors]="form.controls.firstName.errors"></app-errors>
+      @if(form.controls.firstName.touched || this.formSubmitted()) {
+        <app-errors [errors]="form.controls.firstName.errors"></app-errors>
+      }
     </div>
   </div>
 
@@ -17,7 +19,9 @@
       <input tuiTextfield autocomplete="family-name">
     </tui-input>
 
-    <app-errors [errors]="form.controls.lastName.errors"></app-errors>
+    @if(form.controls.lastName.touched || this.formSubmitted()) {
+      <app-errors [errors]="form.controls.lastName.errors"></app-errors>
+    }
   </div>
 
   <div class="mb-3">
@@ -27,7 +31,9 @@
       <input tuiTextfield name="email" autocomplete="email">
     </tui-input>
 
-    <app-errors [errors]="form.controls.email.errors"></app-errors>
+    @if(form.controls.email.touched || this.formSubmitted()) {
+      <app-errors [errors]="form.controls.email.errors"></app-errors>
+    }
   </div>
 
   <div class="mb-3">
@@ -42,7 +48,9 @@
       <input autocomplete="tel" name="phone" tuiTextfield />
     </tui-input-phone> -->
 
-    <app-errors [errors]="form.controls.phone.errors"></app-errors>
+    @if(form.controls.phone.touched || this.formSubmitted()) {
+      <app-errors [errors]="form.controls.phone.errors"></app-errors>
+    }
   </div>
 
   <div class="mb-3">
@@ -50,7 +58,9 @@
       <ng-container i18n>Richieste speciali (opzionale)</ng-container>
     </tui-input>
 
-    <app-errors [errors]="form.controls.notes.errors"></app-errors>
+    @if(form.controls.notes.touched || this.formSubmitted()) {
+      <app-errors [errors]="form.controls.notes.errors"></app-errors>
+    }
   </div>
 
   <div class="mb-3">
@@ -58,7 +68,9 @@
       Accetto i <app-terms-and-conditions-link>termini e le condizioni</app-terms-and-conditions-link>
     </tui-checkbox-labeled>
 
-    <app-errors [errors]="form.controls.acceptTerms.errors"></app-errors>
+    @if(form.controls.acceptTerms.touched || this.formSubmitted()) {
+      <app-errors [errors]="form.controls.acceptTerms.errors"></app-errors>
+    }
   </div>
 
 
