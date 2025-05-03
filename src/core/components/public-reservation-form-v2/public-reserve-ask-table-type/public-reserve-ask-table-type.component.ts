@@ -41,7 +41,7 @@ import { ShowMessagesComponent } from "../show-messages/show-messages.component"
 export class PublicReserveAskTableTypeComponent implements OnInit, ControlValueAccessor {
 
 
-  @Output() submitted: EventEmitter<PublicReserve2.SelectTableData> = new EventEmitter<PublicReserve2.SelectTableData>();
+  @Output() submitted: EventEmitter<TableTypeData | null> = new EventEmitter<TableTypeData | null>();
   @Input() showLoader: boolean = false;
 
   private readonly destroy$: TuiDestroyService = inject(TuiDestroyService);
@@ -96,7 +96,7 @@ export class PublicReserveAskTableTypeComponent implements OnInit, ControlValueA
 
   formSubmit(): void {
     const tableType: TableTypeData | null = this.control.value;
-    this.submitted.emit({ tableType });
+    this.submitted.emit(tableType);
   }
 }
 

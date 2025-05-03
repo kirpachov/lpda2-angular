@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ElementRef, inject, signal, ViewChi
 import { PublicReservePreviewComponent } from "../public-reserve-preview/public-reserve-preview.component";
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TuiDay, TuiDestroyService, TuiTime } from '@taiga-ui/cdk';
-import { DatePipe, NgClass } from '@angular/common';
+import { DatePipe, JsonPipe, NgClass } from '@angular/common';
 import { PublicReservationsService } from '@core/services/http/public-reservations.service';
 import { NotificationsService } from '@core/services/notifications.service';
 import { parseHttpErrorMessage, parseHttpErrorMessageFromErrors } from '@core/lib/parse-http-error-message';
@@ -36,10 +36,6 @@ export namespace PublicReserve2 {
     date: TuiDay;
     time: TuiTime;
     people: number;
-  }
-
-  export interface SelectTableData {
-    tableType: TableTypeData | null;
   }
 
   export interface ContactData {
@@ -87,7 +83,7 @@ export class PublicReservationFormv2Component {
   readonly invalidControl: FormControl = new FormControl(null, [Validators.required]);
 
   readonly datePeopleControl: FormControl<Partial<PublicReserve2.DatePeopleData> | null> = new FormControl<Partial<PublicReserve2.DatePeopleData> | null>(null, [Validators.required, CustomValidators.objectValuesAllPresent]);
-  readonly tableTypeControl: FormControl<Partial<PublicReserve2.SelectTableData> | null> = new FormControl<Partial<PublicReserve2.SelectTableData> | null>(null);
+  readonly tableTypeControl: FormControl<TableTypeData | null> = new FormControl<TableTypeData | null>(null);
   readonly contactControl = new FormControl<Partial<PublicReserve2.ContactData> | null>(null);
 
   readonly preorder: WritableSignal<PreorderReservationGroup | null> = signal<PreorderReservationGroup | null>(null);
@@ -126,7 +122,7 @@ export class PublicReservationFormv2Component {
     this.loadPaymentInfoAndAskTableTypeOrShowLastPage(event);
   }
 
-  tableTypeSubmitted($event: { tableType: TableTypeData | null; }) {
+  tableTypeSubmitted($event: TableTypeData | null) {
     this.tableTypeControl.setValue($event);
     this.showLastPage();
   }
@@ -241,7 +237,7 @@ export class PublicReservationFormv2Component {
     const datetime: string | undefined | null = this.datePeopleControl.value && this.datePeopleControl.value.date && this.datePeopleControl.value.time ? tuiDatetimeToIsoString(this.datePeopleControl.value.date, this.datePeopleControl.value.time) : null;
     const people: number | undefined | null = this.datePeopleControl.value?.people;
     const notes: string | null | undefined = this.contactControl.value?.notes;
-    const tableTypeId: number | null = this.tableTypeControl.value?.tableType?.id || null;
+    const tableTypeId: number | null = this.tableTypeControl.value?.id || null;
 
     let adults = people || 0;
     // if (children) adults -= children;

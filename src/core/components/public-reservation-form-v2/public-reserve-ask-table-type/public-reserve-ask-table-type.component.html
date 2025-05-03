@@ -20,7 +20,7 @@
 
   <app-public-show-images class="block mb-3" [images]="item?.table_type?.images || []"></app-public-show-images>
 
-  <tui-checkbox-block [contentAlign]="'left'" [ngModel]="control.value?.id === item.table_type_id"
+  <tui-checkbox-block [contentAlign]="'left'" [ngModel]="control.value?.id == item.table_type_id"
     (ngModelChange)="updateTableType($event ? item.table_type : null)">
     <ng-container i18n>Richiedi questo tavolo</ng-container>
   </tui-checkbox-block>
