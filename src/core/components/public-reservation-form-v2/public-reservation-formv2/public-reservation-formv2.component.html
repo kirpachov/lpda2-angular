@@ -1,8 +1,53 @@
+<div class="border-b flex flex-wrap border-slate-400 text-lg uppercase mb-3">
 
-<app-public-reserve-preview
-  [formControl]="datePeopleControl"
-  (submitted)="previewSubmitted($event)"
-  [showLoader]="loadingTableTypes()"
-></app-public-reserve-preview>
+  <div class="mb-[-1px] flex items-center flex-nowrap text-nowrap pb-3 border-solid me-4"
+    [ngClass]="{'border-primary border-b-2 ': stepIndex() == 1 || stepIndex() == 2}">
+    @if(stepIndex() > 2) {
+    <mat-icon>check</mat-icon>
+    } @else {
+    <span>1.</span>
+    }
 
-<pre [innerText]="{ datePeopleControl: datePeopleControl.value } | json" ></pre>
+    <span class="ms-1" i18n>Trova un tavolo</span>
+  </div>
+
+  <div class="mb-[-1px] flex items-center flex-nowrap text-nowrap pb-3 border-solid me-4"
+    [ngClass]="{'border-primary border-b-2 ': stepIndex() == 3}">
+    <span>2.</span>
+
+    <span class="ms-1" i18n>I tuoi dettagli</span>
+  </div>
+</div>
+
+<!-- STEP 1: SELECT DATE, TIME, PEOPLE -->
+<tui-expand [expanded]="stepIndex() == 1">
+  <app-public-reserve-preview [formControl]="datePeopleControl" (submitted)="previewSubmitted($event)"
+    [showLoader]="loadingTableTypes()"></app-public-reserve-preview>
+</tui-expand>
+
+<!-- STEP 2: SELECT TABLE TYPE -->
+<tui-expand [expanded]="stepIndex() == 2">
+  <span (click)="backFromTableTypeSelect()" class="cursor-pointer inline-flex items-center mb-4 ms-2 text-lg underline">
+    <mat-icon class="me-1">arrow_back</mat-icon>
+    <span i18n>Indietro</span>
+  </span>
+
+  <app-public-reserve-ask-table-type [group]="preorder()!" [formControl]="tableTypeControl"
+    (submitted)="tableTypeSubmitted($event)"></app-public-reserve-ask-table-type>
+</tui-expand>
+
+
+<!-- STEP 3: CONTACT DETAILS & CONFIRM -->
+
+<tui-expand [expanded]="stepIndex() == 3">
+  <span (click)="backFromContacts()" class="cursor-pointer inline-flex items-center mb-4 ms-2 text-lg underline">
+    <mat-icon class="me-1">arrow_back</mat-icon>
+    <span i18n>Indietro</span>
+  </span>
+
+  <app-contact-confirm [formControl]="contactControl" (submitted)="contactSubmitted($event)"
+    [showLoader]="savingReservation()"></app-contact-confirm>
+</tui-expand>
+
+<!-- <pre
+  [innerText]="{ datePeopleControl: datePeopleControl.value, tableTypeControl: tableTypeControl.value, contactControl: contactControl.value } | json"></pre> -->

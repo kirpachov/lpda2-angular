@@ -1,0 +1,7 @@
+@if(messages && messages.length){
+<div class="w-full my-5 border border-primary p-3 rounded-lg">
+  @for(w of messages; track w){
+  <div class="w-full text-pretty my-3 text-xl" [innerHTML]="w | linkify"></div>
+  }
+</div>
+}

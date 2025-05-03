@@ -38,8 +38,8 @@ export class PublicReservationsService extends DomainService {
         // [JWT_INTERCEPTOR_SKIP_REQUEST_PARAM]: true
       }
     }).pipe(
-      map((data: { preorder_reservation_group: PreorderReservationGroupData } | null): { preorder_reservation_group: PreorderReservationGroup } | null => {
-        if (data) {
+      map((data: { preorder_reservation_group: PreorderReservationGroupData | null } | null): { preorder_reservation_group: PreorderReservationGroup } | null => {
+        if (data && data.preorder_reservation_group) {
           return {
             preorder_reservation_group: new PreorderReservationGroup(data.preorder_reservation_group)
           }

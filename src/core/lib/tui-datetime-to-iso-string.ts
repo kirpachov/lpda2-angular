@@ -17,6 +17,8 @@ export function tuiDatetimeToIsoString(day: TuiDay, _time: TuiTime): string {
  * @param isoString
  */
 export function isoStringToTuiDay(isoString: unknown): TuiDay | null {
+  if (isoString == null || isoString == undefined || isoString == "") return null;
+
   if (!(typeof isoString == 'string' && isoString.length > 0 && isoString.match(isoTimezoneRexExp))) {
     console.error(`Invalid string provided to isoStringToTuiDay`, {isoString});
     return null;
@@ -35,6 +37,8 @@ export function isoStringToTuiDay(isoString: unknown): TuiDay | null {
  * @param str
  */
 export function stringToTuiDay(str: unknown): TuiDay | null {
+  if (str == null || str == undefined || str == "") return null;
+
   if (typeof str == "string" && str.length > 0 && str.match(/^\d{4}-\d{1,2}-\d{1,2}\s{1}\d{1,2}:\d{1,2}$/)) {
     str = str.split(" ")[0];
   }

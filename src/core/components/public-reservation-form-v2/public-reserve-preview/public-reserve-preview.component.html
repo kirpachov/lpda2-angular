@@ -34,34 +34,27 @@
     } @else {
 
     <!-- Messages for partial closes: has turns but not all of them are available -->
-    @if(holidayMessages().length){
-    <div class="w-full my-5 border border-primary p-3 rounded-lg">
-      @for(w of holidayMessages(); track w){
-      <div class="w-full text-pretty my-3 text-xl" [innerHTML]="w | linkify"></div>
-      }
-    </div>
-    }
+    <app-show-messages [messages]="holidayMessages()"></app-show-messages>
+
     }
     }
 
-    @if(this.form.controls.time.value && messages()[this.form.controls.time.value.toString()]?.length){
-    <div class="w-full my-5 border border-primary p-3 rounded-lg">
-      @for(w of messages()[this.form.controls.time.value.toString()]; track w){
-      <div class="w-full text-pretty my-3 text-xl" [innerHTML]="w | linkify"></div>
-      }
-    </div>
+    <!-- Common public messages. -->
+    @if(this.form.controls.time.value && messages() && messages()[this.form.controls.time.value.toString()]?.length){
+    <app-show-messages [messages]="messages()[this.form.controls.time.value.toString()]"></app-show-messages>
     }
 
     @if(loadingTimes() || validTimes().length > 0) {
-    <button [disabled]="form.invalid" [showLoader]="loadingTimes() || showLoader" class="w-full" appearance="primary" size="l"
-      tuiButton type="submit">
+    <button [disabled]="form.invalid" [showLoader]="loadingTimes() || showLoader" class="w-full" appearance="primary"
+      size="l" tuiButton type="submit">
       Prenota un tavolo
       @if(form.controls.time.value) {
       alle {{ form.controls.time.value.toString("HH:MM") }}
       }
     </button>
     } @else {
-    <button class="w-full" appearance="outline" [showLoader]="loadingTimes() || showLoader" tuiButton type="button" (click)="date.findValidDate()">
+    <button class="w-full" appearance="outline" [showLoader]="loadingTimes() || showLoader" tuiButton type="button"
+      (click)="date.findValidDate()">
       <ng-container i18n>Trova una data</ng-container>
     </button>
     }

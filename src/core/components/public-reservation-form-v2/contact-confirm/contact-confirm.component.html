@@ -1,0 +1,69 @@
+<form (ngSubmit)="formSubmit()" [formGroup]="form">
+  <div class="mb-3">
+    <div class="grow">
+      <tui-input [tuiAutoFocus]="true" class="grow" [formControl]="form.controls.firstName">
+        <ng-container i18n>Nome</ng-container>
+        <input tuiTextfield autocomplete="given-name">
+      </tui-input>
+
+      <app-errors [errors]="form.controls.firstName.errors"></app-errors>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <tui-input class="grow" [formControl]="form.controls.lastName">
+      <ng-container i18n>Cognome</ng-container>
+
+      <input tuiTextfield autocomplete="family-name">
+    </tui-input>
+
+    <app-errors [errors]="form.controls.lastName.errors"></app-errors>
+  </div>
+
+  <div class="mb-3">
+    <tui-input [tuiAutoFocus]="true" class="grow" [formControl]="form.controls.email">
+      <ng-container i18n>Email</ng-container>
+
+      <input tuiTextfield name="email" autocomplete="email">
+    </tui-input>
+
+    <app-errors [errors]="form.controls.email.errors"></app-errors>
+  </div>
+
+  <div class="mb-3">
+    <tui-input-phone-international [countries]="countries" [(countryIsoCode)]="countryIsoCode"
+      [formControl]="form.controls.phone">
+      <ng-container i18n>Cellulare</ng-container>
+    </tui-input-phone-international>
+
+    <!-- <tui-input-phone [allowText]="true" [pattern]="'*'" class="grow" [countryCode]="''" [formControl]="form.controls.phone">
+      <ng-container i18n>Cellulare</ng-container>
+
+      <input autocomplete="tel" name="phone" tuiTextfield />
+    </tui-input-phone> -->
+
+    <app-errors [errors]="form.controls.phone.errors"></app-errors>
+  </div>
+
+  <div class="mb-3">
+    <tui-input [formControl]="form.controls.notes">
+      <ng-container i18n>Richieste speciali (opzionale)</ng-container>
+    </tui-input>
+
+    <app-errors [errors]="form.controls.notes.errors"></app-errors>
+  </div>
+
+  <div class="mb-3">
+    <tui-checkbox-labeled [size]="'l'" [formControl]="form.controls.acceptTerms">
+      Accetto i <app-terms-and-conditions-link>termini e le condizioni</app-terms-and-conditions-link>
+    </tui-checkbox-labeled>
+
+    <app-errors [errors]="form.controls.acceptTerms.errors"></app-errors>
+  </div>
+
+
+  <button [disabled]="form.invalid" [showLoader]="showLoader" class="w-full" appearance="primary" size="l" tuiButton
+    type="submit">
+    <ng-container i18n>Conferma prenotazione</ng-container>
+  </button>
+</form>

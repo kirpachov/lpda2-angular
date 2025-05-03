@@ -1,4 +1,4 @@
-import { DatePipe, JsonPipe, NgClass } from '@angular/common';
+import { DatePipe, NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, ElementRef, EventEmitter, Inject, inject, Input, OnInit, Output, signal, ViewChild, WritableSignal } from '@angular/core';
 import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PublicData } from '@core/lib/interfaces/public-data';
@@ -26,6 +26,8 @@ import { DateInputComponent } from "./date-input/date-input.component";
 import { TimeInputComponent } from "./time-input/time-input.component";
 import { ActivatedRoute, Params } from '@angular/router';
 import { stringToTuiDay, stringToTuiTime } from '@core/lib/tui-datetime-to-iso-string';
+import { PublicReserve2 } from '../public-reservation-formv2/public-reservation-formv2.component';
+import { ShowMessagesComponent } from "../show-messages/show-messages.component";
 
 @Component({
   selector: 'app-public-reserve-preview',
@@ -39,8 +41,8 @@ import { stringToTuiDay, stringToTuiTime } from '@core/lib/tui-datetime-to-iso-s
     PeopleInputComponent,
     DateInputComponent,
     TimeInputComponent,
-    // JsonPipe,
-  ],
+    ShowMessagesComponent
+],
   templateUrl: './public-reserve-preview.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
@@ -58,19 +60,20 @@ export class PublicReservePreviewComponent implements ControlValueAccessor, OnIn
   private readonly reservationsv2: PublicReservationsV2Service = inject(PublicReservationsV2Service);
   private readonly notifications: NotificationsService = inject(NotificationsService);
 
-  @Output() submitted: EventEmitter<{ date: TuiDay, time: TuiTime, people: number }> = new EventEmitter<{ date: TuiDay, time: TuiTime, people: number }>();
+  @Output() submitted: EventEmitter<PublicReserve2.DatePeopleData> = new EventEmitter<PublicReserve2.DatePeopleData>();
 
   readonly warningsToShow: WritableSignal<string[]> = signal<string[]>([]);
+
+  private readonly defaultPeople: number = 2;
+  private readonly defaultDate: TuiDay = TuiDay.currentLocal();
+  private readonly defaultTime: TuiTime | null = null;
+
   readonly form = new FormGroup({
-    people: new FormControl<number | null>(
-      Number(this.route.snapshot.queryParams["people"]) || 2, [Validators.required, Validators.min(1), Validators.max(20)]),
+    people: new FormControl<number | null>(this.defaultPeople, [Validators.required, Validators.min(1), Validators.max(20)]),
 
-    date: new FormControl<TuiDay | null>(
-      stringToTuiDay(this.route.snapshot.queryParams["date"]) || TuiDay.currentLocal(), [Validators.required]),
+    date: new FormControl<TuiDay | null>(this.defaultDate, [Validators.required]),
 
-    time: new FormControl<TuiTime | null>(
-      stringToTuiTime(this.route.snapshot.queryParams["time"]) || null
-      , [Validators.required]),
+    time: new FormControl<TuiTime | null>(this.defaultTime, [Validators.required]),
   });
 
   @Input() showLoader: boolean = false;
@@ -100,8 +103,23 @@ export class PublicReservePreviewComponent implements ControlValueAccessor, OnIn
     this.loadValidTimes();
   }
 
-  writeValue(obj: any): void {
-    this.form.patchValue(obj);
+  writeValue(obj: unknown): void {
+    // this.form.patchValue(obj);
+    if (obj == null || obj == undefined || typeof obj !== "object") {
+      this.form.reset();
+      return;
+    }
+
+    const data: PublicReserve2.DatePeopleData = obj as PublicReserve2.DatePeopleData;
+
+    const currentVal = this.form.value;
+    const merge: Partial<PublicReserve2.DatePeopleData> = {
+      people: data.people ?? currentVal.people ?? this.defaultPeople,
+      date:  data.date ?? currentVal.date ?? this.defaultDate,
+      time: data.time ?? currentVal.time ?? this.defaultTime,
+    }
+
+    this.form.patchValue(merge);
   }
 
   registerOnChange(fn: any): void {
@@ -195,7 +213,7 @@ export class PublicReservePreviewComponent implements ControlValueAccessor, OnIn
     this.loadValidTimes();
   }
 
-  private formatOutput(): null | { date: TuiDay, time: TuiTime, people: number } {
+  private formatOutput(): null | PublicReserve2.DatePeopleData {
     const date: TuiDay | null = this.form.controls.date.value;
     const time: TuiTime | null = this.form.controls.time.value;
     const people: number | null = this.form.controls.people.value;

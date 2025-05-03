@@ -19,6 +19,7 @@ import { TuiButtonModule, TuiCalendarModule, TuiHostedDropdownComponent, TuiHost
 import { TUI_ARROW, TuiCheckboxBlockModule } from '@taiga-ui/kit';
 import { merge, takeUntil, filter, finalize } from 'rxjs';
 import { PolymorpheusContent, PolymorpheusModule } from '@tinkoff/ng-polymorpheus';
+import { TuiDayToUtcNativeDatePipe } from "../../../../pipes/tui-day-to-utc-native-date.pipe";
 
 @Component({
   selector: 'app-date-input',
@@ -33,7 +34,9 @@ import { PolymorpheusContent, PolymorpheusModule } from '@tinkoff/ng-polymorpheu
     TuiCalendarModule,
     TuiCheckboxBlockModule,
     PolymorpheusModule,
-  ],
+    TuiDayToUtcNativeDatePipe,
+    DatePipe,
+],
   templateUrl: './date-input.component.html',
   providers: [
     TuiDestroyService,
@@ -60,8 +63,7 @@ export class DateInputComponent implements ControlValueAccessor, OnInit {
   private readonly defaultDateValue: TuiDay = TuiDay.currentLocal();
   readonly control: FormControl<TuiDay | null> = new FormControl<TuiDay | null>(this.defaultDateValue);
 
-  private readonly defaultDateReadonly: string = $localize`Seleziona una data`;
-  readonly dateReadonly: WritableSignal<string> = signal(this.defaultDateReadonly);
+  readonly defaultDateReadonly: string = $localize`Seleziona una data`;
 
   readonly loadingDates: WritableSignal<boolean> = signal(false);
   readonly TUI_ARROW = TUI_ARROW;
@@ -194,9 +196,9 @@ export class DateInputComponent implements ControlValueAccessor, OnInit {
   }
 
   private formUpdated(): void {
-    this.dateReadonly.set(
-      this.datePipe.transform(this.control.value?.toUtcNativeDate(), "d MMMM") ?? this.defaultDateReadonly
-    );
+    // this.dateReadonly.set(
+    //   this.datePipe.transform(this.control.value?.toUtcNativeDate(), "d MMMM") ?? this.defaultDateReadonly
+    // );
 
     this.cd.detectChanges();
   }

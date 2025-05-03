@@ -109,6 +109,20 @@ export class CustomValidators extends Validators {
     return null;
   }
 
+  /**
+   * Validates that all values in an object are present (not null or undefined).
+   */
+  static objectValuesAllPresent(control: AbstractControl | UntypedFormControl): ValidationErrors | null {
+    if (hasValue(control.value) && typeof control.value === "object") {
+      const presentValues = Object.values(control.value).filter((v: any) => hasValue(v));
+      if (presentValues.length !== Object.keys(control.value).length) return { 'objectValuesAllPresent': true };
+
+      return null;
+    }
+
+    return null;
+  }
+
   static arrayMinLength(minLength: number): (c: AbstractControl | UntypedFormControl) => ValidationErrors | null {
     return (control: AbstractControl | UntypedFormControl) => {
       if (!Array.isArray(control.value)) return null;

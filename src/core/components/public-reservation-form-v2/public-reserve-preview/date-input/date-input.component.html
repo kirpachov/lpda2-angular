@@ -22,7 +22,7 @@
 
   <tui-primitive-textfield [tuiTextfieldIconLeft]="calendarIcon" [tuiTextfieldIcon]="icon"
     class="w-full !rounded-tl-none !rounded-bl-none" [editable]="false" [tuiTextfieldLabelOutside]="true"
-    [value]="dateReadonly()">
+    [value]="(control.value | tuiDayToUtcNativeDate | date: 'd MMMM') ??  defaultDateReadonly">
     <input tuiTextfield class="cursor-pointer">
   </tui-primitive-textfield>
 </tui-hosted-dropdown>
