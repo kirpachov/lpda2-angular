@@ -9,7 +9,7 @@ import {
   signal, ViewChild,
   WritableSignal
 } from '@angular/core';
-import {CommonModule, DatePipe} from "@angular/common";
+import {AsyncPipe, CommonModule, DatePipe, NgClass} from "@angular/common";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {TuiInputModule} from "@taiga-ui/kit";
 import {TuiAutoFocusModule, TuiDay, TuiDestroyService, TuiScrollService} from "@taiga-ui/cdk";
@@ -68,6 +68,7 @@ import { EditReservationTableModalComponent } from '@core/components/edit-reserv
 import { PaymentStatusColorPipe } from "../../../../core/pipes/payment-status-color.pipe";
 import { ReservationsEventsNotifier } from '@core/services/reservations-events-notifier';
 import { AdminListReservationsComponent } from "../../../../core/components/admin-list-reservations/admin-list-reservations.component";
+import { AdminScrollService } from '@core/services/admin-scroll.service';
 
 @Component({
   selector: 'app-admin-reservations-home',
@@ -81,7 +82,9 @@ import { AdminListReservationsComponent } from "../../../../core/components/admi
     TuiHostedDropdownModule,
     TuiButtonModule,
     MatIconModule,
-],
+    AsyncPipe,
+    NgClass
+  ],
   templateUrl: './admin-reservations-home.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
@@ -90,6 +93,8 @@ import { AdminListReservationsComponent } from "../../../../core/components/admi
 })
 export class AdminReservationsHomeComponent {
   readonly _ = inject(Title).setTitle($localize`Prenotazioni | La Porta D'Acqua`);
+
+  readonly isScrolling$: Subject<boolean> = inject(AdminScrollService).isScrolling(500);
 
   filters: Partial<ReservationsFilters> = {};
 
