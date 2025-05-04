@@ -116,7 +116,7 @@
     </div>
   </div>
 
-  <div class="grow flex flex-col overflow-auto md:p-3 lg:p-5 p-2">
+  <div class="grow flex flex-col overflow-auto md:p-3 lg:p-5 p-2" (scroll)="divScroll($event)" >
     <router-outlet></router-outlet>
   </div>
 </div>

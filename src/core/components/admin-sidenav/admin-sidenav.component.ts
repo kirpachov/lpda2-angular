@@ -25,6 +25,7 @@ import {
   AdminLanguageSwitcherComponent
 } from "@core/components/admin-language-switcher/admin-language-switcher.component";
 import {ProfileService} from "@core/services/http/profile.service";
+import { AdminScrollService } from '@core/services/admin-scroll.service';
 
 export const COLLAPSE_SIDENAV_TRESHOLD = 768;
 export const SHOW_MENU_BUTTON_TRESHOLD = 1024;
@@ -57,6 +58,7 @@ export class AdminSidenavComponent implements OnInit {
   private readonly destroy$: TuiDestroyService = inject(TuiDestroyService);
   private readonly dialogs: TuiDialogService = inject(TuiDialogService);
   private readonly injector: Injector = inject(Injector);
+  private readonly adminScroll: AdminScrollService = inject(AdminScrollService);
 
   readonly cu = this.profile.cu;
 
@@ -110,5 +112,9 @@ export class AdminSidenavComponent implements OnInit {
       },
       error: (error: any): void => console.error(error),
     })
+  }
+
+  divScroll(event: Event): void {
+    this.adminScroll.scroll$.next(event);
   }
 }
