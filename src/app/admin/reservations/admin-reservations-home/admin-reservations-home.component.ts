@@ -12,9 +12,9 @@ import {
 import {CommonModule, DatePipe} from "@angular/common";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {TuiInputModule} from "@taiga-ui/kit";
-import {TuiAutoFocusModule, TuiDay, TuiDestroyService} from "@taiga-ui/cdk";
-import {TuiButtonModule, TuiDialogService, TuiExpandModule, TuiHintModule, TuiLinkModule, TuiLoaderModule} from "@taiga-ui/core";
-import {MatIcon} from "@angular/material/icon";
+import {TuiAutoFocusModule, TuiDay, TuiDestroyService, TuiScrollService} from "@taiga-ui/cdk";
+import {TuiButtonModule, TuiDialogService, TuiExpandModule, TuiHintModule, TuiHostedDropdownModule, TuiLinkModule, TuiLoaderModule} from "@taiga-ui/core";
+import {MatIcon, MatIconModule} from "@angular/material/icon";
 import {NavigationEnd, Router, RouterLink, RouterModule, RouterOutlet} from "@angular/router";
 import {ShowImageComponent} from "@core/components/show-image/show-image.component";
 import {TuiTablePagination, TuiTablePaginationModule} from "@taiga-ui/addon-table";
@@ -78,6 +78,9 @@ import { AdminListReservationsComponent } from "../../../../core/components/admi
     ReservationTablesSummaryComponent,
     RouterModule,
     TuiLoaderModule,
+    TuiHostedDropdownModule,
+    TuiButtonModule,
+    MatIconModule,
 ],
   templateUrl: './admin-reservations-home.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -92,5 +95,9 @@ export class AdminReservationsHomeComponent {
 
   filtersChanged(filters: Partial<ReservationsFilters>): void {
     this.filters = {...filters};
+  }
+
+  scrollTo(item: HTMLElement): void {
+    item.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }

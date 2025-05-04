@@ -1,14 +1,32 @@
-<h1>
+<h1 #header>
   <ng-container i18n>Prenotazioni</ng-container>
 </h1>
 
-<app-list-reservations-filters [loading]="list.loading()" (filtersChanged)="filtersChanged($event)" [data]="list.data()">
+<app-list-reservations-filters [loading]="list.loading()" (filtersChanged)="filtersChanged($event)"
+  [data]="list.data()">
   <tui-loader [overlay]="true" [showLoader]="list.loading()">
     <app-admin-list-reservations #list [filters]="filters"></app-admin-list-reservations>
   </tui-loader>
 </app-list-reservations-filters>
 
+<div class="fixed bottom-3 right-3">
+  <div class="flex flex-col items-center justify-center">
+    <button (click)="scrollTo(header)" class="!bg-white shadow-lg mb-3" type="button" size="l" tuiIconButton
+      appearance="outline">
+      <mat-icon>keyboard_arrow_up</mat-icon>
+    </button>
 
-<app-reservation-tables-summary [showLoader]="list.loading()" [filters]="this.filters"></app-reservation-tables-summary>
+    <button (click)="scrollTo(summary)" class="!bg-white shadow-lg" type="button" size="l" tuiIconButton
+      appearance="outline">
+      <mat-icon>keyboard_arrow_down</mat-icon>
+    </button>
+
+  </div>
+</div>
+
+<div #summary>
+  <app-reservation-tables-summary [showLoader]="list.loading()"
+    [filters]="this.filters"></app-reservation-tables-summary>
+</div>
 
 <router-outlet></router-outlet>
