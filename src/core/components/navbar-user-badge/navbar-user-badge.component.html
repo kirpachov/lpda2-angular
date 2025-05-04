@@ -8,7 +8,7 @@
 <tui-hosted-dropdown [tuiDropdownAlign]="'right'" #dropdown [content]="loginDropdownContent">
   <span class="flex items-center">
     <span class="flex flex-col items-end me-3">
-      <span class="font-bold text-lg mb-1 text-slate-800">{{ fullnameOrEmail() }}</span>
+      <span [ngClass]="{'hidden md:inline': hideLabelOnMobile}" class="font-bold text-lg mb-1 text-slate-800">{{ fullnameOrEmail() }}</span>
     </span>
 
     <mat-icon class="text-slate-600" style="font-size: 50px; height: 50px; width: 50px;" >account_circle</mat-icon>

@@ -31,6 +31,8 @@ export class NavbarUserBadgeComponent {
   private readonly notification: NotificationsService = inject(NotificationsService);
   private readonly injector: Injector = inject(Injector);
 
+  @Input() hideLabelOnMobile: boolean = false;
+
   readonly fullnameOrEmail: WritableSignal<string | null> = signal(null);
   @Input({required: true}) set user(v: User | null | undefined){
     if (!v){
