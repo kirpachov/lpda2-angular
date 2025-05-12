@@ -50,7 +50,7 @@ export class PublicNavigateMenuV1Component implements OnInit {
   private readonly menuService: PublicMenuService = inject(PublicMenuService);
   private readonly dialogs: TuiDialogService = inject(TuiDialogService);
   private readonly injector: Injector = inject(Injector);
-  private readonly me = inject(ElementRef);
+  // private readonly me = inject(ElementRef);
 
   readonly categoriesData: WritableSignal<SearchResult<MenuCategory> | null> = signal(null);
   readonly categories: Signal<MenuCategory[]> = computed(() => this.categoriesData()?.items || []);
