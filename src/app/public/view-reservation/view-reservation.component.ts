@@ -34,11 +34,15 @@ export class ViewReservationComponent extends PublicPageComponent implements OnI
   readonly loading: WritableSignal<boolean> = signal(true);
   readonly reservation: WritableSignal<Reservation | null> = signal(null);
 
+  private outcome: string | null = null;
+
   override ngOnInit(): void {
     super.ngOnInit();
 
     this.route.params.subscribe({
       next: (p: Params) => {
+        this.outcome = p["outcome"];
+
         const secret = p["secret"];
         if (typeof secret === "string" && secret.length > 0) this.loadReservation(secret);
       }
@@ -47,7 +51,13 @@ export class ViewReservationComponent extends PublicPageComponent implements OnI
 
   private loadReservation(secret: string) {
     this.reservation.set(null);
-    this.reservations.load(secret).pipe(
+
+    const options = this.outcome === "processed" ? { reload_payment: true } : {};
+
+    this.reservations.load(
+      secret,
+      options
+    ).pipe(
       takeUntil(this.destroy$),
       finalize(() => this.loading.set(false))
     ).subscribe({
