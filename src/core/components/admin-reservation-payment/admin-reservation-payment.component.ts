@@ -15,7 +15,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { parseHttpErrorMessage } from '@core/lib/parse-http-error-message';
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
-import { TuiInputModule, TuiInputNumberModule, TuiSelectModule } from '@taiga-ui/kit';
+import { TuiInputModule, TuiInputNumberModule, TuiSelectModule, TuiLineClampModule } from '@taiga-ui/kit';
 import { TuiTextfieldControllerModule } from '@taiga-ui/core';
 import { ErrorsComponent } from "@core/components/errors/errors.component";
 import { TuiAutoFocusModule } from '@taiga-ui/cdk';
@@ -52,7 +52,8 @@ import { PaymentStatusComponent } from "../payment-status/payment-status.compone
     PreorderReservationGroupPreorderTypeComponent,
     ReservationPaymentPreorderTypeComponent,
     PaymentStatusColorPipe,
-    PaymentStatusComponent
+    PaymentStatusComponent,
+    TuiLineClampModule
 ],
   templateUrl: './admin-reservation-payment.component.html',
   styleUrl: './admin-reservation-payment.component.scss',

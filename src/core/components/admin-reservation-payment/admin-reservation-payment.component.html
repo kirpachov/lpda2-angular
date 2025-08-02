@@ -16,10 +16,19 @@
     }
 
     @if(payment()?.external_id) {
-      <p class="mt-3">
-        <ng-container i18n>Id pagamento:</ng-container>
-        <app-copy-content [content]="payment()?.external_id">{{ payment()?.external_id }}</app-copy-content>
-      </p>
+
+       <div class="flex items-center justify-center">
+         <span class="me-2 text-nowrap" i18n>Id pagamento:</span>
+
+          <ng-template #externalId>
+             {{ payment()?.external_id }}
+          </ng-template>
+
+          <tui-line-clamp [linesLimit]="1" [content]="externalId"></tui-line-clamp>
+
+         <app-copy-content [content]="payment()?.external_id"></app-copy-content>
+       </div>
+
     }
 
     <div>
@@ -62,10 +71,14 @@
       }
       @case("todo") {
         <p i18n>Link per completare il pagamento:</p>
-   
+
        <div class="flex items-center justify-center">
-         <a class="me-2" tuiLink href="{{payment()?.hpp_url}}">{{payment()?.hpp_url}}</a>
-   
+          <ng-template #hppUrl>
+            <a class="me-2" tuiLink target="_blank" href="{{payment()?.hpp_url}}">{{payment()?.hpp_url}}</a>
+          </ng-template>
+
+          <tui-line-clamp [linesLimit]="1" [content]="hppUrl"></tui-line-clamp>
+
          <app-copy-content [content]="payment()?.hpp_url"></app-copy-content>
        </div>
       }
@@ -105,7 +118,7 @@
       </div>
 
       <div class="block mb-3">
-        
+
         <ng-template #deferredValue let-deferred>
           @if(deferred) {
             <ng-container i18n>Autorizzazione</ng-container>
@@ -113,7 +126,7 @@
             <ng-container i18n>Pagamento</ng-container>
           }
         </ng-template>
-        
+
 
         <tui-select [valueContent]="deferredValue" [formControl]="newPaymentForm.controls.deferred">
 
