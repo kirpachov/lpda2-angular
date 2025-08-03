@@ -77,7 +77,7 @@ ng s --host 0.0.0.0 --disable-host-check
 ## Local production setup with nginx
 After backend local setup was done:
 
-- Prepare nginx configuration in `/etc/nginx/sites-enabled/lpda2-frontend`, then `sudo nginx -t && sudo service nginx reload`
+- Prepare nginx configuration in `sudo vim /etc/nginx/sites-enabled/lpda2-frontend`, then `sudo nginx -t && sudo service nginx reload`
 - Build `ng build --watch -c development --localize --output-path=/var/www/lpda2`
 - (if issues with permissions) `sudo mkdir -p /var/www/lpda2 && sudo adduser "$(whoami)" www-data && sudo adduser www-data "$(whoami)" && sudo chown "$(whoami):www-data" -R /var/www/lpda2`
 
@@ -85,15 +85,16 @@ Note that some things may not work properly but it's the most efficient way to s
 For a more precise setup, you can build with: `./scripts/build.sh && rm -rf /var/www/lpda2/* && cp -r dist/lpda2/* /var/www/lpda2`
 
 Note that you may need to update `config.json` or `config.prod.json`, maybe something like:
-```json
+```bash
 {
   "api.domain": "lpda2api.localhost",
   "api.secure": "false",
   "api.path": "/"
 }
 ```
-```nginx
-# Nginx configuration in /etc/nginx/sites-enabled/lpda2-frontend
+
+Nginx configuration: `sudo vim /etc/nginx/sites-enabled/lpda2-frontend`
+```bash
 server {
 	listen 80;
 
