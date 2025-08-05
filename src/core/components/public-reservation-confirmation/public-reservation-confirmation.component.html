@@ -9,12 +9,12 @@
   @if(!reservation.payment || (reservation.payment.status == "paid" || reservation.payment.status == "authorized")) {
     <!-------------------------- Payment not required or completed. -------------------------->
     <p class="text-xl text-center mb-3" i18n>La tua prenotazione è confermata.</p>
-  
+
     <p class="text-xl text-center mb-3">
       <ng-container i18n>La prenotazione è fissata per </ng-container>
       {{ reservation.datetime | date: 'EEEE d MMMM y' }} {{ reservation.datetime | date: 'HH:mm' }}.
     </p>
-  
+
     <app-public-message class="block text-center text-xl"
       [location]="'existing-reservation-form'"></app-public-message>
     }
@@ -74,8 +74,7 @@
     [location]="'existing-reservation-authorized-payment'"></app-public-message>
 
   @if(reservation.payment.value) {
-  <p class="text-xl text-center mb-3" i18n>È stato completata l'autorizzazione di {{ reservation.payment.value |
-    currency }}.</p>
+  <p class="text-xl text-center mb-3" i18n>È stato completata l'autorizzazione.</p>
   } @else {
   <p class="text-xl text-center mb-3" i18n>Il pagamento di conferma della prenotazione è stato autorizzato e la
     prenotazione è confermata.</p>
