@@ -69,12 +69,8 @@
   <app-public-message class="block text-center text-xl"
     [location]="'existing-reservation-authorized-payment'"></app-public-message>
 
-  @if(reservation.payment.value) {
-  <p class="text-xl text-center mb-3" i18n>È stato completata l'autorizzazione.</p>
-  } @else {
   <p class="text-xl text-center mb-3" i18n>Il pagamento di conferma della prenotazione è stato autorizzato e la
     prenotazione è confermata.</p>
-  }
   }
 
   @case ("paid") {
