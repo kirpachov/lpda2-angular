@@ -60,10 +60,6 @@
   <div class="flex items-center justify-center mb-3">
     <a href="{{ reservation.payment.hpp_url }}" class="btn-primary me-2" size="m" tuiButton appearance="custom">
       <ng-container i18n>Conferma la prenotazione</ng-container>
-
-      @if(reservation.payment.value) {
-      {{ reservation.payment.value | currency }}
-      }
     </a>
   </div>
   }
