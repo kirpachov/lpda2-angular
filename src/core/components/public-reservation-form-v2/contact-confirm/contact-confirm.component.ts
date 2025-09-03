@@ -12,6 +12,7 @@ import { TuiCountryIsoCode } from '@taiga-ui/i18n';
 import { TermsAndConditionsLinkComponent } from "../../terms-and-conditions-link/terms-and-conditions-link.component";
 import { PublicReserve2 } from '../public-reservation-formv2/public-reservation-formv2.component';
 import { NotificationsService } from '@core/services/notifications.service';
+import { ShowMessagesComponent } from "../show-messages/show-messages.component";
 
 @Component({
   selector: 'app-contact-confirm',
@@ -25,8 +26,9 @@ import { NotificationsService } from '@core/services/notifications.service';
     TuiInputPhoneInternationalModule,
     ErrorsComponent,
     TuiCheckboxLabeledModule,
-    TermsAndConditionsLinkComponent
-  ],
+    TermsAndConditionsLinkComponent,
+    ShowMessagesComponent
+],
   templateUrl: './contact-confirm.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
@@ -46,6 +48,8 @@ export class ContactConfirmComponent implements ControlValueAccessor, OnInit {
   @Output() submitted: EventEmitter<PublicReserve2.ContactData> = new EventEmitter<PublicReserve2.ContactData>();
 
   @Input() showLoader: boolean = false;
+
+  @Input() preorderMessage: string | null | undefined = null;
 
   readonly formSubmitted: WritableSignal<boolean> = signal<boolean>(false);
 

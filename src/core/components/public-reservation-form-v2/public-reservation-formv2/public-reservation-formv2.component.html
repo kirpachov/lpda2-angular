@@ -28,8 +28,8 @@
   <!-- STEP 2: SELECT TABLE TYPE -->
   <tui-expand [expanded]="stepIndex() == 2">
     <span (click)="backFromTableTypeSelect()"
-      class="cursor-pointer inline-flex items-center mb-4 ms-2 text-lg underline">
-      <mat-icon class="me-1">arrow_back</mat-icon>
+      class="cursor-pointer inline-flex items-center mb-4 ms-2 text-lg">
+      <mat-icon class="me-1">chevron_left</mat-icon>
       <span i18n>Indietro</span>
     </span>
 
@@ -37,16 +37,14 @@
       (submitted)="tableTypeSubmitted($event)"></app-public-reserve-ask-table-type>
   </tui-expand>
 
-
   <!-- STEP 3: CONTACT DETAILS & CONFIRM -->
-
   <tui-expand [expanded]="stepIndex() == 3">
-    <span (click)="backFromContacts()" class="cursor-pointer inline-flex items-center mb-4 ms-2 text-lg underline">
-      <mat-icon class="me-1">arrow_back</mat-icon>
+    <span (click)="backFromContacts()" class="cursor-pointer inline-flex items-center mb-4 ms-2 text-lg">
+      <mat-icon class="me-1">chevron_left</mat-icon>
       <span i18n>Indietro</span>
     </span>
 
-    <app-contact-confirm [formControl]="contactControl" (submitted)="contactSubmitted($event)"
+    <app-contact-confirm [preorderMessage]="tableTypeControl.value ? preorder()?.message : null" [formControl]="contactControl" (submitted)="contactSubmitted($event)"
       [showLoader]="savingReservation()"></app-contact-confirm>
   </tui-expand>
 

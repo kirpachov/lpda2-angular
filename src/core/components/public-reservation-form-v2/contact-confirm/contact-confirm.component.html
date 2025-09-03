@@ -76,6 +76,9 @@
     }
   </div>
 
+  @if(preorderMessage) {
+    <app-show-messages [messages]="[preorderMessage]" ></app-show-messages>
+  }
 
   <button [disabled]="form.invalid" [showLoader]="showLoader" class="w-full" appearance="primary" size="l" tuiButton
     type="submit">

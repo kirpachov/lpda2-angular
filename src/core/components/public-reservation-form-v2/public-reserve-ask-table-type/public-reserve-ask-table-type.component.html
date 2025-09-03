@@ -1,44 +1,43 @@
-@if(tableTypes()?.length) {
-  <p class="font-bold text-2xl">
-    <ng-container i18n>Seleziona aggiunte (opzionale)</ng-container>
+@if(tableTypes()) {
+<p class="block mb-3 font-bold">
+  <ng-container i18n>Seleziona un opzione</ng-container>
+</p>
+
+@for (item of tableTypes(); track item; let isLast = $last) {
+<div class="w-full mb-3 border border-primary p-3 rounded-lg">
+  <p class="block mb-3 font-bold text-lg">
+    {{ item.table_type?.name }}
   </p>
-  
-  <p class="text-slate-400 text-lg mb-2">
-    <ng-container i18n>Personalizza la tua esperienza selezionando il tavolo che più ti piace!</ng-container>
+
+  <p class="block mb-2 uppercase">
+    <span class="flex items-center">
+      <img class="me-1" [src]="'assets/img/finance_chip.svg'">
+      {{ item.price | currency }} <ng-container i18n>per persona</ng-container>
+    </span>
   </p>
-  
-  @for (item of tableTypes(); track item; let isLast = $last) {
-  <div class="w-full mb-3 border border-primary p-3 rounded-lg">
-    <p class="font-bold text-xl">
-      {{ item.table_type?.name }}
-    </p>
-  
-    <p class="my-1 uppercase">{{ item.price | currency }} <ng-container i18n>per persona</ng-container> </p>
-  
-    @if(item.table_type?.description) {
-    <p class="text-lg mb-4 text-slate-600" [innerHTML]="item.table_type?.description | linkify"></p>
-    }
-  
-    <app-public-show-images class="block mb-3" [images]="item?.table_type?.images || []"></app-public-show-images>
-  
-    <tui-checkbox-block [contentAlign]="'left'" [ngModel]="control.value?.id == item.table_type_id"
-      (ngModelChange)="updateTableType($event ? item.table_type : null)">
-      <ng-container i18n>Richiedi questo tavolo</ng-container>
-    </tui-checkbox-block>
+
+  @if(item.table_type?.description) {
+  <p class="mb-4 text-slate-600" [innerHTML]="item.table_type?.description | linkify"></p>
+  }
+
+  <div class="mb-3 flex items-center overflow-hidden">
+    @for(image of item.table_type?.images || []; track image; let index = $index) {
+    @if(index < 3) { <app-show-image class="max-w-[100px] me-2" [image]="image"></app-show-image>
+      }
+      } @empty {
+      <app-show-image [image]="null" style="max-width: 100px;"></app-show-image>
+      }
   </div>
-  }
+
+  <button type="button" (click)="updateTableType(item.table_type)" size="s" tuiButton>
+    <ng-container i18n>Seleziona</ng-container>
+  </button>
+</div>
+}
 }
 
-@if(message()) {
-  <app-show-messages [messages]="[message()!]" ></app-show-messages>
-}
 
-<button (click)="formSubmit()" [disabled]="control.invalid" [showLoader]="showLoader" class="w-full"
-  appearance="primary" size="l" tuiButton type="button">
-  @if(control.value) {
-  <ng-container i18n>Richiedi</ng-container>
-  <span class="ms-1 uppercase">{{ control.value.name }}</span>
-  } @else {
-  <ng-container i18n>Continua</ng-container>
-  }
+<button (click)="updateTableType(null)" [showLoader]="showLoader" class="w-full"
+  appearance="secondary" size="l" tuiButton type="button">
+  <ng-container i18n>Continua senza selezione</ng-container>
 </button>

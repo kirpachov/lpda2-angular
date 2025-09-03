@@ -296,7 +296,7 @@ export class PublicReservationFormv2Component {
         delete error["children"];
         delete error["people"];
       }
-  
+
       if (error["datetime"]) {
         ReactiveErrors.assignErrorsToFormFromArray(this.datePeopleInput.form, error["datetime"]);
         delete error["datetime"];
@@ -308,22 +308,22 @@ export class PublicReservationFormv2Component {
         ReactiveErrors.assignErrorsToFormFromArray(this.contactInput.form, error["first_name"]);
         delete error["first_name"];
       }
-  
+
       if (error["last_name"]) {
         ReactiveErrors.assignErrorsToFormFromArray(this.contactInput.form, error["last_name"]);
         delete error["last_name"];
       }
-  
+
       if (error["phone"]) {
         ReactiveErrors.assignErrorsToFormFromArray(this.contactInput.form, error["phone"]);
         delete error["phone"];
       }
-  
+
       if (error["email"]) {
         ReactiveErrors.assignErrorsToFormFromArray(this.contactInput.form, error["email"]);
         delete error["email"];
       }
-  
+
       if (error["notes"]) {
         ReactiveErrors.assignErrorsToFormFromArray(this.contactInput.form, error["notes"]);
         delete error["notes"];

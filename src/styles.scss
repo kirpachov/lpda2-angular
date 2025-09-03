@@ -67,6 +67,7 @@ app-home-layout, app-contacts {
   --tui-primary-hover: var(--second-color);
   --tui-link: var(--first-color);
   --tui-link-hover: var(--second-color);
+  --tui-secondary: var(--seventh-color);
   --tui-secondary-hover: var(--fourth-color);
 
   .selected-link, .active-link, a.active {

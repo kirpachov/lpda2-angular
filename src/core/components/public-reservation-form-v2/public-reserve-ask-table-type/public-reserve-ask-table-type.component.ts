@@ -14,18 +14,16 @@ import { TuiButtonModule } from '@taiga-ui/core';
 import { TableTypeToPreorderReservationGroup } from '@core/lib/interfaces/table-type-to-preorder-reservation-group';
 import { PublicReserve2 } from '../public-reservation-formv2/public-reservation-formv2.component';
 import { ShowMessagesComponent } from "../show-messages/show-messages.component";
+import { ShowImageComponent } from "@core/components/show-image/show-image.component";
 
 @Component({
   selector: 'app-public-reserve-ask-table-type',
   standalone: true,
   imports: [
-    PublicShowImagesComponent,
-    TuiCheckboxBlockModule,
-    FormsModule,
     CurrencyPipe,
     LinkifyPipe,
     TuiButtonModule,
-    ShowMessagesComponent
+    ShowImageComponent,
 ],
   templateUrl: './public-reserve-ask-table-type.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -38,7 +36,7 @@ import { ShowMessagesComponent } from "../show-messages/show-messages.component"
     }
   ],
 })
-export class PublicReserveAskTableTypeComponent implements OnInit, ControlValueAccessor {
+export class PublicReserveAskTableTypeComponent implements ControlValueAccessor {
 
 
   @Output() submitted: EventEmitter<TableTypeData | null> = new EventEmitter<TableTypeData | null>();
@@ -48,16 +46,12 @@ export class PublicReserveAskTableTypeComponent implements OnInit, ControlValueA
 
   readonly control: FormControl<TableTypeData | null> = new FormControl<TableTypeData | null>(null);
 
-  readonly tableTypes: WritableSignal<TableTypeToPreorderReservationGroup[]> = signal([]);
+  readonly tableTypes: WritableSignal<TableTypeToPreorderReservationGroup[] | null | undefined> = signal([]);
   readonly message: WritableSignal<string | null> = signal(null);
 
   @Input({ required: true }) set group(value: PreorderReservationGroup) {
     this.tableTypes.set(value?.table_type_to_preorder_reservation_groups || []);
     this.message.set(value?.message || null);
-  }
-
-  ngOnInit(): void {
-    // throw new Error('Method not implemented.');
   }
 
   writeValue(obj: any): void {
@@ -84,19 +78,8 @@ export class PublicReserveAskTableTypeComponent implements OnInit, ControlValueA
     }
   }
 
-  updateTableTypeId(id: number | null | undefined) {
-    const tableType: TableTypeData | null = this.tableTypes().find((v) => v.table_type_id === id)?.table_type || null;
-
-    this.updateTableType(tableType);
-  }
-
   updateTableType(arg0: TableTypeData | null | undefined) {
     this.control.setValue(arg0 || null);
-  }
-
-  formSubmit(): void {
-    const tableType: TableTypeData | null = this.control.value;
-    this.submitted.emit(tableType);
+    this.submitted.emit(arg0);
   }
 }
-
