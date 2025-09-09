@@ -44,7 +44,7 @@
       <span i18n>Indietro</span>
     </span>
 
-    <app-contact-confirm [preorderMessage]="tableTypeControl.value ? preorder()?.message : null" [formControl]="contactControl" (submitted)="contactSubmitted($event)"
+    <app-contact-confirm [preorderMessage]="preorder() ? preorder()?.message : null" [formControl]="contactControl" (submitted)="contactSubmitted($event)"
       [showLoader]="savingReservation()"></app-contact-confirm>
   </tui-expand>
 
