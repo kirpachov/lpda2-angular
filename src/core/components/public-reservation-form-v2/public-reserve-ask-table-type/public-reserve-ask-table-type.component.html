@@ -5,27 +5,27 @@
 
 @for (item of tableTypes(); track item; let isLast = $last) {
 <div class="w-full mb-3 border border-primary p-3 rounded-lg">
-  <p class="block mb-3 font-bold text-lg">
+  <p class="block mb-3 font-bold text-xl">
     {{ item.table_type?.name }}
   </p>
 
   <p class="block mb-2 uppercase">
-    <span class="flex items-center">
+    <span class="flex items-center text-base">
       <img class="me-1" [src]="'assets/img/finance_chip.svg'">
       {{ item.price | currency }} <ng-container i18n>per persona</ng-container>
     </span>
   </p>
 
   @if(item.table_type?.description) {
-  <p class="mb-4 text-slate-600" [innerHTML]="item.table_type?.description | linkify"></p>
+  <p class="mb-4 text-slate-600 text-base" [innerHTML]="item.table_type?.description | linkify"></p>
   }
 
   <div class="mb-3 flex items-center overflow-hidden">
     @for(image of item.table_type?.images || []; track image; let index = $index) {
-    @if(index < 3) { <app-show-image class="max-w-[100px] me-2" [image]="image"></app-show-image>
+    @if(index < 3) { <app-show-image class="max-w-[150px] me-2" [image]="image"></app-show-image>
       }
       } @empty {
-      <app-show-image [image]="null" style="max-width: 100px;"></app-show-image>
+      <app-show-image [image]="null" style="max-width: 150px;"></app-show-image>
       }
   </div>
 
