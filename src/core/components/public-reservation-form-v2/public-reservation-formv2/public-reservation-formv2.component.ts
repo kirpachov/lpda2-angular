@@ -184,7 +184,8 @@ export class PublicReservationFormv2Component {
    * User is seeing contact form and wants to go back to table type selection (or to date selection).
    */
   backFromContacts() {
-    if (this.preorder())
+    const v: PreorderReservationGroup | null = this.preorder();
+    if (v && v.table_type_to_preorder_reservation_groups && v.table_type_to_preorder_reservation_groups.length > 0)
       this.stepIndex.set(2);
     else
       this.stepIndex.set(1);
@@ -196,7 +197,7 @@ export class PublicReservationFormv2Component {
       finalize(() => this.loadingTableTypes.set(false)),
     ).subscribe({
       next: (v: PreorderReservationGroup | null) => {
-        if (v) this.askTableType();
+        if (v && v.table_type_to_preorder_reservation_groups && v.table_type_to_preorder_reservation_groups.length > 0) this.askTableType();
         else this.showLastPage();
       }
     });
