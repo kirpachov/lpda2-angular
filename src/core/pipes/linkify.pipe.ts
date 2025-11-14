@@ -14,12 +14,15 @@ export class LinkifyPipe implements PipeTransform {
     const tokens = linkify.find(str);
     if (!tokens) return str;
 
-    let result = str;
+    let result: string = str;
+
     for (const token of tokens) {
       if (token.type === `url`) {
-        result = result.replace(token.value, `<a href="${token.href}" target="_blank">${token.value}</a>`);
+        result = result.replace(token.value, `<a href="${token.href}" class="underline" target="_blank">${token.value}</a>`);
       }
     }
+
+    result = result.replace(/\n/gm, ` <br> `);
 
     return result;
   }

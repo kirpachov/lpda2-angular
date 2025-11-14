@@ -3,7 +3,7 @@
 <ng-container *ngFor="let item of controlsArr(); last as isLast">
   <div [ngClass]="{'mb-3': !isLast}">
     @if (long) {
-      <tui-textarea [formControl]="item.control">
+      <tui-textarea [expandable]="true" [formControl]="item.control">
         {{ getFullLang(item.lang) }}
       </tui-textarea>
     } @else {
