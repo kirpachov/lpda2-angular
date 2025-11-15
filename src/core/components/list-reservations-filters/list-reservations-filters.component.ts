@@ -303,8 +303,11 @@ export class ListReservationsFiltersComponent implements OnInit, AfterViewInit {
     }
 
     if (this.date.value instanceof TuiDayRange && this.date.valid) {
-      const from: string | null = this.datePipe.transform(this.date.value.from.toUtcNativeDate(), 'YYYY-MM-dd');
-      const to: string | null = this.datePipe.transform(this.date.value.to.toUtcNativeDate(), 'YYYY-MM-dd');
+      // const from: string | null = this.datePipe.transform(this.date.value.from.toString("YMD"), 'YYYY-MM-dd');
+      // const to: string | null = this.datePipe.transform(this.date.value.to.toUtcNativeDate(), 'YYYY-MM-dd');
+
+      const from: string | null = this.date.value.from.toString("YMD", "-")
+      const to: string | null = this.date.value.to.toString("YMD", "-");
 
       if (from && to) {
         filters['date_from'] = `${from}`;
