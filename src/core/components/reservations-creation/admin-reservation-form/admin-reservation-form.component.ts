@@ -83,7 +83,8 @@ export class AdminReservationFormComponent implements OnInit {
 
     this.form.patchValue({
       date: value.datetime ? new TuiDay(value.datetime?.getFullYear(), value.datetime?.getMonth(), value.datetime?.getDate()) : null,
-      time: value.datetime ? (new TuiTime(value.datetime?.getHours(), value.datetime?.getMinutes())).shift({  hours: - offsetHours }) : null,
+      time: value.datetime ? (new TuiTime(value.datetime?.getHours(), value.datetime?.getMinutes())) : null,
+      // time: value.datetime ? (new TuiTime(value.datetime?.getHours(), value.datetime?.getMinutes())).shift({  hours: - offsetHours }) : null,
       fullname: value.fullname,
       adults: value.adults,
       children: value.children,
