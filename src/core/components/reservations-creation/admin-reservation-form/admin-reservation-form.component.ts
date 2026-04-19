@@ -21,7 +21,7 @@ import {ReservationTurn} from "@core/models/reservation-turn";
 import {nue} from "@core/lib/nue";
 import {MatIcon} from "@angular/material/icon";
 import {DatePipe} from "@angular/common";
-import {offsetHours, strTimeTimezone, strToUTC} from "@core/lib/str-time-timezone";
+import { strTimeTimezone, strToUTC} from "@core/lib/str-time-timezone";
 import {tuiDatetimeToIsoString, tuiTimeToIsoString} from "@core/lib/tui-datetime-to-iso-string";
 import {
   ReservationTablesSummaryComponent
@@ -81,9 +81,11 @@ export class AdminReservationFormComponent implements OnInit {
       return;
     }
 
+    const tuiTime = value.datetime ? (new TuiTime(value.datetime?.getHours(), value.datetime?.getMinutes())) : null;
+
     this.form.patchValue({
       date: value.datetime ? new TuiDay(value.datetime?.getFullYear(), value.datetime?.getMonth(), value.datetime?.getDate()) : null,
-      time: value.datetime ? (new TuiTime(value.datetime?.getHours(), value.datetime?.getMinutes())) : null,
+      time: tuiTime,
       // time: value.datetime ? (new TuiTime(value.datetime?.getHours(), value.datetime?.getMinutes())).shift({  hours: - offsetHours }) : null,
       fullname: value.fullname,
       adults: value.adults,

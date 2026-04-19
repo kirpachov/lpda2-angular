@@ -13,7 +13,7 @@ import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {TuiRoutableDialogModule} from "@taiga-ui/kit";
 import { of } from 'rxjs';
-import {TUI_LANGUAGE, TUI_ITALIAN_LANGUAGE} from '@taiga-ui/i18n';
+// import {TUI_LANGUAGE, TUI_ITALIAN_LANGUAGE} from '@taiga-ui/i18n';
 import {DATE_PIPE_DEFAULT_OPTIONS, DatePipe, registerLocaleData} from '@angular/common';
 import localeIT from '@angular/common/locales/it';
 import localeEN from '@angular/common/locales/en';
@@ -41,7 +41,7 @@ export const appConfig: ApplicationConfig = {
     DatePipe,
     {
       provide: DATE_PIPE_DEFAULT_OPTIONS, useValue: {
-        timezone: '+0100'
+        timezone: 'Rome'
       }
     },
     provideHttpClient(withInterceptors([addLanguageHeaderInterceptor, jwtInterceptor, catchRequireRootInterceptor])),

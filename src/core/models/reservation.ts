@@ -33,7 +33,8 @@ export class Reservation extends BaseModel {
     super(data);
 
     this.fullname = data.fullname;
-    this.datetime = data.datetime ? new Date(data.datetime) : undefined;
+    const datetime = data.datetime ? new Date(data.datetime) : undefined;
+    this.datetime = datetime;
     this.cancelled_at = data.cancelled_at ? new Date(data.cancelled_at) : undefined;
     this.status = data.status;
     this.secret = data.secret;

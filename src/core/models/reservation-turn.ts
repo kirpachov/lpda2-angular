@@ -33,7 +33,7 @@ export class ReservationTurn extends BaseModel {
     this.ends_at = data.ends_at ? strTimeTimezone(data.ends_at) : undefined;
 
     this.preorder_reservation_group = data.preorder_reservation_group ? new PreorderReservationGroup(data.preorder_reservation_group) : undefined;
-    
+
     this.messages = data.messages;
   }
 }

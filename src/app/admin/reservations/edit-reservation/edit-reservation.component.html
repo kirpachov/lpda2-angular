@@ -8,4 +8,9 @@
   </button>
 </div>
 
-<app-admin-reservation-form [item]="item()" [loading]="loading()" (cancelled)="cancel()" (formSubmit)="submit($event)"></app-admin-reservation-form>
+<app-admin-reservation-form
+  [item]="item()"
+  [loading]="loading()"
+  (cancelled)="cancel()"
+  (formSubmit)="submit($event)"
+></app-admin-reservation-form>

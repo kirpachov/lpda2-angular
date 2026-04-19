@@ -1,5 +1,6 @@
 import {TuiDateMode, TuiDay, TuiTime, TuiTimeMode} from "@taiga-ui/cdk";
-import { offsetHours } from "./str-time-timezone";
+import { getTimezoneOffsetHours } from "./str-time-timezone";
+// import { offsetHours } from "./str-time-timezone";
 
 export const isoTimezoneRexExp: RegExp = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/;
 
@@ -7,8 +8,9 @@ export const isoTimezoneRexExp: RegExp = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\
  * Will convert TuiDay and TuiTime to ISO string in UTC.
  */
 export function tuiDatetimeToIsoString(day: TuiDay, _time: TuiTime): string {
+  const offsetHours: number = getTimezoneOffsetHours();
   const time = (new TuiTime(_time.hours, _time.minutes)).shift({hours: - offsetHours });
-  
+
   return new Date(Date.UTC(day.year, day.month, day.day, time.hours, time.minutes)).toISOString();
 }
 
@@ -32,7 +34,7 @@ export function isoStringToTuiDay(isoString: unknown): TuiDay | null {
  * Will accept strings in the following formats:
  * - YYYY-MM-DD
  * - YYYY-MM-DD HH:mm
- * 
+ *
  * and will return the corresponding TuiDay
  * @param str
  */
@@ -57,7 +59,7 @@ export function stringToTuiDay(str: unknown): TuiDay | null {
  * Will accept strings in the following formats:
  * - YYYY-MM-DD
  * - YYYY-MM-DD HH:mm
- * 
+ *
  * and will return the corresponding TuiTime
  * @param str
  */
@@ -123,7 +125,7 @@ export function tuiTimeToIsoString(time: TuiTime): string {
 /**
  * Given a string like 'HH:MM' will return a string in format 'HH:MM'.
  * @param time
- * 
+ *
  * Example:
  * When in Rome, input '10:00' will return '9:00'.
  */
@@ -173,7 +175,15 @@ export function fromUtcTimeDateToLocal(time: string): string {
 }
 
 export function tuiTimeToUTCString(time: TuiTime): string {
-  return fromTocalToUtcTimeString(time.toString());
+  const offsetHours: number = getTimezoneOffsetHours();
+  const shiftedTime = (new TuiTime(time.hours, time.minutes)).shift({hours: - offsetHours });
+
+  const hours = `${shiftedTime.hours}`.padStart(2, '0');
+  const minutes = `${shiftedTime.minutes}`.padStart(2, '0');
+
+  console.log(`input: ${time.toString()}, shifted: ${hours}:${minutes}`);
+
+  return `${hours}:${minutes}`;
 }
 
 export function dateToTuiDay(date: Date): TuiDay {
