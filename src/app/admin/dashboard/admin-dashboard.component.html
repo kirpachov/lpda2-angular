@@ -36,6 +36,29 @@
 
   <div class="col-12 md:col-6 lg:col-3 p-1">
     <tui-island>
+      <h3 [tuiHint]="'Conteggio totale delle prenotazioni che sono state registrate nella data odierna.'" class="tui-island__title">
+        <ng-container i18n>Prenotazioni create oggi</ng-container>
+      </h3>
+      <p class="tui-island__paragraph">
+        {{ stats()?.["reservations-creation"]?.current?.day ?? '?' }}
+      </p>
+    </tui-island>
+  </div>
+
+
+  <div class="col-12 md:col-6 lg:col-3 p-1">
+    <tui-island>
+      <h3 [tuiHint]="'Conteggio totale delle prenotazioni che sono state registrate nella settimana corrente.'" class="tui-island__title">
+        <ng-container i18n>Prenotazioni create questa settimana</ng-container>
+      </h3>
+      <p class="tui-island__paragraph">
+        {{ stats()?.["reservations-creation"]?.current?.week ?? '?' }}
+      </p>
+    </tui-island>
+  </div>
+
+  <div class="col-12 md:col-6 lg:col-3 p-1">
+    <tui-island>
       <h3 [tuiHint]="currentWeekReservationsHint" class="tui-island__title">
         <ng-container i18n>Prenotati per questa settimana</ng-container>
       </h3>
