@@ -7,17 +7,16 @@
   <hr class="bg-primary w-3/4 mx-auto h-[1px] mb-5">
 
   @if(!reservation.payment || (reservation.payment.status == "paid" || reservation.payment.status == "authorized")) {
-    <!-------------------------- Payment not required or completed. -------------------------->
-    <p class="text-xl text-center mb-3" i18n>La tua prenotazione è confermata.</p>
+  <!-------------------------- Payment not required or completed. -------------------------->
+  <p class="text-xl text-center mb-3" i18n>La tua prenotazione è confermata.</p>
 
-    <p class="text-xl text-center mb-3">
-      <ng-container i18n>La prenotazione è fissata per </ng-container>
-      {{ reservation.datetime | date: 'EEEE d MMMM y' }} {{ reservation.datetime | date: 'HH:mm' }}.
-    </p>
+  <p class="text-xl text-center mb-3">
+    <ng-container i18n>La prenotazione è fissata per </ng-container>
+    {{ reservation.datetime | date: 'EEEE d MMMM y' }} {{ reservation.datetime | date: 'HH:mm' }}.
+  </p>
 
-    <app-public-message class="block text-center text-xl"
-      [location]="'existing-reservation-form'"></app-public-message>
-    }
+  <app-public-message class="block text-center text-xl" [location]="'existing-reservation-form'"></app-public-message>
+  }
 
   @if(reservation.payment) {
   @switch (reservation.payment.status) {
@@ -123,7 +122,7 @@
   <div class="px-3 mb-3 text-xl">
     <p class="block mb-2 text-center" i18n>Dimenticato qualcosa?</p>
 
-    <div class="flex items-center justify-center md:flex-row flex-col">
+    <div class="flex items-center justify-center md:flex-row flex-col mb-3">
       <app-contact-us>
         <ng-container i18n>Contattaci</ng-container>
       </app-contact-us>
@@ -137,6 +136,8 @@
       <a routerLink="/r/{{ reservation.secret }}" tuiLink><ng-container i18n>Condividi dettagli</ng-container></a>
       }
     </div>
+
+    <p class="block mb-2 text-center text-gray-400" i18n>Nota: per modificare la prenotazione, contattaci. In alternativa, cancella la prenotazione e creane una nuova.</p>
   </div>
 </div>
 }
