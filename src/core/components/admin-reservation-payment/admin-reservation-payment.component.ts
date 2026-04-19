@@ -2,7 +2,7 @@ import { CurrencyPipe, DatePipe, JsonPipe, NgClass, NgTemplateOutlet } from '@an
 import { ChangeDetectionStrategy, Component, computed, inject, Input, Output, Signal, signal, WritableSignal, EventEmitter } from '@angular/core';
 import { Reservation } from '@core/models/reservation';
 import { ReservationPayment } from '@core/models/reservation-payment';
-import { TuiButtonModule, TuiDialogService, TuiHintModule, TuiLinkModule } from '@taiga-ui/core';
+import { TuiButtonModule, TuiDialogService, TuiHintModule, TuiLinkModule, TuiHostedDropdownModule, TuiDropdownModule } from '@taiga-ui/core';
 import { TuiDialogContext } from '@taiga-ui/core';
 import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
 import { CopyContentComponent } from "../copy-content/copy-content.component";
@@ -53,7 +53,9 @@ import { PaymentStatusComponent } from "../payment-status/payment-status.compone
     ReservationPaymentPreorderTypeComponent,
     PaymentStatusColorPipe,
     PaymentStatusComponent,
-    TuiLineClampModule
+    TuiLineClampModule,
+    TuiHostedDropdownModule,
+    TuiDropdownModule
 ],
   templateUrl: './admin-reservation-payment.component.html',
   styleUrl: './admin-reservation-payment.component.scss',
@@ -131,6 +133,24 @@ export class AdminReservationPaymentComponent {
 
     this.loading.set(true);
     this.reservations.refreshPaymentStatus(id).pipe(
+      takeUntil(this.destroy),
+      finalize(() => this.loading.set(false)),
+    ).subscribe((reservation: Reservation) => {
+      this.reservationValue = reservation;
+    }, (e: HttpErrorResponse) => {
+      this.notifications.error(parseHttpErrorMessage(e));
+    });
+  }
+
+  replacePayment(): void {
+    const id = this.reservation()?.id;
+    if (!(id)) {
+      this.notifications.error();
+      return;
+    }
+
+    this.loading.set(true);
+    this.reservations.replacePayment(id).pipe(
       takeUntil(this.destroy),
       finalize(() => this.loading.set(false)),
     ).subscribe((reservation: Reservation) => {

@@ -22,6 +22,9 @@ import { PaymentStatusColorPipe } from "../../pipes/payment-status-color.pipe";
       @case("refunded") {
         <ng-container i18n>Rimborsata</ng-container>
       }
+      @case("expired") {
+        <ng-container i18n>Link scaduto</ng-container>
+      }
       @default{
         {{ status }}
       }

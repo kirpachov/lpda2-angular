@@ -16,7 +16,6 @@
     }
 
     @if(payment()?.external_id) {
-
        <div class="flex items-center justify-center">
          <span class="me-2 text-nowrap" i18n>Id pagamento:</span>
 
@@ -38,7 +37,7 @@
 
     <div class="flex items-center">
       <div class="me-2">
-        <ng-container *ngTemplateOutlet="paymentStatus" ></ng-container>
+        <ng-container *ngTemplateOutlet="paymentStatus"></ng-container>
       </div>
 
       <ng-template #hintForRefresh>
@@ -49,6 +48,40 @@
         <mat-icon>refresh</mat-icon>
       </button>
     </div>
+
+    <ng-template #replacePaymentSection>
+      <ng-template #hintReplacePayment>
+        <ng-container i18n>Sostituisci pagamento (crea un nuovo pagamento e annulla quello attuale).</ng-container>
+      </ng-template>
+
+      <ng-template #confirmReplacePaymentDialog let-modal >
+        <h2 class="text-xl bold mb-3" i18n>Conferma sostituzione pagamento</h2>
+
+        <p class="mb-3" i18n>Sei sicuro di voler sostituire il pagamento? Verrà creato un nuovo link per il pagamento e quello attuale verrà annullato.</p>
+
+        <span class="me-2" >
+          <button [showLoader]="loading()" (click)="replacePayment(); modal.complete()" tuiButton appearance="primary" type="button">
+            <ng-container i18n>
+              Conferma
+            </ng-container>
+          </button>
+        </span>
+
+        <button tuiButton appearance="outline" type="button" (click)="modal.complete()">
+          <ng-container i18n>
+            Annulla
+          </ng-container>
+        </button>
+      </ng-template>
+
+      <button [tuiHint]="hintReplacePayment" (click)="showDialog(confirmReplacePaymentDialog)" size="m" type="button" appearance="secondary-destructive" tuiButton [showLoader]="loading()">
+        <span class="flex text-center">
+          <mat-icon>swap_horiz</mat-icon>
+
+          Rigenera link di pagamento
+        </span>
+      </button>
+    </ng-template>
 
     @switch(status()){
       @case("paid"){
@@ -81,9 +114,19 @@
 
          <app-copy-content [content]="payment()?.hpp_url"></app-copy-content>
        </div>
+
+        <ng-container *ngTemplateOutlet="replacePaymentSection" ></ng-container>
       }
       @case("refunded") {
         <p i18n>Il pagamento è stato rimborsato.</p>
+
+
+        <ng-container *ngTemplateOutlet="replacePaymentSection"></ng-container>
+      }
+      @case("expired") {
+        <p i18n>Il link per il pagamento è scaduto.</p>
+
+        <ng-container *ngTemplateOutlet="replacePaymentSection" ></ng-container>
       }
       @default{
         error

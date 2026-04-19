@@ -75,6 +75,12 @@ export class ReservationsService extends CommonHttpService<Reservation> {
     );
   }
 
+  replacePayment(id: number): Observable<Reservation> {
+    return this.post(`${id}/replace_payment`, {}).pipe(
+      map((data: unknown) => this.mapItem(data))
+    );
+  }
+
   export(params: Record<string, string | number | boolean>): Observable<void> {
     return new Observable<void>((observer: Observer<void>): void => {
       this.get(`export`, {

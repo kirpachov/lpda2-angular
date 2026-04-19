@@ -14,6 +14,7 @@ export class PaymentStatusColorPipe implements PipeTransform {
       case "authorized": return "text-success";
       case "paid": return "text-success-dark";
       case "refunded": return "text-warning";
+      case "expired": return "text-secondary";
       default:
         return null;
     }

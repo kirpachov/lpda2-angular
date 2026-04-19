@@ -65,7 +65,6 @@ import { ReservationStatus, ReservationStatusTranslations } from '@core/lib/inte
 import { ReservationTablesSummaryComponent } from "../../../../core/components/reservation-tables-summary/reservation-tables-summary.component";
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 import { EditReservationTableModalComponent } from '@core/components/edit-reservation-table-modal/edit-reservation-table-modal.component';
-import { PaymentStatusColorPipe } from "../../../../core/pipes/payment-status-color.pipe";
 import { ReservationsEventsNotifier } from '@core/services/reservations-events-notifier';
 import { AdminListReservationsComponent } from "../../../../core/components/admin-list-reservations/admin-list-reservations.component";
 import { AdminScrollService } from '@core/services/admin-scroll.service';
