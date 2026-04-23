@@ -1,6 +1,10 @@
 @if(tableTypes()) {
-<p class="block mb-3 font-bold">
-  <ng-container i18n>Seleziona un opzione</ng-container>
+<p class="text-xl block mb-2 font-bold">
+  <ng-container i18n>Vuoi aggiungere un tavolo con vista canale? (opzionale)</ng-container>
+</p>
+
+<p class="block text-lg italic mb-3">
+  <ng-container i18n>Puoi prenotare anche senza scegliere un tavolo specifico.</ng-container>
 </p>
 
 @for (item of tableTypes(); track item; let isLast = $last) {
@@ -12,7 +16,7 @@
   <p class="block mb-2 uppercase">
     <span class="flex items-center text-base">
       <img class="me-1" [src]="'assets/img/finance_chip.svg'">
-      {{ item.price | currency }} <ng-container i18n>per persona</ng-container>
+      +{{ item.price | currency }} <ng-container i18n>per persona</ng-container>
     </span>
   </p>
 
@@ -38,6 +42,6 @@
 
 
 <button (click)="updateTableType(null)" [showLoader]="showLoader" class="w-full"
-  appearance="secondary" size="l" tuiButton type="button">
-  <ng-container i18n>Continua senza selezione</ng-container>
+  appearance="primary" size="l" tuiButton type="button">
+  <ng-container i18n>Continua senza tavolo</ng-container>
 </button>
