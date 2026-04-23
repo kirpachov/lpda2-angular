@@ -74,24 +74,26 @@
     <a [routerLink]="[category.id]" role="button"
       class="hover-transition justify-between cursor-pointer flex items-center py-3">
       <div class="flex items-center">
-        <div class="min-w-[20vw] max-w-[20vw] justify-center align-center me-3">
+        <div class="min-w-[10vw] max-w-[10vw] justify-center align-center me-3">
           <app-public-show-images class="block" [images]="category?.images"></app-public-show-images>
         </div>
 
         <div class="justify-center align-center">
-          <p class="text-xl">{{ category.name }}</p>
+          <p class="text-3xl">{{ category.name }}</p>
           <p class="text-lg text-slate-400">{{ category.description }}</p>
           @if(category.price) {
           <div class="text-lg w-fit text-primary rounded">
             <ng-container i18n>Menù a prezzo fisso</ng-container>
-            : {{ category.price | currency }}</div>
+            : {{ category.price | currency }}
+          </div>
           }
         </div>
       </div>
 
       <div>
-        <button type="button" size="m" tuiButton appearance="flat">
-          <ng-container i18n>Apri</ng-container>
+        <button type="button" size="l" tuiIconButton appearance="flat">
+          <!-- <ng-container i18n>Apri</ng-container> -->
+          <mat-icon>arrow_forward</mat-icon>
         </button>
       </div>
     </a>
@@ -101,9 +103,18 @@
     }
     }
 
+    @if(dishes().length && categories().length) {
+    <p class="text-4xl mb-3 block">
+      <ng-container i18n>
+        La selezione
+      </ng-container>
+    </p>
+    }
+
     @for(dish of dishes(); track dish.id; let last = $last) {
-      <!-- (click)="clickOnDish(dish)" -->
-    <a [routerLink]="'.'" [queryParams]="{dishId: dish.id}" role="button"
+    <!-- (click)="clickOnDish(dish)" -->
+     <!-- [routerLink]="'.'" [queryParams]="{dishId: dish.id}"  -->
+    <a (click)="showDishDetail(dish)" role="button"
       class="hover-transition md:justify-between cursor-pointer flex items-center py-3 justify-center">
       <div class="flex md:flex-row flex-col items-center">
         <div class="min-w-[20vw] max-w-[50vw] md:max-w-[20vw] justify-center align-center me-3">

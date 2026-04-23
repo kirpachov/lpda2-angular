@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, Injector, isDevMode, OnInit, Signal, signal, WritableSignal } from '@angular/core';
-import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, NavigationStart, Params, Router, RouterModule } from '@angular/router';
 import { parseHttpErrorMessage } from '@core/lib/parse-http-error-message';
 import { SearchResult } from '@core/lib/search-result.model';
 import { SOMETHING_WENT_WRONG_MESSAGE } from '@core/lib/something-went-wrong-message';
@@ -97,8 +97,23 @@ export class PublicNavigateMenuV1Component implements OnInit {
    * Called when user clicks on a dish.
    */
   private dishDetailSub?: Subscription;
-  private showDishDetail(dish: Dish): void {
+  private routeListenerSub?: Subscription;
+  showDishDetail(dish: Dish): void {
     this.closeDishDetailModal();
+
+    this.routeListenerSub =
+      this.router.events
+        .pipe(filter((event): event is NavigationStart => event instanceof NavigationStart))
+        .subscribe(event => {
+          if (event.navigationTrigger === 'popstate') {
+            console.log(`User navigated back, closing dish detail modal.`);
+            this.router.navigate(["."], { relativeTo: this.route });
+
+            this.closeDishDetailModal();
+          }
+
+          this.routeListenerSub?.unsubscribe();
+        });
 
     this.dishDetailSub = this.dialogs.open<unknown>(
       new PolymorpheusComponent(PublicDishModalComponent, this.injector),
@@ -112,7 +127,8 @@ export class PublicNavigateMenuV1Component implements OnInit {
       takeUntil(this.destroy),
     ).subscribe({
       complete: (): void => {
-        this.router.navigate([], { relativeTo: this.route, queryParams: { dishId: null }, queryParamsHandling: "merge" });
+        this.routeListenerSub?.unsubscribe();
+        // this.router.navigate([], { relativeTo: this.route, queryParams: { dishId: null }, queryParamsHandling: "merge" });
       },
       error: (error: unknown): void => console.error(error),
     })
@@ -120,6 +136,7 @@ export class PublicNavigateMenuV1Component implements OnInit {
 
   private closeDishDetailModal(): void {
     if (this.dishDetailSub) this.dishDetailSub.unsubscribe();
+    if (this.routeListenerSub) this.routeListenerSub.unsubscribe();
   }
 
   /**
@@ -341,7 +358,7 @@ export class PublicNavigateMenuV1Component implements OnInit {
   }
 
   private calcShowDishPrice(): boolean {
-    let first: undefined | null | MenuCategory = this.breadcrumbs()[0]  || this.selectedCategory();
+    let first: undefined | null | MenuCategory = this.breadcrumbs()[0] || this.selectedCategory();
     if (!first) return true;
 
     return !(typeof first.price == "number" && first.price > 0);
