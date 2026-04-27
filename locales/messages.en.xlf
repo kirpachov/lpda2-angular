@@ -9590,9 +9590,9 @@
           <context context-type='linenumber'>85</context>
         </context-group>
       </trans-unit>
-      <trans-unit id='1452325881290905282' datatype='html'>
-        <source>Trova un tavolo</source>
-        <target>Find a table.</target>
+      <trans-unit id='4983656324111399233' datatype='html'>
+        <source>Migliora la tua esperienza (Opzionale)</source>
+        <target>Improve your experience (Optional)</target>
         <context-group purpose='location'>
           <context context-type='sourcefile'>
             
