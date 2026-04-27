@@ -26,10 +26,10 @@
 
   <div class="mb-3 flex items-center overflow-hidden">
     @for(image of item.table_type?.images || []; track image; let index = $index) {
-    @if(index < 3) { <app-show-image class="max-w-[150px] me-2" [image]="image"></app-show-image>
+    @if(index < 3) { <app-show-image class="max-w-[250px] me-2" [image]="image"></app-show-image>
       }
       } @empty {
-      <app-show-image [image]="null" style="max-width: 150px;"></app-show-image>
+      <app-show-image [image]="null" style="max-width: 250px;"></app-show-image>
       }
   </div>
 
@@ -41,7 +41,7 @@
 }
 
 
-<button (click)="updateTableType(null)" [showLoader]="showLoader" class="w-full"
-  appearance="primary" size="l" tuiButton type="button">
+<button (click)="updateTableType(null)" [showLoader]="showLoader" class="w-full" appearance="primary" size="l" tuiButton
+  type="button">
   <ng-container i18n>Continua senza tavolo</ng-container>
 </button>
