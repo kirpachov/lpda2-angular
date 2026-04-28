@@ -1,13 +1,33 @@
 export const timezoneOffset: number = ((new Date()).getTimezoneOffset() / 60);
 // export const offsetHours: number = 1;
 
+// function isRomeDaylightSavingTime(date = new Date()) {
+//   const formatter = new Intl.DateTimeFormat('en-US', {
+//     timeZone: 'Europe/Rome',
+//     timeZoneName: 'shortOffset'
+//   });
+
+//   const parts = formatter.formatToParts(date);
+//   const timeZoneName = parts.find(part => part.type === 'timeZoneName')?.value;
+
+//   return timeZoneName === 'GMT+2';
+// }
+
 /**
  * Ottiene dinamicamente l'offset dal fuso orario corrente del browser
  * Nota: getTimezoneOffset() restituisce i minuti in negativo,
  * quindi neghiamo il risultato per ottenere l'offset corretto
  */
 export function getTimezoneOffsetHours(): number {
-  return -(new Date()).getTimezoneOffset() / 60;
+  // return -(new Date()).getTimezoneOffset() / 60;
+
+  // if (isRomeDaylightSavingTime()) {
+  //   return offsetHours + 1;
+  // } else {
+  //   return offsetHours;
+  // }
+
+  return 2;
 }
 
 /**

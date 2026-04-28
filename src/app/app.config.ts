@@ -41,7 +41,7 @@ export const appConfig: ApplicationConfig = {
     DatePipe,
     {
       provide: DATE_PIPE_DEFAULT_OPTIONS, useValue: {
-        timezone: 'Rome'
+        timezone: '+0200'
       }
     },
     provideHttpClient(withInterceptors([addLanguageHeaderInterceptor, jwtInterceptor, catchRequireRootInterceptor])),
