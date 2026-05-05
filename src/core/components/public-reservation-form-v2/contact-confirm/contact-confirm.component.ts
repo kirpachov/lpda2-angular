@@ -109,13 +109,13 @@ export class ContactConfirmComponent implements ControlValueAccessor, OnInit {
 
     if (this.form.invalid) {
       if (this.submitCount() < 3) return;
-      return this.notifications.warn($localize`Something is wrong with the form. Please check the fields and try again.`);
+      return this.notifications.warn($localize`Qualcosa non va con il modulo. Per favore, controlla i campi e riprova.`);
     }
 
     const out = this.formatOutput();
 
     if (out) this.submitted.emit(out);
-    else this.notifications.error($localize`Please fill in all required fields`);
+    else this.notifications.error($localize`Per favore, compila tutti i campi obbligatori.`);
   }
 
   private formatOutput(): PublicReserve2.ContactData | null {
