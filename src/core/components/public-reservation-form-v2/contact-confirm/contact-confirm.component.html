@@ -64,12 +64,20 @@
   </div>
 
   <div class="mb-3">
-    <tui-checkbox-labeled [size]="'l'" [formControl]="form.controls.acceptTerms">
+    <!-- <tui-checkbox-labeled [size]="'l'" [formControl]="form.controls.acceptTerms">
       <span class="me-1" i18n>Accetto i</span>
        <app-terms-and-conditions-link>
         <ng-container i18n>termini e le condizioni</ng-container>
        </app-terms-and-conditions-link>
-    </tui-checkbox-labeled>
+    </tui-checkbox-labeled> -->
+
+    <tui-checkbox-block [size]="'l'" [formControl]="form.controls.acceptTerms" [contentAlign]="'left'">
+      <span class="me-1" i18n>Accetto i</span>
+       <app-terms-and-conditions-link>
+        <ng-container i18n>termini e le condizioni</ng-container>
+       </app-terms-and-conditions-link>
+    </tui-checkbox-block>
+
 
     @if(form.controls.acceptTerms.touched || this.formSubmitted()) {
       <app-errors [errors]="form.controls.acceptTerms.errors"></app-errors>
@@ -80,7 +88,7 @@
     <app-show-messages [messages]="[preorderMessage]" ></app-show-messages>
   }
 
-  <button [disabled]="form.invalid" [showLoader]="showLoader" class="w-full" appearance="primary" size="l" tuiButton
+  <button [showLoader]="showLoader" class="w-full" appearance="primary" size="l" tuiButton
     type="submit">
     <ng-container i18n>Conferma prenotazione</ng-container>
   </button>

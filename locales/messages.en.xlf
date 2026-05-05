@@ -9565,7 +9565,7 @@
             
             src/core/components/public-reservation-form-v2/contact-confirm/contact-confirm.component.html 
           </context>
-          <context context-type='linenumber'>68</context>
+          <context context-type='linenumber'>75</context>
         </context-group>
       </trans-unit>
       <trans-unit id='2058686552377057337' datatype='html'>
@@ -9576,7 +9576,7 @@
             
             src/core/components/public-reservation-form-v2/contact-confirm/contact-confirm.component.html 
           </context>
-          <context context-type='linenumber'>70</context>
+          <context context-type='linenumber'>77</context>
         </context-group>
       </trans-unit>
       <trans-unit id='4420379438902982268' datatype='html'>
@@ -9587,7 +9587,36 @@
             
             src/core/components/public-reservation-form-v2/contact-confirm/contact-confirm.component.html 
           </context>
-          <context context-type='linenumber'>85</context>
+          <context context-type='linenumber'>93</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='5696908873620624096' datatype='html'>
+        <source>Something is wrong with the form. Please check the fields and try again.</source>
+        <target>Qualcosa non va con il modulo. Per favore, controlla i campi e riprova.</target>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/public-reservation-form-v2/contact-confirm/contact-confirm.component.ts 
+          </context>
+          <context context-type='linenumber'>112</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id='3129604876054849035' datatype='html'>
+        <source>Please fill in all required fields</source>
+        <target>Please fill in all required fields.</target>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/public-reservation-form-v2/contact-confirm/contact-confirm.component.ts 
+          </context>
+          <context context-type='linenumber'>118</context>
+        </context-group>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/public-reservation-form-v2/public-reservation-formv2/public-reservation-formv2.component.ts 
+          </context>
+          <context context-type='linenumber'>141</context>
         </context-group>
       </trans-unit>
       <trans-unit id='1452325881290905282' datatype='html'>
@@ -9610,17 +9639,6 @@
             src/core/components/public-reservation-form-v2/public-reservation-formv2/public-reservation-formv2.component.html 
           </context>
           <context context-type='linenumber'>18</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id='3129604876054849035' datatype='html'>
-        <source>Please fill in all required fields</source>
-        <target>Please fill in all required fields.</target>
-        <context-group purpose='location'>
-          <context context-type='sourcefile'>
-            
-            src/core/components/public-reservation-form-v2/public-reservation-formv2/public-reservation-formv2.component.ts 
-          </context>
-          <context context-type='linenumber'>141</context>
         </context-group>
       </trans-unit>
       <trans-unit id='3234495913862971526' datatype='html'>

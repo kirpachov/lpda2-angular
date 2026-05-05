@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, inject, Input, OnInit, Output, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, EventEmitter, forwardRef, inject, Input, OnInit, Output, signal, WritableSignal } from '@angular/core';
 import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PreorderReservationGroup } from '@core/models/preorder-reservation-group';
 import { TableType } from '@core/models/table-type';
 import { TuiAutoFocusModule, TuiDestroyService } from '@taiga-ui/cdk';
 import { TuiButtonModule, TuiPrimitiveTextfieldModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
-import { TuiCheckboxLabeledModule, TuiInputModule, TuiInputPhoneInternationalModule, TuiInputPhoneModule, TuiSelectModule } from '@taiga-ui/kit';
+import { TuiCheckboxBlockModule, TuiCheckboxLabeledModule, TuiInputModule, TuiInputPhoneInternationalModule, TuiInputPhoneModule, TuiSelectModule } from '@taiga-ui/kit';
 import { takeUntil } from 'rxjs';
 import { ErrorsComponent } from "../../errors/errors.component";
 import { ConfigsService } from '@core/services/configs.service';
@@ -25,9 +25,10 @@ import { ShowMessagesComponent } from "../show-messages/show-messages.component"
     ReactiveFormsModule,
     TuiInputPhoneInternationalModule,
     ErrorsComponent,
-    TuiCheckboxLabeledModule,
+    // TuiCheckboxLabeledModule,
     TermsAndConditionsLinkComponent,
-    ShowMessagesComponent
+    ShowMessagesComponent,
+    TuiCheckboxBlockModule,
 ],
   templateUrl: './contact-confirm.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -51,7 +52,9 @@ export class ContactConfirmComponent implements ControlValueAccessor, OnInit {
 
   @Input() preorderMessage: string | null | undefined = null;
 
-  readonly formSubmitted: WritableSignal<boolean> = signal<boolean>(false);
+  readonly submitCount: WritableSignal<number> = signal<number>(0);
+  // readonly formSubmitted: WritableSignal<boolean> = signal<boolean>(false);
+  readonly formSubmitted = computed(() => this.submitCount() > 0);
 
   readonly form = new FormGroup<{
     firstName: FormControl<string | null>,
@@ -102,11 +105,17 @@ export class ContactConfirmComponent implements ControlValueAccessor, OnInit {
   }
 
   formSubmit(): void {
+    this.submitCount.update((count) => count + 1);
+
+    if (this.form.invalid) {
+      if (this.submitCount() < 3) return;
+      return this.notifications.warn($localize`Something is wrong with the form. Please check the fields and try again.`);
+    }
+
     const out = this.formatOutput();
-    this.formSubmitted.set(true);
 
     if (out) this.submitted.emit(out);
-    else this.notifications.error("Please fill in all required fields");
+    else this.notifications.error($localize`Please fill in all required fields`);
   }
 
   private formatOutput(): PublicReserve2.ContactData | null {
