@@ -28,8 +28,7 @@ import { AdminListReservationsComponent } from "../admin-list-reservations/admin
 })
 export class ListReservationsRequiringPaymentComponent {
   readonly filters: Partial<ReservationsFilters> = {
-    order_by_direction: "asc",
-    order_by_field: "datetime",
+    order_by: "datetime asc, created_at ASC",
     date_from: TuiDay.currentLocal().toString(),
     status: "active",
     payment_status: "todo",

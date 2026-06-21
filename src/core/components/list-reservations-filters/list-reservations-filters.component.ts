@@ -63,8 +63,7 @@ export interface ReservationsFilters {
   date_from: string;
   date_to: string;
   datetime_to: string;
-  order_by_field: string;
-  order_by_direction: "asc" | "desc";
+  order_by: string;
 
   offset: number;
   per_page: number;
@@ -124,6 +123,16 @@ export interface ReservationsFilters {
 export class ListReservationsFiltersComponent implements OnInit, AfterViewInit {
   private readonly dialogs: TuiDialogService = inject(TuiDialogService);
 
+  readonly orderByOptions: { ordering: string, humanLabel: string }[] = [
+    { ordering: 'created_at desc', humanLabel: $localize`Data di creazione (più recenti)` },
+    { ordering: 'created_at asc', humanLabel: $localize`Data di creazione (meno recenti)` },
+    { ordering: 'datetime desc, created_at ASC', humanLabel: $localize`Data e ora decrescente` },
+    { ordering: 'datetime asc, created_at ASC', humanLabel: $localize`Data e ora crescente` },
+  ];
+
+  readonly defaultOrderByOption = this.orderByOptions[3];
+
+
   @Input() loading: boolean = false;
   @Input({ required: true }) data: SearchResult<Reservation> | null = null;
 
@@ -137,7 +146,7 @@ export class ListReservationsFiltersComponent implements OnInit, AfterViewInit {
   readonly turn: FormControl<ReservationTurn | null> = new FormControl<ReservationTurn | null>(null);
   readonly date: FormControl<TuiDayRange | null> = new FormControl<TuiDayRange | null>(new TuiDayRange(TuiDay.currentLocal(), TuiDay.currentLocal()));
   readonly status: FormControl<ReservationStatus | null> = new FormControl<ReservationStatus | null>(`active`);
-  readonly orderBy = new FormControl<{ field: string, direction: "desc" | "asc" } | null>(null);
+  readonly orderBy = new FormControl<{ ordering: string } | null>(this.defaultOrderByOption);
 
   readonly hiddenFormGroup = new FormGroup({
     query: this.query,
@@ -177,15 +186,7 @@ export class ListReservationsFiltersComponent implements OnInit, AfterViewInit {
   private offset: number = 0;
   private per_page: number = 100;
 
-  readonly orderByOptions: { field: string, direction: "asc" | "desc", humanLabel: string }[] = [
-    { field: 'created_at', direction: 'desc', humanLabel: $localize`Data di creazione (più recenti)` },
-    { field: 'created_at', direction: 'asc', humanLabel: $localize`Data di creazione (meno recenti)` },
-    { field: 'datetime', direction: 'desc', humanLabel: $localize`Data e ora (più recenti)` },
-    { field: 'datetime', direction: 'asc', humanLabel: $localize`Data e ora (meno recenti)` },
-  ];
-
-  constructor() {
-  }
+  // constructor() {}
 
   ngOnInit(): void {
     // Listen date change to update dateStr.
@@ -329,8 +330,7 @@ export class ListReservationsFiltersComponent implements OnInit, AfterViewInit {
     }
 
     if (this.orderBy.valid && this.orderBy.value) {
-      filters.order_by_field = this.orderBy.value.field;
-      filters.order_by_direction = this.orderBy.value.direction;
+      filters["order_by"] = this.orderBy.value.ordering;
     }
 
     return filters;

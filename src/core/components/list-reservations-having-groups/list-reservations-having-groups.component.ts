@@ -17,8 +17,7 @@ import { ReservationsFilters } from '../list-reservations-filters/list-reservati
 export class ListReservationsHavingGroupsComponent {
   readonly filters: Partial<ReservationsFilters> = {
     people_more_than: 8,
-    order_by_direction: "asc",
-    order_by_field: "datetime",
+    order_by: "datetime asc, created_at ASC",
     date_from: TuiDay.currentLocal().toString(),
     status: "active",
     per_page: 100,
