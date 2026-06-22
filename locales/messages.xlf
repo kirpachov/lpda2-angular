@@ -5791,7 +5791,7 @@
             
             src/core/components/list-reservations-filters/list-reservations-filters.component.ts 
           </context>
-          <context context-type='linenumber'>181</context>
+          <context context-type='linenumber'>127</context>
         </context-group>
       </trans-unit>
       <trans-unit id='7715713225970241929' datatype='html'>
@@ -5801,27 +5801,27 @@
             
             src/core/components/list-reservations-filters/list-reservations-filters.component.ts 
           </context>
-          <context context-type='linenumber'>182</context>
+          <context context-type='linenumber'>128</context>
         </context-group>
       </trans-unit>
-      <trans-unit id='7740102693403996510' datatype='html'>
-        <source>Data e ora (più recenti)</source>
+      <trans-unit id='5746575338667634289' datatype='html'>
+        <source>Data e ora decrescente</source>
         <context-group purpose='location'>
           <context context-type='sourcefile'>
             
             src/core/components/list-reservations-filters/list-reservations-filters.component.ts 
           </context>
-          <context context-type='linenumber'>183</context>
+          <context context-type='linenumber'>129</context>
         </context-group>
       </trans-unit>
-      <trans-unit id='3104645625547587526' datatype='html'>
-        <source>Data e ora (meno recenti)</source>
+      <trans-unit id='6653565543703803310' datatype='html'>
+        <source>Data e ora crescente</source>
         <context-group purpose='location'>
           <context context-type='sourcefile'>
             
             src/core/components/list-reservations-filters/list-reservations-filters.component.ts 
           </context>
-          <context context-type='linenumber'>184</context>
+          <context context-type='linenumber'>130</context>
         </context-group>
       </trans-unit>
       <trans-unit id='5630635519116865599' datatype='html'>
