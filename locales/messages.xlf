@@ -7965,6 +7965,16 @@
           <context context-type='linenumber'>108,110</context>
         </context-group>
       </trans-unit>
+      <trans-unit id='8319809299312316478' datatype='html'>
+        <source>Costo del coperto</source>
+        <context-group purpose='location'>
+          <context context-type='sourcefile'>
+            
+            src/core/components/public-navigate-menu-v1/public-navigate-menu-v1.component.html 
+          </context>
+          <context context-type='linenumber'>167</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id='7875251088296325066' datatype='html'>
         <source>La tua prenotazione</source>
         <context-group purpose='location'>

@@ -164,7 +164,8 @@
     @if(coverPrice()) {
       <p class="text-2xl cover-charge">
         <strong>
-          Coperto {{ coverPrice() | currency }}
+          <ng-container i18n>Costo del coperto</ng-container>
+          {{ coverPrice() | currency }}
         </strong>
 
       </p>
