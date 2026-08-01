@@ -19,6 +19,8 @@ import { PublicDishModalComponent } from '../public-dish-modal/public-dish-modal
 import { CurrencyPipe, JsonPipe, NgTemplateOutlet } from '@angular/common';
 import { PublicShowImagesComponent } from "../public-show-images/public-show-images.component";
 import { TuiLineClampModule } from '@taiga-ui/kit';
+import { PublicPagesDataService } from '@core/services/http/public-pages-data.service';
+import { PublicData } from '@core/lib/interfaces/public-data';
 
 @Component({
   selector: 'app-public-navigate-menu-v1',
@@ -50,6 +52,7 @@ export class PublicNavigateMenuV1Component implements OnInit {
   private readonly menuService: PublicMenuService = inject(PublicMenuService);
   private readonly dialogs: TuiDialogService = inject(TuiDialogService);
   private readonly injector: Injector = inject(Injector);
+  private readonly publicData: PublicPagesDataService = inject(PublicPagesDataService);
   // private readonly me = inject(ElementRef);
 
   readonly categoriesData: WritableSignal<SearchResult<MenuCategory> | null> = signal(null);
@@ -74,8 +77,14 @@ export class PublicNavigateMenuV1Component implements OnInit {
   readonly breadcrumbUrls: WritableSignal<string[]> = signal([]);
 
   readonly showDishPrice: WritableSignal<boolean> = signal(true);
+  readonly coverPrice: WritableSignal<number | null> = signal(null);
 
   ngOnInit(): void {
+    this.publicData.load();
+    this.publicData.data$.subscribe((data: PublicData | null): void => {
+      this.coverPrice.set(Number(data?.settings.cover_price));
+    });
+
     this.listenRouteParamsAndPopulateBreadcrumb();
 
     this.listenQueryParamsAndShowDishDetail();

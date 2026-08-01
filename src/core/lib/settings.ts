@@ -5,6 +5,7 @@ export const SettingKeys = [
   `reservation_max_days_in_advance`,
   `reservation_min_hours_advance_cancel`,
   `nexi_auto_refund_cancelled_reservations`,
+  `cover_price`
 ] as const;
 
 export type SettingKey = typeof SettingKeys[number];

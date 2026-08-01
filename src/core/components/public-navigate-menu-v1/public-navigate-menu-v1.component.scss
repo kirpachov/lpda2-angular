@@ -1,4 +1,19 @@
 :host {
+
+  .cover-charge {
+    margin-top: 32px;
+    padding: 18px 24px;
+    background: #faf7ef;
+    border-top: 1px solid #e9dfc8;
+    text-align: center;
+    font-size: 18px;
+    color: #555;
+  }
+
+  .cover-charge strong {
+    color: #1f2d5a;
+  }
+
   .hover-transition {
     transition: transform 0.3s ease-in-out;
 

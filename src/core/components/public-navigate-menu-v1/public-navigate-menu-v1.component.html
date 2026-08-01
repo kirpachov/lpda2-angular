@@ -160,6 +160,17 @@
     }
     }
 
+
+    @if(coverPrice()) {
+      <p class="text-2xl cover-charge">
+        <strong>
+          Coperto {{ coverPrice() | currency }}
+        </strong>
+
+      </p>
+    }
+
+
     <ng-container *ngTemplateOutlet="navigateBackBtn"></ng-container>
 
   </tui-loader>
